@@ -12,13 +12,13 @@ function TodoForm(props : Props) {
         props.addTodo(title)
         setTitle('')
     }
-  return (
-    <div>
-        <form onSubmit={add}>
-            <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Add todo" />
-            <button>Add todo</button>
-        </form>
-    </div>
+    return (
+        <div>
+            <form onSubmit={add}>
+                <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Add todo" />
+                <button>Add todo</button>
+            </form>
+        </div>
   )
 }
 

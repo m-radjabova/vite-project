@@ -13,7 +13,7 @@ function App() {
     {
       id: 2,
       title: 'Learn Vue',
-      completed: false
+      completed: true
     }
   ])
 
