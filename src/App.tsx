@@ -1,46 +1,93 @@
+import Sidebar from './component/Sidebar'
+import Content from './component/Content'
 import { useState } from 'react';
-import TodoList from './component/TodoList';
-import TodoForm from './component/TodoForm';
+
+export interface User {
+  id: number,
+  userName: string,
+  phone: string
+}
 
 function App() {
-
-  const [todos, setTodos] = useState([
+  const [users, setUsers] = useState([
     {
       id: 1,
-      title: 'Learn React',
-      completed: false
+      userName: 'me (save changes)',
+      phone: '0123456789'
     },
     {
       id: 2,
-      title: 'Learn Vue',
-      completed: true
+      userName: 'Mary',
+      phone: '09829753469'
+    },
+    {
+      id: 3,
+      userName: 'Jane',
+      phone: '0123456789'
+    },
+    {
+      id: 4,
+      userName: 'Jake',
+      phone: '0156789'
+    },
+    {
+      id: 5,
+      userName: 'Anna',
+      phone: '0123456789'
+    },
+    {
+      id: 6,
+      userName: 'Vika',
+      phone: '3456789'
+    },
+    {
+      id: 7,
+      userName: 'Tom',
+      phone: '9876543210'
+    },
+    {
+      id: 8,
+      userName: 'Lucy',
+      phone: '1234567890'
+    },
+    {
+      id: 9,
+      userName: 'John',
+      phone: '5678901234'
+    },
+    {
+      id: 10,
+      userName: 'Emma',
+      phone: '6789012345'
+    },
+    {
+      id: 11,
+      userName: 'Chris',
+      phone: '7890123456'
+    },
+    {
+      id: 12,
+      userName: 'Sophia',
+      phone: '8901234567'
+    },
+    {
+      id: 13,
+      userName: 'Michael',
+      phone: '9012345678'
     }
-  ])
+  ]);
 
-  function addTodo(title: string) {
-    todos.push({
-      id: todos.length+1,
-      title,
-      completed: false
-    })
-    setTodos([...todos])
+  const [selectedUser , setSelectedUser] = useState<User | null>(null);
+
+  function addUser(user: User) {
+    users.push(user);
+    setUsers([...users]);
   }
-
-  function setChecked(id: number) {
-    const newTodos = todos.map(todo => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed
-      }
-      return todo
-    })
-    setTodos(newTodos)
-  }
-
 
   return (
     <div className='container'>
-      <TodoForm addTodo={addTodo}/>
-      <TodoList setChecked={setChecked} todos={todos}/>
+      <Sidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser} addUser={addUser} users={users} />
+      <Content selectedUser={selectedUser} />
     </div>
   )
 }
