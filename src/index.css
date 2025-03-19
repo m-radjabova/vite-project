@@ -253,7 +253,7 @@ form .inp{
 
 .content .bottom{
   position: fixed;
-  bottom: 17px;
+  bottom: 4px;
   width: 73%;
   padding: 16px;
   border-radius: 8px;
@@ -287,9 +287,8 @@ form .inp{
   background-color: #d48fd7;
   color: #4a1f4d;
   font-size: 20px;
-  /* color: #ECD4EA; */
   padding: 10px 14px;
-  /* margin: 8px 0; */
+  margin: 8px 0;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
