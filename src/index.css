@@ -7,7 +7,7 @@
 }
 
 body{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./assets/wallpaper.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./assets/heart.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -23,7 +23,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #904591;
+  background: #7a3e7a;
   color: white;
   font-size: 3rem;
   font-weight: bold;
@@ -49,8 +49,6 @@ body{
 
 .container .sidebar{
   overflow-y: auto;
-  /* border-right: #bd86be 4px solid; */
-  /* background-color: #ECD4EA; */
   padding: 8px;
 }
 
@@ -72,8 +70,8 @@ body{
 
 .container .sidebar .user{
   font-size: large;
-  background-color: #663a67;
-  color: #ECD4EA;
+  background-color: #8b3d8b;
+  color: #f5d0f5;
   padding: 10px 16px;
   margin: 8px 0;
   border-radius: 8px;
@@ -83,8 +81,8 @@ body{
 }
 
 .container .sidebar .user:hover{
-  background-color: #a25a9c;
-  color: #ddc8de;
+  background-color: #d48fd7;
+  color: white;
   transform: scale(1.02);
   transition: all 0.3s ease;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -100,9 +98,9 @@ body{
 
 .btn{
   width: 100%;
-  background-color: #a05da1;
+  background-color: #8b3d8b;
+  color: #f5d0f5;
   font-size: large;
-  color: #ECD4EA;
   padding: 10px 16px;
   margin: 8px 0;
   border-radius: 8px;
@@ -112,8 +110,8 @@ body{
 }
 
 .btn:hover{
-  background-color: #6a306b;
-  color: #ECD4EA;
+  background-color: #d48fd7;
+  color: white;
   transform: scale(1.02);
   transition: all 0.3s ease;
 }
@@ -138,16 +136,15 @@ form .inp{
   align-items: center;
   padding: 20px 16px;
   height: 90px;
-  background-color: #ECD4EA;
-  color: #663a67;
+  background-color: #784078;
+  color: #f5d0f5;
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .container .content .inContent h1{
   margin-bottom: 8px;
-  color: #663a67;
-  text-shadow: 1px 1px 2px #cfaad1;
+  color: #c3a1c4;
   font-weight: 600;
   font-size: 24px;
 }
@@ -169,7 +166,7 @@ form .inp{
 
 .content p{
   margin-top: 10px;
-  color: #663a67;
+  color: #f5d0f5;
   font-weight: 600;
   font-size: 24px;
 }
@@ -184,8 +181,8 @@ form .inp{
   font-size: large;
   width: 50%;
   padding: 16px;
-  background-color: #ECD4EA;
-  color: #663a67;
+  background-color: #d48fd7;
+  color: #4a1f4d;
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   margin-bottom: 20px;
@@ -195,8 +192,8 @@ form .inp{
 }
 
 .chats ul .massage:hover{
-  background-color: #a25a9c;
-  color: #ddc8de;
+  background-color: #8b3d8b;
+  color: white;
   transform: scale(1.02);
   transition: all 0.3s ease;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -204,12 +201,12 @@ form .inp{
 
 .chats ul .right{
   margin-left: auto;
-  background-color: #a25a9c;
-  color: #ddc8de;
+  background-color: #8b3d8b;
+  color: white;
 }
 
 .chats ul .right:hover{
-  background-color: #6a306b;
+  background-color: #9f52a0;
   color: #ECD4EA;
   transform: scale(1.02);
 }
@@ -230,7 +227,7 @@ form .inp{
 .chats ul .massage span{
   display: block;
   font-size: 12px;
-  color: #6a306b;
+  color: #5f1160;
   margin-top: 8px;
   text-align: right;
   font-weight: 600;
@@ -251,7 +248,7 @@ form .inp{
 
 .user-icon {
   font-size: 50px; 
-  color: #a25a9c; 
+  color: #ceb5cc; 
 }
 
 .content .bottom{
@@ -260,8 +257,8 @@ form .inp{
   width: 73%;
   padding: 16px;
   border-radius: 8px;
-  background-color: #ECD4EA;
-  color: #663a67;
+  background-color: #6d2f6d;
+  color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -274,22 +271,23 @@ form .inp{
 
 .content .bottom form input{
   width: 100%;
-  background-color: #ebe3eb;
+  background-color: #f5d0f5;
+  border: 1px solid #8b3d8b;
   font-size: large;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
-  border: 1px solid #a08ba0;
   outline: none;
   padding: 10px 16px;
   margin: 8px 0;
 }
 
 .content .bottom form button{
-  background-color: #a05da1;
+  background-color: #d48fd7;
+  color: #4a1f4d;
   font-size: 20px;
-  color: #ECD4EA;
+  /* color: #ECD4EA; */
   padding: 10px 14px;
   /* margin: 8px 0; */
   border-radius: 8px;
@@ -299,8 +297,32 @@ form .inp{
 }
 
 .content .bottom form button:hover{
-  background-color: #6a306b;
-  color: #ECD4EA;
+  background-color: #8b3d8b;
+  color: white;
   transform: scale(1.02);
   transition: all 0.3s ease;
+}
+
+.sticker-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #9c5d9c;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 120px;
+  left: 400px;
+}
+
+.sticker {
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.sticker:hover {
+  transform: scale(1.2);
 }

@@ -3,7 +3,7 @@ import { User } from "../App"
 import { BsTelephone } from "react-icons/bs";
 import { CiMenuBurger } from "react-icons/ci";
 import { FaPhoneVolume } from "react-icons/fa6";
-import { FaUserCircle } from "react-icons/fa"; 
+import { FaSmile, FaUserCircle } from "react-icons/fa"; 
 import { AiOutlineSend } from "react-icons/ai";
 
 interface Props {
@@ -17,6 +17,24 @@ interface Massage {
   text : string
   time : string
 }
+
+const stickers = [
+  "😊", "😂", "😍", "😎", "👍", "🎉", "🔥", "😢", "❤️", "🎶", 
+  "🤔", "😄", "😃", "😅", "😉", "😇", "🥰", "😘", "😜", "🤩", 
+  "🤗", "😋", "😛", "😝", "🤑", "🤠", "😷", "🤒", "🤕", "🤧", 
+  "🥳", "😡", "😠", "🤬", "😱", "😨", "😰", "😥", "😓", "😭", "❤️", 
+  "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔", "❣️", 
+  "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "💌", "❤️‍🩹", "❣️",
+
+  "🌹", "🌺", "🌸", "🌼", "🌻", "💐", "🌷", "🌱", "🌿", "☘️", 
+  "🍀", "🌵", "🌴", "🌳", "🌲", "🌾", "🌿", "🍁", "🍂", "🍃",
+
+  "☀️", "🌤️", "⛅", "🌥️", "☁️", "🌦️", "🌧️", "⛈️", "🌩️", "🌨️", 
+  "❄️", "☃️", "⛄", "🌬️", "💨", "🌪️", "🌫️", "🌈", "☔", "⚡",
+
+  "👋", "👏", "🙌", "👐", "🤲", "🤝", "🙏", "✍️", "💅", "🤳",
+];
+
 function Content(props: Props) {
 
   const [messages, setMessages] = useState<Massage[]>([
@@ -89,6 +107,7 @@ function Content(props: Props) {
 
   const [message, setMessage] = useState<string>('');
 
+  const [showStickers, setShowStickers] = useState<boolean>(false);
   
   function sendMessage(e: FormEvent) {
     e.preventDefault();
@@ -103,6 +122,11 @@ function Content(props: Props) {
     };
     setMessages([...messages, newMessage]);
     setMessage("");
+  }
+
+  function handleStickerClick(sticker: string) {
+    setMessage(prev => prev + " " + sticker); 
+    setShowStickers(false);
   }
 
 
@@ -154,10 +178,23 @@ function Content(props: Props) {
         ))}
         </ul>
       </div>
+      {/* stiker bo'limi */}
+        {showStickers && (
+          <div className="sticker-menu">
+            {stickers.map((sticker, index) => (
+              <span key={index} onClick={() => handleStickerClick(sticker)} className="sticker">
+                {sticker}
+              </span>
+            ))}
+          </div>
+      )}
       <div className="bottom">
         <form onSubmit={sendMessage}>
+          <button type="button" onClick={() => setShowStickers(!showStickers)}>
+            <FaSmile />
+          </button>
           <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" placeholder="Type a message..." />
-          <button><AiOutlineSend/></button>
+          <button type="submit"><AiOutlineSend /></button>
         </form>
       </div>
     </div>
