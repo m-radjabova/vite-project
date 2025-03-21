@@ -1,149 +1,157 @@
-.container .sidebar{
+/* === Umumiy sidebar === */
+.container .sidebar {
     overflow-y: auto;
     padding: 8px;
+    max-height: 100vh;
 }
-  
-.container .sidebar::-webkit-scrollbar{
-    width: 5px;
-    height: 5px;
-    background-color: #ECD4EA;
+
+/* === Scrollbar === */
+.container .sidebar::-webkit-scrollbar {
+    width: 6px;
 }
-  
-.container .sidebar::-webkit-scrollbar-thumb{
-    background-color: #a25a9c;
+
+.container .sidebar::-webkit-scrollbar-thumb {
+    background: #a25a9c;
     border-radius: 20px;
-  }
-  
-.container .content{
-    padding: 10px;
-    height: 100%;
 }
-  
-.container .sidebar .user{
+
+.container .sidebar::-webkit-scrollbar-track {
+    background: #ecd4ea;
+}
+
+/* === Sidebar foydalanuvchi kartasi === */
+.container .sidebar .user {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: large;
-    background-color: #8b3d8b;
+    font-size: 16px;
+    background: #8b3d8b;
     color: #f5d0f5;
-    padding: 10px 16px;
-    margin: 8px 0;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
-  
-.container .sidebar .user .deleteIcon{
-    font-size: 24px;
-    color: #f5d0f5;
-    cursor: pointer;
-}
-  
-.container .sidebar .user .deleteIcon:hover{
-    transform: scale(1.02);
-    color: #4a244c;
-}
-  
-.container .sidebar .user:hover{
-    background-color: #d48fd7;
+
+.container .sidebar .user:hover {
+    background: #d48fd7;
     color: white;
     transform: scale(1.02);
-    transition: all 0.3s ease;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-  
-.container .sidebar .user.active{
-    background-color:#d290cd;
-    color: #452345;
-    transform: scale(1.02);
-    transition: all 0.3s ease;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-  
 
-.btn1{
+/* === Faol user === */
+.container .sidebar .user.active {
+    background: #d290cd;
+    color: #452345;
+}
+
+/* === User o‘chirish ikonkasi === */
+.container .sidebar .user .deleteIcon {
+    font-size: 20px;
+    color: #f5d0f5;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.container .sidebar .user .deleteIcon:hover {
+    color: #4a244c;
+    transform: scale(1.1);
+}
+
+/* === Tugmalar === */
+.btn1 {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #8b3d8b;
+    background: #8b3d8b;
     color: #f5d0f5;
-    font-size: large;
-    padding: 10px 16px;
-    margin: 8px 0;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
     border: none;
-}
-  
-.btn1 .addIcon{
-    margin-right: 8px;
-}
-  
-.btn1:hover{
-    background-color: #d48fd7;
-    color: white;
-    transform: scale(1.02);
-    transition: all 0.3s ease;
-}
-  
-form .inp{
-    width: 100%;
-    background-color: #ebe3eb;
-    font-size: large;
-    padding: 10px 16px;
-    margin: 8px 0;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    border: 1px solid #a08ba0;
-    outline: none;
 }
 
-.deleteUserBtns{
+.btn1:hover {
+    background: #d48fd7;
+    color: white;
+    transform: scale(1.02);
+}
+
+/* === Inputlar === */
+form .inp {
+    width: 100%;
+    background: #ebe3eb;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #a08ba0;
+    outline: none;
+    transition: 0.3s;
+}
+
+form .inp:focus {
+    border-color: #8b3d8b;
+}
+
+/* === O‘chirish tugmalari === */
+.deleteUserBtns {
     display: flex;
     justify-content: space-between;
     gap: 8px;
 }
-  
-.deleteUserBtns .deleteUserYesbtn{
-    background-color: #8b3d8b;
-    color: white;
-    font-size: 20px;
-    padding: 10px 14px;
-    margin: 8px 0;
+
+.deleteUserBtns button {
+    font-size: 16px;
+    padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
     border: none;
 }
-  
-.deleteUserBtns .deleteUserYesbtn:hover{
-    background-color: #9f52a0;
-    color: #ECD4EA;
-    transform: scale(1.02);
-    transition: all 0.3s ease;
+
+.deleteUserBtns .deleteUserYesbtn {
+    background: #8b3d8b;
+    color: white;
 }
-  
-.deleteUserBtns .deleteUserNobtn{
-    background-color: #d48fd7;
+
+.deleteUserBtns .deleteUserYesbtn:hover {
+    background: #9f52a0;
+    color: #ecd4ea;
+}
+
+.deleteUserBtns .deleteUserNobtn {
+    background: #d48fd7;
     color: #4a1f4d;
-    font-size: 20px;
-    padding: 10px 14px;
-    margin: 8px 0;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
 }
-  
-.deleteUserBtns .deleteUserNobtn:hover{
-    background-color: #8b3d8b;
+
+.deleteUserBtns .deleteUserNobtn:hover {
+    background: #8b3d8b;
     color: white;
-    transform: scale(1.02);
-    transition: all 0.3s ease;
+}
+
+/* === Icons === */
+.sidebar .icons2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar .icons2 .editIcon {
+    font-size: 20px;
+    color: #f5d0f5;
+    cursor: pointer;
+}
+
+.sidebar .icons2 .editIcon:hover {
+    color: #4a244c;
+    transform: scale(1.1);
 }
 
 /* Dropdown konteyner  */
@@ -197,22 +205,4 @@ form .inp{
       opacity: 1;
       transform: translateY(0);
     }
-}
-
-.sidebar .icons2{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-  
-.sidebar .icons2 .editIcon{
-    font-size: 24px;
-    color: #f5d0f5;
-    cursor: pointer;
-}
-  
-.sidebar .icons2 .editIcon:hover{
-    transform: scale(1.02);
-    color: #4a244c;
 }
