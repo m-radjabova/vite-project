@@ -1,0 +1,211 @@
+.container .content .inContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 16px;
+    height: 90px;
+    background-color: #784078;
+    color: #f5d0f5;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+  
+.container .content .inContent h1{
+    margin-bottom: 8px;
+    color: #c3a1c4;
+    font-weight: 600;
+    font-size: 24px;
+}
+  
+.icons {
+    display: flex;
+    gap: 30px;
+    font-size: 24px;
+    cursor: pointer;
+}
+  
+.content .chats {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    margin-top: 10px;
+    overflow-y: auto; 
+    max-height: calc(100vh - 191px); 
+    padding-right: 10px;
+}
+  
+.content p{
+    margin-top: 10px;
+    color: #f5d0f5;
+    font-weight: 600;
+    font-size: 24px;
+}
+  
+.chats ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+  
+.chats ul .massage {
+    position: relative; 
+    padding-top: 40px;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    word-break: break-word; 
+    white-space: normal;
+    font-size: large;
+    width: 50%;
+    padding: 16px;
+    background-color: #d48fd7;
+    color: #4a1f4d;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #a08ba0;
+}
+  
+.chats ul .massage:hover{
+    background-color: #8b3d8b;
+    color: white;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+  
+.chats ul .right{
+    margin-left: auto;
+    background-color: #8b3d8b;
+    color: white;
+}
+  
+.chats ul .right .dropdown-iconMenu{
+    color: #e9d9e9;
+    font-weight: bolder;
+}
+  
+.chats ul .right:hover{
+    background-color: #9f52a0;
+    color: #ECD4EA;
+    transform: scale(1.02);
+}
+  
+.chats::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.chats::-webkit-scrollbar-thumb {
+    background-color: #a08ba0;
+    border-radius: 8px;
+}
+  
+.chats::-webkit-scrollbar-track {
+    background-color: #ECD4EA;
+}
+  
+.chats ul .massage span{
+    display: block;
+    font-size: 12px;
+    color: #5f1160;
+    margin-top: 8px;
+    text-align: right;
+    font-weight: 600;
+}
+
+
+.user-name {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #663a67;
+}
+  
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+  
+.user-icon {
+    font-size: 50px; 
+    color: #ceb5cc; 
+}
+  
+.content .bottom{
+    position: fixed;
+    bottom: 4px;
+    width: 73%;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #6d2f6d;
+    color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+  
+.content .bottom form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+  
+.content .bottom form input{
+    width: 100%;
+    background-color: #f5d0f5;
+    border: 1px solid #8b3d8b;
+    font-size: large;
+    border-radius: 8px;
+    cursor: text;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    margin: 8px 0;
+}
+  
+.content .bottom form button{
+    background-color: #d48fd7;
+    color: #4a1f4d;
+    font-size: 20px;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+  
+.content .bottom form button:hover{
+    background-color: #8b3d8b;
+    color: white;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+  
+.sticker-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #9c5d9c;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 120px;
+    left: 400px;
+}
+  
+.sticker {
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 5px;
+    transition: transform 0.2s;
+}
+  
+.sticker:hover {
+    transform: scale(1.2);
+}
+  

@@ -5,6 +5,9 @@ import { CiMenuBurger } from "react-icons/ci";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { FaSmile, FaUserCircle } from "react-icons/fa"; 
 import { AiOutlineSend } from "react-icons/ai";
+import { CiMenuFries } from "react-icons/ci";
+import { MdOutlineDelete } from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
 
 interface Props {
   selectedUser: User | null
@@ -14,8 +17,8 @@ interface Massage {
   id: number;
   from : number;
   to : number;
-  text : string
-  time : string
+  text : string;
+  time : string;
 }
 
 const stickers = [
@@ -106,21 +109,32 @@ function Content(props: Props) {
   ]);
 
   const [message, setMessage] = useState<string>('');
-
+  const [editingMessageId, setEditingMessageId] = useState<number | null>(null);
   const [showStickers, setShowStickers] = useState<boolean>(false);
+
+  const [dropdownOpenId, setDropdownOpenId] = useState<number | null>(null);
   
   function sendMessage(e: FormEvent) {
     e.preventDefault();
     if (!message.trim()) return;
 
-    const newMessage: Massage = {
-      id: messages.length + 1,
-      from: 1,
-      to: props.selectedUser ? props.selectedUser.id : 1,
-      text: message,
-      time: getFormattedDateTime(),
-    };
-    setMessages([...messages, newMessage]);
+    if (editingMessageId) {
+      setMessages((prevMessages) =>
+        prevMessages.map((msg) =>
+          msg.id === editingMessageId ? { ...msg, text: message } : msg
+        )
+      );
+      setEditingMessageId(null);
+    } else {
+      const newMessage: Massage = {
+        id: messages.length + 1,
+        from: 1,
+        to: props.selectedUser ? props.selectedUser.id : 1,
+        text: message,
+        time: getFormattedDateTime(),
+      };
+      setMessages([...messages, newMessage]);
+    }
     setMessage("");
   }
 
@@ -129,6 +143,19 @@ function Content(props: Props) {
     setShowStickers(false);
   }
 
+  function editMassage(id: number) {
+    const messageToEdit = messages.find((item) => item.id === id);
+    if (!messageToEdit) return;
+
+    setMessage(messageToEdit.text); 
+    setEditingMessageId(id); 
+    setDropdownOpenId(null); 
+  }
+  
+  function deleteMassage(id: number) {
+    setMessages(messages.filter((item) => item.id !== id));
+    setDropdownOpenId(null); 
+  }
 
 
   function getFormattedDateTime() {
@@ -141,21 +168,24 @@ function Content(props: Props) {
 
     return `${day}.${month}.${year} ${hours}:${minutes}`;
   }
-  if (!props.selectedUser) {
+
+  if( !props.selectedUser ) {
     return (
       <div className="content">
-        <p>No user selected</p>
+        <div className="inContent">
+          <h1>Select a user to start chat</h1>
+        </div>
       </div>
-    );
+    )
   }
-
+  
   return (
     <div className="content">
       <div className="inContent">
         <div className="user-info">
           <FaUserCircle className="user-icon" />
           <div>
-            <h1>{props.selectedUser.userName}</h1>
+          <h1>{props.selectedUser?.userName}</h1>
             <p>
               <BsTelephone /> {props.selectedUser!.phone}
             </p>
@@ -167,16 +197,45 @@ function Content(props: Props) {
         </div>
       </div>
       <div className="chats">
-       <ul>
-       {messages.filter(item => (item.from === 1 && item.to === props.selectedUser!.id) || (item.from === props.selectedUser!.id && item.to === 1))
-        .map((message) => (
-          <li 
-              className={`massage ${message.from === 1 && "right"}`} 
-              key={message.id}>{message.text}
+      <ul>
+        {messages
+          .filter(
+            (item) =>
+              (item.from === 1 && item.to === props.selectedUser!.id) ||
+              (item.from === props.selectedUser!.id && item.to === 1)
+          )
+          .map((message) => (
+            <li className={`massage ${message.from === 1 && "right"}`} key={message.id}>
+              {/* dropdown bo'limi */}
+              <div className="dropdown">
+                  <CiMenuFries
+                    className="dropdown-iconMenu"
+                    onClick={() =>
+                      setDropdownOpenId(dropdownOpenId === message.id ? null : message.id)
+                    }
+                  />
+                  {dropdownOpenId === message.id && (
+                    <div className="dropdown-menu">
+                      <div
+                        onClick={() => deleteMassage(message.id)}
+                        className="dropdown-item"
+                      >
+                        <MdOutlineDelete /> delete
+                      </div>
+                      <div 
+                        onClick={() => editMassage(message.id)}
+                        className="dropdown-item">
+                        <AiFillEdit /> edit
+                      </div>
+                    </div>
+                  )}
+                </div>
+              {message.text}
               <span>{message.time}</span>
-          </li>
-        ))}
-        </ul>
+            </li>
+          ))}
+      </ul>
+
       </div>
       {/* stiker bo'limi */}
         {showStickers && (

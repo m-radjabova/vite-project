@@ -84,9 +84,28 @@ function App() {
     setUsers([...users]);
   }
 
+  const updateUser = (updatedUser: User) => {
+    setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
+    if (selectedUser?.id === updatedUser.id) {
+      setSelectedUser(updatedUser);
+    }
+  };
+
+  function deleteUser(user: User) {
+    const updateUsers = users.filter((u) => u.id !== user.id);
+    setUsers(updateUsers);
+  }
+
   return (
     <div className='container'>
-      <Sidebar selectedUser={selectedUser} setSelectedUser={setSelectedUser} addUser={addUser} users={users} />
+      <Sidebar 
+          updateUser={updateUser}
+          deleteUser={deleteUser} 
+          selectedUser={selectedUser} 
+          setSelectedUser={setSelectedUser} 
+          addUser={addUser} 
+          users={users} 
+      />
       <Content selectedUser={selectedUser} />
     </div>
   )
