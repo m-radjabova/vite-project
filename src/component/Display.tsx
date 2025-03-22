@@ -24,18 +24,19 @@ interface DisplayProps {
 
 function Display({ money, remaining, spent, addMoney }: DisplayProps) {
   const [open, setOpen] = useState(false);
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<string>(""); 
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleAddMoney = () => {
-    if (amount > 0) {
-      addMoney(amount); 
-      setAmount(0); 
+    const numericAmount = Number(amount); 
+    if (numericAmount > 0) {
+      addMoney(numericAmount); 
+      setAmount("");
       handleClose(); 
     } else {
-      alert("iltimos to'g'ri qiymat kiriting"); 
+      alert("Iltimos, to'g'ri qiymat kiriting!"); 
     }
   };
 
@@ -66,9 +67,9 @@ function Display({ money, remaining, spent, addMoney }: DisplayProps) {
           <p id="modal-modal-description" style={{ marginBottom: '16px', textAlign: 'center', color: '#555' }}>
             <input
               type="number"
-              placeholder="Enter amount"
+              placeholder="Enter amount..."
               value={amount} 
-              onChange={(e) => setAmount(Number(e.target.value))}
+              onChange={(e) => setAmount(e.target.value)}
               style={{
                 width: '100%',
                 padding: '10px',
