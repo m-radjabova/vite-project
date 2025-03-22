@@ -172,6 +172,7 @@ function Sidebar(props: Props) {
                     </div>
                 </Box>
         </Modal>
+        
         </div>
     );
 }

@@ -41,13 +41,11 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* === Faol user === */
 .container .sidebar .user.active {
     background: #d290cd;
     color: #452345;
 }
 
-/* === User o‘chirish ikonkasi === */
 .container .sidebar .user .deleteIcon {
     font-size: 20px;
     color: #f5d0f5;
@@ -60,7 +58,6 @@
     transform: scale(1.1);
 }
 
-/* === Tugmalar === */
 .btn1 {
     display: flex;
     justify-content: center;
@@ -83,7 +80,6 @@
     transform: scale(1.02);
 }
 
-/* === Inputlar === */
 form .inp {
     width: 100%;
     background: #ebe3eb;
@@ -100,7 +96,6 @@ form .inp:focus {
     border-color: #8b3d8b;
 }
 
-/* === O‘chirish tugmalari === */
 .deleteUserBtns {
     display: flex;
     justify-content: space-between;
