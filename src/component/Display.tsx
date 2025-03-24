@@ -19,32 +19,30 @@ interface DisplayProps {
   money: number;
   remaining: number;
   spent: number;
-  addMoney: (amount: number) => void;
+  editMoney: (amount: number) => void;
 }
 
-function Display({ money, remaining, spent, addMoney }: DisplayProps) {
+function Display({ money, remaining, spent, editMoney }: DisplayProps) {
   const [open, setOpen] = useState(false);
   const [amount, setAmount] = useState<string>(""); 
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setAmount(String(money)); 
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
-  const handleAddMoney = () => {
-    const numericAmount = Number(amount); 
-    if (numericAmount > 0) {
-      addMoney(numericAmount); 
-      setAmount("");
-      handleClose(); 
-    } else {
-      alert("Iltimos, to'g'ri qiymat kiriting!"); 
-    }
+  const handleEditMoney = () => {
+    editMoney(Number(amount)); 
+    handleClose(); 
   };
 
   return (
     <div className="row mt-3">
       <Box color="info">
         <h3>Expence: <span> ${money}</span></h3>
-        <button onClick={handleOpen} className="btn btn-primary">Add</button>
+        <button onClick={handleOpen} className="btn btn-primary">Edit</button>
       </Box>
       <Box color="success">
         <h3>Remaining: <span> ${remaining}</span></h3>
@@ -62,14 +60,14 @@ function Display({ money, remaining, spent, addMoney }: DisplayProps) {
       >
         <MuiBox sx={style}>
           <h2 id="modal-modal-title" style={{ marginBottom: '16px', textAlign: 'center', color: '#333' }}>
-            Add Money
+            Edit Money
           </h2>
           <p id="modal-modal-description" style={{ marginBottom: '16px', textAlign: 'center', color: '#555' }}>
             <input
               type="number"
               placeholder="Enter amount..."
               value={amount} 
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(e.target.value)} 
               style={{
                 width: '100%',
                 padding: '10px',
@@ -81,7 +79,7 @@ function Display({ money, remaining, spent, addMoney }: DisplayProps) {
             />
           </p>
           <button
-            onClick={handleAddMoney} 
+            onClick={handleEditMoney} 
             className="btn btn-primary"
             style={{
               width: '100%',
@@ -97,7 +95,7 @@ function Display({ money, remaining, spent, addMoney }: DisplayProps) {
             onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#0056b3')}
             onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#007bff')}
           >
-            Add
+            Save
           </button>
         </MuiBox>
       </Modal>

@@ -39,15 +39,15 @@ function App() {
     setExpenses([...expenses, { id: expenses.length + 1, title, amount }])
   }
 
-  const addMoney = (amount: number) => {
-    setMoney(money + amount)
+  const editMoney = (amount: number) => {
+    setMoney(amount)
   }
 
   return (
     <div className="container mt-3">
       <h1>My Budget Planner</h1>
         <Display  
-        addMoney={addMoney}
+        editMoney = {editMoney}
         remaining={showRemainingExpenses()} 
         spent={getAmountExpense()} 
         money={money} 
