@@ -23,26 +23,20 @@ function App() {
   const handleClose = () => setOpen(false);
 
   const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: 'Fix Bugs in the Login Module',
-      status: Status.todo,
-    },
-    {
-      id: 2,
-      title: 'Implement User Registration',
-      status: Status.inProgress,
-    },
-    {
-      id: 3,
-      title: 'Optimize Database Queries',
-      status: Status.completed,
-    }
+    { id: 1, title: 'apple 🍎', status: Status.todo },
+    { id: 2, title: 'lemon 🍋', status: Status.inProgress },
+    { id: 3, title: 'strawberry 🍓', status: Status.completed },
+    { id: 4, title: 'pineple 🍍', status: Status.todo },
+    { id: 5, title: 'watermelon 🍉', status: Status.inProgress },
+    { id: 6, title: 'cherry 🍒', status: Status.completed },
+    { id: 7, title: 'grape 🍇', status: Status.todo },
+    { id: 8, title: 'kiwi 🥝', status: Status.inProgress },
   ]);
 
   const [status, setStatus] = useState("all");
   const [title, setTitle] = useState("");
-  const [taskStatus, setTaskStatus] = useState<Status>(Status.todo); 
+  const [taskStatus, setTaskStatus] = useState<Status>(Status.todo);
+  const [search, setSearch] = useState("");
 
   const changeStatus = (id: number, status: Status) => {
     setTasks(tasks.map((task) => (task.id === id ? { ...task, status } : task)));
@@ -52,65 +46,72 @@ function App() {
     e.preventDefault();
 
     if (!title.trim()) {
-      alert("iltimos title kiriting");
+      alert("Please enter a task title!");
       return;
     }
 
     const newTask: Task = {
       id: tasks.length + 1,
       title,
-      status: taskStatus, 
+      status: taskStatus,
     };
 
     setTasks([...tasks, newTask]);
-    setTitle(""); 
-    setTaskStatus(Status.todo); 
-    handleClose(); 
+    setTitle("");
+    setTaskStatus(Status.todo);
+    handleClose();
   };
 
+
+  const filteredTasks = tasks.filter((task) => {
+    const statusmatch = status === "all" || task.status === status;
+    const searchMatch = task.title.toLowerCase().includes(search.toLowerCase());
+    return statusmatch && searchMatch;
+  });
+
   return (
-    <div className="container mt-5 p-4" style={{boxShadow : '0px 3px 8px rgba(0, 0, 0, 0.24)'}}>
+    <div className="container mt-3 p-4" style={{ boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.24)' }}>
       <h1 className="text-center">Tasks</h1>
       <div className="d-flex justify-content-between align-items-center mt-3">
         <div className="btn-group">
           <button
             onClick={() => setStatus("all")}
-            className="btn btn-info me-2 btn-lg"
+            className={`btn btn-info me-2 ${status === "all" ? "active" : ""}`}
           >
             All
           </button>
           <button
             onClick={() => setStatus("todo")}
-            className="btn btn-primary me-2 btn-lg"
+            className={`btn btn-primary me-2 ${status === "todo" ? "active" : ""}`}
           >
             Todo
           </button>
           <button
             onClick={() => setStatus("inProgress")}
-            className="btn btn-warning me-2 btn-lg"
+            className={`btn btn-warning me-2 ${status === "inProgress" ? "active" : ""}`}
           >
             In Progress
           </button>
           <button
             onClick={() => setStatus("completed")}
-            className="btn btn-success btn-lg"
+            className={`btn btn-success ${status === "completed" ? "active" : ""}`}
           >
             Completed
           </button>
         </div>
-        <button onClick={handleOpen} className="btn btn-primary btn-lg">
+        <button onClick={handleOpen} className="btn btn-primary">
           Add
         </button>
       </div>
-      <hr />
-      <TasksList
-        tasks={
-          status === "all"
-            ? tasks
-            : tasks.filter((task) => task.status === status)
-        }
-        changeStatus={changeStatus}
+      <input
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+        className="form-control mt-3"
+        placeholder="Search tasks..."
+        type="search"
       />
+      <hr />
+      <TasksList tasks={filteredTasks} changeStatus={changeStatus} />
 
       {/* Modal */}
       <Modal
@@ -138,7 +139,7 @@ function App() {
                 className="form-select"
                 id="status"
                 value={taskStatus}
-                onChange={(e) => setTaskStatus(e.target.value as Status)} 
+                onChange={(e) => setTaskStatus(e.target.value as Status)}
               >
                 <option value={Status.todo}>Todo</option>
                 <option value={Status.inProgress}>In Progress</option>

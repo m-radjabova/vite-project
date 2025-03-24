@@ -1,4 +1,5 @@
 import { Task, Status } from '../types/Types'
+import Badge from 'react-bootstrap/Badge';
 
 interface Props {
     tasks: Task[];
@@ -22,13 +23,24 @@ function TasksList({tasks, changeStatus}: Props) {
                     <tr key={task.id}>
                         <td>{task.id}</td>
                         <td>{task.title}</td>
-                        <td>{task.status}</td>
                         <td>
-                            <button onClick={() => changeStatus(task.id, Status.todo)} className={`btn btn-outline-primary ${task.status === Status.todo ? 'active' : ''}`}>todo</button>
-                            <button onClick={() => changeStatus(task.id, Status.inProgress)} className={`btn btn-outline-primary mx-3 ${task.status === Status.inProgress ? 'active' : ''}`}>progress</button>
-                            <button onClick={() => changeStatus(task.id, Status.completed)} className={`btn btn-outline-primary ${task.status === Status.completed ? 'active' : ''}`}>completed</button>
+                            <Badge
+                                bg={
+                                    task.status === Status.todo
+                                    ? "primary" 
+                                    : task.status === Status.inProgress
+                                    ? "warning"
+                                    : "success" 
+                                }
+                                >
+                                {task.status}
+                            </Badge>
                         </td>
-
+                        <td>
+                            <button onClick={() => changeStatus(task.id, Status.todo)} className={`btn btn-outline-dark ${task.status === Status.todo ? 'active' : ''}`}>todo</button>
+                            <button onClick={() => changeStatus(task.id, Status.inProgress)} className={`btn btn-outline-dark mx-3 ${task.status === Status.inProgress ? 'active' : ''}`}>progress</button>
+                            <button onClick={() => changeStatus(task.id, Status.completed)} className={`btn btn-outline-dark ${task.status === Status.completed ? 'active' : ''}`}>completed</button>
+                        </td>
                     </tr>
                 ))
             }
