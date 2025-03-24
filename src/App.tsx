@@ -23,7 +23,7 @@ function App() {
   const handleClose = () => setOpen(false);
 
   const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, title: 'apple 🍎', status: Status.todo },
+    { id: 1, title: 'green apple 🍏', status: Status.todo },
     { id: 2, title: 'lemon 🍋', status: Status.inProgress },
     { id: 3, title: 'strawberry 🍓', status: Status.completed },
     { id: 4, title: 'pineple 🍍', status: Status.todo },
@@ -31,6 +31,7 @@ function App() {
     { id: 6, title: 'cherry 🍒', status: Status.completed },
     { id: 7, title: 'grape 🍇', status: Status.todo },
     { id: 8, title: 'kiwi 🥝', status: Status.inProgress },
+    { id: 9, title: 'red apple 🍎', status: Status.completed },
   ]);
 
   const [status, setStatus] = useState("all");
@@ -46,7 +47,7 @@ function App() {
     e.preventDefault();
 
     if (!title.trim()) {
-      alert("Please enter a task title!");
+      alert("iltimos taskni kiriting");
       return;
     }
 
@@ -146,7 +147,7 @@ function App() {
                 <option value={Status.completed}>Completed</option>
               </select>
             </div>
-            <button type="submit" className="btn btn-primary w-100">
+            <button className="btn btn-primary w-100">
               Submit
             </button>
           </form>
