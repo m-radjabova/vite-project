@@ -1,29 +1,7 @@
-body {
-    background-image: url(./assets/background.jpg); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-}
-
 .container{
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    max-width: 800px !important;
 }
 
-form{
-    width: 600px!important;
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    border-radius: 10px !important;
-    padding: 20px !important;
-    margin-top: 50px !important;
-}
-
-form label{
-    font-weight: bold !important;
-    margin-bottom: 10px !important;
-}
-
-form button{
-    margin-right: auto !important;
+body {
+    background-color: #ece8e8 !important;
 }
