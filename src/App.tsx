@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -26,7 +26,6 @@ const schema = yup.object({
 });
 
 function App() {
-  const [phone, setPhone] = useState("+998");
   const {
     register,
     handleSubmit,
@@ -39,114 +38,102 @@ function App() {
     console.log(data);
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, ""); 
-    if (value.startsWith("998")) {
-      value = value.slice(3); 
-    }
-    let formatted = "+998";
-    if (value.length > 0) formatted += `(${value.slice(0, 2)}`;
-    if (value.length >= 3) formatted += `)${value.slice(2, 5)}`;
-    if (value.length >= 6) formatted += `-${value.slice(5, 7)}`;
-    if (value.length >= 8) formatted += `-${value.slice(7, 9)}`;
-    setPhone(formatted);
-  };
 
   return (
     <div className="container mt-3">
-      <h1 className="text-center mb-4">Register Form</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow rounded bg-light">
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label htmlFor="firstName" className="form-label">First Name</label>
+      <div className="blur-container">
+        <h1 className="text-center mb-4 text-dark">Register Form</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="p-4">
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="firstName" className="form-label">First Name</label>
+              <input
+                {...register("firstName")}
+                type="text"
+                className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
+                id="firstName"
+                // placeholder="Enter your first name"
+              />
+              {errors.firstName && <div className="invalid-feedback">{errors.firstName.message}</div>}
+            </div>
+
+            <div className="col-md-6 mb-3">
+              <label htmlFor="lastName" className="form-label">Last Name</label>
+              <input
+                {...register("lastName")}
+                type="text"
+                className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
+                id="lastName"
+                // placeholder="Enter your last name"
+              />
+              {errors.lastName && <div className="invalid-feedback">{errors.lastName.message}</div>}
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label ">Email</label>
             <input
-              {...register("firstName")}
+              {...register("email")}
+              type="email"
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              id="email"
+              // placeholder="Enter your email"
+            />
+            {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label ">Phone</label>
+            <input
+              {...register("phone")}
               type="text"
-              className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
-              id="firstName"
-              placeholder="Enter your first name"
+              className={`form-control ${errors.phone ? "is-invalid" : ""}`}
+              id="phone"
+              // placeholder="+998(XX)XXX-XX-XX"
             />
-            {errors.firstName && <div className="invalid-feedback">{errors.firstName.message}</div>}
+            {errors.phone && <div className="invalid-feedback">{errors.phone.message}</div>}
           </div>
 
-          <div className="col-md-6 mb-3">
-            <label htmlFor="lastName" className="form-label">Last Name</label>
+          <div className="mb-3">
+            <label htmlFor="address" className="form-label">Address</label>
             <input
-              {...register("lastName")}
+              {...register("address")}
               type="text"
-              className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
-              id="lastName"
-              placeholder="Enter your last name"
+              className={`form-control ${errors.address ? "is-invalid" : ""}`}
+              id="address"
+              // placeholder="Enter your address"
             />
-            {errors.lastName && <div className="invalid-feedback">{errors.lastName.message}</div>}
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email</label>
-          <input
-            {...register("email")}
-            type="email"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
-            id="email"
-            placeholder="Enter your email"
-          />
-          {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="phone" className="form-label">Phone</label>
-          <input
-            {...register("phone")}
-            type="text"
-            value={phone}
-            onChange={handlePhoneChange}
-            className={`form-control ${errors.phone ? "is-invalid" : ""}`}
-            id="phone"
-            placeholder="+998(XX)XXX-XX-XX"
-          />
-          {errors.phone && <div className="invalid-feedback">{errors.phone.message}</div>}
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="address" className="form-label">Address</label>
-          <input
-            {...register("address")}
-            type="text"
-            className={`form-control ${errors.address ? "is-invalid" : ""}`}
-            id="address"
-            placeholder="Enter your address"
-          />
-          {errors.address && <div className="invalid-feedback">{errors.address.message}</div>}
-        </div>
-
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input
-              {...register("password")}
-              type="password"
-              className={`form-control ${errors.password ? "is-invalid" : ""}`}
-              id="password"
-              placeholder="Enter your password"
-            />
-            {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
+            {errors.address && <div className="invalid-feedback">{errors.address.message}</div>}
           </div>
 
-          <div className="col-md-6 mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-            <input
-              {...register("confirmPassword")}
-              type="password"
-              className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
-              id="confirmPassword"
-              placeholder="Confirm your password"
-            />
-            {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword.message}</div>}
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                {...register("password")}
+                type="password"
+                className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                id="password"
+                // placeholder="Enter your password"
+              />
+              {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
+            </div>
+
+            <div className="col-md-6 mb-3">
+              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+              <input
+                {...register("confirmPassword")}
+                type="password"
+                className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
+                id="confirmPassword"
+                // placeholder="Confirm your password"
+              />
+              {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword.message}</div>}
+            </div>
           </div>
-        </div>
-        <button className="btn btn-danger w-100">Register</button>
-      </form>
+          <button className="btn btn-dark w-100">Register</button>
+        </form>
+      </div>
     </div>
   );
 }
