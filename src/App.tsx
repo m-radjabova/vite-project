@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -26,6 +26,7 @@ const schema = yup.object({
 });
 
 function App() {
+  const [phone, setPhone] = useState("+998"); 
   const {
     register,
     handleSubmit,
@@ -37,7 +38,20 @@ function App() {
   const onSubmit = (data: FieldValues) => {
     console.log(data);
   };
+  
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ""); 
+    if (value.startsWith("998")) {
+      value = value.slice(3); 
+    }
+    let formatted = "+998";
+    if (value.length > 0) formatted += `(${value.slice(0, 2)}`;
+    if (value.length >= 3) formatted += `)${value.slice(2, 5)}`;
+    if (value.length >= 6) formatted += `-${value.slice(5, 7)}`;
+    if (value.length >= 8) formatted += `-${value.slice(7, 9)}`;
+    setPhone(formatted);
+  };
 
   return (
     <div className="container mt-3">
@@ -71,7 +85,7 @@ function App() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="email" className="form-label ">Email</label>
+            <label htmlFor="email" className="form-label">Email</label>
             <input
               {...register("email")}
               type="email"
@@ -83,10 +97,12 @@ function App() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="phone" className="form-label ">Phone</label>
+            <label htmlFor="phone" className="form-label">Phone</label>
             <input
               {...register("phone")}
               type="text"
+              value={phone}
+              onChange={handlePhoneChange}
               className={`form-control ${errors.phone ? "is-invalid" : ""}`}
               id="phone"
               // placeholder="+998(XX)XXX-XX-XX"
