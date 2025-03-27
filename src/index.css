@@ -1,55 +1,17 @@
-body {
-    background-image: url(./assets/1400144.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-.blur-container {
-    backdrop-filter: blur(5px); 
-    background: rgba(255, 255, 255, 0.4); 
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
-    padding: 20px;
-    width: 100%;
-    max-width: 600px;
-    color: #202020;
-}
 
-.form-control {
-    border: 3px solid #c6c3c3 !important;
-    border-radius: 15px !important;
-    background-color: rgba(255, 255, 255, 0.4) !important; 
-    padding: 10px;
+.table {
     font-size: 16px;
-    color: #202020;
-    width: 100%;
+    text-align: center;
 }
 
-.form-control:focus {
-    outline: none;
-    border: 3px solid #6a6a6a;
-    background-color: rgba(255, 255, 255, 0.4) !important;
+.table th {
+    font-weight: bold;
 }
 
-.form-control::placeholder {
-    color: #444 !important; 
-    opacity: 0.7 !important;
+.table td {
+    vertical-align: middle;
 }
 
-.btn-dark {
-    margin-top: 10px;
-    background-color: #333 !important;
-    color: white !important;
-    padding: 12px;
-    border-radius: 25px !important;
-    font-size: 20px !important;
-    transition: all 0.3s ease;
-}
-
-.btn-dark:hover {
-    background-color: #555 !important;
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
 }
