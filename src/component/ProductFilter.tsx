@@ -10,7 +10,7 @@ function ProductFilter({ categories, filteredProducts }: Props) {
     <div>
       <select
         onChange={(e) =>
-          filteredProducts(e.target.value === "" ? "" : parseInt(e.target.value))
+          filteredProducts(e.target.value === "" ? "" : Number(e.target.value))
         }
         className="form-select mb-3"
       >

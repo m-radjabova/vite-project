@@ -18,7 +18,7 @@ export interface Product{
 
 function App() {
 
-  const [categories, setCategories] = useState<Category[]>([
+  const [categories] = useState<Category[]>([
     {id: 1, name: 'Candies'},
     {id: 2, name: 'Desserts'},
     {id: 3, name: 'Drinks'},
