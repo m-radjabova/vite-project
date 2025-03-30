@@ -1,0 +1,226 @@
+body{
+    background-color: rgb(250, 215, 215) !important;
+}
+
+
+header{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgb(237, 232, 232);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.row .card:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.row .card{
+    background-color:rgb(239, 187, 187) !important;
+}
+
+header .btn {
+    color: rgb(244, 145, 145) !important;
+    background-color: rgb(250, 215, 215) !important;
+    border-color: rgb(245, 195, 195) !important;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+  
+header .btn:hover {
+    color: rgb(255, 254, 254) !important;
+    background-color: rgb(238, 188, 188) !important;
+    border-color: rgb(244, 145, 145) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+  
+header .btn.active {
+    color: white !important;
+    background-color: rgb(244, 145, 145) !important;
+    border-color: rgb(224, 125, 125) !important;
+    font-weight: 600;
+}
+
+.add .card{
+    background-color:rgb(246, 225, 225) !important;
+    color: rgb(55, 54, 54) !important;
+}
+
+.add .card-header {
+    background: linear-gradient(to right, rgb(255, 102, 102), rgb(255, 153, 153));
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.add .btn{
+    color: rgb(255, 254, 254) !important;
+    background-color: rgb(238, 188, 188) !important;
+    border-color: rgb(244, 145, 145) !important;
+}
+
+.add .btn:hover{
+    color: #fff !important;
+    background-color: rgb(226, 147, 147) !important;
+    border-color: rgb(244, 145, 145) !important;
+}
+
+  
+.about-us .card {
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(245, 230, 230));
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.about-us .card-header {
+    background: linear-gradient(to right, rgb(255, 102, 102), rgb(255, 153, 153));
+    color: white;
+    /* font-weight: bold; */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+  
+
+.about-us .card-body p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgb(80, 80, 80);
+}
+  
+.about-us .list-group-item {
+    background-color: transparent !important;
+    border: none;
+    font-size: 1.1rem;
+    color: rgb(100, 100, 100) !important;
+}
+  
+
+.about-us .list-group-item:hover {
+    background-color: rgb(255, 230, 230) !important;
+    color: rgb(150, 50, 50) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .col-md-3 {
+        flex: 0 0 auto;
+        width: 50% !important;
+    }
+}
+
+
+/* Welcome Overlay Styles */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeOut 0.8s ease-out 2.7s forwards;
+  }
+  
+  .welcome-content {
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 800px;
+  }
+  
+  .welcome-text {
+    font-size: 3.5rem;
+    color: #2d3436;
+    margin-bottom: 1rem;
+    animation: bounce 1.2s ease infinite alternate;
+    font-weight: 700;
+  }
+  
+  .welcome-subtext {
+    font-size: 1.5rem;
+    color: #636e72;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .book-icon {
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  
+  .star {
+    position: absolute;
+    opacity: 0;
+    animation: starAnimation 2s ease-out forwards;
+  }
+  
+  /* Animations */
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes starAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(0.3) translateY(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2) translateY(-100px) rotate(180deg);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.3) translateY(-200px) rotate(360deg);
+    }
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
