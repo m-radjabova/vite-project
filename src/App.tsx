@@ -121,7 +121,7 @@ function App() {
         </div>
       </header>
       <div className="container mt-5">
-        {page === "Books" && <Books editBook={editBook} books={books} deleteBook={( id: number ) => setBooks(books.filter(book => book.id !== id))} />}
+        {page === "Books" && <Books editBook={editBook} books={books} deleteBook={( id: number ) => setBooks(books.filter(book => book.id !== id))} setPage={setPage} />} 
         {page === "AddBooks" && <AddBooks books={books} selectedBook={selectedBook} saveBook={saveBook} setSelectedBook={setSelectedBook} />      }
         {page === "AboutUs" && <AboutUs />}
       </div>

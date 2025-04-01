@@ -5,9 +5,10 @@ interface Props {
   books: Book[];
   deleteBook : (id : number) => void;
   editBook : ( book : Book) => void;
+  setPage: (page: string) => void
 }
 
-function Books({ books, deleteBook, editBook }: Props) {
+function Books({ books, deleteBook, editBook, setPage }: Props) {
   return (
     <div className="row " style={{marginTop: "50px"}}>
       {books.map((book) => (
@@ -39,7 +40,7 @@ function Books({ books, deleteBook, editBook }: Props) {
               </p>
               <div className="mt-auto  d-flex justify-content-end align-items-center gap-2">
               <FaEdit
-                onClick={() => editBook(book)}
+                onClick={() => { editBook(book); setPage("AddBooks"); }}
                 className="text-dark"
                 style={{ cursor: "pointer" }}
                 title="Edit"

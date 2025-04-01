@@ -54,6 +54,7 @@ header .btn.active {
 .add .card{
     background-color:rgb(246, 225, 225) !important;
     color: rgb(55, 54, 54) !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .add .card-header {
