@@ -38,11 +38,10 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
               <div
                 className="position-absolute top-0 start-0 p-2 d-flex align-items-center gap-1"
                 style={{
-                  backgroundColor: "rgba(255, 255, 255, 0.8)",
                   borderRadius: "0 0 10px 0",
                 }}
               >
-                <FaHeart className="text-danger" size={18} />
+                <FaHeart className="text-danger" style={{cursor: "pointer"}} size={18} />
               </div>
             </div>
             <div className="card-body d-flex flex-column">
@@ -76,17 +75,17 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
                   className="text-dark edit-icon"
                   style={{ cursor: "pointer" }}
                   title="Edit"
-                  size={25}
+                  size={15}
                 />
                 <FaTrash
-                  size={20}
+                  size={15}
                   onClick={() => deleteBook(book.id)}
                   className="text-dark delete-icon"
                   style={{ cursor: "pointer" }}
                   title="Delete"
                 />
                 <FaDownload
-                  size={20}
+                  size={15}
                   onClick={() => handleDownload(book)}
                   className="text-dark download-icon"
                   style={{ cursor: "pointer" }}
