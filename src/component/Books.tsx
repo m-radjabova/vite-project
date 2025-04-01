@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Book } from "../App";
-import { FaUser, FaDollarSign, FaEdit, FaTrash, FaHeart, FaDownload } from "react-icons/fa";
+import { FaUser, FaDollarSign, FaEdit, FaTrash, FaHeart, FaRegHeart, FaDownload } from "react-icons/fa";
 
 interface Props {
   books: Book[];
@@ -10,6 +11,8 @@ interface Props {
 }
 
 function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props) {
+  const [likedBooks, setLikedBooks] = useState<number[]>([]); 
+
   const handleViewDetails = (book: Book) => {
     setSelectedBook(book);
     setPage("BookInfo");
@@ -19,8 +22,17 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
     alert(`Downloading ${book.name}`);
   };
 
+  const toggleHeart = (id: number) => {
+    if (likedBooks.includes(id)) {
+      setLikedBooks(likedBooks.filter((bookId) => bookId !== id));
+    } else {
+      setLikedBooks([...likedBooks, id]);
+      alert(`Liked ${books.find((book) => book.id === id)?.name}`);
+    }
+  };
+
   return (
-    <div className="row " style={{ marginTop: "50px" }}>
+    <div className="row " style={{ marginTop: "30px" }}>
       {books.map((book) => (
         <div key={book.id} className="col-md-3 col-sm-6 mb-4">
           <div className="card shadow-sm h-100 p-2 border-0">
@@ -38,10 +50,25 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
               <div
                 className="position-absolute top-0 start-0 p-2 d-flex align-items-center gap-1"
                 style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.8)",
                   borderRadius: "0 0 10px 0",
                 }}
               >
-                <FaHeart className="text-danger" style={{cursor: "pointer"}} size={18} />
+                {likedBooks.includes(book.id) ? (
+                  <FaHeart
+                    className="text-danger"
+                    style={{ cursor: "pointer" }}
+                    size={18}
+                    onClick={() => toggleHeart(book.id)}
+                  />
+                ) : (
+                  <FaRegHeart
+                    className="text-dark"
+                    style={{ cursor: "pointer" }}
+                    size={18}
+                    onClick={() => toggleHeart(book.id)}
+                  />
+                )}
               </div>
             </div>
             <div className="card-body d-flex flex-column">
@@ -75,17 +102,17 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
                   className="text-dark edit-icon"
                   style={{ cursor: "pointer" }}
                   title="Edit"
-                  size={15}
+                  size={20}
                 />
                 <FaTrash
-                  size={15}
+                  size={18}
                   onClick={() => deleteBook(book.id)}
                   className="text-dark delete-icon"
                   style={{ cursor: "pointer" }}
                   title="Delete"
                 />
                 <FaDownload
-                  size={15}
+                  size={18}
                   onClick={() => handleDownload(book)}
                   className="text-dark download-icon"
                   style={{ cursor: "pointer" }}

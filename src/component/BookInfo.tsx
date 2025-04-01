@@ -1,5 +1,5 @@
 import { Book } from "../App";
-import { FaBookReader, FaUser, FaDollarSign, FaEdit, FaTrash, FaHeart, FaDownload } from "react-icons/fa";
+import { FaBookReader, FaUser, FaDollarSign, FaEdit, FaTrash, FaRegHeart, FaDownload } from "react-icons/fa";
 
 interface Props {
   book: Book | undefined;
@@ -18,7 +18,7 @@ function BookInfo({ book, setPage, deleteBook, editBook }: Props) {
   };
 
   return (
-    <div className="book-info container mt-5">
+    <div className="book-info container mt-3">
       <h1
         onClick={() => setPage("Books")}
         className="display-3 text-secondary text-center fw-bold mb-4 d-flex align-items-center justify-content-center gap-4"
@@ -47,7 +47,7 @@ function BookInfo({ book, setPage, deleteBook, editBook }: Props) {
             <FaDollarSign className="text-dark" /> Price: ${book.price}
           </p>
           <hr />
-          <div className="d-flex justify-content-end gap-3 mt-4">
+          <div className="d-flex  justify-content-end gap-3 mt-4">
             <FaEdit
               size={25}
               className="text-primary"
@@ -65,7 +65,7 @@ function BookInfo({ book, setPage, deleteBook, editBook }: Props) {
                 setPage("Books");
               }}
             />
-            <FaHeart
+            <FaRegHeart
               size={25}
               className="text-danger"
               style={{ cursor: "pointer" }}
