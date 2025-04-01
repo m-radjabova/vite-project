@@ -48,8 +48,7 @@ function App() {
     if (data.id) {
       setBooks(books.map((book) => (book.id === data.id ? data : book)));
     } else {
-      const newId = books.length > 0 ? Math.max(...books.map(book => book.id)) + 1 : 1;
-      setBooks([...books, { ...data, id: newId }]);
+      setBooks([...books, { ...data, id: books.length + 1 }]);
     }
     setSelectedBook(undefined);
   };
