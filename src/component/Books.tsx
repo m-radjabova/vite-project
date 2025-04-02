@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Book } from "../App";
-import { FaUser, FaDollarSign, FaEdit, FaTrash, FaHeart, FaRegHeart, FaDownload } from "react-icons/fa";
+import { FaUser, FaDollarSign, FaEdit, FaTrash, FaDownload, FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface Props {
   books: Book[];
@@ -8,11 +7,18 @@ interface Props {
   editBook: (book: Book) => void;
   setPage: (page: string) => void;
   setSelectedBook: (book: Book | undefined) => void;
+  setBooks : React.Dispatch<React.SetStateAction<Book[]>>
 }
 
-function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props) {
-  const [likedBooks, setLikedBooks] = useState<number[]>([]); 
+function Books({ books, deleteBook, editBook, setPage, setSelectedBook, setBooks }: Props) {
 
+  const toggleLike = (id: number) => {
+    setBooks((prevBooks) =>
+      prevBooks.map((book) =>
+        book.id === id ? { ...book, isLiked: !book.isLiked } : book
+      )
+    );
+  };
   const handleViewDetails = (book: Book) => {
     setSelectedBook(book);
     setPage("BookInfo");
@@ -20,15 +26,6 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
 
   const handleDownload = (book: Book) => {
     alert(`Downloading ${book.name}`);
-  };
-
-  const toggleHeart = (id: number) => {
-    if (likedBooks.includes(id)) {
-      setLikedBooks(likedBooks.filter((bookId) => bookId !== id));
-    } else {
-      setLikedBooks([...likedBooks, id]);
-      alert(`Liked ${books.find((book) => book.id === id)?.name}`);
-    }
   };
 
   return (
@@ -50,23 +47,21 @@ function Books({ books, deleteBook, editBook, setPage, setSelectedBook }: Props)
               <div
                 className="position-absolute top-0 start-0 p-2 d-flex align-items-center gap-1"
                 style={{
-                  backgroundColor: "rgba(255, 255, 255, 0.8)",
                   borderRadius: "0 0 10px 0",
                 }}
               >
-                {likedBooks.includes(book.id) ? (
+                {book.isLiked ? (
                   <FaHeart
                     className="text-danger"
-                    style={{ cursor: "pointer" }}
+                    style={{cursor : "pointer"}}
+                    onClick={() => toggleLike(book.id)}
                     size={18}
-                    onClick={() => toggleHeart(book.id)}
                   />
                 ) : (
                   <FaRegHeart
-                    className="text-dark"
-                    style={{ cursor: "pointer" }}
+                    onClick={() => toggleLike(book.id)}
+                    style={{cursor : "pointer"}}
                     size={18}
-                    onClick={() => toggleHeart(book.id)}
                   />
                 )}
               </div>

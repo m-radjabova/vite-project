@@ -1,5 +1,35 @@
+:root {
+  --background-color: rgb(255, 231, 231);
+  --header-bg-color: rgb(237, 232, 232);
+  --header-icon-color: rgb(244, 145, 145);
+  --header-btn-bg-color: rgb(250, 215, 215);
+  --header-btn-hover-bg-color: rgb(238, 188, 188);
+  --header-btn-active-bg-color: rgb(244, 145, 145);
+  --header-btn-border-color: rgb(245, 195, 195);
+  --header-btn-hover-border-color: rgb(244, 145, 145);
+  --header-btn-active-border-color: rgb(224, 125, 125);
+  --card-bg-color: rgb(239, 187, 187);
+  --card-hover-bg-color: rgb(246, 225, 225);
+  --card-header-bg-gradient: linear-gradient(to right, rgb(255, 102, 102), rgb(255, 153, 153));
+  --card-text-color: rgb(55, 54, 54);
+  --about-card-bg-gradient: linear-gradient(to bottom, rgb(255, 255, 255), rgb(245, 230, 230));
+  --about-card-header-bg-gradient: linear-gradient(to right, rgb(255, 102, 102), rgb(255, 153, 153));
+  --about-card-text-color: rgb(80, 80, 80);
+  --about-list-hover-bg-color: rgb(255, 230, 230);
+  --about-list-hover-text-color: rgb(150, 50, 50);
+  --btn-danger-bg-color: #dc3545;
+  --btn-danger-hover-bg-color: #c82333;
+  --cart-bg-color: #f8f9fa;
+  --cart-title-color: #333;
+  --cart-empty-text-color: #666;
+  --cart-item-bg-color: #fff;
+  --cart-item-hover-bg-color: rgba(0, 0, 0, 0.1);
+  --cart-item-name-color: #333;
+  --cart-item-price-color: #555;
+}
+
 body{
-    background-color: rgb(250, 215, 215) !important;
+  background-color: var(--background-color) !important;
 }
 
 
@@ -9,32 +39,23 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: rgb(237, 232, 232);
+    padding: 0 50px; 
+    background-color: var(--header-bg-color);
     position: sticky;
     top: 0;
     z-index: 999;
 }
 
 header .book-icons{
-    color: rgb(244, 145, 145) !important;
-    font-size: 2.5rem;
+  color: var(--header-icon-color) !important;
+  font-size: 2.5rem;
 }
 header h1{
   cursor: pointer;
 }
 
 header h1:hover{
-  color: rgb(244, 145, 145) !important;
-}
-
-@keyframes typewriter {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  color: var(--header-icon-color) !important;
 }
 
 @keyframes blink {
@@ -43,24 +64,13 @@ header h1:hover{
   }
 }
 
-
-.typewriter-effect {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 1px solid rgb(235, 192, 192); 
-  font-size: 3rem; 
-  animation: typewriter 4s steps(30, end) infinite, blink 0.5s step-end infinite;
-  width: 100%; 
-}
-
 .row .edit-icon{
     color: rgb(57, 4, 4) !important;
     font-size: 1.5rem;
 }
 
 .row .edit-icon:hover{
-    color: rgb(244, 145, 145) !important;
+    color: rgb(224, 68, 68) !important;
 }
 
 .row .delete-icon{
@@ -69,7 +79,7 @@ header h1:hover{
 }
 
 .row .delete-icon:hover{
-    color: rgb(244, 145, 145) !important;
+    color: rgb(224, 68, 68) !important;
 }
 
 .row .download-icon{
@@ -77,7 +87,7 @@ header h1:hover{
 }
 
 .row .download-icon:hover{
-    color: rgb(244, 145, 145) !important;
+    color: rgb(224, 68, 68) !important;
 }
 
 .row .card:hover{
@@ -86,13 +96,13 @@ header h1:hover{
 }
 
 .row .card{
-    background-color:rgb(239, 187, 187) !important;
+  background-color: var(--card-bg-color) !important;
 }
 
 header .btn {
-    color: rgb(244, 145, 145) !important;
-    background-color: rgb(250, 215, 215) !important;
-    border-color: rgb(245, 195, 195) !important;
+    color: var(--header-btn-text-color) !important;
+    background-color: var(--header-btn-bg-color) !important;
+    border-color: var(--header-btn-border-color) !important;
     transition: all 0.3s ease;
     font-weight: 500;
     padding: 0.5rem 1.5rem;
@@ -101,55 +111,100 @@ header .btn {
 }
   
 header .btn:hover {
-    color: rgb(255, 254, 254) !important;
-    background-color: rgb(238, 188, 188) !important;
-    border-color: rgb(244, 145, 145) !important;
+    color: #fff !important;
+    background-color: var(--header-btn-hover-bg-color) !important;
+    border-color: var(--header-btn-hover-border-color) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
   
 header .btn.active {
-    color: white !important;
-    background-color: rgb(244, 145, 145) !important;
-    border-color: rgb(224, 125, 125) !important;
+    color: #fff !important;
+    background-color: var(--header-btn-active-bg-color) !important;
+    border-color: var(--header-btn-active-border-color) !important;
     font-weight: 600;
 }
 
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+  position: relative;
+  transition: background-image 0.8s ease-in-out;
+}
+
+.carousel-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right,  rgba(0, 0, 0, 0.3), rgba(255, 192, 203, 0.9)); 
+  z-index: 1;
+}
+
+.carousel-text {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+
 .add .card{
-    background-color:rgb(246, 225, 225) !important;
-    color: rgb(55, 54, 54) !important;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: var(--card-hover-bg-color) !important;
+  color: var(--card-text-color) !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .add .card-header {
-    background: linear-gradient(to right, rgb(255, 102, 102), rgb(255, 153, 153));
+  background: var(--card-header-bg-gradient);
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .add .btn{
     color: rgb(255, 254, 254) !important;
-    background-color: rgb(238, 188, 188) !important;
-    border-color: rgb(244, 145, 145) !important;
+    background-color: var(--header-btn-hover-bg-color) !important;
+  border-color: var(--header-btn-border-color) !important;
 }
 
 .add .btn:hover{
     color: #fff !important;
-    background-color: rgb(226, 147, 147) !important;
-    border-color: rgb(244, 145, 145) !important;
+    background-color: var(--header-btn-active-bg-color) !important;
+  border-color: var(--header-btn-hover-border-color) !important;
 }
 
   
 .about-us .card {
-    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(245, 230, 230));
+  background: var(--about-card-bg-gradient);
     border-radius: 10px;
     overflow: hidden;
     padding: 20px;
 }
 
 .about-us .card-header {
-    background: linear-gradient(to right, rgb(255, 102, 102), rgb(255, 153, 153));
-    color: white;
+  background: var(--about-card-header-bg-gradient);
+  color: white;
     /* font-weight: bold; */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -158,7 +213,7 @@ header .btn.active {
 .about-us .card-body p {
     font-size: 1.2rem;
     line-height: 1.8;
-    color: rgb(80, 80, 80);
+    color: var(--about-card-text-color);
 }
   
 .about-us .list-group-item {
@@ -170,8 +225,8 @@ header .btn.active {
   
 
 .about-us .list-group-item:hover {
-    background-color: rgb(255, 230, 230) !important;
-    color: rgb(150, 50, 50) !important;
+  background-color: var(--about-list-hover-bg-color) !important;
+  color: var(--about-list-hover-text-color) !important;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -294,6 +349,141 @@ header .btn.active {
     opacity: 0;
     animation: starAnimation 2s ease-out forwards;
   }
+
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-success:hover {
+  background-color: #218838; 
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+}
+
+.btn-success:active {
+  background-color: #1e7e34; 
+  transform: translateY(0); 
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.cart-container {
+  padding: 20px;
+  background-color: var(--cart-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+
+.cart-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--cart-title-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cart-empty {
+  font-size: 1.2rem;
+  color: var(--cart-empty-text-color);
+  text-align: center;
+}
+
+
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: var(--cart-item-bg-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px var(--cart-item-hover-bg-color);
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cart-item-name {
+  font-size: 1.2rem;
+  color: var(--cart-item-name-color);
+}
+
+.cart-item-price {
+  font-size: 1rem;
+  color: var(--cart-item-price-color);
+}
+
+.cart-remove-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-remove-btn:hover {
+  background-color: #c82333;
+}
+
+
+.footer-container {
+  background-color: var(--header-bg-color); /* Header bilan bir xil rang */
+  padding: 20px 10px;
+  text-align: center;
+  border-top: 3px solid #e19ca3;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.footer-text a {
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
   
   /* Animations */
 @keyframes bounce {
@@ -342,7 +532,7 @@ header .btn.active {
 }
   
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 600px) {
     .book-info h1 {
       font-size: 1.5rem;
     }
@@ -372,6 +562,12 @@ header .btn.active {
 
     .col-md-3{
       width: 100% !important;
+    }
+
+    header .icons{
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
     }
 }
 
@@ -409,4 +605,13 @@ header .btn.active {
     padding: 1rem;
   }
 
+}
+
+@media screen and (max-width: 960px) {
+  header {
+    height: auto;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+  }
 }

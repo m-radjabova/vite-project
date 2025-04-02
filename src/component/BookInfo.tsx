@@ -1,14 +1,18 @@
 import { Book } from "../App";
-import { FaBookReader, FaUser, FaDollarSign, FaEdit, FaTrash, FaRegHeart, FaDownload } from "react-icons/fa";
+import { FaBookReader, FaUser, FaDollarSign, FaEdit, FaTrash, FaHeart, FaRegHeart, FaDownload } from "react-icons/fa";
+import AddToCart from "./AddToCart";
 
 interface Props {
   book: Book | undefined;
   setPage: (page: string) => void;
   deleteBook: (id: number) => void;
   editBook: (book: Book) => void;
+  toggleLike: (id: number) => void;
+  cart: Book[];
+  setCart: React.Dispatch<React.SetStateAction<Book[]>>
 }
 
-function BookInfo({ book, setPage, deleteBook, editBook }: Props) {
+function BookInfo({ book, setPage, deleteBook, editBook, toggleLike, cart, setCart }: Props) {
   if (!book) {
     return <p>No book selected!</p>;
   }
@@ -65,12 +69,21 @@ function BookInfo({ book, setPage, deleteBook, editBook }: Props) {
                 setPage("Books");
               }}
             />
-            <FaRegHeart
-              size={25}
-              className="text-danger"
-              style={{ cursor: "pointer" }}
-              title="Favorite"
-            />
+            {book.isLiked ? (
+              <FaHeart
+                size={30}
+                className="text-danger"
+                style={{ cursor: "pointer" }}
+                onClick={() => toggleLike(book.id)}
+              />
+            ) : (
+              <FaRegHeart
+                size={30}
+                className="text-danger"
+                style={{ cursor: "pointer" }}
+                onClick={() => toggleLike(book.id)}
+              />
+            )}
             <FaDownload
               size={25}
               className="text-success"
@@ -78,6 +91,9 @@ function BookInfo({ book, setPage, deleteBook, editBook }: Props) {
               title="Download"
               onClick={handleDownload}
             />
+          </div>
+          <div className="d-flex gap-3 mt-4">
+            <AddToCart book={book} cart={cart} setCart={setCart} />
           </div>
         </div>
       </div>
