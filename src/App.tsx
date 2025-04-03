@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import Books from "./component/Books";
-import { GiSpellBook } from "react-icons/gi";
 import AddBooks from "./component/AddBooks";
 import AboutUs from "./component/AboutUs";
 import { FaStar, FaBookOpen } from "react-icons/fa";
 import BookInfo from "./component/BookInfo";
 import Cart from "./component/Cart";
 import AddToCart from "./component/AddToCart";
-import { TbShoppingCartHeart } from "react-icons/tb";
-import { IoAddSharp } from "react-icons/io5";
 import Carousel from "./component/Carousel";
 import Footer from './component/Footer';
+import CreateContextPro from "./hooks/CreateContextPro";
+import Header from './component/Header';
 
 export interface Book {
   id: number;
@@ -101,7 +100,8 @@ function App() {
   }, []);
 
   return (
-    <>
+    <CreateContextPro>
+
       {showWelcome && (
         <div className="welcome-overlay">
           <div className="welcome-content">
@@ -126,43 +126,7 @@ function App() {
           </div>
         </div>
       )}
-      <header className="header shadow-sm">
-        <div className="d-flex align-items-center">
-          <GiSpellBook size={60} className="me-2 book-icons" color="grey" />
-          <h1
-            onClick={() => setPage("Books")}
-            className="typewriter-effect text-secondary text-center display-3"
-          >
-            Book Store
-          </h1>
-        </div>
-        <div className="icons d-flex gap-2">
-          <button
-            className={`btn d-flex align-items-center gap-3 rounded-pill px-4 ${page === "AddBooks" ? "active" : ""}`}
-            onClick={() => setPage("AddBooks")}
-          >
-            Add Books
-            <IoAddSharp/>
-          </button>
-          <button
-            className={`btn rounded-pill px-4 ${page === "Books" ? "active" : ""}`}
-            onClick={() => setPage("Books")}
-          >
-            Books
-          </button>
-          <button
-            className={`btn rounded-pill px-4 ${page === "AboutUs" ? "active" : ""}`}
-            onClick={() => setPage("AboutUs")}
-          >
-            About Us
-          </button>
-          <button 
-            className={`btn rounded-pill px-4 ${page === "Cart" ? "active" : ""} `} 
-            onClick={() => setPage("Cart")}>
-              My Cart <TbShoppingCartHeart />
-          </button>
-        </div>
-      </header>
+      <Header/>
       <div className="container mt-3">
         {page === "Books" && <Carousel />}
         {page === "Books" && (
@@ -209,7 +173,8 @@ function App() {
         )}
       </div>
       {page === "Books" && <Footer />}
-    </>
+
+    </CreateContextPro>
   );
 }
 
