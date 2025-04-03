@@ -1,4 +1,3 @@
-// src/hooks/ThemeContext.tsx
 import { createContext, useState, ReactNode, useEffect } from "react";
 
 interface ThemeContextType {

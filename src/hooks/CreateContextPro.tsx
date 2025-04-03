@@ -1,5 +1,4 @@
-
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 
 interface Notes {
   id: number;
@@ -18,6 +17,8 @@ interface ContextType {
 
 export const MyContext = createContext<ContextType | undefined>(undefined);
 
+const notes_key = "saved_notes";
+
 function CreateContextPro({ children }: { children: ReactNode }) {
   const getFormattedDate = () => {
     const date = new Date();
@@ -27,19 +28,33 @@ function CreateContextPro({ children }: { children: ReactNode }) {
     return `${month}/${day}/${year}`;
   };
 
-  const [notes, setNotes] = useState<Notes[]>([
-    { id: 1, title: "First Note", date: getFormattedDate() },
-    { id: 2, title: "Second Note", date: getFormattedDate() },
-    { id: 3, title: "Third Note", date: getFormattedDate() },
-  ]);
+  const [notes, setNotes] = useState<Notes[]>(() => {
+    const savedNotes = localStorage.getItem(notes_key);
+    if (savedNotes) {
+      return JSON.parse(savedNotes);
+    } else {
+      return [
+        { id: 1, title: "First Note", date: getFormattedDate() },
+        { id: 2, title: "Second Note", date: getFormattedDate() },
+        { id: 3, title: "Third Note", date: getFormattedDate() },
+      ];
+    }
+  });
 
   const [filteredNotes, setFilteredNotes] = useState<Notes[]>(notes);
 
+  useEffect(() => {
+    localStorage.setItem(notes_key, JSON.stringify(notes));
+    setFilteredNotes(notes); 
+  }, [notes]);
+
   const addNotes = (title: string) => {
-    const newNote = { id: notes.length + 1, title, date: getFormattedDate() };
-    const updatedNotes = [...notes, newNote];
-    setNotes(updatedNotes);
-    setFilteredNotes(updatedNotes);
+    const newNote = {
+      id: notes.length + 1, 
+      title,
+      date: getFormattedDate(),
+    };
+    setNotes((prevNotes) => [...prevNotes, newNote]);
   };
 
   const searchNotes = (query: string) => {
@@ -47,7 +62,9 @@ function CreateContextPro({ children }: { children: ReactNode }) {
       setFilteredNotes(notes);
     } else {
       setFilteredNotes(
-        notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()))
+        notes.filter((note) =>
+          note.title.toLowerCase().includes(query.toLowerCase())
+        )
       );
     }
   };
