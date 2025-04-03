@@ -49,9 +49,8 @@ function AddBooks({ saveBook, selectedBook, setSelectedBook }: Props) {
     if (selectedBook) {
       saveBook({ ...selectedBook, ...data });  
     } else {
-      saveBook({ ...data, id: 0 }); 
+      saveBook({ ...data, id: 0, isLiked: false }); 
     }
-  
     setSelectedBook(undefined);
     reset();
   };

@@ -19,7 +19,7 @@ export interface Book {
   description: string;
   price: number;
   imgUrl: string;
-  isLiked: boolean
+  isLiked: boolean;
 }
 
 function App() {
