@@ -1,4 +1,5 @@
-import { createContext, useState, ReactNode, useEffect } from "react";
+import { useState, ReactNode, useEffect } from "react";
+import { MyContext } from "../context/MyContext";
 
 interface Notes {
   id: number;
@@ -6,7 +7,7 @@ interface Notes {
   date: string;
 }
 
-interface ContextType {
+export interface ContextType {
   notes: Notes[];
   filteredNotes: Notes[];
   setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
@@ -15,7 +16,6 @@ interface ContextType {
   resetSearch: () => void;
 }
 
-export const MyContext = createContext<ContextType | undefined>(undefined);
 
 const notes_key = "saved_notes";
 
