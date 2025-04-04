@@ -1,34 +1,73 @@
-import { useReducer } from "react"
-
-function reducer(state: { count: number; name: string }, action: { type: string }) {
-    switch (action.type) {
-      case "increment":
-        return { ...state, count: state.count + 1 };
-      case "decrement":
-        return { ...state, count: state.count - 1 };
-      case "doubleIncrement":
-        return { ...state, count: state.count * 2 };
-      case "change_name":
-        return { ...state, name: state.name === "John" ? "Doe" : "John" }; 
-    }
-    return state;
-}
+import TipsList from "./component/TipsList"
+import { FaHeart, FaRegHeart, FaGift } from 'react-icons/fa';
 
 function App() {
-
-  const [state, dispatch] = useReducer(reducer , { count: 0, name : "John" ,  })
-
   return (
-    <div className="container">
-      <h1>{state.name}</h1>
-      <button className="btn btn-success" onClick={() => dispatch({ type: "change_name" })}>Change Name</button>
-      <hr />
+    <div 
+      className="container py-5 px-4" 
+      style={{
+        background: "linear-gradient(145deg, #fff5f5 0%, #fff0f0 100%)",
+        borderRadius: "20px",
+        boxShadow: "0 10px 30px rgba(255, 105, 180, 0.1)",
+        marginTop: "30px",
+        marginBottom: "50px",
+        border: "1px solid rgba(255, 182, 193, 0.3)",
+        position: "relative",
+        overflow: "hidden"
+      }}
+    >
+      <div style={{
+        position: "absolute",
+        top: "-50px",
+        right: "-30px",
+        fontSize: "120px",
+        color: "rgba(255, 182, 193, 0.15)",
+        transform: "rotate(15deg)"
+      }}>
+        <FaGift />
+      </div>
+      
+      <div style={{
+        position: "absolute",
+        bottom: "-40px",
+        left: "-30px",
+        fontSize: "100px",
+        color: "rgba(255, 182, 193, 0.15)",
+        transform: "rotate(-10deg)"
+      }}>
+        <FaRegHeart />
+      </div>
 
-      <h1>{state.count}</h1>
-      <button className="btn btn-primary me-2" onClick={() => dispatch({ type: "increment" })}>Increment</button>
-      <button className="btn btn-danger me-2" onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
-      <button className="btn btn-warning" onClick={() => dispatch({ type: "doubleIncrement" })}>Double Increment</button>
-      <hr />
+      <h1 
+        className="text-center mb-5 position-relative" 
+        style={{
+          color: "#ff6b88",
+          fontWeight: "700",
+          textShadow: "2px 2px 4px rgba(0,0,0,0.05)",
+          fontSize: "2.8rem",
+          letterSpacing: "1px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "15px"
+        }}
+      >
+        <FaHeart style={{ 
+          color: "#ff6b88", 
+          fontSize: "1.8rem",
+          animation: "pulse 1.5s infinite"
+        }} />
+        Tips
+        <FaHeart style={{ 
+          color: "#ff6b88", 
+          fontSize: "1.8rem",
+          animation: "pulse 1.5s infinite",
+          animationDelay: "0.5s"
+        }} />
+      </h1>
+      
+      <TipsList />
+      
     </div>
   )
 }
