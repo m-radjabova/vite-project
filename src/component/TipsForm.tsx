@@ -206,7 +206,8 @@ function TipsForm() {
             transition: "all 0.3s ease"
           }}
         >
-          <FaPaperPlane /> Submit
+          <FaPaperPlane /> 
+          {selectedTip ? "Update Tip" : "Add Tip"}
         </button>
       </form>
     </div>

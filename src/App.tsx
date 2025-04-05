@@ -5,7 +5,7 @@ import { FaHeart, FaRegHeart, FaGift } from 'react-icons/fa';
 function App() {
   return (
     <div 
-      className="container py-5 px-4" 
+      className="container p-4" 
       style={{
         background: "linear-gradient(145deg, #fff5f5 0%, #fff0f0 100%)",
         borderRadius: "20px",
@@ -68,7 +68,7 @@ function App() {
       </h1>
       <hr className="border-dark opacity-50" />
       <TipsForm />
-      
+
       <div style={{
         width: "100%",
         height: "2px",
