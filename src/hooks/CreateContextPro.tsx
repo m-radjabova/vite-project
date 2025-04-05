@@ -12,6 +12,7 @@ export interface Tips {
 
 interface TypeState {
   tips: Tips[]
+  selectedTip: Tips | undefined
 }
 
 type DeleteAction = {
@@ -23,7 +24,22 @@ type DeleteAllAction = {
   type: "DELETE_ALL"
 }
 
-type Action = DeleteAction | DeleteAllAction
+type AddTipAction = {
+  type: "ADD_TIP"
+  payload: Tips
+}
+
+type SelectedTipAction = {
+  type: "SELECTED_TIP"
+  payload: Tips | undefined
+}
+
+type EditAction = {
+  type: "EDIT"
+  payload: Tips
+}
+
+type Action = DeleteAction | DeleteAllAction | AddTipAction | SelectedTipAction | EditAction
 
 export interface ContextType {
   state: TypeState
@@ -42,14 +58,34 @@ function reducer(state: TypeState, action: Action){
         ...state,
         tips: [],
       };
-  }
+    case "ADD_TIP":
+      return {
+        ...state,
+        tips: [...state.tips, { ...action.payload, id: state.tips.length + 1 }],
+      }
+    case "SELECTED_TIP": {
+        return { ...state, selectedTip: action.payload   
+        }
+      }
+    case "EDIT":
+      return {
+        ...state,
+        tips: state.tips.map((tip) => {
+          if (tip.id === action.payload.id) {
+            return { ...tip, ...action.payload };
+          }
+          return tip;
+        }),
+        selectedTip: undefined
+    }
       return state;
+  }
 }
 
 function CreateContextPro({ children }: { children: ReactNode }) {
 
   const [state, dispatch] = useReducer(reducer,{
-    tips : [
+     tips : [
       { id: 1, name: "Chidi", lastName: "Anagonye", phone: "555-366-8987", address: "St. John's University, Sydney, Australia" },
       { id: 2, name: "Tahani", lastName: "Al-Jamil", phone: "555-276-7991", address: "1 Lancaster Terrace, London, England" },
       { id: 3, name: "Jason", lastName: "Mendoza", phone: "555-113-8388", address: "779 William St, Miami, Florida" },
@@ -59,7 +95,8 @@ function CreateContextPro({ children }: { children: ReactNode }) {
       { id: 7, name: "Lincoln", lastName: "Burrows", phone: "555-444-4444", address: "1213 Pine St, Boston, MA" },
       { id: 8, name: "Veronica", lastName: "Donovan", phone: "555-222-2222", address: "1415 Birch St, San Francisco, CA" },
       { id: 9, name: "T-Bag", lastName: "Bagwell", phone: "555-333-3333", address: "1617 Cedar St, New York, NY" },
-      ]
+      ],
+      selectedTip: undefined ,
   } )
 
   return (
@@ -69,4 +106,4 @@ function CreateContextPro({ children }: { children: ReactNode }) {
     )
 }
 
-export default CreateContextPro
+export default CreateContextPro;

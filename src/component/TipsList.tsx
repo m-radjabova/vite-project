@@ -1,15 +1,34 @@
 import useContextPro from "../hooks/useContextPro"
-import { FaPhone, FaMapMarkerAlt, FaTrash, FaTrashAlt } from 'react-icons/fa';
+import { FaPhone, FaMapMarkerAlt, FaTrash, FaTrashAlt  } from 'react-icons/fa';
+import { MdEdit } from "react-icons/md";
 
 function TipsList() {
     const { state: { tips }, dispatch } = useContextPro()
 
   return (
-    <div className="container">
+    <div className="container p-4" >
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h2 className="mb-0" 
+                    style={{
+                        color: "#ff6b88",
+                        fontWeight: "600",
+                        fontSize: "2rem",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px"
+                        }}> 
+                        <FaPhone className="me-2" style={{ color: "#ff6b88" }} />
+                        Contacts
+                    </h2>
+                    <span className="badge bg-danger bg-opacity-10 text-danger py-2 px-3 rounded-pill">
+                        {tips.length} contacts
+                    </span>
+            </div>
         <div className="row row-cols-1 row-cols-md-3 g-4">
             {tips.map((tip) => (
                 <div key={tip.id} className="col">
-                    <div className="card h-100 border-0 shadow-sm" style={{ 
+                    <div className="card h-100 border-0 shadow-sm" 
+                    style={{ 
                         background: "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)",
                         borderRadius: "15px",
                         overflow: "hidden"
@@ -34,7 +53,15 @@ function TipsList() {
                                 </p>
                                 <hr className="border-light opacity-50" />
                             </div>
-                            <div className="d-flex justify-content-end align-items-center">
+                            <div className="d-flex justify-content-end align-items-center gap-2">
+                                <button
+                                    className="btn btn-light btn-sm mt-2 fw-bold rounded-pill d-flex align-items-center"
+                                    style={{ color: "#ff6b88" }}
+                                    onClick={() => dispatch( { type: "SELECTED_TIP", payload: tip })}
+                                >
+                                    <MdEdit className="me-1" />
+                                    Edit
+                                </button>
                                 <button 
                                     className="btn btn-light btn-sm mt-2 fw-bold rounded-pill d-flex align-items-center" 
                                     style={{ color: "#ff6b88" }}
@@ -43,6 +70,7 @@ function TipsList() {
                                     <FaTrash className="me-1" />
                                     Remove
                                 </button>
+
                             </div>
                         </div>
                     </div>

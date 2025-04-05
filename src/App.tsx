@@ -1,3 +1,4 @@
+import TipsForm from "./component/TipsForm";
 import TipsList from "./component/TipsList"
 import { FaHeart, FaRegHeart, FaGift } from 'react-icons/fa';
 
@@ -65,7 +66,16 @@ function App() {
           animationDelay: "0.5s"
         }} />
       </h1>
+      <hr className="border-dark opacity-50" />
+      <TipsForm />
       
+      <div style={{
+        width: "100%",
+        height: "2px",
+        background: "linear-gradient(90deg, #ff6b88, #ffb6c1)",
+        margin: "20px 0"
+      }}></div>
+
       <TipsList />
       
     </div>
