@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import UserForm from "./component/UserForm";
 import UserList from "./component/UserList";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, TextField, Box, Typography, Paper } from "@mui/material";
+import { 
+  Button, 
+  TextField, 
+  Box, 
+  Typography, 
+  Paper, 
+  Pagination,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  SelectChangeEvent
+} from "@mui/material";
 import { FaUserPlus, FaSearch, FaUserCog } from "react-icons/fa";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./context/Theme";
 
 export interface User {
   id: number;
@@ -15,68 +28,15 @@ export interface User {
   phone: string;
 }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#9c96f5", 
-    },
-    secondary: {
-      main: "#a0e4cb", 
-    },
-    background: {
-      default: "#fafafa", 
-      paper: "#ffffff", 
-    },
-  },
-  typography: {
-    fontFamily: "'Poppins', sans-serif",
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "12px",
-          textTransform: "none",
-          padding: "8px 16px",
-          boxShadow: "none",
-          "&:hover": {
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          },
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          "& .MuiOutlinedInput-root": {
-            borderRadius: "12px",
-            "& fieldset": {
-              borderColor: "#e0e0e0",
-            },
-            "&:hover fieldset": {
-              borderColor: "#9c96f5",
-            },
-          },
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          borderRadius: "16px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.05)",
-        },
-      },
-    },
-  },
-});
 
 function App() {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [users, setUsers] = useState<User[]>([]);
-  const [allUsers, setAllUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(5); 
+  const [totalUsers, setTotalUsers] = useState(0);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -85,82 +45,74 @@ function App() {
   };
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
-      setUsers(res.data);
-      setAllUsers(res.data);
-    });
-  }, []);
+    const url = search.trim() === ""
+      ? `https://jsonplaceholder.typicode.com/users?_limit=${limit}&_page=${page}`
+      : `https://jsonplaceholder.typicode.com/users?name_like=${search}&_limit=${limit}&_page=${page}`;
 
+    axios.get(url)
+      .then(res => {
+        setUsers(res.data);
+        const total = parseInt(res.headers["x-total-count"]) || res.data.length;
+        setTotalUsers(total);
+      })
+      .catch(() => toast.error("Error fetching users"));
+  }, [page, limit, search]);
 
+  
   function addUser(data: Omit<User, "id">) {
-    const usersx = [...users];
+    const usersCopy = [...users];
     const newUser: User = { ...data, id: users.length + 1 };
-    setUsers([...usersx, newUser]);
-    setAllUsers([...allUsers, newUser]);
-    axios
-      .post("https://jsonplaceholder.typicode.com/users", newUser)
+    
+    setUsers([...usersCopy, newUser]);
+    
+    axios.post("https://jsonplaceholder.typicode.com/users", newUser)
       .then((res) => {
-        setUsers([...usersx, res.data]);
-        setAllUsers([...allUsers, res.data]);
-        toast.success("User is saved successfully");
+        setUsers([...usersCopy, res.data]);
+        toast.success("User saved successfully");
         handleClose();
       })
       .catch((err) => {
-        setUsers(usersx);
-        setAllUsers(allUsers);
+        setUsers(usersCopy);
         toast.error(err.message);
       });
   }
 
   function updateUser(updatedUser: User) {
-    const usersx = [...users];
-    const allUsersx = [...allUsers];
+    const usersCopy = [...users];
+    
+    setUsers(users.map((user) => 
+      user.id === updatedUser.id ? updatedUser : user
+    ));
 
-    setUsers(
-      users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-    );
-    setAllUsers(
-      allUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-    );
-
-    axios
-      .patch(
-        `https://jsonplaceholder.typicode.com/users/${updatedUser.id}`,
-        updatedUser
-      )
+    axios.patch(
+      `https://jsonplaceholder.typicode.com/users/${updatedUser.id}`,
+      updatedUser
+    )
       .then((res) => {
-        setUsers(
-          users.map((user) => (user.id === updatedUser.id ? res.data : user))
-        );
-        setAllUsers(
-          allUsers.map((user) => (user.id === updatedUser.id ? res.data : user))
-        );
+        setUsers(users.map((user) => 
+          user.id === updatedUser.id ? res.data : user
+        ));
         toast.success("User updated successfully");
         handleClose();
       })
       .catch((err) => {
-        setUsers(usersx);
-        setAllUsers(allUsersx);
+        setUsers(usersCopy);
         toast.error(err.message);
       });
   }
 
   const deleteUser = (id: number) => {
-    const usersx = [...users];
-    const allUsersx = [...allUsers];
-
+    const usersCopy = [...users];
+    
     setUsers(users.filter((user) => user.id !== id));
-    setAllUsers(allUsers.filter((user) => user.id !== id));
 
-    axios
-      .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+    axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then(() => {
         toast.success("User deleted successfully");
       })
       .catch((err) => {
-        console.log(err);
-        setUsers(usersx);
-        setAllUsers(allUsersx);
+        console.error(err);
+        setUsers(usersCopy);
         toast.error("Error deleting user");
       });
   };
@@ -170,21 +122,15 @@ function App() {
     setOpen(true);
   };
 
-  useEffect(() => {
-    if (search.trim() === "") {
-      setUsers(allUsers);
-    } else {
-      axios
-        .get(`https://jsonplaceholder.typicode.com/users?name_like=${search}`)
-        .then((res) => {
-          setUsers(res.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  }, [search, allUsers]);
-  
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    console.log(event);
+    setPage(value);
+  };
+
+  const handleLimitChange = (event: SelectChangeEvent<number>) => {
+    setLimit(Number(event.target.value));
+    setPage(1);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -193,16 +139,31 @@ function App() {
           minHeight: "100vh",
           backgroundColor: theme.palette.background.default,
           padding: { xs: 2, md: 4 },
+          backgroundImage: "radial-gradient(#FFE5E5 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
         }}
       >
         <Paper
           sx={{
-            padding: 4,
+            padding: { xs: 3, md: 4 },
             maxWidth: 1200,
             margin: "0 auto",
             backgroundColor: theme.palette.background.paper,
+            position: "relative",
+            overflow: "hidden",
+            "&:before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: "100px",
+              height: "100px",
+              background: "radial-gradient(circle, #FFD3D3 0%, transparent 70%)",
+              transform: "translate(30%, -30%)",
+            },
           }}
         >
+          {/* Header Section */}
           <Box
             sx={{
               display: "flex",
@@ -211,6 +172,8 @@ function App() {
               marginBottom: 4,
               flexDirection: { xs: "column", sm: "row" },
               gap: 2,
+              position: "relative",
+              zIndex: 1,
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -220,15 +183,7 @@ function App() {
                   color: theme.palette.primary.main,
                 }}
               />
-              <Typography
-                variant="h4"
-                sx={{
-                  fontWeight: 600,
-                  color: "#5a5a5a",
-                }}
-              >
-                User Management
-              </Typography>
+              <Typography variant="h4">User Management</Typography>
             </Box>
             <Button
               variant="contained"
@@ -237,24 +192,29 @@ function App() {
               sx={{
                 borderRadius: "12px",
                 padding: "10px 20px",
-                color: "#ffff"
+                color: "#fff",
+                fontWeight: 500,
               }}
             >
               Add User
             </Button>
           </Box>
 
+          {/* Search Field */}
           <TextField
             fullWidth
             label="Search users..."
             variant="outlined"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
             InputProps={{
               startAdornment: (
                 <FaSearch
                   style={{
-                    color: "#9e9e9e",
+                    color: theme.palette.primary.main,
                     marginRight: "8px",
                   }}
                 />
@@ -268,20 +228,63 @@ function App() {
             }}
           />
 
-          <UserForm
+          {/* Pagination Controls */}
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            mt: 3, 
+            mb: 3,
+            backgroundColor: "#FFF9F9",
+            padding: 2,
+            borderRadius: "12px",
+            border: "1px solid #FFE5E5"
+          }}>
+            <FormControl sx={{ minWidth: 120 }} size="small">
+              <InputLabel id="rows-per-page-label" sx={{ color: "#8B5D5D" }}>
+                Rows
+              </InputLabel>
+              <Select
+                labelId="rows-per-page-label"
+                value={limit}
+                label="Rows"
+                onChange={handleLimitChange}
+                sx={{
+                  "& .MuiSelect-select": {
+                    color: "#5A3A3A",
+                  },
+                }}
+              >
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+              </Select>
+            </FormControl>
+            
+            <Pagination 
+              count={Math.ceil(totalUsers / limit)}
+              page={page} 
+              onChange={handlePageChange} 
+              color="primary"
+              shape="rounded"
+            />
+          </Box>
+
+          <UserList
+            users={users}
+            deleteUser={deleteUser}
+            handleEdit={handleEdit}
+            selectedUser={(user: User) => setSelectedUser(user)}
+          />
+           <UserForm
             open={open}
             onClose={handleClose}
             addUser={addUser}
             updateUser={updateUser}
             selectedUser={selectedUser}
           />
-
-          <UserList
-            users={users}
-            deleteUser={deleteUser}
-            selectedUser={handleEdit}
-          />
         </Paper>
+
       </Box>
     </ThemeProvider>
   );

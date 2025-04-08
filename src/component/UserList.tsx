@@ -11,20 +11,22 @@ import {
   IconButton
 } from "@mui/material";
 import { User } from "../App";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaUsers, FaUserSlash } from "react-icons/fa";
+import { theme } from "../context/Theme";
 
 interface Props {
   users: User[];
   deleteUser: (id: number) => void;
   selectedUser: (user: User) => void;
+  handleEdit: (user: User) => void
 }
 
-function UserList({ users, deleteUser, selectedUser }: Props) {
+function UserList({ users, deleteUser, selectedUser, handleEdit }: Props) {
   return (
     <Box sx={{ 
       width: '100%', 
-      p: 3,
-      backgroundColor: '#f8f9fa',
+      p: { xs: 2, md: 3 },
+      backgroundColor: theme.palette.background.default,
       minHeight: '100vh'
     }}>
       <Typography 
@@ -32,32 +34,47 @@ function UserList({ users, deleteUser, selectedUser }: Props) {
         component="h2" 
         gutterBottom
         sx={{ 
-          color: '#343a40',
+          color: theme.palette.text.primary,
           fontWeight: 600,
           mb: 4,
-          pt: 2
+          pt: 2,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2
         }}
       >
+        <FaUsers style={{ color: theme.palette.primary.main }} />
         User List
       </Typography>
       
       <TableContainer 
         component={Paper}
         sx={{ 
-          borderRadius: 2,
-          boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
-          overflow: 'hidden'
+          borderRadius: '16px',
+          boxShadow: '0 4px 20px rgba(255, 107, 139, 0.08)',
+          overflow: 'hidden',
+          border: '1px solid #FFE5E5',
+          '& .MuiTable-root': {
+            overflowX: 'auto'
+          }
         }}
       >
         <Table sx={{ minWidth: 650 }} aria-label="user table">
-          <TableHead sx={{ backgroundColor: '#e9ecef' }}>
+          <TableHead sx={{ 
+            backgroundColor: '#FFF0F0',
+            '& .MuiTableCell-root': {
+              fontWeight: 600,
+              color: theme.palette.text.primary,
+              fontSize: '0.95rem'
+            }
+          }}>
             <TableRow>
-              <TableCell sx={{ fontWeight: 600 }}>ID</TableCell>
-              <TableCell sx={{ fontWeight: 600 }}>Name</TableCell>
-              <TableCell sx={{ fontWeight: 600 }}>Username</TableCell>
-              <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>
-              <TableCell sx={{ fontWeight: 600 }}>Phone</TableCell>
-              <TableCell sx={{ fontWeight: 600 }}>Actions</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Username</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -65,41 +82,80 @@ function UserList({ users, deleteUser, selectedUser }: Props) {
               <TableRow
                 key={user.id}
                 sx={{ 
-                  '&:nth-of-type(odd)': { backgroundColor: '#f8f9fa' },
-                  '&:hover': { backgroundColor: '#f1f3f5' }
+                  '&:nth-of-type(even)': { 
+                    backgroundColor: '#FFF9F9' 
+                  },
+                  '&:hover': { 
+                    backgroundColor: '#FFEEEE',
+                    transform: 'scale(1.002)',
+                    boxShadow: '0 2px 8px rgba(255, 107, 139, 0.1)'
+                  },
+                  transition: 'all 0.2s ease'
                 }}
               >
                 <TableCell>{user.id}</TableCell>
-                <TableCell>{user.name}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }}>{user.name}</TableCell>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.phone}</TableCell>
-                <TableCell>
-                  <IconButton
-                    onClick={() => deleteUser(user.id)}
-                    color="error"
-                    sx={{ 
-                      mr: 1,
-                      '&:hover': { backgroundColor: 'rgba(220, 53, 69, 0.1)' }
-                    }}
-                  >
-                    <FaTrashAlt />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => selectedUser(user)}
-                    color="warning"
-                    sx={{ 
-                      '&:hover': { backgroundColor: 'rgba(255, 193, 7, 0.1)' }
-                    }}
-                  >
-                    <FaEdit />
-                  </IconButton>
+                <TableCell align="center">
+                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+                    <IconButton
+                      onClick={() => deleteUser(user.id)}
+                      sx={{ 
+                        color: '#FF4757',
+                        backgroundColor: 'rgba(255, 71, 87, 0.1)',
+                        '&:hover': { 
+                          backgroundColor: 'rgba(255, 71, 87, 0.2)',
+                          transform: 'scale(1.1)'
+                        },
+                        transition: 'all 0.2s ease',
+                        p: 1.5
+                      }}
+                    >
+                      <FaTrashAlt size={16} />
+                    </IconButton>
+                    <IconButton
+                       onClick={() => { selectedUser(user); handleEdit(user) }} 
+                      sx={{ 
+                        color: '#FF9E2C',
+                        backgroundColor: 'rgba(255, 158, 44, 0.1)',
+                        '&:hover': { 
+                          backgroundColor: 'rgba(255, 158, 44, 0.2)',
+                          transform: 'scale(1.1)'
+                        },
+                        transition: 'all 0.2s ease',
+                        p: 1.5
+                      }}
+                    >
+                      <FaEdit size={16} />
+                    </IconButton>
+                  </Box>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+    
+      {users.length === 0 && (
+        <Paper sx={{ 
+          p: 4, 
+          mt: 3, 
+          textAlign: 'center',
+          backgroundColor: '#FFF9F9',
+          borderRadius: '16px'
+        }}>
+          <FaUserSlash size={48} style={{ 
+            color: theme.palette.primary.main,
+            marginBottom: '16px',
+            opacity: 0.5
+          }} />
+          <Typography variant="h6" color="textSecondary">
+            No users found
+          </Typography>
+        </Paper>
+      )}
     </Box>
   );
 }

@@ -9,19 +9,32 @@ import {
   Divider,
   IconButton
 } from "@mui/material";
-import { FaUserEdit, FaUserPlus, FaTimes } from "react-icons/fa";
+import { FaUserEdit, FaUserPlus, FaTimes, FaSave } from "react-icons/fa";
+import { theme } from "../context/Theme";
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: '#fff9fb', 
-  borderRadius: '12px',
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-  p: 3,
-  border: '1px solid #f0e6ea',
+const textFieldStyles = {
+  '& .MuiOutlinedInput-root': {
+    borderRadius: '12px',
+    '& fieldset': {
+      borderColor: '#FFE5E5',
+    },
+    '&:hover fieldset': {
+      borderColor: theme.palette.primary.light,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: theme.palette.primary.main,
+      boxShadow: `0 0 0 2px ${theme.palette.primary.light}`
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: theme.palette.text.secondary,
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: theme.palette.primary.main,
+  },
+  '& .MuiInputBase-input': {
+    color: theme.palette.text.primary,
+  }
 };
 
 interface Props {
@@ -79,29 +92,67 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
       onClose={onClose}
       aria-labelledby="user-modal-title"
       aria-describedby="user-modal-description"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backdropFilter: 'blur(3px)',
+      }}
     >
-      <Box sx={modalStyle} component="form" onSubmit={handleSubmit}>
+      <Box 
+        sx={{
+          position: 'relative',
+          width: { xs: '90%', sm: '80%', md: '600px' },
+          bgcolor: 'background.paper',
+          borderRadius: '16px',
+          boxShadow: '0 10px 30px rgba(255, 107, 139, 0.2)',
+          p: 4,
+          outline: 'none',
+          transform: open ? 'scale(1)' : 'scale(0.9)',
+          transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          border: '1px solid #FFE5E5',
+          '&:before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '60px',
+            height: '60px',
+            background: 'radial-gradient(circle, #FFD3D3 0%, transparent 70%)',
+            transform: 'translate(30%, -30%)',
+          }
+        }}
+        component="form" 
+        onSubmit={handleSubmit}
+      >
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography 
             id="user-modal-title" 
             variant="h6" 
             component="h2"
             sx={{ 
-              color: '#6d6875', 
+              color: theme.palette.text.primary,
               fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
-              gap: 1
+              gap: 1.5,
+              pl: 1
             }}
           >
             {selectedUser ? (
               <>
-                <FaUserEdit style={{ color: '#b5838d', fontSize: '1.2rem' }} />
+                <FaUserEdit style={{ 
+                  color: theme.palette.primary.main, 
+                  fontSize: '1.4rem' 
+                }} />
                 Edit User
               </>
             ) : (
               <>
-                <FaUserPlus style={{ color: '#b5838d', fontSize: '1.2rem' }} />
+                <FaUserPlus style={{ 
+                  color: theme.palette.primary.main,
+                  fontSize: '1.4rem' 
+                }} />
                 Add New User
               </>
             )}
@@ -110,10 +161,12 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
             onClick={onClose} 
             aria-label="close"
             sx={{
-              color: '#b5838d',
+              color: theme.palette.text.secondary,
               '&:hover': {
-                backgroundColor: 'rgba(181, 131, 141, 0.1)'
-              }
+                backgroundColor: 'rgba(255, 107, 139, 0.1)',
+                transform: 'rotate(90deg)'
+              },
+              transition: 'all 0.3s ease'
             }}
           >
             <FaTimes style={{ fontSize: '1.2rem' }} />
@@ -121,137 +174,91 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
         </Box>
         
         <Divider sx={{ 
-          my: 2, 
-          borderColor: '#f0e6ea',
+          my: 3, 
+          borderColor: '#FFE5E5',
           borderWidth: '1px'
         }} />
         
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Name"
-          variant="outlined"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                  borderColor: '#e2d9dc',
-              },
-              '&:hover fieldset': {
-                  borderColor: '#b5838d',
-              },
-              '&.Mui-focused fieldset': {
-                  borderColor: '#b5838d',
-              },
-            },
-            '& .MuiInputLabel-root.Mui-focused': {
-              color: '#b5838d',
-            }
-          }}
-        />
-        
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Username"
-          variant="outlined"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                  borderColor: '#e2d9dc',
-              },
-              '&:hover fieldset': {
-                  borderColor: '#b5838d',
-              },
-              '&.Mui-focused fieldset': {
-                  borderColor: '#b5838d',
-              },
-            },
-            '& .MuiInputLabel-root.Mui-focused': {
-              color: '#b5838d',
-            }
-          }}
-        />
-        
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Email"
-          variant="outlined"
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                  borderColor: '#e2d9dc',
-              },
-              '&:hover fieldset': {
-                  borderColor: '#b5838d',
-              },
-              '&.Mui-focused fieldset': {
-                  borderColor: '#b5838d',
-              },
-            },
-            '& .MuiInputLabel-root.Mui-focused': {
-              color: '#b5838d',
-            }
-          }}
-        />
-        
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Phone"
-          variant="outlined"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                  borderColor: '#e2d9dc',
-              },
-              '&:hover fieldset': {
-                  borderColor: '#b5838d',
-              },
-              '&.Mui-focused fieldset': {
-                  borderColor: '#b5838d',
-              },
-            },
-            '& .MuiInputLabel-root.Mui-focused': {
-              color: '#b5838d',
-            }
-          }}
-        />
+        <Box sx={{
+          display: 'grid',
+          gap: 2,
+          gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
+          '& .MuiTextField-root': {
+            mb: 0
+          }
+        }}>
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Name"
+            variant="outlined"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            sx={textFieldStyles}
+          />
+          
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Username"
+            variant="outlined"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+            sx={textFieldStyles}
+          />
+          
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Email"
+            variant="outlined"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            sx={textFieldStyles}
+          />
+          
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Phone"
+            variant="outlined"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            sx={textFieldStyles}
+          />
+        </Box>
         
         <Divider sx={{ 
-          my: 2, 
-          borderColor: '#f0e6ea',
+          my: 3, 
+          borderColor: '#FFE5E5',
           borderWidth: '1px'
         }} />
-        
+      
         <Box display="flex" justifyContent="flex-end" gap={2}>
           <Button 
             onClick={onClose} 
             variant="outlined" 
+            startIcon={<FaTimes />}
             sx={{
-              color: '#6d6875',
-              borderColor: '#e2d9dc',
+              color: theme.palette.text.secondary,
+              borderColor: '#FFD3D3',
+              borderRadius: '12px',
+              px: 3,
               '&:hover': {
-                borderColor: '#b5838d',
-                backgroundColor: 'rgba(181, 131, 141, 0.08)'
-              }
+                borderColor: theme.palette.primary.main,
+                backgroundColor: 'rgba(255, 107, 139, 0.08)',
+                color: theme.palette.primary.main
+              },
+              transition: 'all 0.2s ease'
             }}
           >
             Cancel
@@ -259,14 +266,21 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
           <Button 
             type="submit" 
             variant="contained" 
+            startIcon={selectedUser ? <FaSave /> : <FaUserPlus />}
             sx={{
-              backgroundColor: '#b5838d',
+              background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+              borderRadius: '12px',
+              px: 3,
+              color: '#fff',
+              boxShadow: '0 4px 12px rgba(255, 107, 139, 0.3)',
               '&:hover': {
-                backgroundColor: '#9d6b75',
-              }
+                transform: 'translateY(-1px)',
+                boxShadow: '0 6px 16px rgba(255, 107, 139, 0.4)',
+              },
+              transition: 'all 0.2s ease'
             }}
           >
-            {selectedUser ? "Update" : "Add"}
+            {selectedUser ? "Update User" : "Add User"}
           </Button>
         </Box>
       </Box>
