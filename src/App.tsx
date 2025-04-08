@@ -124,7 +124,7 @@ function App() {
     );
 
     axios
-      .put(
+      .patch(
         `https://jsonplaceholder.typicode.com/users/${updatedUser.id}`,
         updatedUser
       )
@@ -237,6 +237,7 @@ function App() {
               sx={{
                 borderRadius: "12px",
                 padding: "10px 20px",
+                color: "#ffff"
               }}
             >
               Add User
