@@ -1,5 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { User } from "../App";
+import { ChangeEvent, useState } from "react";
 import {
   Box,
   Button,
@@ -7,10 +6,16 @@ import {
   Modal,
   TextField,
   Divider,
-  IconButton
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  OutlinedInput,
+  SelectChangeEvent
 } from "@mui/material";
-import { FaUserEdit, FaUserPlus, FaTimes, FaSave } from "react-icons/fa";
 import { theme } from "../context/Theme";
+import { FaTimes } from "react-icons/fa";
 
 const textFieldStyles = {
   '& .MuiOutlinedInput-root': {
@@ -37,53 +42,78 @@ const textFieldStyles = {
   }
 };
 
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: 224,
+      width: 250,
+    },
+  },
+};
+
+interface User {
+  id: number;
+  name: string;
+}
+
+interface NewPost {
+  userId: number;
+  title: string;
+  body: string;
+}
+
 interface Props {
   open: boolean;
   onClose: () => void;
-  addUser: (data: Omit<User, "id">) => void;
-  updateUser: (user: User) => void;
-  selectedUser: User | null;
+  users: User[];
+  onUserSelect: (newPost: NewPost) => Promise<void>;
 }
 
-function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
-  const [formData, setFormData] = useState<Omit<User, "id">>({
-    name: "",
-    username: "",
-    email: "",
-    phone: ""
+function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
+  const [selectedUser, setSelectedUser] = useState<number | null>(null);
+  const [postData, setPostData] = useState({
+    title: '',
+    body: ''
   });
 
-  useEffect(() => {
-    if (selectedUser) {
-      const { id, ...rest } = selectedUser;
-      console.log(`Selected user ID: ${id}`);
-      setFormData(rest);
-    } else {
-      setFormData({
-        name: "",
-        username: "",
-        email: "",
-        phone: ""
-      });
-    }
-  }, [selectedUser]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleUserChange = (event: SelectChangeEvent<number>) => {
+    const userId = event.target.value as number;
+    setSelectedUser(userId);
+  };
+  
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setPostData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedUser) {
-      updateUser({ ...formData, id: selectedUser.id });
-    } else {
-      addUser(formData);
+    if (!selectedUser) return;
+    
+    setIsSubmitting(true);
+    
+    const newPost: NewPost = {
+      userId: selectedUser,
+      title: postData.title,
+      body: postData.body
+    };
+    
+    try {
+      await onUserSelect(newPost);
+      setPostData({ title: '', body: '' });
+      setSelectedUser(null);
+      console.log(newPost)
+      onClose();
+    } catch (error) {
+      console.error('Failed to add post:', error);
+    } finally {
+      setIsSubmitting(false);
     }
-    onClose();
   };
 
   return (
@@ -122,7 +152,7 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
             transform: 'translate(30%, -30%)',
           }
         }}
-        component="form" 
+        component="form"
         onSubmit={handleSubmit}
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -139,23 +169,7 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
               pl: 1
             }}
           >
-            {selectedUser ? (
-              <>
-                <FaUserEdit style={{ 
-                  color: theme.palette.primary.main, 
-                  fontSize: '1.4rem' 
-                }} />
-                Edit User
-              </>
-            ) : (
-              <>
-                <FaUserPlus style={{ 
-                  color: theme.palette.primary.main,
-                  fontSize: '1.4rem' 
-                }} />
-                Add New User
-              </>
-            )}
+            Add New Post
           </Typography>
           <IconButton 
             onClick={onClose} 
@@ -179,6 +193,25 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
           borderWidth: '1px'
         }} />
         
+        <FormControl fullWidth sx={{ mb: 3, ...textFieldStyles }}>
+          <InputLabel id="user-select-label">Select User</InputLabel>
+          <Select
+            labelId="user-select-label"
+            id="user-select"
+            value={selectedUser || ''}
+            onChange={handleUserChange}
+            input={<OutlinedInput label="Select User" />}
+            MenuProps={MenuProps}
+            required
+          >
+            {users.map((user) => (
+              <MenuItem key={user.id} value={user.id}>
+                {user.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        
         <Box sx={{
           display: 'grid',
           gap: 2,
@@ -190,11 +223,11 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
           <TextField
             fullWidth
             margin="normal"
-            label="Name"
+            label="Title"
             variant="outlined"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
+            name="title"
+            value={postData.title}
+            onChange={handleInputChange}
             required
             sx={textFieldStyles}
           />
@@ -202,36 +235,11 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
           <TextField
             fullWidth
             margin="normal"
-            label="Username"
+            label="Body"
             variant="outlined"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            sx={textFieldStyles}
-          />
-          
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Email"
-            variant="outlined"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            sx={textFieldStyles}
-          />
-          
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Phone"
-            variant="outlined"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
+            name="body"
+            value={postData.body}
+            onChange={handleInputChange}
             required
             sx={textFieldStyles}
           />
@@ -266,7 +274,7 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
           <Button 
             type="submit" 
             variant="contained" 
-            startIcon={selectedUser ? <FaSave /> : <FaUserPlus />}
+            disabled={isSubmitting}
             sx={{
               background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
               borderRadius: '12px',
@@ -277,10 +285,14 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
                 transform: 'translateY(-1px)',
                 boxShadow: '0 6px 16px rgba(255, 107, 139, 0.4)',
               },
-              transition: 'all 0.2s ease'
+              transition: 'all 0.2s ease',
+              '&:disabled': {
+                background: '#e0e0e0',
+                color: '#a0a0a0'
+              }
             }}
           >
-            {selectedUser ? "Update User" : "Add User"}
+            {isSubmitting ? 'Adding...' : 'Add New Post'}
           </Button>
         </Box>
       </Box>
@@ -288,4 +300,4 @@ function UserForm({ open, onClose, addUser, updateUser, selectedUser }: Props) {
   );
 }
 
-export default UserForm;
+export default AddPostForm;

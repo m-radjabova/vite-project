@@ -1,215 +1,141 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import UserForm from "./component/UserForm";
-import UserList from "./component/UserList";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import PostList from "./component/PostList";
+import UserSelect from "./component/UserSelect";
+import apiClient from "./apiClient/ApiClient";
+import { FaSearch } from "react-icons/fa";
+import PageAndLimit from "./component/PageAndLimit";
+import { Button, createTheme, TextField } from "@mui/material";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { 
-  Button, 
-  TextField, 
-  Box, 
-  Typography, 
-  Paper, 
-  Pagination,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  SelectChangeEvent
-} from "@mui/material";
-import { FaUserPlus, FaSearch, FaUserCog } from "react-icons/fa";
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./context/Theme";
+import AddPostForm from "./component/AddPostForm";
 
-export interface User {
+export interface Post {
+  userId: number;
   id: number;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
+  title: string;
+  body: string;
 }
 
+export interface User{
+  id: number;
+  name: string
+}
+
+export interface NewPost {
+  userId: number;
+  title: string;
+  body: string;
+}
+
+const theme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      main: "#3f51b5",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+  },
+});
 
 function App() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [users, setUsers] = useState<User[]>([])
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const [limit, setLimit] = useState(10)
+  const [search, setSearch] = useState('')
+  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [open, setOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(5); 
-  const [totalUsers, setTotalUsers] = useState(0);
+
+  const searchTimeout = useRef<number | null>(null);
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setSelectedUser(null);
   };
 
   useEffect(() => {
-    const url = search.trim() === ""
-      ? `https://jsonplaceholder.typicode.com/users?_limit=${limit}&_page=${page}`
-      : `https://jsonplaceholder.typicode.com/users?name_like=${search}&_limit=${limit}&_page=${page}`;
+    getPosts();
+    getUsers();
+  }, [page, limit, search, selectedUsers]);
 
-    axios.get(url)
-      .then(res => {
-        setUsers(res.data);
-        const total = parseInt(res.headers["x-total-count"]) || res.data.length;
-        setTotalUsers(total);
-      })
-      .catch(() => toast.error("Error fetching users"));
-  }, [page, limit, search]);
+  function getPosts() {
+    let url = `/posts?_page=${page}&_limit=${limit}`;
+    
+    if (search) {
+      url += `&title_like=${search}`;
+    }
+    
+    if (selectedUsers.length > 0) {
+      url += `&userId=${selectedUsers.join('&userId=')}`;
+    }
 
-  
-  function addUser(data: Omit<User, "id">) {
-    const usersCopy = [...users];
-    const newUser: User = { ...data, id: users.length + 1 };
-    
-    setUsers([...usersCopy, newUser]);
-    
-    axios.post("https://jsonplaceholder.typicode.com/users", newUser)
-      .then((res) => {
-        setUsers([...usersCopy, res.data]);
-        toast.success("User saved successfully");
-        handleClose();
+    axios.get(apiClient.defaults.baseURL + url)
+      .then((response) => {
+        setPageSize(Math.floor(response.headers['x-total-count'] / limit));
+        setPosts(response.data);
       })
-      .catch((err) => {
-        setUsers(usersCopy);
-        toast.error(err.message);
+      .catch((error) => {
+        console.log(error);
       });
   }
 
-  function updateUser(updatedUser: User) {
-    const usersCopy = [...users];
-    
-    setUsers(users.map((user) => 
-      user.id === updatedUser.id ? updatedUser : user
-    ));
 
-    axios.patch(
-      `https://jsonplaceholder.typicode.com/users/${updatedUser.id}`,
-      updatedUser
-    )
-      .then((res) => {
-        setUsers(users.map((user) => 
-          user.id === updatedUser.id ? res.data : user
-        ));
-        toast.success("User updated successfully");
-        handleClose();
-      })
-      .catch((err) => {
-        setUsers(usersCopy);
-        toast.error(err.message);
-      });
+  function getUsers() {
+    axios.get(
+      apiClient.defaults.baseURL + `/users`
+    ).then((res) => setUsers(res.data));
   }
 
-  const deleteUser = (id: number) => {
-    const usersCopy = [...users];
-    
-    setUsers(users.filter((user) => user.id !== id));
 
-    axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then(() => {
-        toast.success("User deleted successfully");
-      })
-      .catch((err) => {
-        console.error(err);
-        setUsers(usersCopy);
-        toast.error("Error deleting user");
-      });
-  };
 
-  const handleEdit = (user: User) => {
-    setSelectedUser(user);
-    setOpen(true);
-  };
+  function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
 
-  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
-    console.log(event);
-    setPage(value);
-  };
+    if (searchTimeout.current) {
+        clearTimeout(searchTimeout.current);
+    }
 
-  const handleLimitChange = (event: SelectChangeEvent<number>) => {
-    setLimit(Number(event.target.value));
-    setPage(1);
-  };
+    searchTimeout.current = setTimeout(() => {
+        setSearch(value);
+    }, 2000);
+  }
+
+  async function addPost(newPost: NewPost) {
+    try {
+      const response = await axios.post<Post>(
+        apiClient.defaults.baseURL + '/posts',
+        newPost
+      );
+      getPosts();
+      alert("Post added successfully!");
+      return response.data;
+    } catch (error) {
+      console.error('Error adding post:', error);
+      throw error;
+    }
+  }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          minHeight: "100vh",
-          backgroundColor: theme.palette.background.default,
-          padding: { xs: 2, md: 4 },
-          backgroundImage: "radial-gradient(#FFE5E5 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
+    <div className="container mt-5" >
+      <div className="d-flex justify-content-end">
+        <Button onClick={handleOpen} className="mb-3" variant="outlined">Add Post</Button>
+      </div>
+      <AddPostForm 
+        open={open}
+        onClose={handleClose}
+        users={users}
+        onUserSelect={async (newPost) => {
+          await addPost(newPost);
         }}
-      >
-        <Paper
-          sx={{
-            padding: { xs: 3, md: 4 },
-            maxWidth: 1200,
-            margin: "0 auto",
-            backgroundColor: theme.palette.background.paper,
-            position: "relative",
-            overflow: "hidden",
-            "&:before": {
-              content: '""',
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: "100px",
-              height: "100px",
-              background: "radial-gradient(circle, #FFD3D3 0%, transparent 70%)",
-              transform: "translate(30%, -30%)",
-            },
-          }}
-        >
-          {/* Header Section */}
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 4,
-              flexDirection: { xs: "column", sm: "row" },
-              gap: 2,
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <FaUserCog
-                style={{
-                  fontSize: "1.75rem",
-                  color: theme.palette.primary.main,
-                }}
-              />
-              <Typography variant="h4">User Management</Typography>
-            </Box>
-            <Button
-              variant="contained"
-              startIcon={<FaUserPlus style={{ fontSize: "1rem" }} />}
-              onClick={handleOpen}
-              sx={{
-                borderRadius: "12px",
-                padding: "10px 20px",
-                color: "#fff",
-                fontWeight: 500,
-              }}
-            >
-              Add User
-            </Button>
-          </Box>
-
-          {/* Search Field */}
-          <TextField
+      />
+        <TextField
+            onChange={handleSearch}
             fullWidth
-            label="Search users..."
+            label="Search posts..."
             variant="outlined"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
             InputProps={{
               startAdornment: (
                 <FaSearch
@@ -228,65 +154,21 @@ function App() {
             }}
           />
 
-          {/* Pagination Controls */}
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            mt: 3, 
-            mb: 3,
-            backgroundColor: "#FFF9F9",
-            padding: 2,
-            borderRadius: "12px",
-            border: "1px solid #FFE5E5"
-          }}>
-            <FormControl sx={{ minWidth: 120 }} size="small">
-              <InputLabel id="rows-per-page-label" sx={{ color: "#8B5D5D" }}>
-                Rows
-              </InputLabel>
-              <Select
-                labelId="rows-per-page-label"
-                value={limit}
-                label="Rows"
-                onChange={handleLimitChange}
-                sx={{
-                  "& .MuiSelect-select": {
-                    color: "#5A3A3A",
-                  },
-                }}
-              >
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-              </Select>
-            </FormControl>
-            
-            <Pagination 
-              count={Math.ceil(totalUsers / limit)}
-              page={page} 
-              onChange={handlePageChange} 
-              color="primary"
-              shape="rounded"
-            />
-          </Box>
-
-          <UserList
-            users={users}
-            deleteUser={deleteUser}
-            handleEdit={handleEdit}
-            selectedUser={(user: User) => setSelectedUser(user)}
+          <PageAndLimit 
+            pageSize={pageSize} 
+            limit={limit} 
+            setLimit={setLimit} 
+            setPage={setPage}
           />
-           <UserForm
-            open={open}
-            onClose={handleClose}
-            addUser={addUser}
-            updateUser={updateUser}
-            selectedUser={selectedUser}
+          <UserSelect 
+            users={users} 
+            selectedUsers={selectedUsers} 
+            setSelectedUsers={setSelectedUsers} 
           />
-        </Paper>
 
-      </Box>
-    </ThemeProvider>
+          <PostList posts={posts} />
+
+    </div>
   );
 }
 
