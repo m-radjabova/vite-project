@@ -7,6 +7,7 @@ import PageAndLimit from "./component/PageAndLimit";
 import { Button, createTheme, TextField } from "@mui/material";
 import axios from "axios";
 import AddPostForm from "./component/AddPostForm";
+import { toast } from "react-toastify";
 
 export interface Post {
   userId: number;
@@ -20,11 +21,6 @@ export interface User{
   name: string
 }
 
-export interface NewPost {
-  userId: number;
-  title: string;
-  body: string;
-}
 
 const theme = createTheme({
   palette: {
@@ -45,7 +41,7 @@ function App() {
   const [pageSize, setPageSize] = useState(10)
   const [limit, setLimit] = useState(10)
   const [search, setSearch] = useState('')
-  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+  const [selectedUser, setSelectedUser] = useState<number | "">("");
   const [open, setOpen] = useState(false);
 
   const searchTimeout = useRef<number | null>(null);
@@ -59,28 +55,30 @@ function App() {
   useEffect(() => {
     getPosts();
     getUsers();
-  }, [page, limit, search, selectedUsers]);
+  }, [page, limit, search, selectedUser]);
 
   function getPosts() {
     let url = `/posts?_page=${page}&_limit=${limit}`;
-    
+  
     if (search) {
       url += `&title_like=${search}`;
     }
-    
-    if (selectedUsers.length > 0) {
-      url += `&userId=${selectedUsers.join('&userId=')}`;
+  
+    if (selectedUser !== "") {
+      url += `&userId=${selectedUser}`;
     }
-
-    axios.get(apiClient.defaults.baseURL + url)
+  
+    axios
+      .get(apiClient.defaults.baseURL + url)
       .then((response) => {
-        setPageSize(Math.floor(response.headers['x-total-count'] / limit));
+        setPageSize(Math.floor(response.headers["x-total-count"] / limit));
         setPosts(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+  
 
 
   function getUsers() {
@@ -103,20 +101,22 @@ function App() {
     }, 2000);
   }
 
-  async function addPost(newPost: NewPost) {
-    try {
-      const response = await axios.post<Post>(
-        apiClient.defaults.baseURL + '/posts',
-        newPost
-      );
-      getPosts();
-      alert("Post added successfully!");
-      return response.data;
-    } catch (error) {
-      console.error('Error adding post:', error);
-      throw error;
-    }
+  function addPosts(data: Omit<Post, "id">) {
+    const postCopy = [...posts];
+    const newPost: Post = { ...data, id: posts.length + 1 };
+  
+    setPosts([...postCopy, newPost]);
+  
+    axios.post(apiClient.defaults.baseURL + `/posts`, newPost)
+      .then((res) => {
+        setPosts([...postCopy, res.data]);
+        toast.success("Post saved successfully");
+      }).catch((error) => {
+        setPosts(postCopy);
+        toast.error("Failed to add post: " + error.message);
+      });
   }
+  
 
   return (
     <div className="container mt-5" >
@@ -124,12 +124,10 @@ function App() {
         <Button onClick={handleOpen} className="mb-3" variant="outlined">Add Post</Button>
       </div>
       <AddPostForm 
+        addPosts={addPosts}
         open={open}
         onClose={handleClose}
         users={users}
-        onUserSelect={async (newPost) => {
-          await addPost(newPost);
-        }}
       />
         <TextField
             onChange={handleSearch}
@@ -160,11 +158,12 @@ function App() {
             setLimit={setLimit} 
             setPage={setPage}
           />
-          <UserSelect 
-            users={users} 
-            selectedUsers={selectedUsers} 
-            setSelectedUsers={setSelectedUsers} 
+          <UserSelect
+            users={users}
+            selectedUser={selectedUser}
+            setSelectedUser={setSelectedUser}
           />
+
 
           <PostList posts={posts} />
 

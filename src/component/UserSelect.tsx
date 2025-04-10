@@ -1,64 +1,47 @@
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { User } from '../App';
+import { User } from "../App";
+import React from "react";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 interface Props {
   users: User[];
-  selectedUsers: number[];
-  setSelectedUsers: React.Dispatch<React.SetStateAction<number[]>>;
+  selectedUser: number | "";
+  setSelectedUser: React.Dispatch<React.SetStateAction<number | "">>;
 }
 
-
-function UserSelect({ users, selectedUsers, setSelectedUsers }: Props) {
-  const handleChange = (event: SelectChangeEvent<number[]>) => {
-    const {
-      target: { value },
-    } = event;
-    const newSelectedUsers = typeof value === 'string' ? value.split(',').map(Number) : value;
-  
-    if (newSelectedUsers.includes(-1) || newSelectedUsers.length === users.length) {
-      setSelectedUsers([]);
-    } else {
-      setSelectedUsers(newSelectedUsers);
-    }
+function UserSelect({ users, selectedUser, setSelectedUser }: Props) {
+  const handleChange = (event: SelectChangeEvent) => {
+    const value = event.target.value;
+    setSelectedUser(value === "" ? "" : Number(value));
   };
 
   return (
-    <div>
-      <FormControl fullWidth className='mb-5'>
-        <InputLabel id="demo-multiple-name-label">Users</InputLabel>
-        <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={selectedUsers}
-          onChange={handleChange}
-          input={<OutlinedInput label="Users" />}
-          MenuProps={MenuProps}
-        >
-          {users.map((user) => (
-            <MenuItem key={user.id} value={user.id}>
-              {user.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <FormControl fullWidth className="mb-5">
+      <InputLabel id="user-select-label">Filter by User</InputLabel>
+      <Select
+        labelId="user-select-label"
+        id="user-select"
+        value={selectedUser === "" ? "" : selectedUser.toString()}
+        onChange={handleChange}
+        label="Filter by User"
+      >
+        <MenuItem value="">All Users</MenuItem>
+        {users.map((user) => (
+          <MenuItem key={user.id} value={user.id.toString()}>
+            {user.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 }
 
-export default UserSelect
+
+
+export default UserSelect;

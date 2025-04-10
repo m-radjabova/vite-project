@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   Box,
   Button,
@@ -14,41 +14,32 @@ import {
   OutlinedInput,
   SelectChangeEvent
 } from "@mui/material";
-import { theme } from "../context/Theme";
 import { FaTimes } from "react-icons/fa";
 
 const textFieldStyles = {
   '& .MuiOutlinedInput-root': {
     borderRadius: '12px',
+    backgroundColor: '#ffffff',
     '& fieldset': {
-      borderColor: '#FFE5E5',
+      borderColor: '#cce4ff',
     },
     '&:hover fieldset': {
-      borderColor: theme.palette.primary.light,
+      borderColor: '#90caf9',
     },
     '&.Mui-focused fieldset': {
-      borderColor: theme.palette.primary.main,
-      boxShadow: `0 0 0 2px ${theme.palette.primary.light}`
+      borderColor: '#42a5f5',
+      boxShadow: `0 0 0 2px rgba(66, 165, 245, 0.2)`
     },
   },
   '& .MuiInputLabel-root': {
-    color: theme.palette.text.secondary,
+    color: '#5f7eaa',
   },
   '& .MuiInputLabel-root.Mui-focused': {
-    color: theme.palette.primary.main,
+    color: '#1e88e5',
   },
   '& .MuiInputBase-input': {
-    color: theme.palette.text.primary,
+    color: '#0d2b4a',
   }
-};
-
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: 224,
-      width: 250,
-    },
-  },
 };
 
 interface User {
@@ -56,8 +47,8 @@ interface User {
   name: string;
 }
 
-interface NewPost {
-  userId: number;
+interface PostData {
+  userId: number | null;
   title: string;
   body: string;
 }
@@ -66,17 +57,16 @@ interface Props {
   open: boolean;
   onClose: () => void;
   users: User[];
-  onUserSelect: (newPost: NewPost) => Promise<void>;
+  addPosts(data: PostData): void;
 }
 
-function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
+
+function AddPostForm({ open, onClose, users, addPosts}: Props) {
   const [selectedUser, setSelectedUser] = useState<number | null>(null);
   const [postData, setPostData] = useState({
     title: '',
     body: ''
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleUserChange = (event: SelectChangeEvent<number>) => {
     const userId = event.target.value as number;
@@ -91,30 +81,18 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedUser) return;
-    
-    setIsSubmitting(true);
-    
-    const newPost: NewPost = {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    addPosts({
       userId: selectedUser,
       title: postData.title,
       body: postData.body
-    };
-    
-    try {
-      await onUserSelect(newPost);
-      setPostData({ title: '', body: '' });
-      setSelectedUser(null);
-      console.log(newPost)
-      onClose();
-    } catch (error) {
-      console.error('Failed to add post:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    })
+
+    setPostData({ title: '', body: '' });
+    setSelectedUser(null);
+    onClose();
+  }
 
   return (
     <Modal
@@ -126,30 +104,32 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backdropFilter: 'blur(3px)',
+        backdropFilter: 'blur(4px)',
+        backgroundColor: 'rgba(240, 248, 255, 0.4)',
       }}
     >
       <Box 
         sx={{
           position: 'relative',
           width: { xs: '90%', sm: '80%', md: '600px' },
-          bgcolor: 'background.paper',
-          borderRadius: '16px',
-          boxShadow: '0 10px 30px rgba(255, 107, 139, 0.2)',
+          bgcolor: '#f0f7ff',
+          borderRadius: '20px',
+          boxShadow: '0 10px 30px rgba(66, 133, 244, 0.2)',
           p: 4,
           outline: 'none',
-          transform: open ? 'scale(1)' : 'scale(0.9)',
-          transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-          border: '1px solid #FFE5E5',
+          transform: open ? 'scale(1)' : 'scale(0.95)',
+          transition: 'all 0.3s ease-in-out',
+          border: '1px solid #d0e2ff',
           '&:before': {
             content: '""',
             position: 'absolute',
             top: 0,
-            right: 0,
-            width: '60px',
-            height: '60px',
-            background: 'radial-gradient(circle, #FFD3D3 0%, transparent 70%)',
-            transform: 'translate(30%, -30%)',
+            left: 0,
+            width: '80px',
+            height: '80px',
+            background: 'radial-gradient(circle, #e0f0ff 0%, transparent 70%)',
+            transform: 'translate(-30%, -30%)',
+            borderRadius: '50%',
           }
         }}
         component="form"
@@ -161,7 +141,7 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
             variant="h6" 
             component="h2"
             sx={{ 
-              color: theme.palette.text.primary,
+              color: '#0d2b4a',
               fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
@@ -175,9 +155,9 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
             onClick={onClose} 
             aria-label="close"
             sx={{
-              color: theme.palette.text.secondary,
+              color: '#5f7eaa',
               '&:hover': {
-                backgroundColor: 'rgba(255, 107, 139, 0.1)',
+                backgroundColor: '#e3f2fd',
                 transform: 'rotate(90deg)'
               },
               transition: 'all 0.3s ease'
@@ -186,13 +166,13 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
             <FaTimes style={{ fontSize: '1.2rem' }} />
           </IconButton>
         </Box>
-        
+
         <Divider sx={{ 
           my: 3, 
-          borderColor: '#FFE5E5',
+          borderColor: '#d0e2ff',
           borderWidth: '1px'
         }} />
-        
+
         <FormControl fullWidth sx={{ mb: 3, ...textFieldStyles }}>
           <InputLabel id="user-select-label">Select User</InputLabel>
           <Select
@@ -201,7 +181,6 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
             value={selectedUser || ''}
             onChange={handleUserChange}
             input={<OutlinedInput label="Select User" />}
-            MenuProps={MenuProps}
             required
           >
             {users.map((user) => (
@@ -211,7 +190,7 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
             ))}
           </Select>
         </FormControl>
-        
+
         <Box sx={{
           display: 'grid',
           gap: 2,
@@ -244,27 +223,26 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
             sx={textFieldStyles}
           />
         </Box>
-        
+
         <Divider sx={{ 
           my: 3, 
-          borderColor: '#FFE5E5',
+          borderColor: '#d0e2ff',
           borderWidth: '1px'
         }} />
-      
+
         <Box display="flex" justifyContent="flex-end" gap={2}>
           <Button 
             onClick={onClose} 
             variant="outlined" 
             startIcon={<FaTimes />}
             sx={{
-              color: theme.palette.text.secondary,
-              borderColor: '#FFD3D3',
+              color: '#1e88e5',
+              borderColor: '#90caf9',
               borderRadius: '12px',
               px: 3,
               '&:hover': {
-                borderColor: theme.palette.primary.main,
-                backgroundColor: 'rgba(255, 107, 139, 0.08)',
-                color: theme.palette.primary.main
+                backgroundColor: '#e3f2fd',
+                borderColor: '#42a5f5',
               },
               transition: 'all 0.2s ease'
             }}
@@ -274,16 +252,15 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
           <Button 
             type="submit" 
             variant="contained" 
-            disabled={isSubmitting}
             sx={{
-              background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+              background: `linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%)`,
               borderRadius: '12px',
               px: 3,
               color: '#fff',
-              boxShadow: '0 4px 12px rgba(255, 107, 139, 0.3)',
+              boxShadow: '0 4px 12px rgba(66, 133, 244, 0.3)',
               '&:hover': {
                 transform: 'translateY(-1px)',
-                boxShadow: '0 6px 16px rgba(255, 107, 139, 0.4)',
+                boxShadow: '0 6px 16px rgba(66, 133, 244, 0.4)',
               },
               transition: 'all 0.2s ease',
               '&:disabled': {
@@ -292,7 +269,7 @@ function AddPostForm({ open, onClose, users, onUserSelect }: Props) {
               }
             }}
           >
-            {isSubmitting ? 'Adding...' : 'Add New Post'}
+            Add New Post
           </Button>
         </Box>
       </Box>
