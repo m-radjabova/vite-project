@@ -6,8 +6,6 @@ interface Props{
     pageSize : number,
     setLimit: React.Dispatch<React.SetStateAction<number>>,
     setPage: React.Dispatch<React.SetStateAction<number>>
-    
-
 }
 function PageAndLimit( {limit, setLimit, setPage, pageSize}: Props) {
 

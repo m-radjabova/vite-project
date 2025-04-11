@@ -1,6 +1,5 @@
-import { User } from "../App";
+import { User } from "../page/Posts";
 import React from "react";
-
 import {
   FormControl,
   InputLabel,

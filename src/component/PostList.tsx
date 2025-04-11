@@ -1,4 +1,4 @@
-import { Post } from "../App";
+import { Post } from "../page/Posts";
 import { FaUser, FaHashtag, FaRegClock } from 'react-icons/fa';
 
 interface Props {
