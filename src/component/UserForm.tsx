@@ -1,14 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { User } from "../page/Users";
-import {
-  Box,
-  Button,
-  Typography,
-  Modal,
-  TextField,
-  Divider,
-  IconButton
-} from "@mui/material";
+import {Box,Button,Typography,Modal,TextField,Divider,IconButton} from "@mui/material";
 import { FaUserEdit, FaUserPlus, FaTimes, FaSave } from "react-icons/fa";
 import { theme } from "../context/Theme";
 

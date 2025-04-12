@@ -44,3 +44,52 @@
     color: inherit;
     font-weight: 500;
   }
+
+.card-footer button {
+    cursor: pointer !important;
+}
+
+
+
+.modern-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+}
+
+.modern-loader .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.modern-loader .dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.modern-loader .dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  }
+  40% { 
+    transform: scale(1);
+  }
+}
+
+.hover-effect {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 255, 0.1);
+}
+
+.btn-hoverme{
+  background-color: #d4edda;
+  transform: translateY(-2px)
+}

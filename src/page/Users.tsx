@@ -19,6 +19,7 @@ import {
 import { FaUserPlus, FaSearch} from "react-icons/fa";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../context/Theme";
+import Loading from "../component/Loading";
 
 export interface User {
   id: number;
@@ -37,6 +38,7 @@ function Users() {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(5); 
   const [totalUsers, setTotalUsers] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -45,6 +47,7 @@ function Users() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const url = search.trim() === ""
       ? `https://jsonplaceholder.typicode.com/users?_limit=${limit}&_page=${page}`
       : `https://jsonplaceholder.typicode.com/users?name_like=${search}&_limit=${limit}&_page=${page}`;
@@ -55,7 +58,8 @@ function Users() {
         const total = parseInt(res.headers["x-total-count"]) || res.data.length;
         setTotalUsers(total);
       })
-      .catch(() => toast.error("Error fetching users"));
+      .catch(() => toast.error("Error fetching users"))
+      .finally(() => setIsLoading(false));
   }, [page, limit, search]);
 
   
@@ -134,6 +138,7 @@ function Users() {
 
   return (
     <ThemeProvider theme={theme}>
+      {isLoading && <Loading />}
       <Box
         sx={{
           minHeight: "100vh",
@@ -267,12 +272,14 @@ function Users() {
             />
           </Box>
 
-          <UserList
+
+          {!isLoading &&  <UserList
             users={users}
             deleteUser={deleteUser}
             handleEdit={handleEdit}
             selectedUser={(user: User) => setSelectedUser(user)}
-          />
+            />
+          }
            <UserForm
             open={open}
             onClose={handleClose}
