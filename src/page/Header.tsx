@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom';
-import { FaUsers, FaListAlt, FaEdit, FaUserCog } from 'react-icons/fa';
 import { Box, Typography } from '@mui/material';
+import { FaEdit, FaListAlt, FaUserCog, FaUsers } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Header() {
     const location = useLocation();

@@ -139,66 +139,17 @@ function Users() {
   return (
     <ThemeProvider theme={theme}>
       {isLoading && <Loading />}
-      <Box
-        sx={{
-          minHeight: "100vh",
-          backgroundColor: theme.palette.background.default,
-          padding: { xs: 2, md: 4 },
-          backgroundImage: "radial-gradient(#FFE5E5 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-        }}
-      >
-        <Paper
-          sx={{
-            padding: { xs: 3, md: 4 },
-            maxWidth: 1200,
-            margin: "0 auto",
-            backgroundColor: theme.palette.background.paper,
-            position: "relative",
-            overflow: "hidden",
-            "&:before": {
-              content: '""',
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: "100px",
-              height: "100px",
-              background: "radial-gradient(circle, #FFD3D3 0%, transparent 70%)",
-              transform: "translate(30%, -30%)",
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 4,
-              flexDirection: { xs: "column", sm: "row" },
-              gap: 2,
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            <Typography
-              variant="h4"
-              sx={{
-                color: theme.palette.primary.main,
-                fontWeight: 600,
-              }}
-            >
+      <Box className="main-container">
+        <Paper className="paper-container">
+          <Box className="header-container">
+            <Typography variant="h4" className="header-title">
               Users
             </Typography>
             <Button
               variant="contained"
               startIcon={<FaUserPlus style={{ fontSize: "1rem" }} />}
               onClick={handleOpen}
-              sx={{
-                borderRadius: "12px",
-                padding: "10px 20px",
-                color: "#fff",
-                fontWeight: 500,
-              }}
+              className="add-user-button"
             >
               Add User
             </Button>
@@ -223,27 +174,12 @@ function Users() {
                 />
               ),
             }}
-            sx={{
-              marginBottom: 4,
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "12px",
-              },
-            }}
+            className="search-input"
           />
 
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            mt: 3, 
-            mb: 3,
-            backgroundColor: "#FFF9F9",
-            padding: 2,
-            borderRadius: "12px",
-            border: "1px solid #FFE5E5"
-          }}>
-            <FormControl sx={{ minWidth: 120 }} size="small">
-              <InputLabel id="rows-per-page-label" sx={{ color: "#8B5D5D" }}>
+          <Box className="filter-pagination-container">
+            <FormControl className="form-control" size="small">
+              <InputLabel id="rows-per-page-label" className="input-label">
                 Rows
               </InputLabel>
               <Select
@@ -251,36 +187,32 @@ function Users() {
                 value={limit}
                 label="Rows"
                 onChange={handleLimitChange}
-                sx={{
-                  "& .MuiSelect-select": {
-                    color: "#5A3A3A",
-                  },
-                }}
+                className="select-input"
               >
                 <MenuItem value={3}>3</MenuItem>
                 <MenuItem value={5}>5</MenuItem>
                 <MenuItem value={10}>10</MenuItem>
               </Select>
             </FormControl>
-            
-            <Pagination 
+
+            <Pagination
               count={Math.ceil(totalUsers / limit)}
-              page={page} 
-              onChange={handlePageChange} 
+              page={page}
+              onChange={handlePageChange}
               color="primary"
               shape="rounded"
             />
           </Box>
 
-
-          {!isLoading &&  <UserList
-            users={users}
-            deleteUser={deleteUser}
-            handleEdit={handleEdit}
-            selectedUser={(user: User) => setSelectedUser(user)}
+          {!isLoading && (
+            <UserList
+              users={users}
+              deleteUser={deleteUser}
+              handleEdit={handleEdit}
+              selectedUser={(user: User) => setSelectedUser(user)}
             />
-          }
-           <UserForm
+          )}
+          <UserForm
             open={open}
             onClose={handleClose}
             addUser={addUser}
@@ -288,9 +220,9 @@ function Users() {
             selectedUser={selectedUser}
           />
         </Paper>
-
       </Box>
     </ThemeProvider>
+
   );
 }
 
