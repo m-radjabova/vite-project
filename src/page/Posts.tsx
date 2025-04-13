@@ -123,7 +123,7 @@ function Posts() {
   
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3 posts-container">
     {isLoading && <Loading />}
   
     <div className="posts-header">

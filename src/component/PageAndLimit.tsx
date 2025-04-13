@@ -19,6 +19,7 @@ function PageAndLimit( {limit, setLimit, setPage, pageSize}: Props) {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
+        width: '100%',
         mb: 3,
         padding: 2,
         borderRadius: "12px",

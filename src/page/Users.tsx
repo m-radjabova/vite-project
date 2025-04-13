@@ -55,7 +55,7 @@ function Users() {
     axios.get(url)
       .then(res => {
         setUsers(res.data);
-        const total = parseInt(res.headers["x-total-count"]) || res.data.length;
+        const total = (res.headers["x-total-count"] / limit)
         setTotalUsers(total);
       })
       .catch(() => toast.error("Error fetching users"))
@@ -137,7 +137,7 @@ function Users() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       {isLoading && <Loading />}
       <Box className="main-container">
         <Paper className="paper-container">
@@ -178,7 +178,7 @@ function Users() {
           />
 
           <Box className="filter-pagination-container">
-            <FormControl className="form-control" size="small">
+            <FormControl size="small">
               <InputLabel id="rows-per-page-label" className="input-label">
                 Rows
               </InputLabel>
@@ -187,7 +187,7 @@ function Users() {
                 value={limit}
                 label="Rows"
                 onChange={handleLimitChange}
-                className="select-input"
+                style={{ minWidth: "120px" }}
               >
                 <MenuItem value={3}>3</MenuItem>
                 <MenuItem value={5}>5</MenuItem>
@@ -196,7 +196,7 @@ function Users() {
             </FormControl>
 
             <Pagination
-              count={Math.ceil(totalUsers / limit)}
+              count={totalUsers}
               page={page}
               onChange={handlePageChange}
               color="primary"
