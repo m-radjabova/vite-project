@@ -42,7 +42,7 @@ function CommentList({ comments}: Props) {
                             className="text-info position-absolute" 
                             style={{ bottom: 0, right: 0, fontSize: '14px' }}
                             />
-                            {comment.userId}
+                            {comment.postId}
                         </div>
                         
                         <div className="flex-grow-1">

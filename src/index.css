@@ -5,13 +5,17 @@
   --background-paper: #fff;
   --text-secondary: #6c757d;
 }
-body {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 245, 245, 0.7),
-    rgba(245, 250, 248, 0.7),
-    rgba(227, 230, 253, 0.7)
-  );
+
+.bodypink {
+  background-color: #f7e8e8 !important;
+}
+
+.bodyblue{
+  background-color: #e3f2fd !important;
+}
+
+.bodygreen{
+  background-color: rgb(209, 236, 209) !important;
 }
 
 
@@ -42,6 +46,7 @@ body {
     color: #1976d2 !important;
     box-shadow: 0 2px 5px rgba(25, 118, 210, 0.2);
   }
+
   
   .active-todo {
     background-color: #d6ffdf !important;
@@ -316,7 +321,7 @@ body {
 /* posts.tsx */
 
 .posts-container{
-  background-color: #e4e6f3 !important;
+  background-color: #cfe9fb !important;
   padding: 2rem !important;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(90, 143, 123, 0.1);
@@ -326,7 +331,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem !important;
   border-bottom: 2px solid var(--primary-light) !important;
   padding-bottom: 1rem;
 }
@@ -363,7 +368,7 @@ body {
 
 .search-section {
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 2rem;
   background-color: var(--background-paper) !important;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);

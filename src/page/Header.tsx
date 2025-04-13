@@ -1,10 +1,24 @@
 import { Box, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { FaEdit, FaListAlt, FaUserCog, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 function Header() {
     const location = useLocation();
+
+    useEffect(() => {
+      document.body.classList.remove('bodyblue', 'bodypink', 'bodygreen');
+    
+      if (location.pathname === '/Posts') {
+        document.body.classList.add('bodyblue');
+      } else if (location.pathname === '/Users') {
+        document.body.classList.add('bodypink');
+      } else if (location.pathname === '/Todos') {
+        document.body.classList.add('bodygreen');
+      } 
+    }, [location.pathname]);
+    
 
   return (
     <header className="header bg-light p-3 mb-4 shadow-sm">

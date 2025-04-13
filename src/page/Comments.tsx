@@ -12,6 +12,8 @@ export interface CommentType {
     body: string,
     userId: number
 }
+
+
 function Comments() {
     const { id } = useParams()
     const [comments, setComments] = useState<CommentType[]>([])

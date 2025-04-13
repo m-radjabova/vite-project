@@ -14,7 +14,7 @@ function PostList({ posts, users }: Props) {
   };
   
   return (
-    <div className="container-fluid p-4" style={{ backgroundColor: '#f0f8ff' }}>
+    <div className="container-fluid p-4" style={{ backgroundColor: '#f3f4f6', borderRadius: '12px' }}>
       <div className="row g-4 justify-content-center">
         {(posts).map((post, index) => {
           const user = userNameById(post.userId);

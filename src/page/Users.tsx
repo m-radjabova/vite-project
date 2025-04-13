@@ -3,10 +3,7 @@ import UserForm from "../component/UserForm";
 import UserList from "../component/UserList";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { 
-  Button, 
-  TextField, 
-  Box, 
+import { Button, TextField, Box, 
   Paper, 
   Pagination,
   Select,
