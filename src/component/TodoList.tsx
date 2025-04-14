@@ -21,7 +21,7 @@ function TodoList({ todos, setTodos }: Props) {
     };
 
     return (
-        <div className="container mt-3">
+        <div className="mt-3">
             <div className="todo-container">
                 <ListGroup variant="flush">
                     {todos.map(todo => (

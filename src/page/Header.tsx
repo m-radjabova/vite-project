@@ -21,7 +21,7 @@ function Header() {
     
 
   return (
-    <header className="header bg-light p-3 mb-4 shadow-sm">
+    <header className="header bg-light p-3  shadow-sm">
       <div className="container d-flex justify-content-between align-items-center">
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <FaUserCog

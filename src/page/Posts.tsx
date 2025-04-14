@@ -43,15 +43,16 @@ function Posts() {
   const [limit, setLimit] = useState(10)
   const [search, setSearch] = useState('')
   const [selectedUser, setSelectedUser] = useState<number | "">("");
-  const [open, setOpen] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   const searchTimeout = useRef<number | null>(null);
 
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpenAdd(true);
   const handleClose = () => {
-    setOpen(false);
+    setOpenAdd(false);
   };
 
   useEffect(() => {
@@ -120,8 +121,44 @@ function Posts() {
         toast.error("Failed to add post: " + error.message);
       });
   }
-  
 
+  function deletePost(id: number) {
+    const postCopy = [...posts];
+  
+    setPosts(postCopy.filter(post => post.id !== id));
+  
+    axios.delete(apiClient.defaults.baseURL + `/posts/${id}`)
+      .then(() => {
+        toast.success("Post deleted successfully");
+      }).catch((error) => {
+        setPosts(postCopy);
+        toast.error("Failed to delete post: " + error.message);
+      });
+  }
+
+  function updatePost(updatedPost: Post) {
+    const postCopy = [...posts];
+  
+    setPosts(postCopy.map(post => post.id === updatedPost.id ? updatedPost : post));
+
+    axios.patch(apiClient.defaults.baseURL + `/posts/${updatedPost.id}`, updatedPost)
+
+      .then((res) => {
+        toast.success("Post updated successfully");
+        setPosts(posts.map((post) => 
+          post.id === updatedPost.id ? res.data : post
+        ))
+      }).catch((error) => {
+        setPosts(postCopy);
+        toast.error("Failed to update post: " + error.message);
+      });
+  }
+
+  const handleEdit = (post: Post) => {
+    setSelectedPost(post);
+    setOpenAdd(true);
+  }
+  
   return (
     <div className="container mt-3 posts-container">
     {isLoading && <Loading />}
@@ -147,7 +184,9 @@ function Posts() {
   
     <AddPostForm 
       addPosts={addPosts}
-      open={open}
+      updatePost={updatePost}
+      selectedPost={selectedPost}
+      openAdd={openAdd}
       onClose={handleClose}
       users={users}
     />
@@ -185,7 +224,13 @@ function Posts() {
       </div>
     </div>
   
-    {!isLoading && <PostList users={users} posts={posts} />}
+    {!isLoading && <PostList 
+      handleEdit={handleEdit}
+      selectedPost={(post: Post) => setSelectedPost(post)}
+      deletePost={deletePost} 
+      users={users} 
+      posts={posts} 
+      />}
   
     <div className="text-center mt-4 mb-5">
         <Button

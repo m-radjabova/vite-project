@@ -1,13 +1,14 @@
 import { CommentType } from "../page/Comments";
-import { FaUser, FaRegEnvelope, FaRegHeart, FaReply,FaIdCard} from 'react-icons/fa';
+import { FaUser, FaRegEnvelope, FaRegHeart, FaReply,FaIdCard, FaTrashAlt} from 'react-icons/fa';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { RiVerifiedBadgeFill } from 'react-icons/ri';
 
 interface Props {
     comments: CommentType[]
+    deleteComment: (id: number) => void
 }
 
-function CommentList({ comments}: Props) {
+function CommentList({ comments, deleteComment}: Props) {
 
   return (
     <div className="row">
@@ -73,14 +74,18 @@ function CommentList({ comments}: Props) {
                         
                         <div className="d-flex align-items-center gap-3">
                             <button className="btn btn-sm btn-outline-primary d-flex align-items-center gap-1">
-                            <FaRegHeart size={14} />
-                            <span>Like</span>
+                                <FaRegHeart size={14} />
+                                <span>Like</span>
                             </button>
                             <button className="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1">
-                            <FaReply size={14} />
-                            <span>Reply</span>
+                                <FaReply size={14} />
+                                <span>Reply</span>
                             </button>
-                        </div>
+                            <button onClick={() => deleteComment(comment.id)} className="btn btn-sm btn-outline-danger d-flex align-items-center gap-1">
+                                <FaTrashAlt size={14} />
+                                <span>Delete</span>
+                            </button>
+                        </div> 
                         </div>
                     </div>
                     </div>

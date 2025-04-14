@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import {Box,Button,Typography,Modal,TextField,Divider,IconButton,FormControl,InputLabel,Select,
 MenuItem,OutlinedInput,SelectChangeEvent} from "@mui/material";
 import { FaTimes } from "react-icons/fa";
+import { Post } from "../page/Posts";
 
 const textFieldStyles = {
   '& .MuiOutlinedInput-root': {
@@ -41,25 +42,42 @@ interface PostData {
 }
 
 interface Props {
-  open: boolean;
+  openAdd: boolean;
   onClose: () => void;
   users: User[];
   addPosts(data: PostData): void;
+  updatePost: (post: Post) => void;
+  selectedPost: Post | null;
 }
 
 
-function AddPostForm({ open, onClose, users, addPosts}: Props) {
+function AddPostForm({ openAdd, onClose, users, addPosts, updatePost, selectedPost }: Props) {
   const [selectedUser, setSelectedUser] = useState<number | null>(null);
   const [postData, setPostData] = useState({
     title: '',
     body: ''
   });
 
+  useEffect(() => {
+    if (selectedPost) {
+      const { userId, id, ...rest } = selectedPost;
+      console.log(id)
+      setSelectedUser(userId);
+      setPostData(rest);
+    } else {
+      setSelectedUser(null);
+      setPostData({
+        title: "",
+        body: "",
+      });
+    }
+  }, [selectedPost, openAdd]);
+
   const handleUserChange = (event: SelectChangeEvent<number>) => {
     const userId = event.target.value as number;
     setSelectedUser(userId);
   };
-  
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPostData(prev => ({
@@ -69,21 +87,20 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    addPosts({
-      userId: selectedUser,
-      title: postData.title,
-      body: postData.body
-    })
-
-    setPostData({ title: '', body: '' });
-    setSelectedUser(null);
+    e.preventDefault();
+    if (selectedPost) {
+      updatePost({ ...postData, id: selectedPost.id, userId: selectedUser! });
+    } else {
+      addPosts({ ...postData, userId: selectedUser });
+    }
     onClose();
   }
 
+  const isEditMode = Boolean(selectedPost);
+
   return (
     <Modal
-      open={open}
+      open={openAdd}
       onClose={onClose}
       aria-labelledby="user-modal-title"
       aria-describedby="user-modal-description"
@@ -95,7 +112,7 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
         backgroundColor: 'rgba(240, 248, 255, 0.4)',
       }}
     >
-      <Box 
+      <Box
         sx={{
           position: 'relative',
           width: { xs: '90%', sm: '80%', md: '600px' },
@@ -104,7 +121,7 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
           boxShadow: '0 10px 30px rgba(66, 133, 244, 0.2)',
           p: 4,
           outline: 'none',
-          transform: open ? 'scale(1)' : 'scale(0.95)',
+          transform: openAdd ? 'scale(1)' : 'scale(0.95)',
           transition: 'all 0.3s ease-in-out',
           border: '1px solid #d0e2ff',
           '&:before': {
@@ -123,11 +140,11 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
         onSubmit={handleSubmit}
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography 
-            id="user-modal-title" 
-            variant="h6" 
+          <Typography
+            id="user-modal-title"
+            variant="h6"
             component="h2"
-            sx={{ 
+            sx={{
               color: '#0d2b4a',
               fontWeight: 600,
               display: 'flex',
@@ -136,10 +153,10 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
               pl: 1
             }}
           >
-            Add New Post
+            {isEditMode ? 'Edit Post' : 'Add New Post'}
           </Typography>
-          <IconButton 
-            onClick={onClose} 
+          <IconButton
+            onClick={onClose}
             aria-label="close"
             sx={{
               color: '#5f7eaa',
@@ -154,8 +171,8 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
           </IconButton>
         </Box>
 
-        <Divider sx={{ 
-          my: 3, 
+        <Divider sx={{
+          my: 3,
           borderColor: '#d0e2ff',
           borderWidth: '1px'
         }} />
@@ -165,7 +182,7 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
           <Select
             labelId="user-select-label"
             id="user-select"
-            value={selectedUser || ''}
+            value={selectedUser !== null ? selectedUser : ''}
             onChange={handleUserChange}
             input={<OutlinedInput label="Select User" />}
             required
@@ -197,7 +214,7 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
             required
             sx={textFieldStyles}
           />
-          
+
           <TextField
             fullWidth
             margin="normal"
@@ -211,16 +228,16 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
           />
         </Box>
 
-        <Divider sx={{ 
-          my: 3, 
+        <Divider sx={{
+          my: 3,
           borderColor: '#d0e2ff',
           borderWidth: '1px'
         }} />
 
         <Box display="flex" justifyContent="flex-end" gap={2}>
-          <Button 
-            onClick={onClose} 
-            variant="outlined" 
+          <Button
+            onClick={onClose}
+            variant="outlined"
             startIcon={<FaTimes />}
             sx={{
               color: '#1e88e5',
@@ -236,9 +253,9 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
           >
             Cancel
           </Button>
-          <Button 
-            type="submit" 
-            variant="contained" 
+          <Button
+            type="submit"
+            variant="contained"
             sx={{
               background: `linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%)`,
               borderRadius: '12px',
@@ -256,7 +273,7 @@ function AddPostForm({ open, onClose, users, addPosts}: Props) {
               }
             }}
           >
-            Add New Post
+            {isEditMode ? 'Save Changes' : 'Add New Post'}
           </Button>
         </Box>
       </Box>

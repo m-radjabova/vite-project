@@ -3,20 +3,14 @@ import UserForm from "../component/UserForm";
 import UserList from "../component/UserList";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, TextField, Box, 
-  Paper, 
-  Pagination,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  SelectChangeEvent,
-  Typography
-} from "@mui/material";
+import { Button, TextField, Box, Paper, Pagination, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent,
+  Typography } from "@mui/material";
 import { FaUserPlus, FaSearch} from "react-icons/fa";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../context/Theme";
 import Loading from "../component/Loading";
+import apiClient from "../apiClient/ApiClient";
+import useUsers from "../hooks/useUsers";
 
 export interface User {
   id: number;
@@ -28,9 +22,9 @@ export interface User {
 
 
 function Users() {
+  const { users, setUsers } = useUsers()
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(5); 
@@ -43,20 +37,29 @@ function Users() {
     setSelectedUser(null);
   };
 
-  useEffect(() => {
+  function getUsers() {
     setIsLoading(true);
     const url = search.trim() === ""
-      ? `https://jsonplaceholder.typicode.com/users?_limit=${limit}&_page=${page}`
-      : `https://jsonplaceholder.typicode.com/users?name_like=${search}&_limit=${limit}&_page=${page}`;
-
-    axios.get(url)
-      .then(res => {
-        setUsers(res.data);
-        const total = (res.headers["x-total-count"] / limit)
+      ? `/users?_page=${page}&_limit=${limit}`
+      : `/users?name_like=${search}&_page=${page}&_limit=${limit}`;
+  
+    axios.get(apiClient.defaults.baseURL + url)
+      .then((res) => {
+        const total = Math.floor(res.headers["x-total-count"] / limit);
         setTotalUsers(total);
+        setUsers(res.data);
       })
-      .catch(() => toast.error("Error fetching users"))
-      .finally(() => setIsLoading(false));
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error fetching users");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    getUsers()
   }, [page, limit, search]);
 
   
@@ -136,7 +139,7 @@ function Users() {
   return (
     <ThemeProvider theme={theme} >
       {isLoading && <Loading />}
-      <Box className="main-container">
+      <Box className="main-container container"  >
         <Paper className="paper-container">
           <Box className="header-container">
             <Typography variant="h4" className="header-title">
