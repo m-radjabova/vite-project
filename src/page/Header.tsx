@@ -32,18 +32,24 @@ function Header() {
             <Typography variant="h4">User Management</Typography>
         </Box>
         <div className="d-flex align-items-center gap-2">
-          <button className={`btn d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${location.pathname === '/Users' ? 'active-user' : 'text-muted'}`}>
-            <FaUsers className="fs-5" />
-            <Link className='link text-decoration-none' to="/Users">Users</Link>
-          </button>
-          <button className={`btn d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${location.pathname === '/Posts' ? 'active-post' : 'text-muted'}`}>
-            <FaEdit className="fs-5" />
-            <Link className='link text-decoration-none' to="/Posts">Posts</Link>
-          </button>
-          <button className={`btn d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${location.pathname === '/Todos' ? 'active-todo' : 'text-muted'}`}>
-            <FaListAlt className="fs-5" />
-            <Link className='link text-decoration-none' to="/Todos">Todos</Link>
-          </button>
+          <Link to="/Users" className='link text-decoration-none'>
+            <button className={`btn d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${location.pathname === '/Users' ? 'active-user' : 'text-muted'}`}>
+                <FaUsers className="fs-5" />
+                Users
+            </button>
+          </Link>
+          <Link to="/Posts" className='link text-decoration-none'>
+            <button className={`btn d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${location.pathname === '/Posts' ? 'active-post' : 'text-muted'}`}>
+              <FaEdit className="fs-5" />
+              Posts
+            </button>
+          </Link>
+          <Link to="/Todos" className='link text-decoration-none'>
+            <button className={`btn d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${location.pathname === '/Todos' ? 'active-todo' : 'text-muted'}`}>
+              <FaListAlt className="fs-5" />
+              Todos
+            </button>
+          </Link>
         </div>
       </div>
     </header>
@@ -51,4 +57,3 @@ function Header() {
 }
 
 export default Header
-
