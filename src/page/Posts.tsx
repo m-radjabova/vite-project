@@ -45,6 +45,7 @@ function Posts() {
   const [selectedUser, setSelectedUser] = useState<number | "">("");
   const [openAdd, setOpenAdd] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   const searchTimeout = useRef<number | null>(null);

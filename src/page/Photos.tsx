@@ -8,6 +8,7 @@ import chroma from 'chroma-js';
 import Select, { MultiValue, StylesConfig } from 'react-select';
 import PageAndLimitPhoto from "../component/PageAndLimitPhoto";
 import { Button, Typography } from "@mui/material";
+import Loading from "../component/Loading";
 
 export interface Photo {
   albumId: number;
@@ -87,6 +88,7 @@ function Photos() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [pageSize, setPageSize] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getPhotos();
@@ -94,6 +96,7 @@ function Photos() {
   }, [page, limit]);
 
   const getPhotos = () => {
+    setIsLoading(true)
     apiClient.get(`/photos?_page=${page}&_limit=${limit}`)
       .then(res => {
         setPhotos(res.data);
@@ -101,7 +104,9 @@ function Photos() {
       }).catch((err) => {
         console.log(err);
         toast.error("Error fetching photos");
-      });
+      }).finally(() => {
+        setIsLoading(false)
+      })
   };
 
   const getAlbums = () => {
@@ -126,16 +131,18 @@ function Photos() {
     }
   
     const albumIds = selectedOptions.map(option => option.value);
+    
     apiClient.get(`/photos?${albumIds.map(id => `albumId=${id}`).join('&')}`)
       .then(res => setPhotos(res.data))
       .catch(err => {
         console.log(err);
         toast.error("Error fetching filtered photos");
-      });
+      })
   };
   
   return (
     <div className="container" style={{padding: '0 20px' }}>
+      {isLoading && <Loading />}
       <div className="photos-container">
         <div className="photos-header d-flex justify-content-between align-items-center mt-3 mb-4">
           <div className="photos-title">
@@ -207,7 +214,7 @@ function Photos() {
           boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
           margin: '20px 0'
         }}>
-          <PhotosList photos={photos} />
+          {!isLoading && <PhotosList photos={photos} />}
         </div>
       </div>
       
