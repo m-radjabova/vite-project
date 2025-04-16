@@ -4,6 +4,7 @@ import Posts from "./page/Posts"
 import Todos from "./page/Todos"
 import Header from "./page/Header"
 import Comments from "./page/Comments"
+import Photos from "./page/Photos"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Posts" element={<Posts/>} />
           <Route path="/Posts/:id/Comments" element={<Comments/>} />
           <Route path="/Todos" element={<Todos/>} />
+          <Route path="/Photos" element={<Photos/>}></Route>
         </Routes>
        </div>
     </div>
