@@ -8,9 +8,10 @@ import { Button, TextField, Box, Paper, Pagination, Select, MenuItem, FormContro
 import { FaUserPlus, FaSearch} from "react-icons/fa";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../context/Theme";
-import Loading from "../component/Loading";
+import Loading from "../component/LoadingForUsers";
 import apiClient from "../apiClient/ApiClient";
 import useUsers from "../hooks/useUsers";
+import { PiUserCheckBold } from "react-icons/pi";
 
 export interface User {
   id: number;
@@ -142,8 +143,9 @@ function Users() {
       <Box className="main-container container"  >
         <Paper className="paper-container">
           <Box className="header-container">
-            <Typography variant="h4" className="header-title">
-              Users
+            <Typography variant="h4" className="d-flex gap-3">
+                Users
+                <PiUserCheckBold/>
             </Typography>
             <Button
               variant="contained"

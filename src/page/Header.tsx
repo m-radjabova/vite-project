@@ -1,9 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect } from 'react';
-import { FaEdit, FaListAlt, FaUserCog, FaUsers } from 'react-icons/fa';
+import { FaEdit, FaListAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { IoMdPhotos } from "react-icons/io";
+import { FaUsers, FaUsersLine } from "react-icons/fa6";
 
 function Header() {
     const location = useLocation();
@@ -26,12 +27,12 @@ function Header() {
     <header className="header bg-light p-3 shadow-sm ">
       <div className="container d-flex justify-content-between align-items-center">
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <FaUserCog
+            <FaUsersLine
                 style={{
                     fontSize: "2rem",
                 }}
             />
-            <Typography variant="h4">User Management</Typography>
+            <Typography variant="h4">Users Management</Typography>
         </Box>
         <div className="d-flex align-items-center gap-2">
           <Link to="/Users" className='link text-decoration-none'>

@@ -8,7 +8,7 @@ import { Button, createTheme, InputAdornment, TextField, Typography } from "@mui
 import axios from "axios";
 import AddPostForm from "../component/AddPostForm";
 import { toast } from "react-toastify";
-import Loading from "../component/Loading";
+import Loading from "../component/LoadingForUsers";
 
 export interface Post {
   userId: number;
@@ -161,112 +161,114 @@ function Posts() {
   }
   
   return (
-    <div className="container mt-3 posts-container">
-    {isLoading && <Loading />}
-  
-    <div className="posts-header">
-      <Typography variant="h4" className="posts-title">
-        <FaNewspaper style={{ fontSize: '1.5rem' }} />
-        Posts
-        <span className="posts-count">
-          {posts.length} {posts.length === 1 ? 'Post' : 'Posts'}
-        </span>
-      </Typography>
-  
-      <Button 
-        onClick={handleOpen} 
-        variant="contained" 
-        startIcon={<FaPlus />}
-        className="add-post-btn"
-      >
-        Add Post
-      </Button>
-    </div>
-  
-    <AddPostForm 
-      addPosts={addPosts}
-      updatePost={updatePost}
-      selectedPost={selectedPost}
-      openAdd={openAdd}
-      onClose={handleClose}
-      users={users}
-    />
-  
-    <div className="search-section">
-      <TextField
-        onChange={handleSearch}
-        fullWidth
-        label="Search posts..."
-        variant="outlined"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <FaSearch style={{ color: 'var(--primary-main)' }} />
-            </InputAdornment>
-          )
-        }}
-        className="search-input"
-        sx={{ marginBottom: 3 }}
-      />
-  
-      <div className="filters">
-        <UserSelect
-          users={users}
-          selectedUser={selectedUser}
-          setSelectedUser={setSelectedUser}
-        />
-  
-        <PageAndLimit 
-          pageSize={pageSize} 
-          limit={limit} 
-          setLimit={setLimit} 
-          setPage={setPage}
-        />
+    <div className="container">
+      {isLoading && <Loading />}
+        <div className="mt-3 posts-container">
+      
+          <div className="posts-header">
+            <Typography variant="h4" className="posts-title">
+              <FaNewspaper style={{ fontSize: '3rem' }} />
+                Posts
+              <span className="posts-count">
+                {posts.length} {posts.length === 1 ? 'Post' : 'Posts'}
+              </span>
+            </Typography>
+        
+            <Button 
+              onClick={handleOpen} 
+              variant="contained" 
+              startIcon={<FaPlus />}
+              className="add-post-btn"
+            >
+              Add Post
+            </Button>
+          </div>
+        
+          <AddPostForm 
+            addPosts={addPosts}
+            updatePost={updatePost}
+            selectedPost={selectedPost}
+            openAdd={openAdd}
+            onClose={handleClose}
+            users={users}
+          />
+        
+          <div className="search-section">
+            <TextField
+              onChange={handleSearch}
+              fullWidth
+              label="Search posts..."
+              variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FaSearch style={{ color: 'var(--primary-main)' }} />
+                  </InputAdornment>
+                )
+              }}
+              className="search-input"
+              sx={{ marginBottom: 3 }}
+            />
+        
+            <div className="filters">
+              <UserSelect
+                users={users}
+                selectedUser={selectedUser}
+                setSelectedUser={setSelectedUser}
+              />
+        
+              <PageAndLimit 
+                pageSize={pageSize} 
+                limit={limit} 
+                setLimit={setLimit} 
+                setPage={setPage}
+              />
+            </div>
+          </div>
+        
+          {!isLoading && <PostList 
+            handleEdit={handleEdit}
+            selectedPost={(post: Post) => setSelectedPost(post)}
+            deletePost={deletePost} 
+            users={users} 
+            posts={posts} 
+            />}
+        
+          <div className="text-center mt-4 mb-5">
+              <Button
+                onClick={() => setLimit(limit + 10)}
+                variant="outlined"
+                endIcon={<FaArrowDown />}
+                sx={{
+                  borderRadius: '8px',
+                  padding: '10px 28px',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  borderWidth: '2px',
+                  '&:hover': {
+                    borderWidth: '2px',
+                    backgroundColor: '#f0f8ff'
+                  }
+                }}
+              >
+                Load More Posts
+              </Button>
+        
+            <Typography variant="body2" 
+              sx={{
+                color: theme.palette.text.secondary,
+                marginTop: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px'
+              }}>
+              <FaInfoCircle />
+              Showing {Math.min(limit, posts.length)} of {posts.length} posts
+            </Typography>
+          </div>
       </div>
     </div>
-  
-    {!isLoading && <PostList 
-      handleEdit={handleEdit}
-      selectedPost={(post: Post) => setSelectedPost(post)}
-      deletePost={deletePost} 
-      users={users} 
-      posts={posts} 
-      />}
-  
-    <div className="text-center mt-4 mb-5">
-        <Button
-          onClick={() => setLimit(limit + 10)}
-          variant="outlined"
-          endIcon={<FaArrowDown />}
-          sx={{
-            borderRadius: '8px',
-            padding: '10px 28px',
-            fontSize: '1rem',
-            fontWeight: 600,
-            borderWidth: '2px',
-            '&:hover': {
-              borderWidth: '2px',
-              backgroundColor: '#f0f8ff'
-            }
-          }}
-        >
-          Load More Posts
-        </Button>
-  
-      <Typography variant="body2" 
-        sx={{
-          color: theme.palette.text.secondary,
-          marginTop: '12px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px'
-        }}>
-        <FaInfoCircle />
-        Showing {Math.min(limit, posts.length)} of {posts.length} posts
-      </Typography>
-    </div>
-  </div>
   
   );
 }
