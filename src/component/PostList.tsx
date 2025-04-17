@@ -49,7 +49,7 @@ function PostList({ posts, users, deletePost, handleEdit, selectedPost}: Props) 
             <div 
               key={post ? `post-${post.id}` : `skeleton-${index}`} 
               className="col-12 col-sm-6 col-md-4 col-lg-3"
-              style={{ minWidth: '390px', maxWidth: '410px' }}
+              style={{ minWidth: '360px', maxWidth: '380px' }}
             >
               <div 
                 className="card h-100 border-0 overflow-hidden"
