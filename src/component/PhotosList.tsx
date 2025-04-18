@@ -46,11 +46,10 @@ function PhotosList({ photos }: Props) {
                 }
               }
             }}>
-              {/* Photo with overlay effect */}
               <Box sx={{ position: 'relative' }}>
                 <CardMedia
                   component="img"
-                  image={photo.url}
+                  image={`https://picsum.photos/id/${photo.id}/300/200`}
                   alt={photo.title}
                   sx={{ 
                     height: 220,

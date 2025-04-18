@@ -59,6 +59,7 @@ function Header() {
               Photos
             </button>
           </Link>
+          
         </div>
       </div>
     </header>
