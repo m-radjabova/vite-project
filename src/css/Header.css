@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #545EE1;
+    font-size: 20px;
+}
+
+header ul li{
+    display: flex;
+    gap: 25px;
+}
+
+header ul li{
+    list-style: none;
+}
+
+header ul li a{
+    color: #BDC2FF;
+}
+
+header ul li a:hover{
+    color: #ffff;
+}
+

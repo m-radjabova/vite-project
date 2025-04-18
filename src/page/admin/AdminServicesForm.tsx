@@ -1,70 +1,69 @@
-import { Box, Divider, IconButton, Modal, TextField, Typography, Button } from "@mui/material"
+import { Box, Divider, IconButton, Modal, TextField, Typography } from "@mui/material"
+import { Button } from "@mui/material"
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { FaTimes } from "react-icons/fa"
-import { FieldValues, useForm } from "react-hook-form";
-import { CommentType } from "../page/Comments";
 
-interface Props {
-    open: boolean;
-    onClose: () => void;
-    addComments: (newComment: Omit<CommentType, "id" | "postId" | "userId" >) => void;
+interface Service {
+    id?: number
+    name: string
+    description: string
+    imgUrl: string
 }
 
+interface Props {
+    open: boolean
+    onClose: () => void
+    addService: (data: Omit<Service, "id">) => void
+    updateService: (data: Service) => void 
+    selectedService: Service | null
+}
 
-const textFieldStyles = {
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '12px',
-      backgroundColor: '#ffffff',
-      '& fieldset': {
-        borderColor: '#cce4ff',
-      },
-      '&:hover fieldset': {
-        borderColor: '#90caf9',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#42a5f5',
-        boxShadow: `0 0 0 2px rgba(66, 165, 245, 0.2)`
-      },
-    },
-    '& .MuiInputLabel-root': {
-      color: '#5f7eaa',
-    },
-    '& .MuiInputLabel-root.Mui-focused': {
-      color: '#1e88e5',
-    },
-    '& .MuiInputBase-input': {
-      color: '#0d2b4a',
-    }
-};
+function AdminServicesForm({ open, onClose, addService, updateService, selectedService }: Props) {
+    const [serviceData, setServiceData] = useState<Omit<Service, "id">>({
+        name: '',
+        description: '',
+        imgUrl: ''
+    });
 
-function AddCommentForm({ open, onClose, addComments }: Props ) {
-
-    const { register, handleSubmit, reset } = useForm({
-        defaultValues: {
-            name: '',
-            email: '',
-            body: '',
+    useEffect(() => {
+        if (selectedService ) {
+            setServiceData({
+                name: selectedService.name,
+                description: selectedService.description,
+                imgUrl: selectedService.imgUrl
+            });
+        } else {
+            setServiceData({
+                name: '',
+                description: '',
+                imgUrl: ''
+            });
         }
-    })
+    }, [selectedService]);
 
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setServiceData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
 
-    const submit = (data: FieldValues) => {
-        const newComment: Omit<CommentType, "id" | "postId" | "userId"> = {
-            name: data.name,
-            email: data.email,
-            body: data.body
-        };
-        console.log(newComment)
-        addComments(newComment);
-        reset();
-        onClose();
-    }
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (selectedService && updateService) {
+            updateService({ ...serviceData, id: selectedService.id });
+        } else {
+            addService(serviceData);
+        }
+    };
 
     return (
         <Modal
             open={open}
             onClose={onClose}
-            aria-labelledby="user-modal-title"
-            aria-describedby="user-modal-description"
+            aria-labelledby="service-modal-title"
+            aria-describedby="service-modal-description"
             sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -73,7 +72,7 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                 backgroundColor: 'rgba(240, 248, 255, 0.4)',
             }}
         >
-            <Box
+            <Box 
                 sx={{
                     position: 'relative',
                     width: { xs: '90%', sm: '80%', md: '600px' },
@@ -82,7 +81,7 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                     boxShadow: '0 10px 30px rgba(66, 133, 244, 0.2)',
                     p: 4,
                     outline: 'none',
-                    transform: open? 'scale(1)' : 'scale(0.95)',
+                    transform: open ? 'scale(1)' : 'scale(0.95)',
                     transition: 'all 0.3s ease-in-out',
                     border: '1px solid #d0e2ff',
                     '&:before': {
@@ -98,14 +97,14 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                     }
                 }}
                 component="form"
-                onSubmit={handleSubmit(submit)}
+                onSubmit={handleSubmit}
             >
                 <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography
-                        id="user-modal-title"
-                        variant="h6"
+                    <Typography 
+                        id="service-modal-title" 
+                        variant="h6" 
                         component="h2"
-                        sx={{
+                        sx={{ 
                             color: '#0d2b4a',
                             fontWeight: 600,
                             display: 'flex',
@@ -114,10 +113,10 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                             pl: 1
                         }}
                     >
-                        Add Comment
+                        {selectedService ? 'Edit Service' : 'Add New Service'}
                     </Typography>
                     <IconButton
-                        onClick={onClose}
+                        onClick={onClose} 
                         aria-label="close"
                         sx={{
                             color: '#5f7eaa',
@@ -131,13 +130,13 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                         <FaTimes style={{ fontSize: '1.2rem' }} />
                     </IconButton>
                 </Box>
-        
-                <Divider sx={{
-                    my: 3,
+    
+                <Divider sx={{ 
+                    my: 3, 
                     borderColor: '#d0e2ff',
                     borderWidth: '1px'
                 }} />
-        
+    
                 <Box sx={{
                     display: 'grid',
                     gap: 2,
@@ -149,49 +148,47 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                     <TextField
                         fullWidth
                         margin="normal"
-                        label="name"
+                        label="Name"
                         variant="outlined"
-                        type="text"
-                        sx={textFieldStyles}
-                        {...register('name', { required: true })}
+                        name="name"
+                        value={serviceData.name}
+                        onChange={handleInputChange}
+                        required
                     />
-
-
+                    
                     <TextField
                         fullWidth
                         margin="normal"
-                        label="Email"
+                        label="Description"
                         variant="outlined"
-                        type="email"
-                        sx={textFieldStyles}
-                        {...register('email', {required: true})}
+                        name="description"
+                        value={serviceData.description}
+                        onChange={handleInputChange}
+                        required
                     />
-
+    
                     <TextField
                         fullWidth
                         margin="normal"
-                        label="Body"
+                        label="Image URL"
                         variant="outlined"
-                        multiline
-                        rows={4}
-                        {...register('body', {required: true})}
-                        sx={{
-                            ...textFieldStyles,
-                            gridColumn: '1 / -1'
-                        }}
+                        name="imgUrl"
+                        value={serviceData.imgUrl}
+                        onChange={handleInputChange}
+                        required
                     />
                 </Box>
-        
-                <Divider sx={{
-                    my: 3,
+    
+                <Divider sx={{ 
+                    my: 3, 
                     borderColor: '#d0e2ff',
                     borderWidth: '1px'
                 }} />
-        
+    
                 <Box display="flex" justifyContent="flex-end" gap={2}>
-                    <Button
-                        onClick={onClose}
-                        variant="outlined"
+                    <Button 
+                        onClick={onClose} 
+                        variant="outlined" 
                         startIcon={<FaTimes />}
                         sx={{
                             color: '#1e88e5',
@@ -207,9 +204,9 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                     >
                         Cancel
                     </Button>
-                    <Button
-                        type="submit"
-                        variant="contained"
+                    <Button 
+                        type="submit" 
+                        variant="contained" 
                         sx={{
                             background: `linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%)`,
                             borderRadius: '12px',
@@ -227,12 +224,12 @@ function AddCommentForm({ open, onClose, addComments }: Props ) {
                             }
                         }}
                     >
-                        Add new comment
+                        {selectedService ? 'Update Service' : 'Add Service'}
                     </Button>
                 </Box>
             </Box>
         </Modal>
-    )
+    );
 }
 
-export default AddCommentForm;
+export default AdminServicesForm;
