@@ -5,7 +5,6 @@ import Todos from "./page/Todos"
 import Header from "./page/Header"
 import Comments from "./page/Comments"
 import Photos from "./page/Photos"
-import Admin from "./page/Admin" 
 
 function App() {
   return (
@@ -13,15 +12,11 @@ function App() {
       <Header />
       <div className="mt-3">
         <Routes>
-          <Route path="/Admin" element={<Admin />}>
             <Route path="Users" element={<Users />} />
             <Route path="Posts" element={<Posts />} />
+            <Route path="/Posts/:id/Comments" element={<Comments />} />
             <Route path="Todos" element={<Todos />} />
             <Route path="Photos" element={<Photos />} />
-          </Route>
-
-        
-          <Route path="/Posts/:id/Comments" element={<Comments />} />
         </Routes>
       </div>
     </div>
