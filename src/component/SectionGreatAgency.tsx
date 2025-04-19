@@ -2,7 +2,7 @@ import LeftImg from "../assets/Group (1).svg"
 
 function SectionGreatAgency() {
   return (
-    <section className="section-great-agency">
+    <section className="section-great-agency" id="about">
         <div className="left-side">
             <img src={LeftImg} alt="#" />
         </div>

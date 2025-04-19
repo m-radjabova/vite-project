@@ -3,7 +3,7 @@ import RightImg from "../assets/Group.svg"
 
 function Main() {
   return (
-    <main className="main" id="about">
+    <main className="main" >
         <div className="container">
             <div className="left-side">
                 <h1>Grow your <br />

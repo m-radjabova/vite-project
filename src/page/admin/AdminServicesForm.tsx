@@ -4,7 +4,7 @@ import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { FaTimes } from "react-icons/fa"
 
 interface Service {
-    id?: number
+    id: number
     name: string
     description: string
     imgUrl: string

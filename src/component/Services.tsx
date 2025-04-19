@@ -1,7 +1,7 @@
-import { Servise } from "../page/home/Home"
+import { Service } from "../page/home/Home"
 
 interface Props {
-    servisec: Servise[]
+    servisec: Service[]
 }
 function Servisec({servisec}: Props) {
 

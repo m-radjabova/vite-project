@@ -9,6 +9,7 @@ function Admin() {
         <ul>
           <li>
             <Link to="services">Services</Link>
+            <Link to="blog">Blog</Link>
           </li>
         </ul>
       </div>

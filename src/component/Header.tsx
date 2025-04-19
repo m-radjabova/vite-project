@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 import Logo from "../assets/Agency.svg"
 
 function Header() {
@@ -5,15 +6,16 @@ function Header() {
     <header id="header">
         <img src={Logo} alt="#" />
         <ul>
-            <li>
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#servisec">Services</a>
-                <a href="#project">Project</a>
-                <a href="#feedback">Feedback</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-            </li>
+            <NavLink to="/login" className="login">
+                <li> <a href="#">Login</a> </li>
+            </NavLink>
+            <li> <a href="#home">Home</a> </li>
+            <li> <a href="#about">About</a> </li>
+            <li> <a href="#servisec">Services</a> </li>
+            <li> <a href="#project">Project</a> </li>
+            <li> <a href="#feedback">Feedback</a> </li>
+            <li> <a href="#blog">Blog</a> </li>
+            <li> <a href="#contact">Contact</a> </li>
         </ul>
     </header>
   )

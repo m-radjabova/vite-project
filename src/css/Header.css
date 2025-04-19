@@ -7,7 +7,7 @@ header{
     font-size: 20px;
 }
 
-header ul li{
+header ul{
     display: flex;
     gap: 25px;
 }
