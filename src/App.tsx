@@ -7,6 +7,7 @@ import SingUp from "./page/login/SingUp"
 import { useEffect, useState } from "react"
 import apiClient from "./apiClient/ApiClient"
 import AdminBlog from "./page/admin/AdminBlog"
+import AdminProject from "./page/admin/AdminProject"
 
 export interface User {
   id: string;
@@ -44,6 +45,7 @@ function App() {
                 : <h1>Access Denied</h1>
           }>
           <Route path="services" element={<AdminServices />} />
+          <Route path="project" element={<AdminProject/>} />
           <Route path="blog" element={<AdminBlog/>} />
         </Route>
         <Route path="*" element={<h1>Page not found</h1>}/>

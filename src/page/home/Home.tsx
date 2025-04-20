@@ -9,6 +9,7 @@ import SectionHappyClients from "../../component/SectionHappyClients"
 import SectionBlog from "../../component/SectionBlog"
 import apiClient from "../../apiClient/ApiClient"
 import Footer from "../../component/Footer"
+import SectionProject from "../../component/SectionProject"
 
 export interface Service {
     id: number
@@ -23,14 +24,29 @@ export interface Blog {
     imgUrl: string
 }
 
+export interface Category {
+    id: number
+    name: string
+}
+
+export interface Project {
+    id: number
+    imgUrl: string
+    categoryId: number
+}
+
 function Home() {
 
     const [servises, setServises] = useState<Service[]>([])
     const [blog, setBlog] = useState<Blog[]>([])
+    const [category, setCategory] = useState<Category[]>([])
+    const [project, setProject] = useState<Project[]>([])
 
     useEffect(() => {
         getServises()
         getBlog()
+        getCategory()
+        getProject()
     }, [])
 
     const getServises = async () => {
@@ -48,6 +64,24 @@ function Home() {
             console.log(err)
         })
     }
+    
+    
+    const getCategory = async () => {
+        apiClient.get(`/category`).then(res => {
+            setCategory(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    
+    const getProject = async () => {
+        apiClient.get(`/projects`).then(res => {
+            setProject(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    
 
   return (
     <div>
@@ -57,7 +91,7 @@ function Home() {
             <SectionGreatAgency/>
             <Servisec servisec={servises}/>
             <SectionOurSales/>
-
+            <SectionProject project={project} category={category}/>
         </div>
         <SectionHappyClients/>
         <div className="container">

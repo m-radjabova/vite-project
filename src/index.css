@@ -1,9 +1,10 @@
 @import "./css/Header.css";
+@import "./css/Admin.css";
 @import "./css/Main.css";
 @import "./css/Services.css";
 @import "./css/SectionOurSales.css";
+@import "./css/SectionProject.css";
 @import "./css/Footer.css";
-
 
 * {
   margin: 0;
