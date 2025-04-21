@@ -66,23 +66,6 @@ const LoginForm = () => {
             </div>
           </div>
 
-          <div className="mb-4 position-relative">
-            <label htmlFor="confirm-password" className="form-label" style={{ fontWeight: '500' }}>Confirm Password</label>
-            <div className="input-group">
-              <span className="input-group-text" style={{ backgroundColor: '#4a69bd', color: 'white' }}>
-                <FaLock />
-              </span>
-              <input
-                type="password"
-                className="form-control"
-                id="confirm-password"
-                placeholder="Confirm your password"
-                {...register('confirmPassword', { required: true })}
-                style={{ borderLeft: 'none', boxShadow: 'none' }}
-              />
-            </div>
-          </div>
-
           <button
             type="submit"
             className="btn w-100 py-2 d-flex align-items-center justify-content-center"
