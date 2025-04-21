@@ -7,8 +7,7 @@ import { Link } from "react-router-dom"
 
 function SingUp() {
 
-    const {register, handleSubmit, formState: { errors }, reset, watch} = useForm()
-    const password = watch("password")
+    const {register, handleSubmit, formState: { errors }, reset} = useForm()
     const navigate = useNavigate()
 
     const checkUser = async (data: FieldValues) => {
@@ -102,8 +101,7 @@ function SingUp() {
                         </span>
                         <input 
                             {...register("confirmPassword", {
-                                required: true,
-                                validate: (value) => value === password || "Passwords do not match"
+                                required: true
                             })}
                             type="password" 
                             className="form-control border-start-0" 
@@ -111,7 +109,6 @@ function SingUp() {
                             placeholder="Re-enter your password"
                         />
                     </div>
-                    {errors.confirmPassword && <p className="text-danger mt-1">{String(errors.confirmPassword.message) || "Confirm Password is required"}</p>}
                 </div>         
                 <button 
                     type="submit" 

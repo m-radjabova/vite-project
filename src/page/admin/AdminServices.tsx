@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Service } from '../home/Home';
 import AdminServicesForm from './AdminServicesForm';
+import apiClient from '../../apiClient/ApiClient';
 
 function AdminServices() {
     const [services, setServices] = useState<Service[]>([]);
@@ -19,7 +19,7 @@ function AdminServices() {
 
     const getServices = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/services');
+            const response = await apiClient.get('/services');
             setServices(response.data);
         } catch (err) {
             console.log(err);
@@ -28,7 +28,7 @@ function AdminServices() {
 
     const deleteService = async (id: number | undefined) => {
         try {
-            await axios.delete(`http://localhost:3000/services/${id}`);
+            await apiClient.delete(`/services/${id}`);
             getServices();
         } catch (err) {
             console.log(err);
@@ -37,7 +37,7 @@ function AdminServices() {
 
     const addService = async (data: Omit<Service, "id">) => {
         try {
-            const response = await axios.post(`http://localhost:3000/services`, data);
+            const response = await apiClient.post(`/services`, data);
             setServices([...services, response.data]);
             handleClose();
         } catch (err) {
@@ -47,7 +47,7 @@ function AdminServices() {
 
     const updateService = async (data: Service) => {
         try {
-            await axios.put(`http://localhost:3000/services/${data.id}`, data);
+            await apiClient.put(`/services/${data.id}`, data);
             getServices();
             handleClose();
         } catch (err) {
