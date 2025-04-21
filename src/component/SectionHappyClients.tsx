@@ -3,7 +3,7 @@ import img2 from '../assets/Group 191.png'
 import tirnoqcha from '../assets/tirnoqcha.png'
 function SectionHappyClients() {
   return (
-    <div className="section-happy-clients">
+    <div className="section-happy-clients" id="feedback">
         <div className='container'>
             <div className="left-side">
                 <h1>What Our Happy <br />

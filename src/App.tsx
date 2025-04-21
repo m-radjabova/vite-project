@@ -35,6 +35,7 @@ function App() {
     <div>
       <Routes>
         <Route index element={<Home/>}/>
+        
         <Route path="/login" element={<Login/>}/>
         <Route path="/sign-up" element={<SingUp/>}/>
         <Route path="/admin" element={

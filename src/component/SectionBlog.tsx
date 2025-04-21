@@ -6,7 +6,7 @@ interface Props {
 
 function SectionBlog({ blog }: Props) {
     return (
-        <div className="section-blog">
+        <div className="section-blog" id="blog">
             <div className="section-blog__title">
                 <h2>Blog</h2>
                 <p>Creative & Professional Creative Agency!</p>
