@@ -1,36 +1,35 @@
-import { Box, Button, Divider, FormControl, IconButton, InputLabel, MenuItem, Modal, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Divider, IconButton, Modal,  TextField, Typography } from '@mui/material'
 import { useEffect} from 'react'
 import { FaTimes } from 'react-icons/fa'
-import { Category, Project } from '../home/Home'
+import { Blog} from '../home/Home'
 import { useForm } from 'react-hook-form'
 
 interface Props {
   open: boolean
   onClose: () => void
-  selectedProject: Project | null
-  category: Category[]
-  addProject: (data: Omit<Project, "id">) => void
-  updateProject: (data: Project) => void
+  selectedBlog: Blog | null
+  addBlog: (data: Omit<Blog, "id">) => void
+  updateBlog: (data: Blog) => void
 }
 
-function AdminProjectForm({ open, onClose, selectedProject, category, updateProject, addProject}: Props) {
+function AdminBlogForm({ open, onClose, selectedBlog, addBlog, updateBlog}: Props) {
 
-  const { register, handleSubmit, reset } = useForm<Project>({
-    defaultValues: selectedProject || { imgUrl: '', categoryId: undefined },
+  const { register, handleSubmit, reset } = useForm<Blog>({
+    defaultValues: selectedBlog || { imgUrl: '', title: '' },
   });
 
   useEffect(() => {
-    reset(selectedProject || { imgUrl: '', categoryId: undefined });
-  }, [selectedProject, reset]);
+    reset(selectedBlog || { imgUrl: '', title: '' });
+  }, [selectedBlog, reset]);
 
-  const onSubmit = (data: Project) => {
-    if (selectedProject) {
-      updateProject(data);
-    } else {
-      addProject(data);
-    }
-    onClose();
-  };
+  const onSubmit = (data: Blog) => {
+      if (selectedBlog) {
+          updateBlog(data);
+      } else {
+        addBlog(data);
+      }
+      onClose();
+    };
 
   return (
     <Modal
@@ -87,7 +86,7 @@ function AdminProjectForm({ open, onClose, selectedProject, category, updateProj
               pl: 1,
             }}
           >
-            {selectedProject ? 'Edit Project' : 'Add New Project'}
+            {selectedBlog ? 'Edit Blog' : 'Add New Blog'}
           </Typography>
           <IconButton
             onClick={onClose}
@@ -130,23 +129,18 @@ function AdminProjectForm({ open, onClose, selectedProject, category, updateProj
             variant="outlined"
             placeholder="Enter image URL"
             {...register('imgUrl', { required: true })}
-            defaultValue={selectedProject ? selectedProject.imgUrl : ''}
+            defaultValue={selectedBlog ? selectedBlog.imgUrl : ''}
           />
 
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="category-select-label">Category</InputLabel>
-            <Select
-              labelId="category-select-label"
-              defaultValue={selectedProject ? selectedProject.categoryId : ''}
-              {...register('categoryId', { required: true })}
-            >
-              {category.map((cat) => (
-                <MenuItem key={cat.id} value={cat.id}>
-                  {cat.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <TextField 
+            fullWidth
+            margin="normal"
+            label="Title"
+            variant="outlined"
+            placeholder="Enter project title"
+            {...register('title', { required: true })}
+            defaultValue={selectedBlog ? selectedBlog.title : ''}
+            />
         </Box>
 
         <Divider
@@ -196,7 +190,7 @@ function AdminProjectForm({ open, onClose, selectedProject, category, updateProj
               },
             }}
           >
-            {selectedProject ? 'Update' : 'Add'}
+            {selectedBlog ? 'Update' : 'Add'}
           </Button>
         </Box>
       </Box>
@@ -204,4 +198,4 @@ function AdminProjectForm({ open, onClose, selectedProject, category, updateProj
   )
 }
 
-export default AdminProjectForm
+export default AdminBlogForm

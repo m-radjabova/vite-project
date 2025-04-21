@@ -64,32 +64,66 @@ function AdminProject() {
 
   return (
     <div className="adminProject">
-      <div className="container">
-        <h1 className="text-center">Admin Project</h1>
-        <button className="btn btn-primary mb-4" onClick={() => {
-          setSelectedProject(null);
-          setOpen(true);
-        }}>Add Project</button>
+      <div className="container py-5">
+        <div className="d-flex justify-content-between align-items-center mb-5">
+          <h1 className="text-center text-primary fw-bold">Project Management</h1>
+          <button 
+            className="btn btn-primary mb-4 px-4 py-2 fw-bold" 
+            onClick={() => {
+              setSelectedProject(null);
+              setOpen(true);
+            }}
+            style={{
+              background: 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)',
+              border: 'none',
+              boxShadow: '0 4px 15px rgba(106, 17, 203, 0.3)'
+            }}
+          >
+            <i className="bi bi-plus-circle me-2"></i>Add Project
+          </button>
+        </div>
 
-          <div className="row">
-            {project.map((item) => (
-              <div className="col-md-4" key={item.id}>
-                <div className="card mb-4 shadow-sm">
-                  <img src={item.imgUrl} alt="#" className="card-img-top" />
-                  <div className="card-body">
-                    <p className="card-text">Category: {category.find(cat => cat.id === item.categoryId)?.name || "Unknown"}</p>
-                  </div>
-                  <div className="card-footer">
-                    <button className="btn btn-danger" onClick={() => deleteProject(item.id)}>Delete</button>
-                    <button className="btn btn-warning ms-2" onClick={() => {
+        <div className="row g-4">
+          {project.map((item) => (
+            <div className="col-md-4 col-lg-3" key={item.id}>
+              <div className="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
+                <div className="card-img-top overflow-hidden" style={{height: '180px'}}>
+                  <img 
+                    src={item.imgUrl} 
+                    alt="#" 
+                    className="w-100 h-100 object-fit-cover transition-transform"
+                    style={{transform: 'scale(1)'}}
+                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                  />
+                </div>
+                <div className="card-body">
+                  <p className="card-text text-muted mb-1">Category:</p>
+                  <h5 className="card-title text-dark">
+                    {category.find(cat => cat.id === item.categoryId)?.name || "Unknown"}
+                  </h5>
+                </div>
+                <div className="card-footer bg-white border-0 d-flex justify-content-between">
+                  <button 
+                    className="btn btn-outline-danger px-3 py-1"
+                    onClick={() => deleteProject(item.id)}
+                  >
+                    <i className="bi bi-trash me-1"></i>Delete
+                  </button>
+                  <button 
+                    className="btn btn-outline-warning px-3 py-1"
+                    onClick={() => {
                       setSelectedProject(item);
                       setOpen(true);
-                    }}>Edit</button>
-                  </div>
+                    }}
+                  >
+                    <i className="bi bi-pencil-square me-1"></i>Edit
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
       </div>
       <AdminProjectForm 
         open={open} 

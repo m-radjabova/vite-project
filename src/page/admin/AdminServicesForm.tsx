@@ -1,6 +1,7 @@
 import { Box, Divider, IconButton, Modal, TextField, Typography } from "@mui/material"
 import { Button } from "@mui/material"
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
+import {useEffect} from 'react'
+import { useForm } from "react-hook-form"
 import { FaTimes } from "react-icons/fa"
 
 interface Service {
@@ -19,43 +20,22 @@ interface Props {
 }
 
 function AdminServicesForm({ open, onClose, addService, updateService, selectedService }: Props) {
-    const [serviceData, setServiceData] = useState<Omit<Service, "id">>({
-        name: '',
-        description: '',
-        imgUrl: ''
+
+    const { register, handleSubmit, reset } = useForm<Service>({
+        defaultValues: selectedService || {name: '', description: '', imgUrl: ''},
     });
-
+    
     useEffect(() => {
-        if (selectedService ) {
-            setServiceData({
-                name: selectedService.name,
-                description: selectedService.description,
-                imgUrl: selectedService.imgUrl
-            });
-        } else {
-            setServiceData({
-                name: '',
-                description: '',
-                imgUrl: ''
-            });
-        }
-    }, [selectedService]);
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setServiceData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (selectedService && updateService) {
-            updateService({ ...serviceData, id: selectedService.id });
-        } else {
-            addService(serviceData);
-        }
+        reset(selectedService || {name: '', description: '', imgUrl: ''});
+      }, [selectedService, reset]);
+    
+    const onSubmit = (data: Service) => {
+          if (selectedService) {
+            updateService(data);
+          } else {
+            addService(data);
+          }
+          onClose();
     };
 
     return (
@@ -97,7 +77,7 @@ function AdminServicesForm({ open, onClose, addService, updateService, selectedS
                     }
                 }}
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
             >
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                     <Typography 
@@ -150,10 +130,8 @@ function AdminServicesForm({ open, onClose, addService, updateService, selectedS
                         margin="normal"
                         label="Name"
                         variant="outlined"
-                        name="name"
-                        value={serviceData.name}
-                        onChange={handleInputChange}
-                        required
+                        {...register('name')}
+                        defaultValue={selectedService ? selectedService.name : ''}
                     />
                     
                     <TextField
@@ -161,10 +139,8 @@ function AdminServicesForm({ open, onClose, addService, updateService, selectedS
                         margin="normal"
                         label="Description"
                         variant="outlined"
-                        name="description"
-                        value={serviceData.description}
-                        onChange={handleInputChange}
-                        required
+                        {...register('description')}
+                        defaultValue={selectedService ? selectedService.description : ''}
                     />
     
                     <TextField
@@ -172,10 +148,8 @@ function AdminServicesForm({ open, onClose, addService, updateService, selectedS
                         margin="normal"
                         label="Image URL"
                         variant="outlined"
-                        name="imgUrl"
-                        value={serviceData.imgUrl}
-                        onChange={handleInputChange}
-                        required
+                        {...register('imgUrl')}
+                        defaultValue={selectedService ? selectedService.imgUrl : ''}
                     />
                 </Box>
     
