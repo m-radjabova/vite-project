@@ -1,34 +1,28 @@
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import Home from "./page/home/Home"
 import Login from "./page/login/Login"
 import Admin from "./page/admin/Admin"
 import AdminServices from "./page/admin/AdminServices"
 import SingUp from "./page/login/SingUp"
-import { useEffect, useState } from "react"
-import apiClient from "./apiClient/ApiClient"
 import AdminBlog from "./page/admin/AdminBlog"
 import AdminProject from "./page/admin/AdminProject"
+import ProtectedRoute from "./component/ProtectedRoute"
+import Super_Admin from "./page/super_admin/Super_Admin"
+import useContextPro from "./hooks/useContextPro"
+import Profile from "./page/admin/Profile"
+import Settings from "./page/super_admin/Settings"
 
 export interface User {
   id: string;
   name: string;
   email: string;
-  role: string;
+  roles: ("ADMIN" | "USER" | "SUPER_ADMIN")[];
   password: string;
 }
 
 function App() {
 
-  const [user, setUser] = useState<User | null>()
-  const location = useLocation()
-
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-
-    apiClient.get(`/users/${token}`).then((res) => {
-      setUser(res.data)
-    })
-  }, [location.pathname])
+  const {state: {user}} = useContextPro()
 
 
   return (
@@ -38,16 +32,28 @@ function App() {
         
         <Route path="/login" element={<Login/>}/>
         <Route path="/sign-up" element={<SingUp/>}/>
+        {/* ADMIN */}
         <Route path="/admin" element={
-            user === undefined 
-              ? <div>Loading...</div> 
-              : user?.role === "ADMIN" 
-                ? <Admin /> 
-                : <h1>Access Denied</h1>
-          }>
+          <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
+            <Admin/>
+          </ProtectedRoute>
+        }>
           <Route path="services" element={<AdminServices />} />
           <Route path="project" element={<AdminProject/>} />
           <Route path="blog" element={<AdminBlog/>} />
+          <Route path="profile" element={<Profile/>} />
+        </Route>
+        {/* SUPER ADMIN */}
+        <Route path="super-admin" element={
+          <ProtectedRoute isAllowed={!!user && user.roles.includes("SUPER_ADMIN")}>
+            <Super_Admin/>
+          </ProtectedRoute>
+        }>
+          <Route path="services" element={<AdminServices />} />
+          <Route path="project" element={<AdminProject/>} />
+          <Route path="blog" element={<AdminBlog/>} />
+          <Route path="profile" element={<Profile/>} />
+          <Route path="settings-users" element={<Settings/>}/>
         </Route>
         <Route path="*" element={<h1>Page not found</h1>}/>
       </Routes>

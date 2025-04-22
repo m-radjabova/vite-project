@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { FaHome, FaServer, FaProjectDiagram, FaBlog, FaUser, FaSignOutAlt} from 'react-icons/fa';
+import { FaHome, FaServer, FaProjectDiagram, FaBlog, FaUser, FaCog, FaSignOutAlt} from 'react-icons/fa';
 
-function Admin() {
+function Super_Admin() {
   return (
     <div className="super-admin-container d-flex" style={{ minHeight: '100vh' }}>
       <div className="sidebar bg-dark text-white p-3" style={{ width: '280px', minHeight: '100vh' }}>
         <Link to="/" className="text-decoration-none text-white">
           <div className="d-flex align-items-center mb-4">
             <FaHome className="fs-4 me-2" />
-            <h1 className="sidebar-title fs-5 mb-0">Admin Dashboard</h1>
+            <h1 className="sidebar-title fs-5 mb-0">Super Admin Dashboard</h1>
           </div>
         </Link>
         
@@ -53,6 +53,15 @@ function Admin() {
               <span>Profile</span>
             </NavLink>
           </li>
+          <li className="nav-item mb-2">
+            <NavLink 
+              className={({isActive}) => isActive ? "active nav-link d-flex align-items-center" : "nav-link text-white d-flex align-items-center"} 
+              to="settings-users"
+            >
+              <FaCog className="me-3" />
+              <span>Settings Users</span>
+            </NavLink>
+          </li>
         </ul>
         
         <div className="position-absolute bottom-0 start-0 p-3 w-100">
@@ -61,7 +70,7 @@ function Admin() {
               <FaUser className="fs-5" />
             </div>
             <div className="ms-3">
-              <div className="fw-bold">Admin</div>
+              <div className="fw-bold">Super Admin</div>
               <small className="text-muted">Administrator</small>
             </div>
           </div>
@@ -80,4 +89,4 @@ function Admin() {
   )
 }
 
-export default Admin;
+export default Super_Admin;
