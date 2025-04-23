@@ -9,12 +9,17 @@ export interface ContextType {
     dispatch: Dispatch<Action>
 }
 
-
 export interface TypeState {
     user: User | null,
 }
 
-type Action = { type: string; payload?: any }
+type SETAction = { type: "SET_USER", payload: User }
+type LOGOUTAction = { type: "LOGOUT" }
+type EDITAction = { type: "EDIT_USER", payload: Partial<User> }
+type CHANGE_PASSWORDAction = { type: "CHANGE_PASSWORD", payload: string }
+
+
+type Action = SETAction | LOGOUTAction | EDITAction | CHANGE_PASSWORDAction
 
 
 export interface ContextType {
@@ -24,16 +29,23 @@ export interface ContextType {
 
 
 
-function reducer(state: TypeState, action: any) {
+
+function reducer(state: TypeState, action: Action): TypeState {
     switch (action.type) {
         case "SET_USER":
-            return { ...state, user: action.payload }
+            return { ...state, user: action.payload as User }
         case "LOGOUT":
             return { ...state, user: null }
-        case "EDIT_USER":
-            return { ...state, user: { ...state.user, ...action.payload } }
+        case 'EDIT_USER':
+            return { ...state, user: { ...state.user, ...action.payload } as User };
+        case "CHANGE_PASSWORD":
+            return {
+                ...state,
+                user: state.user ? { ...state.user, password: action.payload } as User : null
+            };
+        default:
+            return state
     }
-    return state
 }
 
 function CreateContextPro({ children }: { children: ReactNode }) {

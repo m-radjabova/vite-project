@@ -1,46 +1,49 @@
-import useContextPro from '../../hooks/useContextPro';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, IconButton, CircularProgress, Box } from '@mui/material';
-import { RiCloseLargeFill } from "react-icons/ri";
+import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from "@mui/material"
+import { FieldValues, useForm } from "react-hook-form";
+import { RiCloseLargeFill } from "react-icons/ri"
+// import { useState } from "react";
+// import { toast } from "react-toastify";
+// import apiClient from "../../apiClient/ApiClient";
+// import useContextPro from "../../hooks/useContextPro";
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  handleEdit: (data: FormData) => Promise<boolean>;
 }
 
-type FormData = {
-  name: string;
-  email: string;
-};
-
-function ProfileForm({ open, onClose, handleEdit }: Props) {
-  const { state: { user }} = useContextPro();
+function PasswordForm({ open, onClose }: Props) {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm();
 
-  useEffect(() => {
-    if (user) {
-      reset({
-        name: user.name || '',
-        email: user.email || ''
-      });
-    }
-  }, [user, reset]);
+  // const { state: { user }, dispatch } = useContextPro();
 
-  const onSubmit = async (data: FormData) => {
-    try {
-      await handleEdit(data);
-      onClose();
-    } catch (error) {
-      console.error('Update failed:', error);
-    }
-  };
+  const onSubmit = async (data: FieldValues) => {
+    // try {
+    //   const res = await apiClient.put(`/users/${user?.id}`,  {
+    //     password: data.password
+    //   });
+    //   console.log("Parol muvaffaqiyatli yangilandi:", res.data);
+      
+    //   dispatch({ type: "CHANGE_PASSWORD", payload: data.password });
+      
+    //   toast.success("Parol muvaffaqiyatli yangilandi!");
+    //   onClose();
+    //   reset();
+    // } catch (error) {
+    //   console.error("Parolni yangilashda xatolik:", error);
+    //   toast.error("Parolni yangilashda xatolik yuz berdi.");
+    // }
+    console.log(data);
+  }
+  
+  
+
+  const password = watch("password");
 
   return (
     <Dialog
@@ -55,8 +58,8 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
         }
       }}
     >
-      <DialogTitle sx={{ 
-        bgcolor: 'primary.main', 
+      <DialogTitle sx={{
+        bgcolor: 'primary.main',
         color: 'white',
         display: 'flex',
         justifyContent: 'space-between',
@@ -65,7 +68,7 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
         px: 3
       }}>
         <Box component="span" sx={{ fontSize: '1.25rem', fontWeight: 500 }}>
-          Edit Profile
+          Change Password
         </Box>
         <IconButton
           edge="end"
@@ -87,12 +90,20 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
           <Box sx={{ mb: 3 }}>
             <TextField
               fullWidth
-              label="Full Name"
+              type="text"
+              label="New Password"
               variant="outlined"
               margin="normal"
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              {...register('name')}
+              error={!!errors.password}
+              helperText={
+                errors.password?.type === "required" ? "Password is required" :
+                errors.password?.type === "minLength" ? "Minimum 6 characters" :
+                ""
+              }
+              {...register("password", {
+                required: true,
+                minLength: 6
+              })}
               InputProps={{
                 sx: {
                   borderRadius: 2,
@@ -107,13 +118,22 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
           <Box sx={{ mb: 1 }}>
             <TextField
               fullWidth
-              label="Email Address"
+              type="text"
+              label="Confirm Password"
               variant="outlined"
               margin="normal"
-              type="email"
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              {...register('email')}
+              error={!!errors.confirmPassword}
+              helperText={
+                errors.confirmPassword?.type === "required"
+                  ? "Confirm your password"
+                  : errors.confirmPassword?.type === "validate"
+                  ? "Passwords do not match"
+                  : ""
+              }
+              {...register("confirmPassword", {
+                required: true,
+                validate: value => value === password
+              })}
               InputProps={{
                 sx: {
                   borderRadius: 2,
@@ -128,7 +148,10 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
 
         <DialogActions sx={{ px: 3, py: 2 }}>
           <Button
-            onClick={onClose}
+            onClick={() => {
+              reset();
+              onClose();
+            }}
             disabled={isSubmitting}
             sx={{
               px: 3,
@@ -171,4 +194,4 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
   );
 }
 
-export default ProfileForm;
+export default PasswordForm;

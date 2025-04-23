@@ -2,15 +2,40 @@ import { FaUser, FaEnvelope, FaUserShield, FaEdit, FaLock } from 'react-icons/fa
 import useContextPro from '../../hooks/useContextPro';
 import ProfileForm from './ProfileForm';
 import { useState } from 'react';
+import apiClient from '../../apiClient/ApiClient';
+import { toast } from 'react-toastify';
+import PasswordForm from './PasswordForm';
+
+interface ProfileData {
+  name: string;
+  email: string;
+}
 
 function Profile() {
-  const { state: { user } } = useContextPro();
+  const { state: { user }, dispatch } = useContextPro();
   const [open, setOpen] = useState(false);
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
+  const handleEdit = async (data: ProfileData) => {
+    try {
+      const updatedData = {
+        ...user, 
+        ...data, 
+      };
+  
+      const response = await apiClient.put(`/users/${user?.id}`, updatedData);
+      dispatch({ type: 'EDIT_USER', payload: response.data });
+      toast.success('Profile updated successfully!');
+      return true;
+    } catch (error) {
+      console.error('Update failed:', error);
+      toast.error('Failed to update profile');
+      throw error;
+    }
+  };
+  
   return (
     <div className="container py-5" style={{ maxWidth: 880 }}>
       <div className="card border-0 shadow-lg rounded-4 overflow-hidden">
@@ -94,13 +119,16 @@ function Profile() {
             <FaEdit className="me-2" />
             Edit Profile
           </button>
-          <button className="btn btn-outline-primary btn-lg rounded-pill px-4 shadow-sm">
+          <button 
+            onClick={handleOpen}
+            className="btn btn-outline-primary btn-lg rounded-pill px-4 shadow-sm">
             <FaLock className="me-2" />
             Change Password
           </button>
         </div>
       </div>
-      <ProfileForm open={open} onClose={handleClose}/>
+      <ProfileForm open={open} onClose={handleClose} handleEdit={handleEdit} />
+      <PasswordForm open={open} onClose={handleClose}/>
     </div>
   );
 }
