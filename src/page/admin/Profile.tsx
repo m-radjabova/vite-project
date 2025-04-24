@@ -14,18 +14,20 @@ interface ProfileData {
 function Profile() {
   const { state: { user }, dispatch } = useContextPro();
   const [open, setOpen] = useState(false);
+  const [passwordOpen, setPasswordOpen] = useState(false);
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handlePasswordClose = () => setPasswordOpen(false);
 
   const handleEdit = async (data: ProfileData) => {
     try {
-      const updatedData = {
-        ...user, 
-        ...data, 
+      const updateData = {
+        name: data.name,
+        email: data.email,
       };
   
-      const response = await apiClient.put(`/users/${user?.id}`, updatedData);
+      const response = await apiClient.patch(`/users/${user?.id}`, updateData);
       dispatch({ type: 'EDIT_USER', payload: response.data });
       toast.success('Profile updated successfully!');
       return true;
@@ -120,7 +122,7 @@ function Profile() {
             Edit Profile
           </button>
           <button 
-            onClick={handleOpen}
+            onClick={() => setPasswordOpen(true)}
             className="btn btn-outline-primary btn-lg rounded-pill px-4 shadow-sm">
             <FaLock className="me-2" />
             Change Password
@@ -128,7 +130,7 @@ function Profile() {
         </div>
       </div>
       <ProfileForm open={open} onClose={handleClose} handleEdit={handleEdit} />
-      <PasswordForm open={open} onClose={handleClose}/>
+      <PasswordForm passwordOpen={passwordOpen} handlePasswordClose={handlePasswordClose}/>
     </div>
   );
 }

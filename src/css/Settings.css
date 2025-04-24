@@ -26,3 +26,28 @@
 .text-purple {
   color: #d5c7f0 !important;
 }
+
+.react-select-container {
+  width: 100%;
+}
+
+.react-select__control {
+  border-color: #ced4da;
+  box-shadow: none;
+  &:hover {
+    border-color: #80bdff;
+  }
+}
+
+.react-select__menu {
+  z-index: 1050;
+}
+
+.react-select__option--is-selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-select__option--is-focused {
+  background-color: #e9ecef;
+}

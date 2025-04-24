@@ -1,17 +1,16 @@
 import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from "@mui/material"
 import { FieldValues, useForm } from "react-hook-form";
 import { RiCloseLargeFill } from "react-icons/ri"
-// import { useState } from "react";
-// import { toast } from "react-toastify";
-// import apiClient from "../../apiClient/ApiClient";
-// import useContextPro from "../../hooks/useContextPro";
+import { toast } from "react-toastify";
+import apiClient from "../../apiClient/ApiClient";
+import useContextPro from "../../hooks/useContextPro";
 
 interface Props {
-  open: boolean;
-  onClose: () => void;
+  passwordOpen: boolean;
+  handlePasswordClose: () => void;
 }
 
-function PasswordForm({ open, onClose }: Props) {
+function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
   const {
     register,
     handleSubmit,
@@ -20,25 +19,23 @@ function PasswordForm({ open, onClose }: Props) {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  // const { state: { user }, dispatch } = useContextPro();
+  const { state: { user }, dispatch } = useContextPro();
 
   const onSubmit = async (data: FieldValues) => {
-    // try {
-    //   const res = await apiClient.put(`/users/${user?.id}`,  {
-    //     password: data.password
-    //   });
-    //   console.log("Parol muvaffaqiyatli yangilandi:", res.data);
+    try {
+      await apiClient.patch(`/users/${user?.id}`, {
+        password: data.password
+      });
       
-    //   dispatch({ type: "CHANGE_PASSWORD", payload: data.password });
+      dispatch({ type: "CHANGE_PASSWORD", payload: data.password });
       
-    //   toast.success("Parol muvaffaqiyatli yangilandi!");
-    //   onClose();
-    //   reset();
-    // } catch (error) {
-    //   console.error("Parolni yangilashda xatolik:", error);
-    //   toast.error("Parolni yangilashda xatolik yuz berdi.");
-    // }
-    console.log(data);
+      toast.success("Password updated successfully!");
+      handlePasswordClose();
+      reset();
+    } catch (error) {
+      console.error("Error updating password:", error);
+      toast.error("Failed to update password");
+    }
   }
   
   
@@ -47,8 +44,8 @@ function PasswordForm({ open, onClose }: Props) {
 
   return (
     <Dialog
-      open={open}
-      onClose={onClose}
+      open={passwordOpen}
+      onClose={handlePasswordClose}
       maxWidth="sm"
       fullWidth
       PaperProps={{
@@ -73,7 +70,7 @@ function PasswordForm({ open, onClose }: Props) {
         <IconButton
           edge="end"
           color="inherit"
-          onClick={onClose}
+          onClick={handlePasswordClose}
           disabled={isSubmitting}
           sx={{
             '&:hover': {
@@ -132,7 +129,7 @@ function PasswordForm({ open, onClose }: Props) {
               }
               {...register("confirmPassword", {
                 required: true,
-                validate: value => value === password
+                validate: value => value === password || "Passwords do not match"
               })}
               InputProps={{
                 sx: {
@@ -150,7 +147,7 @@ function PasswordForm({ open, onClose }: Props) {
           <Button
             onClick={() => {
               reset();
-              onClose();
+              handlePasswordClose();
             }}
             disabled={isSubmitting}
             sx={{
