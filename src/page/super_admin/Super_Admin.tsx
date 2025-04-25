@@ -3,13 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { FaHome, FaServer, FaProjectDiagram, FaBlog, FaUser, FaCog, FaSignOutAlt} from 'react-icons/fa';
 import useContextPro from '../../hooks/useContextPro';
-import { FormControlLabel} from '@mui/material';
-import { MaterialUISwitch } from './GetBadgeFunction';
-import { useState } from 'react';
 
 
 function Super_Admin() {
-  const [darkMode, setDarkMode] = useState(false);
   const {dispatch } = useContextPro();
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -17,7 +13,7 @@ function Super_Admin() {
   };
 
   return (
-    <div className={`super-admin-container d-flex ${darkMode ? 'dark-mode' : 'light-mode'}`} style={{ minHeight: '100vh' }}>
+    <div className={`super-admin-container d-flex`} style={{ minHeight: '100vh' }}>
       <div className="sidebar bg-dark text-white p-3" style={{ width: '280px', minHeight: '100vh' }}>
         <Link to="/" className="text-decoration-none text-white">
           <div className="d-flex align-items-center mb-4">
@@ -77,17 +73,6 @@ function Super_Admin() {
         </ul>
         
         <div className="position-absolute bottom-0 start-0 p-3 w-100">
-          <div className='text-md-end mb-3'>
-            <FormControlLabel 
-              control={
-                <MaterialUISwitch 
-                  checked={darkMode}
-                  onChange={() => setDarkMode(!darkMode)} 
-                />
-              } 
-              label="" 
-            />
-          </div>
           <div className="d-flex align-items-center text-white mb-3">
             <div className="bg-primary rounded-circle d-flex align-items-center justify-content-center" style={{ width: '40px', height: '40px' }}>
               <FaUser className="fs-5" />

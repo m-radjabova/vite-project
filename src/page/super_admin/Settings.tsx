@@ -171,7 +171,7 @@ function Settings() {
                           <div className="d-flex flex-wrap gap-2">
                             <button
                               onClick={() => saveRoleChange(user.id)}
-                              className="btn btn-sm btn-primary px-3"
+                              className="btn btn-sm btn-outline-primary px-3"
                               disabled={isSaving[user.id]}
                               style={{ minWidth: '80px' }}
                             >
@@ -189,7 +189,7 @@ function Settings() {
                             <button 
                               onClick={() => deleteUsers(user.id)}
                               disabled={isSaving[user.id]}
-                              className="btn btn-sm btn-danger px-3"
+                              className="btn btn-sm btn-outline-danger px-3"
                               style={{ minWidth: '80px' }}
                             >
                               <FaUserTimes className="me-1" /> Delete
