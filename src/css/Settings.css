@@ -1,6 +1,5 @@
 .settings-container {
   background-color: #f8f9fa;
-  min-height: 100vh;
 }
 
 .user-role-badge {
@@ -29,18 +28,6 @@
 
 .react-select-container {
   width: 100%;
-}
-
-.react-select__control {
-  border-color: #ced4da;
-  box-shadow: none;
-  &:hover {
-    border-color: #80bdff;
-  }
-}
-
-.react-select__menu {
-  z-index: 1050;
 }
 
 .react-select__option--is-selected {

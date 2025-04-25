@@ -2,8 +2,16 @@ import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { FaHome, FaServer, FaProjectDiagram, FaBlog, FaUser, FaSignOutAlt} from 'react-icons/fa';
+import useContextPro from '../../hooks/useContextPro';
 
 function Admin() {
+
+  const {dispatch } = useContextPro();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <div className="super-admin-container d-flex" style={{ minHeight: '100vh' }}>
       <div className="sidebar bg-dark text-white p-3" style={{ width: '280px', minHeight: '100vh' }}>
@@ -65,7 +73,9 @@ function Admin() {
               <small className="text-muted">Administrator</small>
             </div>
           </div>
-          <button className="btn btn-outline-light w-100 d-flex align-items-center justify-content-center">
+          <button
+            onClick={handleLogout} 
+           className="btn btn-outline-light w-100 d-flex align-items-center justify-content-center">
             <FaSignOutAlt className="me-2" />
             Logout
           </button>
