@@ -86,7 +86,7 @@ function Settings() {
 
   return (
     <div className="settings-container container py-5">
-      <div className="row mb-4 align-items-center">
+      <div className="row mb-4 align-items-center p-3">
         <div className="col-md-6">
           <h1 className="fw-bold text-primary mb-3 ">
             <FaUser className="me-3" />
@@ -106,7 +106,7 @@ function Settings() {
       </div>
 
       <div className="row">
-        <div className="col-12 mb-4">
+        <div className="col-12 mb-4 ">
           <div className="card shadow-sm border-0">
             <div className="card-body" style={{ borderRadius: '0.5rem' }}>
               <div className="table-responsive"> 
@@ -189,7 +189,7 @@ function Settings() {
                             <button 
                               onClick={() => deleteUsers(user.id)}
                               disabled={isSaving[user.id]}
-                              className="btn btn-sm btn-outline-danger px-3"
+                              className="btn btn-sm btn-danger px-3"
                               style={{ minWidth: '80px' }}
                             >
                               <FaUserTimes className="me-1" /> Delete
