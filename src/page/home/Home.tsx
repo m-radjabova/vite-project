@@ -10,6 +10,7 @@ import SectionBlog from "../../component/SectionBlog"
 import apiClient from "../../apiClient/ApiClient"
 import Footer from "../../component/Footer"
 import SectionProject from "../../component/SectionProject"
+import AgencyPhotos from "../../component/AgencyPhotos"
 
 export interface Service {
     id: number
@@ -22,6 +23,9 @@ export interface Blog {
     id: number
     title: string
     imgUrl: string
+    date?: string
+    author?: string
+    excerpt?: string
 }
 
 export interface Category {
@@ -35,18 +39,25 @@ export interface Project {
     categoryId: number
 }
 
+export interface AgencyPhotosImg {
+    id: string
+    imgUrl: string
+}
+
 function Home() {
 
     const [servises, setServises] = useState<Service[]>([])
     const [blog, setBlog] = useState<Blog[]>([])
     const [category, setCategory] = useState<Category[]>([])
     const [project, setProject] = useState<Project[]>([])
+    const [agencyPhotos, setAgencyPhotos] = useState<AgencyPhotosImg[]>([])
 
     useEffect(() => {
         getServises()
         getBlog()
         getCategory()
         getProject()
+        getAgencyPhotos()
     }, [])
 
     const getServises = async () => {
@@ -81,12 +92,21 @@ function Home() {
             console.log(err)
         })
     }
+
+    const getAgencyPhotos = async () => {
+        apiClient.get(`/agency`).then(res => {
+            setAgencyPhotos(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
     
 
   return (
     <div>
         <Header/>
         <Main/>
+        <AgencyPhotos agencyPhotos={agencyPhotos}/>
         <div className="container">
             <SectionGreatAgency/>
             <Servisec servisec={servises}/>

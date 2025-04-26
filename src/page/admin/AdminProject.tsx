@@ -63,12 +63,23 @@ function AdminProject() {
   }
 
   return (
-    <div className="adminProject">
-      <div className="container py-5">
-        <div className="d-flex justify-content-between align-items-center mb-5">
-          <h1 className="text-center text-primary fw-bold">Project Management</h1>
+    <div className="adminProject" style={{backgroundColor: '#f8f9fa'}}>
+      <div className="container py-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+          <div className="mb-3 mb-md-0">
+            <h1 className="text-primary fw-bold mb-2">
+              Project Management
+            </h1>
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li className="breadcrumb-item active" aria-current="page">Projects</li>
+              </ol>
+            </nav>
+          </div>
+          
           <button 
-            className="btn btn-primary mb-4 px-4 py-2 fw-bold" 
+            className="btn btn-primary px-4 py-2 fw-bold d-flex align-items-center"
             onClick={() => {
               setSelectedProject(null);
               setOpen(true);
@@ -76,55 +87,62 @@ function AdminProject() {
             style={{
               background: 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)',
               border: 'none',
-              boxShadow: '0 4px 15px rgba(106, 17, 203, 0.3)'
+              boxShadow: '0 4px 15px rgba(106, 17, 203, 0.3)',
+              transition: 'all 0.3s ease'
             }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            <i className="bi bi-plus-circle me-2"></i>Add Project
+            Add New Project
           </button>
         </div>
-
-        <div className="row g-4">
-          {project.map((item) => (
-            <div className="col-md-4 col-lg-3" key={item.id}>
-              <div className="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
-                <div className="card-img-top overflow-hidden" style={{height: '180px'}}>
-                  <img 
-                    src={item.imgUrl} 
-                    alt="#" 
-                    className="w-100 h-100 object-fit-cover transition-transform"
-                    style={{transform: 'scale(1)'}}
-                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                  />
-                </div>
-                <div className="card-body">
-                  <p className="card-text text-muted mb-1">Category:</p>
-                  <h5 className="card-title text-dark">
-                    {category.find(cat => cat.id === item.categoryId)?.name || "Unknown"}
-                  </h5>
-                </div>
-                <div className="card-footer bg-white border-0 d-flex justify-content-between">
-                  <button 
-                    className="btn btn-outline-danger px-3 py-1"
-                    onClick={() => deleteProject(item.id)}
-                  >
-                    <i className="bi bi-trash me-1"></i>Delete
-                  </button>
-                  <button 
-                    className="btn btn-outline-warning px-3 py-1"
-                    onClick={() => {
-                      setSelectedProject(item);
-                      setOpen(true);
-                    }}
-                  >
-                    <i className="bi bi-pencil-square me-1"></i>Edit
-                  </button>
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            {project.map((item) => (
+              <div className="col" key={item.id}>
+                <div className="card h-100 border-0 shadow-sm overflow-hidden transition-all hover-shadow-lg">
+                  <div className="position-relative" style={{height: '180px', overflow: 'hidden'}}>
+                    <img 
+                      src={item.imgUrl} 
+                      className="w-100 h-100 object-fit-cover transition-transform"
+                      style={{transform: 'scale(1)'}}
+                      onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                      onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    />
+                    <span className="position-absolute top-0 end-0 m-2 badge bg-success">
+                      Active
+                    </span>
+                  </div>
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <span className="badge bg-primary bg-opacity-10 text-primary mb-1">
+                          {category.find(cat => cat.id === item.categoryId)?.name || "Uncategorized"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-footer bg-white border-0 d-flex justify-content-between pt-0">
+                    <button 
+                      className="btn btn-sm btn-outline-primary flex-grow-1 me-2 d-flex align-items-center justify-content-center"
+                      onClick={() => {
+                        setSelectedProject(item);
+                        setOpen(true);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button 
+                      className="btn btn-sm btn-outline-danger flex-grow-1 d-flex align-items-center justify-content-center"
+                      onClick={() => deleteProject(item.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
       <AdminProjectForm 
         open={open} 
         onClose={handleClose} 

@@ -147,69 +147,50 @@
     height: auto;
 }
 
-/* blog.tsx */
- 
-.section-blog {
-    padding: 50px 100px !important;
-}
+/* blog  */
 
-.section-blog .section-blog__title{
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.section-blog .section-blog__title h1{
-    font-size: 48px;
-    font-weight: 700;
-}
-
-.section-blog .section-blog__title p{
-    font-size: 18px;
-    margin-top: 20px;
-    line-height: 1.5;
-    color: #333333;
-}
-
-.section-blog .section-blog__cards{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 40px;
-    margin-top: 50px;
-}
-
-.section-blog .section-blog__cards .section-blog__card{
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.section-blog .section-blog__cards .section-blog__card img{
-    width: 100%;
-    height: 400px;
-    border-radius: 10px;
-}
-
-.section-blog .section-blog__cards .section-blog__card h4{
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 20px;
-}
-
-.section-blog .section-blog__dots{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    gap: 10px;
-}
-
-.section-blog .section-blog__dots .section-blog__dot{
+.blog-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .blog-card__image img {
+    transition: transform 0.5s ease;
+  }
+  
+  .blog-card:hover .blog-card__image img {
+    transform: scale(1.1);
+  }
+  
+  .blog-bullet {
     width: 10px;
     height: 10px;
+    background-color: #dee2e6;
     border-radius: 50%;
-    background-color: #ccc;
+    display: inline-block;
+    margin: 0 5px;
     cursor: pointer;
-}
-.section-blog .section-blog__dots .dot.active{
-    background-color: #545EE1;
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .blog-bullet-active {
+    background-color: #0d6efd;
+    width: 30px;
+    border-radius: 5px;
+  }
+  
+  .swiper-pagination-bullets {
+    bottom: 0 !important;
+  }
+  
+  .transition-scale {
+    transition: transform 0.5s ease;
+  }
+  
+  .object-cover {
+    object-fit: cover;
+  }
