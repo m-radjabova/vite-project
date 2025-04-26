@@ -28,7 +28,7 @@ function AddNewUser({ open, onClose, addNewUsers }: Props) {
 
     const onSubmit = async (data: FieldValues) => {
         const newUser: User = {
-            id: Math.random().toString(15).substring(2, 15),
+            id: Math.random().toString(36).substring(2, 6),
             name: data.name,
             email: data.email,
             password: data.password,
