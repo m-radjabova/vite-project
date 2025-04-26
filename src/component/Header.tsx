@@ -47,7 +47,7 @@ function Header() {
   }
 
   return (
-    <header id="header">
+    <header id="header" >
       <img src={Logo} alt="#" />
       <ul>
         <li> <a href="#home">Home</a>  </li>

@@ -19,7 +19,7 @@ function SectionProject({ project, category }: Props) {
       });
       
   return (
-    <div className="section-project" id="project">
+    <div className="section-project" id="projects">
         <div className="section-project__title">
             <h2>Projects</h2>
             <p>Creative & Professional Creative Agency!</p> 

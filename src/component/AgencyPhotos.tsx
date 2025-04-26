@@ -16,8 +16,6 @@ function AgencyPhotos({ agencyPhotos }: Props) {
   return (
     <section className="agency-photos py-5 bg-light">
       <div className="container">
-        <h2 className="text-center mb-4 fw-bold display-4">Our Works</h2>
-        
         <Swiper
             modules={[Autoplay, Navigation]}
             spaceBetween={20}

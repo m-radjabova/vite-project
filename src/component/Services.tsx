@@ -6,7 +6,7 @@ interface Props {
 function Servisec({servisec}: Props) {
 
   return (
-    <section id="servisec" className="servisec">
+    <section id="services" className="servisec">
         <div className="text-center">
             <h1>Our Services</h1>
             <p>Creative & Proffesional Creative Agency!</p>

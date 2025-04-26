@@ -7,8 +7,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { SidebarItem } from '../admin/SidebarItem';
 import { useState } from 'react';
 
-
-
 function Super_Admin() {
   const {dispatch } = useContextPro();
   const handleLogout = () => {
