@@ -5,6 +5,9 @@ header{
     padding: 10px 40px;
     background: #545EE1;
     font-size: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header ul{
