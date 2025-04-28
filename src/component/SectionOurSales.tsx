@@ -4,7 +4,7 @@ import RightImg from "../assets/image 32.svg"
 function SectionOurSales() {
   return (
     <section className="section-our-sales">
-        <div className="left-side">
+        <div className="left-side" data-aos="fade-up-right">
           <h1> Our Speciality Sales <br />
             Increase By 250% </h1>
           <ul>
@@ -15,7 +15,7 @@ function SectionOurSales() {
               <li><input type="checkbox" checked/> Need To Be Sure There Isn't Anything Embarrassing <br /> Hidden In The Middle Of Text.</li>
           </ul>
         </div>
-        <div className="right-side">
+        <div className="right-side" data-aos="fade-up-left">
           <img src={RightImg} alt="#" />
         </div>
     </section>

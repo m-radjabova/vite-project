@@ -1,68 +1,81 @@
-import { useEffect, useState } from "react"
-import Header from "../../component/Header"
-import Main from "../../component/Main"
-import SectionGreatAgency from "../../component/SectionGreatAgency"
-import Servisec from "../../component/Services"
-import SectionOurSales from "../../component/SectionOurSales"
-import SectionSubscribe from "../../component/SectionSubscribe"
-import SectionHappyClients from "../../component/SectionHappyClients"
-import SectionBlog from "../../component/SectionBlog"
-import apiClient from "../../apiClient/ApiClient"
-import Footer from "../../component/Footer"
-import SectionProject from "../../component/SectionProject"
-import AgencyPhotos from "../../component/AgencyPhotos"
+import { useEffect, useState } from "react";
+import Header from "../../component/Header";
+import Main from "../../component/Main";
+import SectionGreatAgency from "../../component/SectionGreatAgency";
+import Services from "../../component/Services";
+import SectionOurSales from "../../component/SectionOurSales";
+import SectionSubscribe from "../../component/SectionSubscribe";
+import SectionHappyClients from "../../component/SectionHappyClients";
+import SectionBlog from "../../component/SectionBlog";
+import apiClient from "../../apiClient/ApiClient";
+import Footer from "../../component/Footer";
+import SectionProject from "../../component/SectionProject";
+import AgencyPhotos from "../../component/AgencyPhotos";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export interface Service {
-    id: number
-    name: string
-    description: string
-    imgUrl: string
+  id: number;
+  name: string;
+  description: string;
+  imgUrl: string;
 }
 
 export interface Blog {
-    id: number
-    title: string
-    imgUrl: string
-    date?: string
-    author?: string
-    excerpt?: string
+  id: number;
+  title: string;
+  imgUrl: string;
+  date?: string;
+  author?: string;
+  excerpt?: string;
 }
 
 export interface Category {
-    id: number
-    name: string
+  id: number;
+  name: string;
 }
 
 export interface Project {
-    id: number
-    imgUrl: string
-    categoryId: number
+  id: number;
+  imgUrl: string;
+  categoryId: number;
 }
 
 export interface AgencyPhotosImg {
-    id: string
-    imgUrl: string
+  id: string;
+  imgUrl: string;
+}
+
+interface Translations {
+  [key: string]: {
+    [key: string]: string;
+  };
 }
 
 function Home() {
+  const [services, setServices] = useState<Service[]>([]);
+  const [blog, setBlog] = useState<Blog[]>([]);
+  const [category, setCategory] = useState<Category[]>([]);
+  const [project, setProject] = useState<Project[]>([]);
+  const [agencyPhotos, setAgencyPhotos] = useState<AgencyPhotosImg[]>([]);
+  const [translations, setTranslations] = useState<Translations>({});
 
-    const [servises, setServises] = useState<Service[]>([])
-    const [blog, setBlog] = useState<Blog[]>([])
-    const [category, setCategory] = useState<Category[]>([])
-    const [project, setProject] = useState<Project[]>([])
-    const [agencyPhotos, setAgencyPhotos] = useState<AgencyPhotosImg[]>([])
+  useEffect(() => {
+    getServises()
+    getBlog()
+    getCategory()
+    getProject()
+    getAgencyPhotos()
+    getTranslations()
+    }, [])
 
     useEffect(() => {
-        getServises()
-        getBlog()
-        getCategory()
-        getProject()
-        getAgencyPhotos()
-    }, [])
+        AOS.init({ duration: 2000 });
+    }, []);
 
     const getServises = async () => {
         apiClient.get(`/services`).then(res => {
-            setServises(res.data)
+            setServices(res.data)
         }).catch(err => {
             console.log(err)
         })
@@ -75,8 +88,8 @@ function Home() {
             console.log(err)
         })
     }
-    
-    
+
+
     const getCategory = async () => {
         apiClient.get(`/category`).then(res => {
             setCategory(res.data)
@@ -84,7 +97,7 @@ function Home() {
             console.log(err)
         })
     }
-    
+
     const getProject = async () => {
         apiClient.get(`/projects`).then(res => {
             setProject(res.data)
@@ -100,27 +113,34 @@ function Home() {
             console.log(err)
         })
     }
-    
+
+    const getTranslations = async () =>{
+        apiClient.get(`/translations`).then(res =>{
+            setTranslations(res.data)
+        }).catch(err =>{
+            console.log(err)
+        })
+    }
 
   return (
     <div>
-        <Header/>
-        <Main/>
-        <AgencyPhotos agencyPhotos={agencyPhotos}/>
-        <div className="container">
-            <SectionGreatAgency/>
-            <Servisec servisec={servises}/>
-            <SectionOurSales/>
-            <SectionProject project={project} category={category}/>
-        </div>
-        <SectionHappyClients/>
-        <div className="container">
-            <SectionBlog blog={blog}/>
-        </div>
-        <SectionSubscribe/>
-        <Footer/>
+      <Header translations={translations} />
+      <Main />
+      <AgencyPhotos agencyPhotos={agencyPhotos} />
+      <div className="container">
+        <SectionGreatAgency />
+        <Services services={services} />
+        <SectionOurSales />
+        <SectionProject project={project} category={category} />
+      </div>
+      <SectionHappyClients />
+      <div className="container">
+        <SectionBlog blog={blog} />
+      </div>
+      <SectionSubscribe />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

@@ -5,7 +5,7 @@ function Main() {
   return (
     <main className="main" id="home">
         <div className="container">
-            <div className="left-side">
+            <div className="left-side" data-aos="fade-right">
                 <h1>Grow your <br />
                     Business Google Ads & <br />
                     Instagram Ads
@@ -19,7 +19,7 @@ function Main() {
                     </button>
                 </div>
             </div>
-            <div className="right-side">
+            <div className="right-side" data-aos="fade-left">
                 <img src={RightImg} alt="#" />
             </div>
         </div>

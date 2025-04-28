@@ -1,17 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "../assets/Agency.svg";
 import { FaChevronDown, FaShieldAlt, FaSignOutAlt, FaUserAlt, FaUserShield } from "react-icons/fa";
 import useContextPro from "../hooks/useContextPro";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box, Typography } from "@mui/material";
 
-function Header() {
+interface HeaderProps {
+  translations: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
+}
+
+function Header({ translations }: HeaderProps) {
   const { state: { user }, dispatch } = useContextPro();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [currentLanguage, setCurrentLanguage] = useState('en');
   const open = Boolean(anchorEl);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -28,45 +36,48 @@ function Header() {
     handleMenuClose();
   };
 
-  function stringToColor(string : string) {
-    let hash = 0;
-    let i;
-  
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-  
-    let color = '#';
-  
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-  
-    return color;
-  }
+  const changeLanguage = (language: string) => {
+    setCurrentLanguage(language);
+  };
+
+  const t = (key: string) => {
+    return translations[currentLanguage]?.[key] || key;
+  };
 
   return (
-    <header id="header" >
-      <img src={Logo} alt="#" />
+    <header id="header">
+      <img src={Logo} alt="Agency Logo" />
       <ul>
-        <li> <a href="#home">Home</a>  </li>
-        <li> <a href="#about">About</a></li>
-        <li> <a href="#services">Services</a></li>
-        <li> <a href="#projects">Projects</a></li>
-        <li> <a href="#feedback">Feedback</a> </li>
-        <li> <a href="#blog">Blog</a> </li>
-        <li> <a href="#contact">Contact</a> </li>
-        {!user && (
-          <>
-            <NavLink to="/login" className="login text-decoration-none" style={{ color: '#BDC2FF'  }}>
-              <li>
-                Login
-              </li>
+        <li><NavLink to="/">{t('home')}</NavLink></li>
+        <li><NavLink to="/about">{t('about')}</NavLink></li>
+        <li><NavLink to="/services">{t('services')}</NavLink></li>
+        <li><NavLink to="/projects">{t('projects')}</NavLink></li>
+        <li><NavLink to="/feedback">{t('feedback')}</NavLink></li>
+        <li><NavLink to="/blog">{t('blog')}</NavLink></li>
+        <li><NavLink to="/contact">{t('contact')}</NavLink></li>
+        <li>
+          <select 
+            className="language-select"
+            value={currentLanguage}
+            onChange={(e) => changeLanguage(e.target.value)}
+          >
+            <option value="en">EN</option>
+            <option value="uz">UZ</option>
+            <option value="ru">RU</option>
+            <option value="kor">KOR</option>
+          </select>
+        </li>
+        {!user ? (
+          <li>
+            <NavLink 
+              to="/login" 
+              className="login text-decoration-none" 
+              style={{ color: '#BDC2FF' }}
+            >
+              {t('login')}
             </NavLink>
-          </>
-        )} 
-        {user && (
+          </li>
+        ) : (
           <li className="profile" style={{ listStyle: 'none' }}>
             <div 
               style={{ 
@@ -82,7 +93,7 @@ function Header() {
             >
               <Avatar
                 sx={{ 
-                  bgcolor: user.name ? stringToColor(user.name) : '#9e9e9e',
+                  bgcolor: user.name ? '#4a69bd' : '#6c757d',
                   width: 36,
                   height: 36,
                   fontSize: '0.9rem',
@@ -157,7 +168,7 @@ function Header() {
                     }}
                   >
                     <FaShieldAlt style={{ color: '#1976d2', fontSize: '16px' }} />
-                    <span>Super Admin</span>
+                    <span>{t('superAdmin')}</span>
                   </Link>
                 </MenuItem>
               )}
@@ -184,7 +195,7 @@ function Header() {
                     }}
                   >
                     <FaUserShield style={{ color: '#0288d1', fontSize: '16px' }} />
-                    <span>Admin</span>
+                    <span>{t('admin')}</span>
                   </Link>
                 </MenuItem>
               )}
@@ -200,11 +211,11 @@ function Header() {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <FaSignOutAlt style={{ color: '#d32f2f', fontSize: '16px' }} />
-                  <span>Logout</span>
+                  <span>{t('logout')}</span>
                 </div>
               </MenuItem>
             </Menu>
-        </li>
+          </li>
         )}
       </ul>
     </header>

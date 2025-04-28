@@ -1,9 +1,9 @@
 import { Service } from "../page/home/Home"
 
 interface Props {
-    servisec: Service[]
+    services: Service[]
 }
-function Servisec({servisec}: Props) {
+function Servisec({services}: Props) {
 
   return (
     <section id="services" className="servisec">
@@ -13,10 +13,10 @@ function Servisec({servisec}: Props) {
         </div>
         <div className="servisec-cards">
             {
-                servisec.map(servise => <div className="servisec-card">
-                    <img src={servise.imgUrl} alt="#" />
-                    <h2>{servise.name}</h2>
-                    <p>{servise.description}</p>
+                services.map(service => <div className="servisec-card"  data-aos="zoom-in">
+                    <img src={service.imgUrl} alt="#" />
+                    <h2>{service.name}</h2>
+                    <p>{service.description}</p>
                 </div>)
             }
         </div>

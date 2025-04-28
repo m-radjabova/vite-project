@@ -2,7 +2,8 @@
 function SectionSubscribe() {
   return (
     <section className="section-subscribe">
-        <div className="container">
+        <div className="container" data-aos="fade-up"
+     data-aos-anchor-placement="top-center">
             <div className="left-side">
                 <h1>Subscribe To Get The Latest <br />
                 News About Us </h1>

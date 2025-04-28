@@ -5,7 +5,8 @@ function SectionHappyClients() {
   return (
     <div className="section-happy-clients" id="feedback">
         <div className='container'>
-            <div className="left-side">
+            <div className="left-side" data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom" >
                 <h1>What Our Happy <br />
                     Clients Say
                 </h1> 
@@ -13,7 +14,8 @@ function SectionHappyClients() {
                     slightly believable.
                 </p>
             </div>
-            <div className="right-side">
+            <div className="right-side" data-aos="fade-up"
+                            data-aos-anchor-placement="bottom-bottom">
                 <div className='d-flex align-items-center justify-content-between'>
                     <img src={tirnoqcha} alt="" />
                     <img src={img1} alt="" />

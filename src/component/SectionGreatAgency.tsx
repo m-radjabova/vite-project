@@ -3,10 +3,10 @@ import LeftImg from "../assets/Group (1).svg"
 function SectionGreatAgency() {
   return (
     <section className="section-great-agency" id="about">
-        <div className="left-side">
+        <div className="left-side" data-aos="fade-up-right">
             <img src={LeftImg} alt="#" />
         </div>
-        <div className="right-side">
+        <div className="right-side" data-aos="fade-up-left">
             <h1>Great Creative Agency
                 Since 1993
             </h1>

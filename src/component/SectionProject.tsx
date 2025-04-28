@@ -38,7 +38,10 @@ function SectionProject({ project, category }: Props) {
 
       <div className="project-grid">
         {filteredProjects.map((proj) => (
-          <div key={proj.id} className="project-card">
+          <div key={proj.id} className="project-card" data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
+          >
             <img src={proj.imgUrl} alt="#" className="project-image" />
           </div>
         ))}

@@ -37,3 +37,18 @@
     margin-left: 0;
   }
 }
+
+
+.hover-effect:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.hover-effect:hover div {
+  background-color: #0d6efd !important;
+}
+.hover-effect:hover div svg {
+  color: white !important;
+}
+.text-gradient-primary {
+  background: linear-gradient(45deg, #0d6efd, #00b4d8);
+}
