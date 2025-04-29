@@ -48,13 +48,13 @@ function Header({ translations }: HeaderProps) {
     <header id="header">
       <img src={Logo} alt="Agency Logo" />
       <ul>
-        <li><NavLink to="/">{t('home')}</NavLink></li>
-        <li><NavLink to="/about">{t('about')}</NavLink></li>
-        <li><NavLink to="/services">{t('services')}</NavLink></li>
-        <li><NavLink to="/projects">{t('projects')}</NavLink></li>
-        <li><NavLink to="/feedback">{t('feedback')}</NavLink></li>
-        <li><NavLink to="/blog">{t('blog')}</NavLink></li>
-        <li><NavLink to="/contact">{t('contact')}</NavLink></li>
+        <li><a href="#home">{t('home')}</a></li>
+        <li><a href="#about">{t('about')}</a></li>
+        <li><a href="#services">{t('services')}</a></li>
+        <li><a href="#projects">{t('projects')}</a></li>
+        <li><a href="#feedback">{t('feedback')}</a></li>
+        <li><a href="#blog">{t('blog')}</a></li>
+        <li><a href="#contact" >{t('contact')}</a></li>
         <li>
           <select 
             className="language-select"
