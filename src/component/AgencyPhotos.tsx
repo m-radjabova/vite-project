@@ -9,8 +9,22 @@ interface AgencyPhotosImg {
   imgUrl: string;
 }
 
-function AgencyPhotos({ agencyPhotos }: { agencyPhotos: AgencyPhotosImg[] }) {
+interface Props {
+  agencyPhotos: AgencyPhotosImg[];
+  translations: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
+  currentLanguage: string;
+}
+
+function AgencyPhotos({ agencyPhotos, translations, currentLanguage }: Props) {
   const theme = useTheme();
+
+  const t = (key: string) => {
+    return translations[currentLanguage]?.[key] || key;
+  };
 
   const settings = {
     dots: false,
@@ -85,7 +99,7 @@ function AgencyPhotos({ agencyPhotos }: { agencyPhotos: AgencyPhotosImg[] }) {
       }}
     >
       <Typography variant="h3" textAlign="center" mb={4}>
-          Our Clients
+          {t("Our Clients")} 
         </Typography>
 
       <Container maxWidth="xl">

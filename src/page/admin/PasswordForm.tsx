@@ -38,8 +38,6 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
     }
   }
   
-  
-
   const password = watch("password");
 
   return (

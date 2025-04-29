@@ -14,6 +14,7 @@ import AgencyPhotos from "../../component/AgencyPhotos";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+
 export interface Service {
   id: number;
   name: string;
@@ -59,7 +60,7 @@ function Home() {
   const [project, setProject] = useState<Project[]>([]);
   const [agencyPhotos, setAgencyPhotos] = useState<AgencyPhotosImg[]>([]);
   const [translations, setTranslations] = useState<Translations>({});
-
+  const [currentLanguage, setCurrentLanguage] = useState('en');
   useEffect(() => {
     getServises()
     getBlog()
@@ -67,7 +68,7 @@ function Home() {
     getProject()
     getAgencyPhotos()
     getTranslations()
-    }, [])
+  }, [])
 
     useEffect(() => {
         AOS.init({ duration: 2000 });
@@ -124,21 +125,21 @@ function Home() {
 
   return (
     <div>
-      <Header translations={translations} />
-      <Main />
-      <AgencyPhotos agencyPhotos={agencyPhotos} />
+      <Header translations={translations} currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage} />
+      <Main translations={translations} currentLanguage={currentLanguage} />
+      <AgencyPhotos agencyPhotos={agencyPhotos} translations={translations} currentLanguage={currentLanguage} />
       <div className="container">
-        <SectionGreatAgency />
-        <Services services={services} />
-        <SectionOurSales />
-        <SectionProject project={project} category={category} />
+        <SectionGreatAgency translations={translations} currentLanguage={currentLanguage} />
+        <Services services={services} translations={translations} currentLanguage={currentLanguage} />
+        <SectionOurSales translations={translations} currentLanguage={currentLanguage} />
+        <SectionProject project={project} category={category} translations={translations} currentLanguage={currentLanguage} />
       </div>
-      <SectionHappyClients />
+      <SectionHappyClients translations={translations} currentLanguage={currentLanguage} />
       <div className="container">
-        <SectionBlog blog={blog} />
+        <SectionBlog blog={blog} translations={translations} currentLanguage={currentLanguage} />
       </div>
-      <SectionSubscribe />
-      <Footer />
+      <SectionSubscribe translations={translations} currentLanguage={currentLanguage} />
+      <Footer translations={translations} currentLanguage={currentLanguage} />
     </div>
   );
 }

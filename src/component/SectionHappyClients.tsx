@@ -1,17 +1,31 @@
 import img1 from '../assets/Group 192.png'
 import img2 from '../assets/Group 191.png'
 import tirnoqcha from '../assets/tirnoqcha.png'
-function SectionHappyClients() {
+
+interface Props {
+    translations: {
+        [key: string]: {
+          [key: string]: string;
+        };
+      };
+    currentLanguage: string;
+}
+function SectionHappyClients( {translations, currentLanguage}: Props ) {
+
+    const t = (key: string) => {
+        return translations[currentLanguage]?.[key] || key;
+    };
+    
   return (
     <div className="section-happy-clients" id="feedback">
         <div className='container'>
             <div className="left-side" data-aos="fade-up"
                     data-aos-anchor-placement="bottom-bottom" >
-                <h1>What Our Happy <br />
-                    Clients Say
+                <h1>{t('What Our Happy')}<br />
+                    {t('Clients Say')} 
                 </h1> 
-                <p>randomised words which don't look even <br />
-                    slightly believable.
+                <p>{t("randomised words which don't look even")} <br />
+                    {t('slightly believable.')}
                 </p>
             </div>
             <div className="right-side" data-aos="fade-up"

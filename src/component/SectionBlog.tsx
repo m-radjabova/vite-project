@@ -9,16 +9,26 @@ import { Blog } from '../page/home/Home';
 
 interface Props {
   blog: Blog[];
+  translations: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
+  currentLanguage: string;
 }
 
-function SectionBlog({ blog }: Props) {
+function SectionBlog({ blog, translations, currentLanguage }: Props) {
+
+  const t = (key: string) => {
+    return translations[currentLanguage]?.[key] || key;
+  };
   return (
     <section className="blog-section py-5 bg-light" id="blog">
       <div className="container">
         <div className="section-header text-center mb-5">
-          <h2 className="display-5 fw-bold text-primary mb-3">Our Blog</h2>
+          <h2 className="display-5 fw-bold text-primary mb-3">{t('Our Blog')}</h2>
           <p className="lead text-muted mx-auto" style={{ maxWidth: '600px' }}>
-            Creative & Professional Insights From Our Team
+            {t('Creative & Professional Insights From Our Team')} 
           </p>
         </div>
 

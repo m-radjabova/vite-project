@@ -2,14 +2,24 @@ import { Service } from "../page/home/Home"
 
 interface Props {
     services: Service[]
+    translations: {
+        [key: string]: {
+          [key: string]: string;
+        };
+      };
+    currentLanguage: string; 
 }
-function Servisec({services}: Props) {
+function Servisec({services, translations, currentLanguage}: Props) {
+
+    const t = (key: string) => {
+        return translations[currentLanguage]?.[key] || key;
+    };
 
   return (
     <section id="services" className="servisec">
         <div className="text-center">
-            <h1>Our Services</h1>
-            <p>Creative & Proffesional Creative Agency!</p>
+            <h1>{t('Our Services')}</h1> 
+            <p>{t('Creative & Proffesional Creative Agency!')}</p> 
         </div>
         <div className="servisec-cards">
             {

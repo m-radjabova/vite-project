@@ -5,10 +5,20 @@ import { useState } from "react";
 interface Props {
   project: Project[];
   category: Category[];
+  translations: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
+  currentLanguage: string;   
 }
 
-function SectionProject({ project, category }: Props) {
+function SectionProject({ project, category, translations, currentLanguage }: Props) {
   const [activeCategory, setActiveCategory] = useState("All");
+
+  const t = (key: string) => {
+    return translations[currentLanguage]?.[key] || key;
+  };
 
   const filteredProjects =
     activeCategory === "All"
@@ -21,8 +31,8 @@ function SectionProject({ project, category }: Props) {
   return (
     <div className="section-project" id="projects">
         <div className="section-project__title">
-            <h2>Projects</h2>
-            <p>Creative & Professional Creative Agency!</p> 
+            <h2>{t('Our Projects')}</h2> 
+            <p>{t('Creative & Proffesional Creative Agency!')}</p> 
         </div>
       <div className="category-tabs">
         {["All", ...category.filter((c) => c.name !== "All").map((c) => c.name)].map((cat) => (

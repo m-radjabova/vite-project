@@ -14,12 +14,13 @@ interface HeaderProps {
       [key: string]: string;
     };
   };
+  currentLanguage: string;
+  setCurrentLanguage: (language: string) => void;
 }
 
-function Header({ translations }: HeaderProps) {
+function Header({ translations, currentLanguage, setCurrentLanguage }: HeaderProps) {
   const { state: { user }, dispatch } = useContextPro();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [currentLanguage, setCurrentLanguage] = useState('en');
   const open = Boolean(anchorEl);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {

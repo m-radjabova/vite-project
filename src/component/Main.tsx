@@ -1,21 +1,31 @@
 import { FaPlayCircle } from "react-icons/fa";
 import RightImg from "../assets/Group.svg"
 
-function Main() {
+interface MainProps{
+    translations: {
+        [key: string]: {
+          [key: string]: string;
+        };
+      };
+    currentLanguage: string;
+}
+function Main({translations, currentLanguage} : MainProps) {
+    const t = (key: string) => {
+        return translations[currentLanguage]?.[key] || key;
+    };
+
   return (
     <main className="main" id="home">
         <div className="container">
             <div className="left-side" data-aos="fade-right">
-                <h1>Grow your <br />
-                    Business Google Ads & <br />
-                    Instagram Ads
+                <h1>{(t("Grow your Business Google Ads & Instagram Ads"))}
                 </h1>
-                <p>It is a long established fact that a reader <br /> will be distracted by the readable.</p>
+                <p>{(t("It is a long established fact that a reader will be distracted by the readable."))}</p>
                 <div className="btn-main">
-                    <button className="btn-contact">Contact Us</button>
+                    <button className="btn-contact">{(t("Contact Us"))}</button>
                     <button className="btn-video">
                         <FaPlayCircle/>
-                        Intro Video
+                        {(t("Intro Video"))}
                     </button>
                 </div>
             </div>
