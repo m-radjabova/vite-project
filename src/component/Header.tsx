@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import Logo from "../assets/Agency.svg";
 import { FaChevronDown, FaShieldAlt, FaSignOutAlt, FaUserAlt, FaUserShield } from "react-icons/fa";
@@ -23,6 +23,13 @@ function Header({ translations, currentLanguage, setCurrentLanguage }: HeaderPro
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language");
+    if (savedLanguage) {
+      setCurrentLanguage(savedLanguage); 
+    }
+  }, []);
+
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -39,6 +46,7 @@ function Header({ translations, currentLanguage, setCurrentLanguage }: HeaderPro
 
   const changeLanguage = (language: string) => {
     setCurrentLanguage(language);
+    localStorage.setItem("language", language); 
   };
 
   const t = (key: string) => {
