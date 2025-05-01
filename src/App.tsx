@@ -1,23 +1,17 @@
-import { Route, Routes } from "react-router-dom";
-import Home from "./page/home/Home";
-import Login from "./page/login/Login";
-import Admin from "./page/admin/Admin";
-import AdminServices from "./page/admin/AdminServices";
-import SingUp from "./page/login/SingUp";
-import AdminBlog from "./page/admin/AdminBlog";
-import AdminProject from "./page/admin/AdminProject";
-import ProtectedRoute from "./component/ProtectedRoute";
-import Super_Admin from "./page/super_admin/Super_Admin";
-import useContextPro from "./hooks/useContextPro";
-import Profile from "./page/admin/Profile";
-import Settings from "./page/super_admin/Settings";
+import { Route, Routes } from 'react-router-dom';
+import Login from './page/login/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import Admin from './page/Admin/Admin';
+import useContextPro from './hooks/useContextPro';
+import Teacher from './page/Teacher/Teacher';
+import AddTeacher from './page/Admin/AddTeacher';
 
 export interface User {
   id: string;
-  name: string;
+  username: string;
   email: string;
-  roles: ("ADMIN" | "USER" | "SUPER_ADMIN")[];
   password: string;
+  roles: string[];
 }
 
 function App() {
@@ -27,50 +21,40 @@ function App() {
 
   return (
     <div>
-      {!isLoading && (
-        <Routes>
-          <Route index element={<Home />} />
-
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SingUp />} />
-          {/* ADMIN */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute
-                isAllowed={!!user && user.roles.includes("ADMIN")}
-              >
-                <Admin />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="services" element={<AdminServices />} />
-            <Route path="project" element={<AdminProject />} />
-            <Route path="blog" element={<AdminBlog />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          {/* SUPER ADMIN */}
-          <Route
-            path="super-admin"
-            element={
-              <ProtectedRoute
-                isAllowed={!!user && user.roles.includes("SUPER_ADMIN")}
-              >
-                <Super_Admin />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="services" element={<AdminServices />} />
-            <Route path="project" element={<AdminProject />} />
-            <Route path="blog" element={<AdminBlog />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings-users" element={<Settings />} />
-          </Route>
-          <Route path="*" element={<h1>Page not found</h1>} />
-        </Routes>
-      )}
+      {
+        !isLoading && (
+          <Routes>
+            <Route index element={<Login />} />
+            {/* ADMIN */}
+            <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute
+                    isAllowed={!!user && user.roles.includes("ADMIN")}
+                  >
+                    <Admin />
+                  </ProtectedRoute>
+                }
+              >    
+              <Route path="add-teacher" element={<AddTeacher />} />
+            </Route>
+            {/* TEACHER */}
+            <Route
+                path="/teacher"
+                element={
+                  <ProtectedRoute
+                    isAllowed={!!user && user.roles.includes("TEACHER")}
+                  >
+                    <Teacher />
+                  </ProtectedRoute>
+                }
+              >    
+            </Route>
+          </Routes>   
+        )
+      }
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
