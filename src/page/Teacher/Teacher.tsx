@@ -1,10 +1,11 @@
-import { FaChalkboardTeacher, FaCalendarAlt, FaCog, FaBell, FaSearch, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaChalkboardTeacher, FaCalendarAlt, FaCog, FaBell, FaSearch, FaSignOutAlt, FaUser, FaChevronDown } from "react-icons/fa";
 import useContextPro from "../../hooks/useContextPro";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
+import { RiArrowDropRightLine } from "react-icons/ri";
+import { GrArticle } from "react-icons/gr";
 
 function Teacher() {
   const { state: { user } } = useContextPro();
@@ -160,6 +161,7 @@ function Teacher() {
                 }}
               >
                 <AccordionSummary
+                  expandIcon={<FaChevronDown className="text-white" />}
                   sx={{
                     padding: '0.5rem 1rem',
                     minHeight: 'auto !important',
@@ -209,7 +211,9 @@ function Teacher() {
                           }
                         })}
                       >
-                        <span>Ariza (Ochiq Dars)</span>
+                        <span>
+                          <RiArrowDropRightLine className="me-2"/> Applications
+                        </span>
                       </NavLink>
                     </li>
                     <li>
@@ -229,12 +233,36 @@ function Teacher() {
                           }
                         })}
                       >
-                        <span>Bildirgi (Sayyor Dars)</span>
+                        <span> 
+                          <RiArrowDropRightLine className="me-2"/> Announcement
+                        </span>
                       </NavLink>
                     </li>
                   </ul>
                 </AccordionDetails>
               </Accordion>
+            </li>
+            <li className="nav-item mb-2">
+              <NavLink
+                to="/teacher/article"
+                className={({ isActive }) => 
+                  `nav-link d-flex align-items-center ${isActive ? 'active' : ''}`
+                }
+                style={({ isActive }) => ({ 
+                  padding: '0.5rem 1rem',
+                  backgroundColor: isActive ? 'rgba(255,255,255,0.2)' : 'transparent',
+                  borderLeft: isActive ? '3px solid #3a7bd5' : 'none',
+                  borderRadius: '4px',
+                  color: isActive ? 'white' : 'rgba(255,255,255,0.8)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255,255,255,0.1)',
+                  }
+                })}
+              >
+                <GrArticle className="me-3" />
+                <span>Article</span>
+              </NavLink>
             </li>
           </ul>
         </div>

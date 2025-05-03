@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import apiClient from "../../apiClient/ApiClient";
 import { toast } from "react-toastify";
-import { FiCalendar, FiSearch, FiPlus, FiBook, FiUsers, FiClock, FiMapPin, 
-  FiFileText, FiInbox } from 'react-icons/fi';
+import { 
+  FiCalendar, FiSearch, FiPlus, FiBook, FiUsers, FiClock, 
+  FiMapPin, FiFileText, FiInbox, FiCheckCircle, FiClock as FiPending 
+} from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
 
@@ -19,6 +21,8 @@ interface OpenClassApplication {
   address: string;
   applicationText: string;
   teacherId: string;
+  completed: boolean;
+  createdAt: string;
 }
 
 function OpenClassApplications() {
@@ -45,16 +49,6 @@ function OpenClassApplications() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric',
-      weekday: 'short'
-    };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  };
-
   const filteredApplications = applications.filter(app =>
     app.theme.toLowerCase().includes(searchTerm.toLowerCase()) ||
     app.subjectName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -67,6 +61,7 @@ function OpenClassApplications() {
         borderRadius: '16px',
         border: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
+
         {/* Card Header */}
         <div className="card-header bg-white d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center p-4" style={{
           borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
@@ -82,7 +77,7 @@ function OpenClassApplications() {
           </div>
           
           <div className="d-flex flex-column flex-md-row gap-3">
-          <div className="input-group" style={{ maxWidth: '300px' }}>
+            <div className="input-group" style={{ maxWidth: '300px' }}>
               <span className="input-group-text bg-transparent border-end-0">
                 <FiSearch className="text-muted" />
               </span>
@@ -143,15 +138,22 @@ function OpenClassApplications() {
                       <FiMapPin className="me-1" size={14} />
                       Location
                     </th>
+                    <th className="py-3 text-uppercase fw-semibold fs-7 text-muted">Status</th>
+                    <th className="py-3 text-uppercase fw-semibold fs-7 text-muted">Created</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredApplications.length > 0 ? (
                     filteredApplications.map((app, index) => (
-                      <tr key={app.id} className="border-top" style={{
-                        transition: 'all 0.2s ease',
-                        cursor: 'pointer'
-                      }}>
+                      <tr 
+                        key={app.id} 
+                        className="border-top" 
+                        style={{
+                          transition: 'all 0.2s ease',
+                          cursor: 'pointer'
+                        }}
+                        onClick={() => navigate(`/teacher/ochiqdars/${app.id}`)}
+                      >
                         <td className="ps-4 fw-bold text-muted">{index + 1}</td>
                         <td>
                           <div className="d-flex align-items-center">
@@ -188,7 +190,7 @@ function OpenClassApplications() {
                           <div className="d-flex flex-column">
                             <span className="fw-medium d-flex align-items-center gap-1">
                               <FiCalendar size={14} />
-                              {formatDate(app.scheduleDate)}
+                              {app.scheduleDate}
                             </span>
                             <div className="d-flex align-items-center gap-1">
                               <FiClock size={14} className="text-muted" />
@@ -202,11 +204,43 @@ function OpenClassApplications() {
                             {app.address}
                           </span>
                         </td>
+                        <td>
+                          <span className={`badge d-flex align-items-center gap-1 ${app.completed ? 'bg-success bg-opacity-10 text-success' : 'bg-warning bg-opacity-10 text-warning'}`}
+                            style={{
+                              borderRadius: '6px',
+                              padding: '0.35rem 0.75rem',
+                              fontWeight: '500'
+                            }}
+                          >
+                            {app.completed ? (
+                              <>
+                                <FiCheckCircle size={14} />
+                                Completed
+                              </>
+                            ) : (
+                              <>
+                                <FiPending size={14} />
+                                Pending
+                              </>
+                            )}
+                          </span>
+                        </td>
+                        <td>
+                        <small className="text-muted">
+                          {new Date(app.createdAt).toLocaleString('en-GB', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </small>
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={7} className="text-center py-5">
+                      <td colSpan={8} className="text-center py-5">
                         <div className="py-4">
                           <FiInbox size={48} className="text-muted mb-3" />
                           <h5 className="fw-medium text-muted">No applications found</h5>

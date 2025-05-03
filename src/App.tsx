@@ -9,6 +9,8 @@ import ArizaOchiqDars from './page/Teacher/ArizaOchiqDars';
 import ArizaOchiqDarsForm from './page/Teacher/ArizaOchiqDarsForm';
 import ArizaBildirgi from './page/Teacher/ArizaBildirgi';
 import ArizaBildirgiForm from './page/Teacher/ArizaBildirgiForm';
+import Article from './page/Teacher/Article';
+import ArticleForm from './page/Teacher/ArticleForm';
 
 export interface User {
   id: string;
@@ -22,7 +24,7 @@ function App() {
   const {
     state: { user, isLoading },
   } = useContextPro();
-
+  console.log(user)
   return (
     <div>
       {
@@ -57,6 +59,8 @@ function App() {
                <Route path="/teacher/ochiqdars/new" element={<ArizaOchiqDarsForm />} />
                <Route path="/teacher/bildirgi" element={<ArizaBildirgi />} />  
                <Route path="/teacher/bildirgi/newAnnouns" element={<ArizaBildirgiForm />} />
+               <Route path='/teacher/article' element={<Article />}/>
+               <Route path='/teacher/article/newArticle' element={<ArticleForm />}/>
             </Route>
           </Routes>   
         )

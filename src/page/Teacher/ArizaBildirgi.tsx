@@ -7,10 +7,11 @@ import {
     FiMessageSquare, 
     FiBook, 
     FiUsers, 
-    FiCalendar, 
-    FiClock, 
+    FiCalendar,
     FiMapPin,  
-    FiInbox 
+    FiInbox, 
+    FiClock as FiPending,
+    FiCheckCircle
 } from 'react-icons/fi';
 import { PiMegaphoneLight } from "react-icons/pi";
 
@@ -25,11 +26,12 @@ interface Announcement {
   groupNumber: string;
   groupName: string;
   scheduleDate: string;
-  scheduleTime: string;
   para: string;
   address: string;
   announcementText: string;
   teacherId: string;
+  completed: boolean;
+  createdAt: string;
 }
 
 function ArizaBildirgi() {
@@ -134,8 +136,9 @@ function ArizaBildirgi() {
                         <th className="text-uppercase fw-semibold fs-7 text-muted">Subject</th>
                         <th className="text-uppercase fw-semibold fs-7 text-muted">Group</th>
                         <th className="text-uppercase fw-semibold fs-7 text-muted">Date & Period</th>
-                        <th className="text-uppercase fw-semibold fs-7 text-muted">Time</th>
                         <th className="text-uppercase fw-semibold fs-7 text-muted">Location</th>
+                        <th className="text-uppercase fw-semibold fs-7 text-muted">Status</th>
+                        <th className="text-uppercase fw-semibold fs-7 text-muted">Created</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -189,16 +192,42 @@ function ArizaBildirgi() {
                             </td>
                             <td>
                             <span className="d-flex align-items-center gap-1">
-                                <FiClock size={14} />
-                                {app.scheduleTime}
-                            </span>
-                            </td>
-                            <td>
-                            <span className="d-flex align-items-center gap-1">
                                 <FiMapPin size={14} />
                                 {app.address}
                             </span>
                             </td>
+                            <td>
+                                <span className={`badge d-flex align-items-center gap-1 ${app.completed ? 'bg-success bg-opacity-10 text-success' : 'bg-warning bg-opacity-10 text-warning'}`}
+                                    style={{
+                                    borderRadius: '6px',
+                                    padding: '0.35rem 0.75rem',
+                                    fontWeight: '500'
+                                    }}
+                                >
+                                    {app.completed ? (
+                                    <>
+                                        <FiCheckCircle size={14} />
+                                        Completed
+                                    </>
+                                    ) : (
+                                    <>
+                                        <FiPending size={14} />
+                                        Pending
+                                    </>
+                                    )}
+                                </span>
+                            </td>
+                            <td>
+                            <small className="text-muted">
+                                {new Date(app.createdAt).toLocaleString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}
+                            </small>
+                            </td>                          
                         </tr>
                         ))
                     ) : (

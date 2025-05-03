@@ -5,6 +5,7 @@ interface Props {
     children: React.ReactNode;
 }
 function ProtectedRoute({ isAllowed, children }: Props) {
+  console.log(isAllowed)
     if (!isAllowed) {
         return <Navigate to="/" replace />;
     }
