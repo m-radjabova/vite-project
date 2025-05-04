@@ -1,21 +1,37 @@
 import { FieldValues, useForm } from "react-hook-form";
-import { FaArrowLeft, FaCloudUploadAlt, FaFileAlt, FaLink, FaSave } from "react-icons/fa";
-import {Container,Box,Typography,TextField,Button,Card,CardHeader,CardContent,Stack, InputAdornment, Avatar, CircularProgress} from "@mui/material";
+import { FaArrowLeft, FaCheckCircle, FaCloudUploadAlt, FaFileAlt, FaLink, FaSave } from "react-icons/fa";
+import {Container,Box,Typography,TextField,Button,Card,CardHeader,CardContent,Stack, InputAdornment, Avatar, CircularProgress, Chip} from "@mui/material";
 import useContextPro from "../../hooks/useContextPro";
 import apiClient from "../../apiClient/ApiClient";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { grey, blue } from "@mui/material/colors";
+import { grey, blue,green } from "@mui/material/colors";
+import { ChangeEvent, useState } from "react";
+
 
 function ArticleForm() {
   const { state: { user } } = useContextPro();
   const { register, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm();
-
   const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState("");
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setSelectedFile(file);
+      setFileName(file.name);
+    }
+  };
 
   const onSubmit = (data: FieldValues) => {
+    if (selectedFile) {
+      data.file = selectedFile; 
+    }
+
     const formData = {
       ...data,
+      date: new Date().toISOString().split("T")[0],
       createdAt: new Date().toISOString(), 
       teacherId: user?.id,
     }
@@ -44,6 +60,7 @@ function ArticleForm() {
         mb: 4
       }}>
         <Button
+          onClick={() => navigate(-1)}
           variant="text"
           startIcon={<FaArrowLeft />}
           sx={{ 
@@ -139,41 +156,82 @@ function ArticleForm() {
                 }}
               />
 
-              <Box>
-                <Button
-                  variant="outlined"
-                  component="label"
-                  fullWidth
-                  sx={{ 
-                    py: 3,
-                    borderRadius: 2,
-                    borderStyle: 'dashed',
-                    borderWidth: 2,
-                    borderColor: grey[300],
-                    backgroundColor: grey[50],
-                    '&:hover': {
-                      borderColor: blue[500],
-                      backgroundColor: 'rgba(58, 123, 213, 0.04)'
-                    }
-                  }}
-                >
-                  <Stack alignItems="center" spacing={1}>
-                    <FaCloudUploadAlt size={32} color={grey[500]} />
-                    <Typography variant="body1" color={grey[600]}>
-                      Upload Supporting File
-                    </Typography>
-                    <Typography variant="caption" color={grey[500]}>
-                      PDF, DOCX, or Image (Max 10MB)
-                    </Typography>
-                  </Stack>
-                  <input
-                    {...register("file")}
-                    id="file"
-                    type="file"
-                    hidden
-                  />
-                </Button>
-              </Box>
+            <Box>
+              <Button
+                variant="outlined"
+                component="label"
+                fullWidth
+                sx={{ 
+                  py: 3,
+                  borderRadius: 2,
+                  borderStyle: 'dashed',
+                  borderWidth: 2,
+                  borderColor: selectedFile ? green[500] : grey[300],
+                  backgroundColor: grey[50],
+                  '&:hover': {
+                    borderColor: selectedFile ? green[600] : blue[500],
+                    backgroundColor: 'rgba(58, 123, 213, 0.04)'
+                  },
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+              >
+                <Stack alignItems="center" spacing={1}>
+                  {selectedFile ? (
+                    <>
+                      <FaCheckCircle size={32} color={green[500]} />
+                      <Typography variant="body1" color={grey[800]}>
+                        File Selected
+                      </Typography>
+                      <Chip
+                        label={fileName}
+                        size="small"
+                        sx={{ 
+                          maxWidth: 200,
+                          backgroundColor: green[50],
+                          color: green[800]
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <FaCloudUploadAlt size={32} color={grey[500]} />
+                      <Typography variant="body1" color={grey[600]}>
+                        Upload Supporting File
+                      </Typography>
+                      <Typography variant="caption" color={grey[500]}>
+                        PDF, DOCX, or Image (Max 10MB)
+                      </Typography>
+                    </>
+                  )}
+                </Stack>
+                <input
+                  {...register("file")}
+                  id="file"
+                  type="file"
+                  hidden
+                  onChange={handleFileChange}
+                />
+              </Button>
+              {selectedFile && (
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center',
+                  mt: 1
+                }}>
+                  <Button 
+                    size="small" 
+                    color="error"
+                    onClick={() => {
+                      setSelectedFile(null);
+                      setFileName("");
+                    }}
+                  >
+                    Remove File
+                  </Button>
+                </Box>
+              )}
+            </Box>
 
               <TextField
                 {...register("text", { 

@@ -13,19 +13,7 @@ function Admin() {
   return (
     <div className="admin-layout" style={{ minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
 
-      <div className="top-navbar bg-white shadow-sm" style={{
-        height: '70px',
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        left: '280px',
-        zIndex: 1000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 2rem',
-        borderBottom: '1px solid #eaeaea'
-      }}>
+      <div className="top-navbar bg-white shadow-sm" >
         <div className="user-profile d-flex align-items-center">
           <div className="position-relative me-3">
             <div className="user-avatar rounded-circle overflow-hidden" 

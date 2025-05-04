@@ -1,29 +1,12 @@
 import { useEffect, useState } from "react";
 import apiClient from "../../apiClient/ApiClient";
 import { toast } from "react-toastify";
-import { 
-  FiCalendar, FiSearch, FiPlus, FiBook, FiUsers, FiClock, 
-  FiMapPin, FiFileText, FiInbox, FiCheckCircle, FiClock as FiPending 
-} from 'react-icons/fi';
+import { FiCalendar, FiSearch, FiPlus, FiBook, FiUsers, FiClock, FiMapPin, FiFileText, FiInbox, FiCheckCircle, 
+  FiClock as FiPending } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
+import { OpenClassApplication } from "../types/Types";
 
-interface OpenClassApplication {
-  id: string;
-  theme: string;
-  subjectName: string;
-  teacherName: string;
-  groupNumber: string;
-  groupName: string;
-  scheduleDate: string;
-  scheduleTime: string;
-  para: string;
-  address: string;
-  applicationText: string;
-  teacherId: string;
-  completed: boolean;
-  createdAt: string;
-}
 
 function OpenClassApplications() {
   const [applications, setApplications] = useState<OpenClassApplication[]>([]);

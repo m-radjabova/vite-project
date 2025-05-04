@@ -6,17 +6,7 @@ import ArticleViewModal from "./ArticleViewModal";
 import { useNavigate } from "react-router-dom";
 import { FaCalendar, FaEye, FaFileAlt, FaInbox, FaLink, FaPlus, FaSearch } from "react-icons/fa";
 import { FiFileText } from "react-icons/fi";
-
-export interface Article {
-  id: string;
-  title: string;
-  date: string;
-  link: string;
-  file: string;
-  text: string;
-  teacherId: string;
-  createdAt: string;
-}
+import { Article } from "../types/Types";
 
 function ArticleList() {
   const { state: { user } } = useContextPro();
@@ -28,16 +18,16 @@ function ArticleList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchArticles();
+    getArticles();
   }, []);
 
-  const fetchArticles = async () => {
+  const getArticles = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.get(`/articles?teacherId=${user?.id}`);
-      setArticles(response.data);
-    } catch (error) {
-      console.error("Error fetching articles:", error);
+      const res = await apiClient.get(`/articles?teacherId=${user?.id}`);
+      setArticles(res.data);
+    } catch (err) {
+      console.error("Error fetching articles:", err);
       toast.error("Failed to load articles");
     } finally {
       setLoading(false);

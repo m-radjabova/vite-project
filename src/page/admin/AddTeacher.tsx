@@ -1,27 +1,12 @@
 import { useState, useEffect } from "react";
-import { 
-  FiPlusCircle, 
-  FiTrash2, 
-  FiSearch,  
-  FiMail,
-  FiHome,
-  FiUsers,
-  FiChevronRight
-} from "react-icons/fi";
-// import { FaUser } from "react-icons/fa";
+import { FiPlusCircle, FiTrash2, FiSearch,  FiMail,FiHome,FiUsers,FiChevronRight} from "react-icons/fi";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import AddTeacherForm from "./AddTeacherForm";
 import apiClient from "../../apiClient/ApiClient";
 import { User } from "../../App";
 import { toast } from "react-toastify";
-
-interface Teacher {
-  id: string;
-  username: string;
-  email: string;
-  roles: string[];
-}
+import { Teacher } from "../types/Types";
 
 function AddTeacher() {
   const [open, setOpen] = useState(false);
@@ -33,10 +18,10 @@ function AddTeacher() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    fetchTeachers();
+    getTeachers();
   }, []);
 
-  const fetchTeachers = async () => {
+  const getTeachers = async () => {
     try {
       setLoading(true);
       const response = await apiClient.get<User[]>("/users?roles=TEACHER");
@@ -58,7 +43,7 @@ function AddTeacher() {
   const handleDelete = async (id: string) => {
     try {
       await apiClient.delete(`/users/${id}`);
-      fetchTeachers();
+      getTeachers();
       toast.success("Teacher deleted successfully");
     } catch (error) {
       console.error("Error deleting teacher:", error);
@@ -69,7 +54,7 @@ function AddTeacher() {
   const addNewTeacher = async (newTeacher: User) => {
     try {
       await apiClient.post("/users", newTeacher);
-      fetchTeachers();
+      getTeachers();
       toast.success("Teacher added successfully");
     } catch (error) {
       console.error("Error adding teacher:", error);
