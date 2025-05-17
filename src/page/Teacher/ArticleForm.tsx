@@ -16,7 +16,7 @@ function ArticleForm() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {    
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setSelectedFile(file);
@@ -26,7 +26,7 @@ function ArticleForm() {
 
   const onSubmit = (data: FieldValues) => {
     if (selectedFile) {
-      data.file = selectedFile; 
+      data.file = selectedFile.name; 
     }
 
     const formData = {
