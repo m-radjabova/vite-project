@@ -1,8 +1,8 @@
 import { Dispatch, ReactNode, useEffect, useReducer } from 'react'
-import { User } from '../App';
 import { useLocation } from 'react-router-dom';
 import apiClient from './../apiClient/ApiClient';
 import { MyContext } from '../context/MyContext';
+import { User } from '../App';
 
 export interface ContextType {
     state: TypeState

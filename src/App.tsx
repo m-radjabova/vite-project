@@ -1,72 +1,51 @@
-import { Route, Routes } from 'react-router-dom';
-import Login from './page/login/Login';
-import ProtectedRoute from './components/ProtectedRoute';
-import Admin from './page/Admin/Admin';
-import useContextPro from './hooks/useContextPro';
-import Teacher from './page/Teacher/Teacher';
-import AddTeacher from './page/Admin/AddTeacher';
-import ArizaOchiqDars from './page/Teacher/ArizaOchiqDars';
-import ArizaOchiqDarsForm from './page/Teacher/ArizaOchiqDarsForm';
-import ArizaBildirgi from './page/Teacher/ArizaBildirgi';
-import ArizaBildirgiForm from './page/Teacher/ArizaBildirgiForm';
-import Article from './page/Teacher/Article';
-import ArticleForm from './page/Teacher/ArticleForm';
+import { Route, Routes } from "react-router-dom";
+import useContextPro from "./hooks/useContextPro";
+import Login from "./page/login/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Admin from "./page/admin/Admin";
+import Home from "./page/home/Home";
+import SingUp from "./page/login/SingUp";
+
 
 export interface User {
   id: string;
   username: string;
   email: string;
+  roles: ("ADMIN" | "USER")[];
   password: string;
-  roles: string[];
+  phoneNumber: string;
 }
 
 function App() {
   const {
     state: { user, isLoading },
   } = useContextPro();
-  console.log(user)
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      {
-        !isLoading && (
-          <Routes>
-            <Route index element={<Login />} />
-            {/* ADMIN */}
-            <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute
-                    isAllowed={!!user && user.roles.includes("ADMIN")}
-                  >
-                    <Admin />
-                  </ProtectedRoute>
-                }
-              >    
-              <Route path="add-teacher" element={<AddTeacher />} />
-            </Route>
-            {/* TEACHER */}
-            <Route
-                path="/teacher"
-                element={
-                  <ProtectedRoute
-                    isAllowed={!!user && user.roles.includes("TEACHER")}
-                  >
-                    <Teacher />
-                  </ProtectedRoute>
-                }  
-              >  
-               <Route path="/teacher/ochiqdars" element={<ArizaOchiqDars />} />  
-               <Route path="/teacher/ochiqdars/new" element={<ArizaOchiqDarsForm />} />
-               <Route path="/teacher/bildirgi" element={<ArizaBildirgi />} />  
-               <Route path="/teacher/bildirgi/newAnnouns" element={<ArizaBildirgiForm />} />
-               <Route path='/teacher/article' element={<Article />}/>
-               <Route path='/teacher/article/newArticle' element={<ArticleForm />}/>
-            </Route>
-          </Routes>   
-        )
-      }
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SingUp />} />
+
+        {/* ADMIN */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<h1>Page not found</h1>} />
+      </Routes>
     </div>
-  )
+  );
 }
 
 export default App
