@@ -21,10 +21,16 @@ export interface CategoryType {
     name: string;
 }
 
+interface CartItem {
+  product: ProductType;
+  count: number;
+}
+
 function Home() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     getProducts();
@@ -55,6 +61,43 @@ function Home() {
     ? products.filter((p) => p.categoryId === activeCategoryId)
     : [];
 
+  const handleAddToCart = (product: ProductType, count: number = 1) => {
+    setCartItems(prev => {
+      const existing = prev.find(item => item.product.id === product.id);
+      if (existing) {
+        return prev.map(item =>
+          item.product.id === product.id
+            ? { ...item, count: item.count + count }
+            : item
+        );
+      } else {
+        return [...prev, { product, count }];
+      }
+    });
+  };
+
+  const handleIncrease = (productId: number) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.product.id === productId
+          ? { ...item, count: item.count + 1 }
+          : item
+      )
+    );
+  };
+
+  const handleDecrease = (productId: number) => {
+    setCartItems(prev =>
+      prev
+        .map(item =>
+          item.product.id === productId
+            ? { ...item, count: item.count - 1 }
+            : item
+        )
+        .filter(item => item.count > 0)
+    );
+  };
+
   return (
     <div>
         <Header />
@@ -63,14 +106,24 @@ function Home() {
           activeCategoryId={activeCategoryId}
           setActiveCategoryId={setActiveCategoryId}
         />
-        <div className="cart-container">
-          <div className="left">
-            <Cart />
-          </div>
-          <div className="right">
-            {activeCategoryId && (
-              <Product products={filteredProducts} categories={categories} />
-            )}
+        <div className="container">
+          <div className="cart-container ">  
+            <div className="left">
+              <Cart 
+                cartItems={cartItems} 
+                onIncrease={handleIncrease}
+                onDecrease={handleDecrease}
+                />
+            </div>
+            <div className="right">
+              {activeCategoryId && (
+                <Product
+                  products={filteredProducts}
+                  categories={categories}
+                  onAddToCart={handleAddToCart}
+                />
+              )}
+            </div>
           </div>
         </div>
     </div>

@@ -1,18 +1,39 @@
 import { useState } from "react";
 import { CategoryType, ProductType } from "../page/home/Home";
 import styles from "../css/Product.module.css";
+import {Modal,Box,Button,IconButton,Typography,List,ListItem,ListItemText} from "@mui/material";
+import { MdClose } from "react-icons/md";
 
 interface ProductProps {
-    products: ProductType[];
-    categories: CategoryType[];
+  products: ProductType[];
+  categories: CategoryType[];
+  onAddToCart: (product: ProductType, count: number) => void;
 }
 
-function Product({ products, categories }: ProductProps) {
-  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
+function Product({ products, categories, onAddToCart }: ProductProps) {
+  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);;
+  const [count, setCount] = useState<number>(1);
 
   const getCategoryName = (categoryId: string | number) => {
     const cat = categories.find(c => c.id === categoryId || c.id === String(categoryId));
     return cat ? cat.name : "";
+  };
+
+  const handleOpenModal = (product: ProductType) => {
+    setSelectedProduct(product);
+    setCount(1);
+  };
+
+  const handleAdd = () => {
+    if (selectedProduct) {
+      onAddToCart(selectedProduct, count);
+      setSelectedProduct(null);
+    }
+  };
+
+  const handleClose = () => {
+    setSelectedProduct(null);
+    setCount(1);
   };
 
   return (
@@ -22,7 +43,7 @@ function Product({ products, categories }: ProductProps) {
           <div
             key={product.id}
             className={styles.productCard}
-            onClick={() => setSelectedProduct(product)}
+            onClick={() => handleOpenModal(product)}
             style={{ cursor: "pointer" }}
           >
             <img
@@ -46,7 +67,7 @@ function Product({ products, categories }: ProductProps) {
             </div>
             <button
               className={styles.addButton}
-              onClick={e => { e.stopPropagation(); }}
+              onClick={e => { e.stopPropagation(); handleOpenModal(product); }}
             >
               Добавить
             </button>
@@ -54,132 +75,130 @@ function Product({ products, categories }: ProductProps) {
         ))}
       </div>
       {selectedProduct && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0, left: 0, right: 0, bottom: 0,
-            background: "rgba(0,0,0,0.5)",
-            zIndex: 1000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
+        <Modal
+        open={Boolean(selectedProduct)}
+        onClose={handleClose}
+        aria-labelledby="product-modal-title"
+        aria-describedby="product-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            borderRadius: "24px",
+            boxShadow: 24,
+            p: 4,
+            minWidth: 600,
+            maxWidth: "90vw",
+            outline: "none"
           }}
-          onClick={() => setSelectedProduct(null)}
         >
-          <div
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "32px",
-              minWidth: "600px",
-              maxWidth: "90vw",
-              display: "flex",
-              flexDirection: "column",
-              position: "relative"
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: "absolute",
+              right: 16,
+              top: 16,
+              color: "text.secondary"
             }}
-            onClick={e => e.stopPropagation()}
           >
-            <button
-              onClick={() => setSelectedProduct(null)}
+            <MdClose fontSize="large" />
+          </IconButton>
+
+          <Typography id="product-modal-title" variant="h4" fontWeight={700} mb={2}>
+            {selectedProduct?.name}
+          </Typography>
+
+          <Box display="flex" gap={3}>
+            <img
+              src={selectedProduct?.imageUrl}
+              alt={selectedProduct?.name}
               style={{
-                position: "absolute",
-                top: "16px",
-                right: "16px",
-                background: "none",
-                border: "none",
-                fontSize: "28px",
-                cursor: "pointer",
-                color: "#888"
+                width: "220px",
+                height: "180px",
+                objectFit: "cover",
+                borderRadius: "16px"
               }}
-              aria-label="Close"
-            >
-              ×
-            </button>
-            <div style={{ fontSize: "32px", fontWeight: 700, marginBottom: "16px" }}>
-              {selectedProduct.name}
-            </div>
-            <div style={{ display: "flex", gap: "24px" }}>
-              <img
-                src={selectedProduct.imageUrl}
-                alt={selectedProduct.name}
-                style={{
-                  width: "220px",
-                  height: "180px",
-                  objectFit: "cover",
-                  borderRadius: "16px"
-                }}
-              />
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: "18px", marginBottom: "8px" }}>
-                  {selectedProduct.description}
-                </div>
-                <div style={{ fontSize: "16px", fontWeight: 500, marginBottom: "4px" }}>
-                  Состав:
-                </div>
-                <ul style={{ margin: 0, paddingLeft: "18px", marginBottom: "8px" }}>
-                  {selectedProduct.compound.split(",").map((item, idx) => (
-                    <li key={idx} style={{ fontSize: "15px" }}>{item.trim()}</li>
-                  ))}
-                </ul>
-                <div style={{ color: "#B1B1B1", fontSize: "14px" }}>
-                  {selectedProduct.weight}г
-                </div>
-              </div>
-            </div>
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "24px",
-              gap: "16px"
-            }}>
-              <button
-                style={{
-                  background: "#FF7020",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "12px",
-                  padding: "14px 40px",
-                  fontSize: "20px",
-                  fontWeight: 500,
-                  cursor: "pointer"
-                }}
-              >
-                Добавить
-              </button>
-              <div style={{
-                display: "flex",
-                alignItems: "center",
-                background: "#F2F2F3",
+            />
+            <Box flex={1}>
+              <Typography variant="body1" mb={1}>
+                {selectedProduct?.description}
+              </Typography>
+              <Typography variant="subtitle1" fontWeight={500} mb={0.5}>
+                Состав:
+              </Typography>
+              <List dense sx={{ py: 0, mb: 1 }}>
+                {selectedProduct?.compound.split(",").map((item, idx) => (
+                  <ListItem key={idx} sx={{ py: 0, px: 2 }}>
+                    <ListItemText primary={item.trim()} />
+                  </ListItem>
+                ))}
+              </List>
+              <Typography color="text.secondary" variant="body2">
+                {selectedProduct?.weight}г
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box
+            display="flex"
+            alignItems="center"
+            mt={3}
+            gap={2}
+          >
+            <Button
+              variant="contained"
+              color="warning"
+              sx={{
                 borderRadius: "12px",
-                padding: "8px 16px",
-                fontSize: "20px",
-                fontWeight: 500,
-                gap: "16px"
-              }}>
-                <button style={{
-                  background: "none",
-                  border: "none",
-                  fontSize: "24px",
-                  cursor: "pointer"
-                }}>-</button>
-                <span>1</span>
-                <button style={{
-                  background: "none",
-                  border: "none",
-                  fontSize: "24px",
-                  cursor: "pointer"
-                }}>+</button>
-              </div>
-              <div style={{
-                marginLeft: "auto",
-                fontSize: "28px",
-                fontWeight: 700
-              }}>
-                {selectedProduct.price}₽
-              </div>
-            </div>
-          </div>
-        </div>
+                py: 1.75,
+                px: 5,
+                fontSize: "1.25rem",
+                fontWeight: 500
+              }}
+              onClick={handleAdd}
+            >
+              Добавить
+            </Button>
+
+            <Box
+              display="flex"
+              alignItems="center"
+              bgcolor="grey.100"
+              borderRadius="12px"
+              px={2}
+              py={1}
+              gap={2}
+            >
+              <IconButton
+                onClick={() => setCount(prev => Math.max(1, prev - 1))}
+                size="large"
+              >
+                -
+              </IconButton>
+              <Typography variant="h6" fontWeight={500}>
+                {count}
+              </Typography>
+              <IconButton
+                onClick={() => setCount(prev => prev + 1)}
+                size="large"
+              >
+                +
+              </IconButton>
+            </Box>
+
+            <Box ml="auto">
+              <Typography variant="h4" fontWeight={700}>
+                {selectedProduct ? selectedProduct.price * count : 0}₽
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Modal>
       )}
     </>
   );
