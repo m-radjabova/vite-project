@@ -1,37 +1,32 @@
-import { useEffect, useState } from "react";
-import apiClient from "../apiClient/ApiClient";
+import { CategoryType } from "../page/home/Home";
 
-interface Category {
-    id: string;
-    name: string;
+interface CategoryProps {
+    activeCategoryId: string | null;
+    setActiveCategoryId: (id: string) => void;
+    categories: CategoryType[];
 }
 
-function Category() {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
-
-    useEffect(() => {
-        getCategories();
-    }, []);
-
-    const getCategories = () => {
-        apiClient.get<Category[]>("/categories")
-            .then((response) => {
-                setCategories(response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching categories:", error);
-        });
-    };
+function Category({ activeCategoryId, setActiveCategoryId, categories }: CategoryProps) {
 
     return (
         <div className="container">
-            <ul className="category-list">
+            <ul className="category-list" style={{ display: "flex", gap: "16px" }}>
                 {categories.map((category) => (
                     <li
                         className={`category-item${category.id === activeCategoryId ? " active" : ""}`}
                         key={category.id}
                         onClick={() => setActiveCategoryId(category.id)}
+                        style={{
+                            flex: "1",
+                            cursor: "pointer",
+                            padding: "8px 14px",
+                            borderRadius: "50px",
+                            background: category.id === activeCategoryId ? "#FF7020" : "#fff",
+                            color: category.id === activeCategoryId ? "#000" : "#000",
+                            fontWeight: category.id === activeCategoryId ? 400 : 400,
+                            border: "none",
+                            transition: "all 0.2s"
+                        }}
                     >
                         {category.name}
                     </li>
