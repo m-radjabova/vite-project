@@ -1,4 +1,4 @@
-import { CategoryType } from "../page/home/Home";
+import { CategoryType } from "../page/types/Types";
 
 interface CategoryProps {
     activeCategoryId: string | null;

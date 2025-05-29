@@ -1,18 +1,8 @@
-// import { useState } from "react";
+import { CartItemForCart } from "../page/types/Types";
 
-interface CartItem {
-  product: {
-    id: number;
-    name: string;
-    price: number;
-    imageUrl: string;
-    weight?: number;
-  };
-  count: number;
-}
 
 interface CartProps {
-  cartItems: CartItem[];
+  cartItems: CartItemForCart[];
   onIncrease: (productId: number) => void;
   onDecrease: (productId: number) => void;
 }

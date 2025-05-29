@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { CategoryType, ProductType } from "../page/home/Home";
-import styles from "../css/Product.module.css";
-import {Modal,Box,Button,IconButton,Typography,List,ListItem,ListItemText} from "@mui/material";
+import { CategoryType, ProductType } from "../page/types/Types";
+import {Modal,Box,Button,IconButton,Typography,List,ListItem,ListItemText, Pagination} from "@mui/material";
 import { MdClose } from "react-icons/md";
 
 interface ProductProps {
   products: ProductType[];
   categories: CategoryType[];
   onAddToCart: (product: ProductType, count: number) => void;
+  page?: number;
+  setPage?: (page: number) => void;
+  totalPages?: number;
+  setLimit?: (limit: number) => void;
 }
 
-function Product({ products, categories, onAddToCart }: ProductProps) {
-  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);;
+function Product({ products, categories, onAddToCart, page, setPage, totalPages }: ProductProps) {
+  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
   const [count, setCount] = useState<number>(1);
+  
 
   const getCategoryName = (categoryId: string | number) => {
     const cat = categories.find(c => c.id === categoryId || c.id === String(categoryId));
@@ -36,37 +40,45 @@ function Product({ products, categories, onAddToCart }: ProductProps) {
     setCount(1);
   };
 
+  const changePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (setPage) {
+      setPage(value);
+    }
+    console.log(event);
+  };
+  
   return (
     <>
-      <div className={styles.productList}>
+      <div className="productList">
         {products.map((product) => (
           <div
             key={product.id}
-            className={styles.productCard}
+            className="productCard"
             onClick={() => handleOpenModal(product)}
             style={{ cursor: "pointer" }}
           >
             <img
-              src={product.imageUrl}
-              alt={product.name}
-              className={styles.productImg}
-            />
+                src={product.imageUrl}
+                alt={product.name}
+                className="productImg"
+              />
+
             <div style={{ width: "100%" }}>
-              <div className={styles.productPrice}>
+              <div className="productPrice">
                 {product.price}₽
               </div>
-              <div className={styles.productName}>
+              <div className="productName">
                 {product.name}
               </div>
-              <div className={styles.productCategory}>
+              <div className="productCategory">
                 {getCategoryName(product.categoryId)}
               </div>
-              <div className={styles.productWeight}>
+              <div className="productWeight">
                 {product.weight}г
               </div>
             </div>
             <button
-              className={styles.addButton}
+              className="addButton"
               onClick={e => { e.stopPropagation(); handleOpenModal(product); }}
             >
               Добавить
@@ -119,7 +131,7 @@ function Product({ products, categories, onAddToCart }: ProductProps) {
               alt={selectedProduct?.name}
               style={{
                 width: "220px",
-                height: "180px",
+                height: "auto",
                 objectFit: "cover",
                 borderRadius: "16px"
               }}
@@ -200,6 +212,33 @@ function Product({ products, categories, onAddToCart }: ProductProps) {
         </Box>
       </Modal>
       )}
+      <Pagination
+        count={totalPages || 1}
+        page={page || 1}
+        onChange={changePage}
+        variant="outlined"
+        shape="rounded"
+        sx={{
+          mt: 4,
+          display: "flex",
+          justifyContent: "center",
+          "& .MuiPaginationItem-root": {
+            borderColor: "#FF7020",
+            color: "#FF7020",
+          },
+          "& .Mui-selected": {
+            backgroundColor: "#FF7020",
+            color: "#fff",
+            borderColor: "#FF7020",
+            "&:hover": {
+              backgroundColor: "#ff8c42",
+            },
+          },
+          "& .MuiPaginationItem-root:hover": {
+            backgroundColor: "#fff3e0",
+          },
+        }}
+      />
     </>
   );
 }

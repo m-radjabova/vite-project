@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import Logo from '../assets/logo (1).svg';
-import leftImg from '../assets/pic.svg';
 import useContextPro from '../hooks/useContextPro';
 import { useState } from 'react';
 import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
@@ -29,20 +28,16 @@ function Header() {
 
 
   return (
-    <main className="main">
-        <div className='container'>
-            <div className='main-header'>
-                <div className="logo">
-                    <img src={Logo} alt="logo" />
-                </div>
-                <nav>
+    <header className="header">
+        <img src={Logo} alt="logo" />
+             <nav>
                     <ul>
                         {!user ? (
-                            <li>
+                            <li className="login" style={{ listStyle: 'none' }}>
                                 <NavLink 
                                     to="/login" 
-                                    className="login text-decoration-none" 
-                                    style={{ color: '#BDC2FF' }}
+                                    className="login text-decoration-none list-unstyled text-white "
+                                    style={{fontSize: "24px"}}
                                 >
                                     Login 
                                 </NavLink>
@@ -193,21 +188,7 @@ function Header() {
                             )}
                     </ul>
                 </nav>
-            </div>
-            <div className='main-content'>
-                <div className='left-side'>
-                    <img src={leftImg} alt="left-side" />
-                </div>
-                <div className='right-side'>
-                    <h1>
-                        Только самые <br />
-                        <span style={{ color: "#FF7020" }}>сочные бургеры!</span>
-                    </h1>
-                    <p>Бесплатная доставка от 599₽</p>
-                </div>
-            </div>
-        </div>
-    </main>
+    </header>
   )
 }
 
