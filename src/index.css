@@ -11,6 +11,7 @@
 body {
   scroll-behavior: smooth;
   animation: fadeIn 0.5s ease-in-out;
+  background-color: #F2F2F3 !important;
 }
 
 @keyframes fadeIn {
@@ -28,7 +29,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 30px;
   background-color: #FFAB08;
 }
 
@@ -86,14 +87,26 @@ body {
 }
 
 
-.category-list{
+.category-list {
+  max-width: 1440px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
   margin-top: 50px;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.category-list::-webkit-scrollbar {
+  display: none; 
 }
 
 .category-item {
-  flex: 1 1 calc(33.333% - 20px);
+  flex-shrink: 0;
   margin-bottom: 20px;
   list-style: none;
   padding: 8px 14px;
@@ -102,6 +115,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
 }
 
 .category-item:hover {

@@ -7,6 +7,7 @@ import useProducts from "../../hooks/useProducts";
 import useCategories from "../../hooks/useCategories";
 import { CartItem, ProductType } from "../types/Types";
 import Main from "../../components/Main";
+import Footer from "../../components/Footer";
 
 function Home() {
   const {product, page, setPage, totalPages, setLimit } = useProducts();
@@ -92,6 +93,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
