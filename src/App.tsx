@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./page/admin/Admin";
 import Home from "./page/home/Home";
 import SingUp from "./page/login/SingUp";
+import AdminProduct from "./page/admin/AdminProduct";
 
 
 export interface User {
@@ -40,8 +41,9 @@ function App() {
               <Admin />
             </ProtectedRoute>
           }
-        />
-
+        >
+          <Route path="product" element={<AdminProduct />} />
+        </Route>
         <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>
     </div>
