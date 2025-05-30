@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom"
 import useContextPro from "../../hooks/useContextPro"
-import {FaSignOutAlt, FaUser, FaHamburger} from "react-icons/fa"
+import { FaSignOutAlt, FaUser, FaHamburger, FaBox, FaList, FaUserFriends } from "react-icons/fa"
 import { NavLink } from "react-router-dom";
 
 function Admin() {
@@ -12,130 +12,211 @@ function Admin() {
   };
 
   return (
-    <div className="admin-container d-flex" style={{ minHeight: '100vh' }}>
-
+    <div className="admin-container d-flex" style={{ minHeight: '100vh', backgroundColor: '#f5f7fa' }}>
       <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
         width: '280px', 
-        background: 'linear-gradient(180deg, #343a40 0%, #2b3035 100%)',
-        borderRight: '1px solid rgba(255, 255, 255, 0.1)'
+        background: 'linear-gradient(180deg, #2c3e50 0%, #1a252f 100%)',
+        boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
+        position: 'relative',
+        zIndex: 10
       }}>
-        <Link to="/" className="text-decoration-none">
-          <div className="d-flex align-items-center mb-4 p-2 rounded" style={{ background: 'rgba(253, 126, 20, 0.1)' }}>
-            <FaHamburger className="fs-4 me-2" style={{ color: '#fd7e14' }} />
-            <h1 className="sidebar-title fs-5 mb-0 text-white">Your Meal Admin</h1>
-          </div>
-        </Link>
-        <hr className="bg-secondary my-4" />
+        <div>
+          <Link to="/" className="text-decoration-none">
+            <div className="d-flex align-items-center mb-4 p-3 rounded" style={{ 
+              background: 'rgba(255,255,255,0.05)',
+              borderLeft: '4px solid #fd7e14'
+            }}>
+              <FaHamburger className="fs-4 me-3" style={{ color: '#fd7e14' }} />
+              <h1 className="sidebar-title fs-5 mb-0 text-white" style={{ fontWeight: 600 }}>Your Meal Admin</h1>
+            </div>
+          </Link>
+          
+          <hr className="bg-secondary opacity-25 my-3" />
 
-        <ul className="nav nav-pills flex-column">
-          <li className="nav-item mb-2">
-            <NavLink
-              className={({ isActive }) => isActive ?
-                "active nav-link d-flex align-items-center rounded-pill" :
-                "nav-link text-white d-flex align-items-center rounded-pill"}
-              to="product"
-              style={({isActive}) => isActive ? {
-                backgroundColor: '#fd7e14',
-                color: 'white'
-              } : {}}
-            >
-              <FaHamburger className="me-3" />
-              <span>Products</span>
-            </NavLink>
-          </li>
-          <li className="nav-item mb-2">
-            <NavLink
-              className={({ isActive }) => isActive ?
-                "active nav-link d-flex align-items-center rounded-pill" :
-                "nav-link text-white d-flex align-items-center rounded-pill"}
-              to="categories"
-              style={({isActive}) => isActive ? {
-                backgroundColor: '#fd7e14',
-                color: 'white'
-              } : {}}
-            >
-              <FaHamburger className="me-3" />
-              <span>Categories</span>
-            </NavLink>
-          </li>
-        </ul>
+          <ul className="nav nav-pills flex-column gap-2">
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ?
+                  "active nav-link d-flex align-items-center rounded" :
+                  "nav-link text-white-50 d-flex align-items-center rounded"}
+                to="product"
+                style={({isActive}) => ({
+                  backgroundColor: isActive ? 'rgba(253, 126, 20, 0.15)' : 'transparent',
+                  color: isActive ? '#fd7e14' : 'inherit',
+                  borderLeft: isActive ? '3px solid #fd7e14' : '3px solid transparent',
+                  transition: 'all 0.2s ease',
+                  padding: '12px 16px',
+                  fontWeight: 500
+                })}
+              >
+                <FaBox className="me-3" />
+                <span>Products</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ?
+                  "active nav-link d-flex align-items-center rounded" :
+                  "nav-link text-white-50 d-flex align-items-center rounded"}
+                to="categories"
+                style={({isActive}) => ({
+                  backgroundColor: isActive ? 'rgba(253, 126, 20, 0.15)' : 'transparent',
+                  color: isActive ? '#fd7e14' : 'inherit',
+                  borderLeft: isActive ? '3px solid #fd7e14' : '3px solid transparent',
+                  transition: 'all 0.2s ease',
+                  padding: '12px 16px',
+                  fontWeight: 500
+                })}
+              >
+                <FaList className="me-3" />
+                <span>Categories</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ?
+                  "active nav-link d-flex align-items-center rounded" :
+                  "nav-link text-white-50 d-flex align-items-center rounded"}
+                to="clients"
+                style={({isActive}) => ({
+                  backgroundColor: isActive ? 'rgba(253, 126, 20, 0.15)' : 'transparent',
+                  color: isActive ? '#fd7e14' : 'inherit',
+                  borderLeft: isActive ? '3px solid #fd7e14' : '3px solid transparent',
+                  transition: 'all 0.2s ease',
+                  padding: '12px 16px',
+                  fontWeight: 500
+                })}
+              >
+                <FaUserFriends className="me-3" />
+                <span>Clients</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ?
+                  "active nav-link d-flex align-items-center rounded" :
+                  "nav-link text-white-50 d-flex align-items-center rounded"}
+                to="profile"
+                style={({isActive}) => ({
+                  backgroundColor: isActive ? 'rgba(253, 126, 20, 0.15)' : 'transparent',
+                  color: isActive ? '#fd7e14' : 'inherit',
+                  borderLeft: isActive ? '3px solid #fd7e14' : '3px solid transparent',
+                  transition: 'all 0.2s ease',
+                  padding: '12px 16px',
+                  fontWeight: 500
+                })}
+              >
+                <FaUser className="me-3" />
+                <span>Profile</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
 
-        <div style={{ width: '100%', marginTop: 'auto' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            background: 'rgba(255,255,255,0.08)',
-            borderRadius: 12,
-            padding: '12px 16px',
-            marginBottom: 16,
+        <div className="mb-3">
+          <div className="d-flex align-items-center p-3 rounded" style={{
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            transition: 'all 0.2s ease',
+            marginBottom: '16px'
           }}>
             <div style={{
-              width: 44,
-              height: 44,
+              width: 40,
+              height: 40,
               borderRadius: '50%',
-              background: 'rgba(253, 126, 20, 0.18)',
+              background: 'rgba(253, 126, 20, 0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#fd7e14',
-              fontSize: 24,
+              fontSize: 16,
+              marginRight: 12,
               flexShrink: 0,
             }}>
               <FaUser />
             </div>
-            <div>
-              <div style={{ fontWeight: 700, color: '#fff', fontSize: 17 }}>
+            <div className="overflow-hidden">
+              <div className="text-white" style={{ 
+                fontWeight: 500, 
+                fontSize: 14,
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden'
+              }}>
                 {user?.username || 'Admin'}
               </div>
-              <div style={{ color: '#bbb', fontSize: 13 }}>
+              <div style={{ 
+                color: 'rgba(255,255,255,0.6)', 
+                fontSize: 12,
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden'
+              }}>
                 Administrator
               </div>
             </div>
           </div>
+          
           <button
             onClick={handleLogout}
-            className="d-flex align-items-center justify-content-center"
+            className="btn w-100 d-flex align-items-center justify-content-center py-2"
             style={{
-              width: '100%',
-              background: 'rgba(253, 126, 20, 0.08)',
+              background: 'rgba(253, 126, 20, 0.1)',
               color: '#fd7e14',
-              border: '1px solid #fd7e1440',
-              borderRadius: 24,
+              border: 'none',
+              borderRadius: 6,
               fontWeight: 500,
-              fontSize: 17,
-              padding: '10px 0',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              outline: 'none',
+              fontSize: 14,
+              transition: 'all 0.2s ease',
               gap: 8,
             }}
             onMouseEnter={e => {
               e.currentTarget.style.background = '#fd7e14';
               e.currentTarget.style.color = '#fff';
-              e.currentTarget.style.borderColor = '#fd7e14';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(253, 126, 20, 0.08)';
+              e.currentTarget.style.background = 'rgba(253, 126, 20, 0.1)';
               e.currentTarget.style.color = '#fd7e14';
-              e.currentTarget.style.borderColor = '#fd7e1440';
             }}
           >
-            <FaSignOutAlt style={{ fontSize: 20 }} />
-            Logout
+            <FaSignOutAlt style={{ fontSize: 14 }} />
+            <span>Logout</span>
           </button>
         </div>
       </div>
       
-      <div className="content flex-grow-1 p-4" style={{ 
-        backgroundColor: '#f8f9fa',
-        backgroundImage: 'linear-gradient(to bottom, rgba(253, 126, 20, 0.03), rgba(253, 126, 20, 0.01))'
+      <div className="content flex-grow-1" style={{ 
+        backgroundColor: '#f5f7fa',
+        overflowY: 'auto',
+        position: 'relative'
       }}>
-        <div className="bg-white rounded-3 p-4 shadow-sm" style={{ 
-          minHeight: 'calc(100vh - 2rem)',
-          borderLeft: '4px solid #fd7e14'
+        <div className="bg-white px-4 py-3 d-flex align-items-center justify-content-between" style={{
+          boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 5,
+          borderBottom: '1px solid rgba(0,0,0,0.05)'
         }}>
-          <Outlet/>
+          <h2 className="mb-0 fs-5 fw-semibold text-dark">Dashboard</h2>
+          <div className="text-muted small">
+            {new Date().toLocaleDateString('en-US', { 
+              weekday: 'long', 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </div>
+        </div>
+        
+        <div className="p-4" style={{ 
+          minHeight: 'calc(100vh - 56px)',
+        }}>
+          <div className="bg-white rounded-3 p-4" style={{ 
+            boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+            border: '1px solid rgba(0,0,0,0.05)',
+            minHeight: 'calc(100vh - 120px)'
+          }}>
+            <Outlet/>
+          </div>
         </div>
       </div>
     </div>

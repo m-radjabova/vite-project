@@ -136,3 +136,22 @@ body {
 .cart-container .right {
   flex: 1;
 }
+
+
+.footer {
+  padding: 20px;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer .container .footer-content {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+
+  gap: 20px;
+}

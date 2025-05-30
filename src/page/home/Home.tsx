@@ -8,6 +8,7 @@ import useCategories from "../../hooks/useCategories";
 import { CartItem, ProductType } from "../types/Types";
 import Main from "../../components/Main";
 import Footer from "../../components/Footer";
+import ProductCarousel from "../../components/ProductCarousel";
 
 function Home() {
   const {product, page, setPage, totalPages, setLimit } = useProducts();
@@ -64,6 +65,7 @@ function Home() {
     <div>
       <Header />
       <Main />
+      <ProductCarousel />
       <Category
         categories={categories}
         activeCategoryId={activeCategoryId}

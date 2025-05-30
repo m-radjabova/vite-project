@@ -6,6 +6,10 @@ import Admin from "./page/admin/Admin";
 import Home from "./page/home/Home";
 import SingUp from "./page/login/SingUp";
 import AdminProduct from "./page/admin/AdminProduct";
+import Profile from "./page/admin/Profile";
+import AdminCategories from "./page/admin/AdminCategories";
+import AdminClients from "./page/admin/AdminClients";
+import PageNotFound from "./components/PageNotFound";
 
 
 export interface User {
@@ -43,8 +47,11 @@ function App() {
           }
         >
           <Route path="product" element={<AdminProduct />} />
+          <Route path="categories" element={<AdminCategories />} />
+          <Route path="clients" element={<AdminClients />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
-        <Route path="*" element={<h1>Page not found</h1>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );

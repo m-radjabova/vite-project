@@ -17,9 +17,11 @@ export interface TypeState {
 type SETAction = { type: "SET_USER", payload: User }
 type LOGOUTAction = { type: "LOGOUT" }
 type SETLoadingAction = { type: "SET_LOADING", payload: boolean }
+type EDITUserAction = { type: "EDIT_USER", payload: Partial<User> }
+type CHANGE_PASSWORDAction = { type: "CHANGE_PASSWORD", payload: string }
 
 
-type Action = SETAction | LOGOUTAction | SETLoadingAction
+type Action = SETAction | LOGOUTAction | SETLoadingAction | EDITUserAction | CHANGE_PASSWORDAction
 
 
 export interface ContextType {
@@ -34,6 +36,10 @@ function reducer(state: TypeState, action: Action): TypeState {
             return { ...state, user: action.payload as User }
         case "LOGOUT":
             return { ...state, user: null }
+        case 'EDIT_USER':
+            return { ...state, user: { ...state.user, ...action.payload } as User };
+        case "CHANGE_PASSWORD":
+            return { ...state, user: { ...state.user, password: action.payload } as User };
         case "SET_LOADING":
             console.log("loading", action.payload)
             return { ...state, isLoading: action.payload as boolean }
