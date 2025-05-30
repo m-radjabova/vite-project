@@ -11,7 +11,7 @@ import Footer from "../../components/Footer";
 import ProductCarousel from "../../components/ProductCarousel";
 
 function Home() {
-  const {product, page, setPage, totalPages, setLimit } = useProducts();
+  const {product} = useProducts();
   const categories = useCategories();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -86,10 +86,6 @@ function Home() {
                 products={filteredProducts}
                 categories={categories}
                 onAddToCart={handleAddToCart}
-                page={page}
-                setPage={setPage}
-                totalPages={totalPages}
-                setLimit={setLimit}
               />
             )}
           </div>

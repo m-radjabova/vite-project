@@ -4,6 +4,7 @@ import { CategoryType } from "../page/types/Types";
 
 const useCategories = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
+  
 
   useEffect(() => {
     apiClient.get<CategoryType[]>("/categories")

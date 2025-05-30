@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CategoryType, ProductType } from "../page/types/Types";
-import {Modal,Box,Button,IconButton,Typography,List,ListItem,ListItemText, Pagination} from "@mui/material";
+import {Modal,Box,Button,IconButton,Typography,List,ListItem,ListItemText} from "@mui/material";
 import { MdClose } from 'react-icons/md';
 import { RiStarSmileLine } from 'react-icons/ri';
 import { FaCartPlus } from 'react-icons/fa';
@@ -11,13 +11,9 @@ interface ProductProps {
   products: ProductType[];
   categories: CategoryType[];
   onAddToCart: (product: ProductType, count: number) => void;
-  page?: number;
-  setPage?: (page: number) => void;
-  totalPages?: number;
-  setLimit?: (limit: number) => void;
 }
 
-function Product({ products, categories, onAddToCart, page, setPage, totalPages }: ProductProps) {
+function Product({ products, categories, onAddToCart}: ProductProps) {
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
   const [count, setCount] = useState<number>(1);
   
@@ -44,13 +40,11 @@ function Product({ products, categories, onAddToCart, page, setPage, totalPages 
     setCount(1);
   };
 
-  const changePage = (event: React.ChangeEvent<unknown>, value: number) => {
-    if (setPage) {
-      setPage(value);
-    }
-    console.log(event);
-  };
-  
+  // const changePage = (event: ChangeEvent<unknown>, value: number) => {
+  //   console.log(event);
+  //   setPage(value);
+  // };
+
   return (
     <>
       <div className="productList">
@@ -260,9 +254,8 @@ function Product({ products, categories, onAddToCart, page, setPage, totalPages 
         </Modal>
       )}
       
-      <Pagination
-        count={totalPages || 1}
-        page={page || 1}
+      {/* <Pagination
+        count={pageSize}
         onChange={changePage}
         sx={{
           display: 'flex',
@@ -288,7 +281,7 @@ function Product({ products, categories, onAddToCart, page, setPage, totalPages 
         }}
         variant="outlined"
         shape="rounded"
-      />
+      /> */}
     </>
   );
 }
