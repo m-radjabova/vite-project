@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../apiClient/ApiClient";
 import { TiStarFullOutline } from "react-icons/ti"; 
 
-interface CarouselImg {
+export interface CarouselImg {
   id: number;
   imgUrl: string;
 }

@@ -22,9 +22,9 @@ function Footer() {
               </div>
               <div className='socials'>
                 <h4>Мы в соцсетях</h4>
-                <div className='socials-icons'>
-                  <img src={vk} alt="VK" style={{marginRight: "10px"}} />
-                  <img src={tg} alt="Telegram" />
+                <div className='socials-icons '>
+                  <img src={vk} alt="VK" style={{marginRight: "10px", cursor: "pointer"}} />
+                  <img src={tg} alt="Telegram" style={{cursor: "pointer"}} />
                 </div>
               </div>
             </div>

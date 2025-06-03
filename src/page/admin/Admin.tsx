@@ -1,10 +1,11 @@
-import { Link, Outlet } from "react-router-dom"
-import useContextPro from "../../hooks/useContextPro"
-import { FaSignOutAlt, FaUser, FaHamburger, FaBox, FaList, FaUserFriends } from "react-icons/fa"
+import { Link, Outlet } from "react-router-dom";
+import useContextPro from "../../hooks/useContextPro";
+import { FaSignOutAlt, FaUser, FaHamburger, FaBox, FaList, FaUserFriends, FaBell, FaCalendarAlt, FaChevronDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 function Admin() {
-  const { state: { user }, dispatch } = useContextPro()
+  const { state: { user }, dispatch } = useContextPro();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -12,10 +13,11 @@ function Admin() {
   };
 
   return (
-    <div className="admin-container d-flex" style={{ minHeight: '100vh', backgroundColor: '#f5f7fa' }}>
+    <div className="admin-container d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
+      {/* Sidebar */}
       <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
         width: '280px', 
-        background: 'linear-gradient(180deg, #2c3e50 0%, #1a252f 100%)',
+        background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
         boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
         position: 'relative',
         zIndex: 10
@@ -24,14 +26,14 @@ function Admin() {
           <Link to="/" className="text-decoration-none">
             <div className="d-flex align-items-center mb-4 p-3 rounded" style={{ 
               background: 'rgba(255,255,255,0.05)',
-              borderLeft: '4px solid #fd7e14'
+              borderLeft: '4px solid #f97316'
             }}>
-              <FaHamburger className="fs-4 me-3" style={{ color: '#fd7e14' }} />
+              <FaHamburger className="fs-4 me-3" style={{ color: '#f97316' }} />
               <h1 className="sidebar-title fs-5 mb-0 text-white" style={{ fontWeight: 600 }}>Your Meal Admin</h1>
             </div>
           </Link>
           
-          <hr className="bg-secondary opacity-25 my-3" />
+          <hr className="bg-slate-600 opacity-25 my-3" />
 
           <ul className="nav nav-pills flex-column gap-2">
             <li className="nav-item">
@@ -113,6 +115,7 @@ function Admin() {
           </ul>
         </div>
 
+        {/* User & Logout */}
         <div className="mb-3">
           <div className="d-flex align-items-center p-3 rounded" style={{
             backgroundColor: 'rgba(255,255,255,0.05)',
@@ -123,11 +126,11 @@ function Admin() {
               width: 40,
               height: 40,
               borderRadius: '50%',
-              background: 'rgba(253, 126, 20, 0.15)',
+              background: 'rgba(249, 115, 22, 0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fd7e14',
+              color: '#f97316',
               fontSize: 16,
               marginRight: 12,
               flexShrink: 0,
@@ -160,8 +163,8 @@ function Admin() {
             onClick={handleLogout}
             className="btn w-100 d-flex align-items-center justify-content-center py-2"
             style={{
-              background: 'rgba(253, 126, 20, 0.1)',
-              color: '#fd7e14',
+              background: 'rgba(249, 115, 22, 0.1)',
+              color: '#f97316',
               border: 'none',
               borderRadius: 6,
               fontWeight: 500,
@@ -170,12 +173,12 @@ function Admin() {
               gap: 8,
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.background = '#fd7e14';
+              e.currentTarget.style.background = '#f97316';
               e.currentTarget.style.color = '#fff';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(253, 126, 20, 0.1)';
-              e.currentTarget.style.color = '#fd7e14';
+              e.currentTarget.style.background = 'rgba(249, 115, 22, 0.1)';
+              e.currentTarget.style.color = '#f97316';
             }}
           >
             <FaSignOutAlt style={{ fontSize: 14 }} />
@@ -184,35 +187,86 @@ function Admin() {
         </div>
       </div>
       
+      {/* Main Content */}
       <div className="content flex-grow-1" style={{ 
-        backgroundColor: '#f5f7fa',
+        backgroundColor: '#f8fafc',
         overflowY: 'auto',
         position: 'relative'
       }}>
-        <div className="bg-white px-4 py-3 d-flex align-items-center justify-content-between" style={{
-          boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+        {/* Header */}
+        <div className="bg-white px-4 py-3 d-flex align-items-center justify-content-between border-bottom" style={{
+          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
           position: 'sticky',
           top: 0,
           zIndex: 5,
-          borderBottom: '1px solid rgba(0,0,0,0.05)'
         }}>
-          <h2 className="mb-0 fs-5 fw-semibold text-dark">Dashboard</h2>
-          <div className="text-muted small">
-            {new Date().toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
+          <h2 className="mb-0 fs-5 fw-semibold text-slate-800">Dashboard</h2>
+          
+          <div className="d-flex align-items-center gap-4">
+            <div className="d-flex align-items-center text-slate-500">
+              <FaCalendarAlt className="me-2" />
+              <span className="small">
+                {new Date().toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
+              </span>
+            </div>
+
+            <button className="btn btn-link position-relative p-0 text-slate-500">
+              <FaBell size={16} />
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.5rem', padding: '0.15rem 0.25rem' }}>
+                3
+              </span>
+            </button>
+
+            <Dropdown>
+              <Dropdown.Toggle variant="link" className="d-flex align-items-center p-0 text-decoration-none">
+                <div className="d-flex align-items-center">
+                  <div style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: '50%',
+                    background: 'rgba(249, 115, 22, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#f97316',
+                    fontSize: 14,
+                    marginRight: 8,
+                  }}>
+                    <FaUser />
+                  </div>
+                  <span className="small fw-medium text-slate-600 me-1">{user?.username || 'Admin'}</span>
+                  <FaChevronDown size={12} className="text-slate-400" />
+                </div>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu className="dropdown-menu-end shadow-sm border-0" style={{ minWidth: '180px' }}>
+                <Dropdown.Item className="d-flex align-items-center gap-2 py-2" href="#">
+                  <FaUser size={14} className="text-slate-500" />
+                  <NavLink to="/admin/profile" className="text-slate-600 text-decoration-none fw-medium text-truncate">Profile</NavLink>
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item 
+                  className="d-flex align-items-center gap-2 py-2 text-danger" 
+                  onClick={handleLogout}
+                >
+                  <FaSignOutAlt size={14} />
+                  <span>Logout</span>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
         
+        {/* Content Area */}
         <div className="p-4" style={{ 
           minHeight: 'calc(100vh - 56px)',
         }}>
-          <div className="bg-white rounded-3 p-4" style={{ 
-            boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-            border: '1px solid rgba(0,0,0,0.05)',
+          <div className="bg-white rounded-lg p-4 shadow-xs border" style={{ 
             minHeight: 'calc(100vh - 120px)'
           }}>
             <Outlet/>
@@ -220,7 +274,7 @@ function Admin() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Admin
+export default Admin;

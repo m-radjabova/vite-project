@@ -10,6 +10,7 @@ import Profile from "./page/admin/Profile";
 import AdminCategories from "./page/admin/AdminCategories";
 import AdminClients from "./page/admin/AdminClients";
 import PageNotFound from "./components/PageNotFound";
+import IsLoading from "./components/isLoading";
 
 
 export interface User {
@@ -27,7 +28,7 @@ function App() {
   } = useContextPro();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <IsLoading/>;
   }
 
   return (
