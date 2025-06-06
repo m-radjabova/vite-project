@@ -16,7 +16,8 @@ function Admin() {
     <div className="admin-container d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
       {/* Sidebar */}
       <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
-        width: '280px', 
+        width: '300px', 
+        minWidth: '300px',
         background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
         boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
         position: 'relative',

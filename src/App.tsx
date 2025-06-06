@@ -10,8 +10,8 @@ import Profile from "./page/admin/Profile";
 import AdminCategories from "./page/admin/AdminCategories";
 import AdminClients from "./page/admin/AdminClients";
 import PageNotFound from "./components/PageNotFound";
-import IsLoading from "./components/isLoading";
-
+import IsLoading from "./components/IsLoading";
+import AdminProductForm from "./page/admin/AdminProductForm";
 
 export interface User {
   id: string;
@@ -48,6 +48,8 @@ function App() {
           }
         >
           <Route path="product" element={<AdminProduct />} />
+          <Route path="product/add" element={<AdminProductForm />} />
+          <Route path="/admin/product/add/:id" element={<AdminProductForm />} />
           <Route path="categories" element={<AdminCategories />} />
           <Route path="clients" element={<AdminClients />} />
           <Route path="profile" element={<Profile />} />

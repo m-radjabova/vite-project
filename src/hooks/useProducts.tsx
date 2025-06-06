@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import apiClient from "../apiClient/ApiClient";
 import { ProductType } from "../page/types/Types";
 
 const useProducts = () => {
   const [product, setProduct] = useState<ProductType[]>([]);
-  // const [page, setPage] = useState<number>(1);
-  // const [limit] = useState<number>(10); 
-  // const [pageSize, setPageSize] = useState(10);
 
-  useEffect(() => {
-    apiClient.get<ProductType[]>(`/products`)
+  const fetchProducts = useCallback(() => {
+    apiClient.get<ProductType[]>("/products")
       .then(res => {
-        // setPageSize(Math.floor(res.headers["x-total-count"] / limit));
         setProduct(res.data);
       })
       .catch(err => console.error("Error fetching products:", err));
   }, []);
 
-  return { product};
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  return { product, refetch: fetchProducts };
 };
 
 export default useProducts;
