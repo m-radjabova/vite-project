@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 
 function AdminProduct() {
-  const categories = useCategories();
+  const { categories } = useCategories();
   const { product, refetch } = useProducts();
   const navigate = useNavigate();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);

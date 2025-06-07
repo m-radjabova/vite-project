@@ -23,7 +23,7 @@ type ProductForm = z.infer<typeof productSchema>;
 
 function AdminProductForm() {
     const { state: { user } } = useContextPro();
-    const categories = useCategories();
+    const { categories } = useCategories();
     const navigate = useNavigate();
     const { id } = useParams();
 

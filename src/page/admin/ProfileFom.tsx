@@ -51,22 +51,23 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
       PaperProps={{
         sx: {
           borderRadius: 3,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)'
+          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+          overflow: 'hidden'
         }
       }}
     >
       <DialogTitle sx={{ 
-        bgcolor: 'primary.main', 
+        bgcolor: '#ffb347', 
         color: 'white',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         py: 2,
-        px: 3
+        px: 3,
+        fontWeight: 600,
+        fontSize: '1.25rem'
       }}>
-        <Box component="span" sx={{ fontSize: '1.25rem', fontWeight: 500 }}>
-          Edit Profile
-        </Box>
+        Edit Profile
         <IconButton
           edge="end"
           color="inherit"
@@ -74,7 +75,7 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
           disabled={isSubmitting}
           sx={{
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)'
+              backgroundColor: 'rgba(255, 255, 255, 0.2)'
             }
           }}
         >
@@ -83,7 +84,11 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
       </DialogTitle>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogContent sx={{ py: 3, px: 3 }}>
+        <DialogContent sx={{ 
+          py: 3, 
+          px: 3,
+          bgcolor: '#fff8f0' 
+        }}>
           <Box sx={{ mb: 3 }}>
             <TextField
               fullWidth
@@ -92,12 +97,16 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
               margin="normal"
               error={!!errors.name}
               helperText={errors.name?.message}
-              {...register('name')}
+              {...register('name', { required: 'Name is required' })}
               InputProps={{
                 sx: {
                   borderRadius: 2,
+                  bgcolor: 'white',
                   '& fieldset': {
-                    borderWidth: '1px !important'
+                    borderColor: '#ffd8b2' 
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffb347' 
                   }
                 }
               }}
@@ -113,12 +122,22 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
               type="email"
               error={!!errors.email}
               helperText={errors.email?.message}
-              {...register('email')}
+              {...register('email', { 
+                required: 'Email is required',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Invalid email address'
+                }
+              })}
               InputProps={{
                 sx: {
                   borderRadius: 2,
+                  bgcolor: 'white',
                   '& fieldset': {
-                    borderWidth: '1px !important'
+                    borderColor: '#ffd8b2'
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffb347'
                   }
                 }
               }}
@@ -126,7 +145,12 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
           </Box>
         </DialogContent>
 
-        <DialogActions sx={{ px: 3, py: 2 }}>
+        <DialogActions sx={{ 
+          px: 3, 
+          py: 2,
+          bgcolor: '#fff8f0',
+          borderTop: '1px solid #ffd8b2'
+        }}>
           <Button
             onClick={onClose}
             disabled={isSubmitting}
@@ -135,10 +159,11 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
               py: 1,
               borderRadius: 2,
               border: '1px solid',
-              borderColor: 'grey.400',
-              color: 'text.primary',
+              borderColor: '#ffb347',
+              color: '#e67a00',
+              fontWeight: 500,
               '&:hover': {
-                bgcolor: 'grey.100'
+                bgcolor: 'rgba(255, 179, 71, 0.1)'
               }
             }}
           >
@@ -152,10 +177,16 @@ function ProfileForm({ open, onClose, handleEdit }: Props) {
               px: 3,
               py: 1,
               borderRadius: 2,
+              bgcolor: '#ffb347',
+              color: 'white',
+              fontWeight: 500,
               boxShadow: 'none',
               '&:hover': {
-                boxShadow: 'none',
-                bgcolor: 'primary.dark'
+                bgcolor: '#e67a00',
+                boxShadow: 'none'
+              },
+              '&:disabled': {
+                bgcolor: '#ffd8b2'
               }
             }}
           >

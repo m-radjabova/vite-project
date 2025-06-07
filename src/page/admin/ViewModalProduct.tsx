@@ -78,7 +78,7 @@ function ViewModalProduct({selectedProduct, handleViewClose, count, setCount, ha
                         }}
                       />
                       <Box flex={1}>
-                        <Typography variant="body1" mb={1} color="text.secondary">
+                        <Typography variant="body1" mb={1}  color="text.secondary">
                           {selectedProduct?.description}
                         </Typography>
                         <Typography variant="subtitle1" fontWeight={500} mb={0.5} mt={2}>

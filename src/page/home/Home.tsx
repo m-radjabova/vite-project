@@ -12,7 +12,7 @@ import ProductCarousel from "../../components/ProductCarousel";
 
 function Home() {
   const {product} = useProducts();
-  const categories = useCategories();
+  const { categories } = useCategories();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
