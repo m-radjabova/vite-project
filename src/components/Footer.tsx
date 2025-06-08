@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer">
         <div className="container">
             <div className="footer-logo">
-                <img src={FooterLogo} alt="#" />
+                <img style={{cursor: "pointer", width: "200px"}} src={FooterLogo} alt="#" />
                 <ul style={{ listStyle: "none" , textAlign: "left", marginTop: "50px"}}>
                     <li>© YouMeal, 2022</li>
                 </ul>

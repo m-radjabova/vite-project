@@ -21,7 +21,7 @@ function SignUp() {
     }
 
     const regiterUser = async (data: FieldValues) => {
-        apiClient.post("/users", {...data, role: "USER"}).then((res) => {
+        apiClient.post("/users", {...data, roles: ["USER"]}).then((res) => {
             console.log(res)
             navigate("/login")
             toast.success("User registered successfully")
@@ -88,10 +88,10 @@ function SignUp() {
                                 <FaUser style={{ color: '#ff8c00' }} />
                             </span>
                             <input 
-                                {...register("name", { required: true })} 
+                                {...register("username", { required: true })} 
                                 type="text" 
                                 className="form-control" 
-                                id="name"
+                                id="username"
                                 placeholder="John Doe"
                                 style={{
                                     borderLeft: 'none',
@@ -138,7 +138,7 @@ function SignUp() {
                                 <FaPhone style={{ color: '#ff8c00' }} />
                             </span>
                             <input 
-                                {...register("phone", { required: true })} 
+                                {...register("phoneNumber", { required: true })} 
                                 type="tel" 
                                 className="form-control" 
                                 id="phone" 

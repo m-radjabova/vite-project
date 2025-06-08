@@ -216,7 +216,43 @@ body {
       0% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0px); }
-    }
+}
     .hover-effect:hover {
       opacity: 0.2 !important;
-    }
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    padding: 0 10px !important;
+  }
+  .main .container{
+    flex-direction: column;
+  }
+  .main .container .left-side img{
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .main .container .right-side{
+    text-align: center;
+  }
+
+  .footer{
+    padding: 20px;
+  }
+
+  .footer .container{
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .footer .container .footer-content{
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cart-container{
+    flex-direction: column;
+  }
+}

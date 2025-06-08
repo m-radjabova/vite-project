@@ -9,7 +9,6 @@ import PasswordForm from './PasswordForm';
 interface ProfileData {
   name: string;
   email: string;
-  avatar: string | File;
 }
 
 function Profile() {
@@ -27,7 +26,6 @@ function Profile() {
       const updateData = {
         name: data.name,
         email: data.email,
-        ...(data.avatar && { avatar: data.avatar })
       };
   
       const response = await apiClient.patch(`/users/${user?.id}`, updateData);
@@ -41,25 +39,13 @@ function Profile() {
     }
   };
 
-  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     
     if (file) {
-      try {
-        const formData = new FormData();
-        formData.append('avatar', file);
-        const response = await apiClient.post(`/users/${user?.id}/avatar`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        setPreview(URL.createObjectURL(file));
-        dispatch({ type: 'EDIT_USER', payload: response.data });
-        toast.success('Profile picture updated successfully!');
-      } catch (error) {
-        console.error('Avatar upload failed:', error);
-        toast.error('Failed to upload profile picture');
-      }
+      const imageUrl = URL.createObjectURL(file);
+      setPreview(imageUrl);
+      toast.info('Profile picture selected (not uploaded to server)');
     }
   };
   
@@ -113,7 +99,7 @@ function Profile() {
               animation: 'float 6s ease-in-out infinite',
               filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
             }}>
-             <label 
+              <label 
                 htmlFor="image-upload"
                 className="rounded-circle bg-white text-warning d-flex justify-content-center align-items-center position-relative"
                 style={{
@@ -130,12 +116,6 @@ function Profile() {
                 {preview ? (
                   <img 
                     src={preview} 
-                    alt="Profile" 
-                    className="w-100 h-100 object-cover"
-                  />
-                ) : user?.avatar ? (
-                  <img 
-                    src={user.avatar} 
                     alt="Profile" 
                     className="w-100 h-100 object-cover"
                   />
