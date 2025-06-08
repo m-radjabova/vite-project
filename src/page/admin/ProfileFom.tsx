@@ -13,6 +13,7 @@ interface Props {
 type FormData = {
   name: string;
   email: string;
+  avatar: string | File;
 };
 
 function ProfileForm({ open, onClose, handleEdit }: Props) {

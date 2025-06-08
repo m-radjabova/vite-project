@@ -20,6 +20,7 @@ export interface User {
   roles: ("ADMIN" | "USER")[];
   password: string;
   phoneNumber: string;
+  avatar: string;
 }
 
 function App() {

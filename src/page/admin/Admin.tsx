@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser, FaHamburger, FaBox, FaList, FaUserFriends, FaBell, FaCalendarAlt, FaChevronDown } from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaHamburger, FaBox, FaList, FaUserFriends, FaCalendarAlt, FaChevronDown, FaClipboard } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 
@@ -14,7 +14,6 @@ function Admin() {
 
   return (
     <div className="admin-container d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
-      {/* Sidebar */}
       <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
         width: '300px', 
         minWidth: '300px',
@@ -92,6 +91,25 @@ function Admin() {
               >
                 <FaUserFriends className="me-3" />
                 <span>Clients</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ?
+                  "active nav-link d-flex align-items-center rounded" :
+                  "nav-link text-white-50 d-flex align-items-center rounded"}
+                to="orders"
+                style={({isActive}) => ({
+                  backgroundColor: isActive ? 'rgba(253, 126, 20, 0.15)' : 'transparent',
+                  color: isActive ? '#fd7e14' : 'inherit',
+                  borderLeft: isActive ? '3px solid #fd7e14' : '3px solid transparent',
+                  transition: 'all 0.2s ease',
+                  padding: '12px 16px',
+                  fontWeight: 500
+                })}
+              >
+                <FaClipboard className="me-3" />
+                <span>Orders</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -188,20 +206,21 @@ function Admin() {
         </div>
       </div>
       
-      {/* Main Content */}
       <div className="content flex-grow-1" style={{ 
         backgroundColor: '#f8fafc',
         overflowY: 'auto',
         position: 'relative'
       }}>
-        {/* Header */}
         <div className="bg-white px-4 py-3 d-flex align-items-center justify-content-between border-bottom" style={{
           boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
           position: 'sticky',
           top: 0,
           zIndex: 5,
         }}>
-          <h2 className="mb-0 fs-5 fw-semibold text-slate-800">Dashboard</h2>
+          <h2 className="mb-0 fs-5 fw-semibold text-slate-800">
+            <FaHamburger className="me-2" />
+            Admin Dashboard          
+          </h2>
           
           <div className="d-flex align-items-center gap-4">
             <div className="d-flex align-items-center text-slate-500">
@@ -215,13 +234,6 @@ function Admin() {
                 })}
               </span>
             </div>
-
-            <button className="btn btn-link position-relative p-0 text-slate-500">
-              <FaBell size={16} />
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.5rem', padding: '0.15rem 0.25rem' }}>
-                3
-              </span>
-            </button>
 
             <Dropdown>
               <Dropdown.Toggle variant="link" className="d-flex align-items-center p-0 text-decoration-none">
