@@ -84,26 +84,6 @@ function ViewModalProduct({selectedProduct, handleViewClose, count, setCount, ha
                 maxHeight: "90vh"
               }}
             />
-            <IconButton
-              aria-label="close"
-              onClick={handleViewClose}
-              sx={{
-                position: "absolute",
-                top: 10,
-                right: -50,
-                color: "text.danger",
-                bgcolor: 'rgba(0, 0, 0, 0.7)',
-                '&:hover': {
-                  bgcolor: 'rgba(0,0,0,0.15)',
-                  color: "text.primary"
-                },
-                zIndex: 2,
-                boxShadow: 1
-              }}
-              size="small"
-              >
-              <MdClose size={24} />
-            </IconButton>
           </Box>
           <Box flex={1} width="100%">
             <Typography

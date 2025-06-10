@@ -58,7 +58,7 @@ function AdminClients() {
 
   return (
     <>
-      <div className="admin-clients">
+      <div className="admin-clients ">
         <div className="add-section">
           <input
             type="text"

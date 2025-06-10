@@ -18,7 +18,6 @@ function AdminCategory({ categories, activeCategoryId, setActiveCategoryId }: Pr
                         key={category.id}
                         onClick={() => setActiveCategoryId(category.id)}
                     >
-                        {/* Optional: Add icon if needed */}
                         {/* <span className="category-icon">📁</span> */}
                         {category.name}
                     </li>

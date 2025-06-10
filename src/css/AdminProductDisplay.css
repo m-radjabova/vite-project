@@ -153,9 +153,6 @@
 
 .admin-clients {
   padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
 }
 
 .admin-clients .add-section {
@@ -174,12 +171,12 @@
 
 .admin-clients .add-section input:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #de7a48;
 }
 
 .admin-clients .add-button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #e1581e;
   color: white;
   border: none;
   border-radius: 4px;
@@ -190,7 +187,7 @@
 }
 
 .admin-clients .add-button:hover {
-  background-color: #45a049;
+  background-color: #de7a48;
 }
 
 .admin-clients .image-list {
@@ -200,7 +197,7 @@
 }
 
 .admin-clients .image-item {
-  border: 1px solid #eee;
+  border: 3px solid #eee;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
