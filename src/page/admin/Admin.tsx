@@ -4,6 +4,7 @@ import { FaSignOutAlt, FaUser, FaBox, FaList, FaCalendarAlt, FaChevronDown, FaCl
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { GiHotMeal } from "react-icons/gi";
+import { LuCrown } from "react-icons/lu";
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
@@ -16,8 +17,7 @@ function Admin() {
   return (
     <div className="admin-container d-flex" style={{ 
       minHeight: '100vh', 
-      backgroundColor: '#fef6ee',
-      fontFamily: "'Inter', sans-serif"
+      backgroundColor: '#fef6ee'
     }}>
       <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
         width: '280px', 
@@ -202,14 +202,14 @@ function Admin() {
               }}>
                 {user?.username || 'Admin User'}
               </div>
-              <div style={{ 
+              <div style={{
                 color: 'rgba(255,255,255,0.6)', 
                 fontSize: 12,
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
                 overflow: 'hidden'
               }}>
-               Administrator
+                <LuCrown className="me-1" /> Administrator
               </div>
             </div>
           </div>

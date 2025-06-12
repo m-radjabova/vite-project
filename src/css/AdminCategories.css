@@ -1,14 +1,44 @@
+/* AdminCategories.css */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 .category-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 2rem;
 }
 
 .category-title {
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: 600;
   color: #333;
+  margin: 0;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #ff9500;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.2);
+}
+
+.add-button:hover {
+  background-color: #e67a00;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
 }
 
 .category-admin-list {
@@ -16,85 +46,56 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .category-admin-item {
-  background: #ffffff;
+  background-color: white;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid #f0f0f0;
-  transition: all 0.3s ease;
+  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
 }
 
 .category-admin-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #ffd8a8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #ffd8b2;
 }
 
 .category-admin-name {
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: 500;
   color: #333;
-  flex-grow: 1;
 }
 
 .category-actions {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .action-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: none;
-}
-
-.edit-button {
-  background-color: #f0f7ff;
-  color: #1a73e8;
-}
-
-.edit-button:hover {
-  background-color: #e1f0ff;
 }
 
 .delete-button {
-  background-color: #fff0f0;
-  color: #e53935;
+  background-color: rgba(255, 86, 48, 0.1);
+  color: #ff5630;
 }
 
 .delete-button:hover {
-  background-color: #ffe0e0;
-}
-
-.add-button {
-  background-color: #ff7020;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
-}
-
-.add-button:hover {
-  background-color: #e65c1a;
-  transform: translateY(-1px);
+  background-color: rgba(255, 86, 48, 0.2);
 }

@@ -34,11 +34,11 @@ function AdminProduct() {
   return (
     <>
       <div className="category-header">
-          <h2 className="category-title">Products</h2>
+          <h2 className="category-title">Продукты</h2>
             <button 
               onClick={() => navigate("/admin/product/add")} 
               className="add-button">
-              <FiPlus /> Add Product
+              <FiPlus /> Добавить продукт
             </button>
       </div>
       <div className="admin-product">
@@ -58,8 +58,8 @@ function AdminProduct() {
             />
           ) : (
             <div className="empty-state">
-              <h3>Select a category to view products</h3>
-              <p>Choose from the categories on the left to display products</p>
+              <h3>Выберите категорию для просмотра продуктов</h3>
+              <p>Пожалуйста, выберите категорию из списка слева.</p>
             </div>
           )}
         </div>

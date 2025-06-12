@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { CategoryType, ProductType } from "../types/Types";
 import ViewModalProduct from "./ViewModalProduct";
-import { FiDelete, FiEdit2, FiTrash2 } from "react-icons/fi";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import {Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,Button,Box,Typography,IconButton
 } from "@mui/material";
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { Player } from '@lottiefiles/react-lottie-player';
 
 interface Props{
     products: ProductType[];
@@ -85,7 +86,7 @@ function AdminProductDisplay({products, categories, deleteProduct}: Props ) {
                         navigate(`/admin/product/add/${product.id}`);
                     }}
                 >
-                    <FiEdit2 /> Edit
+                    <FiEdit2 /> Изменить
                 </button>
                 <button 
                     className="deleteButton"
@@ -94,7 +95,7 @@ function AdminProductDisplay({products, categories, deleteProduct}: Props ) {
                         handleDeleteClick(String(product.id), e);
                     }}
                 >
-                    <FiTrash2 /> Delete
+                    <FiTrash2 /> Удалить
                 </button>
 
                 </div>
@@ -116,100 +117,124 @@ function AdminProductDisplay({products, categories, deleteProduct}: Props ) {
             aria-labelledby="delete-dialog-title"
             sx={{
                 '& .MuiPaper-root': {
-                borderRadius: '16px',
-                padding: '8px',
-                maxWidth: '480px',
+                borderRadius: '20px',
+                padding: '16px',
+                maxWidth: '500px',
                 width: '100%',
-                boxShadow: '0 10px 30px rgba(255, 140, 0, 0.2)',
-                border: '1px solid rgba(255, 140, 0, 0.1)'
+                boxShadow: '0 10px 50px rgba(0, 0, 0, 0.15)',
+                border: 'none',
+                background: 'linear-gradient(145deg, #ffffff, #f8f8f8)',
+                overflow: 'hidden',
+                position: 'relative',
+                '&:before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '4px',
+                    background: 'linear-gradient(90deg, #FF6B6B, #FF8E53)'
                 }
+                },
+                backdropFilter: 'blur(3px)'
             }}
             >
-            <Box display="flex" justifyContent="space-between" alignItems="center" px={3} pt={3}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" px={3} pt={2}>
                 <DialogTitle id="delete-dialog-title" sx={{ p: 0 }}>
-                <Typography variant="h6" fontWeight="600" color="text.primary">
-                    Confirm Deletion
+                <Typography variant="h6" fontWeight="700" color="text.primary" fontSize="1.3rem">
+                    Подтверждение удаления
                 </Typography>
                 </DialogTitle>
                 <IconButton 
                 onClick={cancelDelete} 
                 sx={{ 
                     color: 'text.secondary',
+                    transition: 'all 0.3s ease',
                     '&:hover': {
-                    backgroundColor: 'rgba(255, 140, 0, 0.08)'
+                    transform: 'rotate(90deg)',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)'
                     }
                 }}
                 >
-                <MdClose size={24} />
+                <MdClose size={26} />
                 </IconButton>
             </Box>
             
-            <DialogContent sx={{ px: 3, py: 2 }}>
-                <Box display="flex" flexDirection="column" alignItems="center" textAlign="center" py={2}>
-                <Box
-                    bgcolor="rgba(255, 140, 0, 0.1)"
-                    color="warning.main"
-                    p={2}
-                    mb={3}
-                    borderRadius="50%"
-                    sx={{
-                    width: '72px',
-                    height: '72px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+            <DialogContent sx={{ px: 3, py: 3 }}>
+                <Box display="flex" flexDirection="column" alignItems="center" textAlign="center">
+                {/* Lottie animatsiya qo'shildi */}
+                <Player
+                    autoplay
+                    loop={false}
+                    src="https://assets1.lottiefiles.com/packages/lf20_khtt8ejx.json"
+                    style={{ 
+                    height: '150px', 
+                    width: '150px',
+                    marginBottom: '16px'
                     }}
+                />
+                
+                <DialogContentText 
+                    variant="body1" 
+                    color="text.primary" 
+                    fontWeight="600" 
+                    mb={1} 
+                    fontSize="1.15rem"
+                    sx={{ lineHeight: 1.5 }}
                 >
-                    <FiDelete size={28} />
-                </Box>
-                <DialogContentText variant="body1" color="text.primary" fontWeight="500" mb={1} fontSize="1.1rem">
-                    Delete this product permanently?
-                </DialogContentText>
-                <DialogContentText variant="body2" color="text.secondary" fontSize="0.95rem">
-                    This will remove all product data from our systems. You won't be able to undo this action.
+                    Вы уверены, что хотите удалить эту продукт?
                 </DialogContentText>
                 </Box>
             </DialogContent>
             
-            <DialogActions sx={{ px: 3, pb: 3, pt: 0, gap: '12px' }}>
+            <DialogActions sx={{ px: 3, pb: 3, pt: 0, gap: '16px' }}>
                 <Button
                 onClick={cancelDelete}
                 variant="outlined"
                 fullWidth
                 sx={{
                     color: 'text.primary',
-                    borderColor: 'rgba(255, 140, 0, 0.3)',
-                    borderRadius: '8px',
-                    padding: '8px 16px',
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                    borderRadius: '12px',
+                    padding: '12px 16px',
                     textTransform: 'none',
-                    fontSize: '0.95rem',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    transition: 'all 0.3s ease',
                     '&:hover': {
-                    borderColor: 'rgba(255, 140, 0, 0.5)',
-                    backgroundColor: 'rgba(255, 140, 0, 0.04)'
+                    borderColor: 'rgba(0, 0, 0, 0.2)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                    transform: 'translateY(-2px)'
                     }
                 }}
                 >
-                Cancel
+                Отменить
                 </Button>
                 <Button
                 onClick={confirmDelete}
                 variant="contained"
                 fullWidth
                 sx={{
-                    backgroundColor: 'rgba(255, 140, 0, 0.9)',
+                    background: 'linear-gradient(90deg, #FF6B6B, #FF8E53)',
                     color: '#fff',
-                    borderRadius: '8px',
-                    padding: '8px 16px',
+                    borderRadius: '12px',
+                    padding: '12px 16px',
                     textTransform: 'none',
-                    fontSize: '0.95rem',
+                    fontSize: '1rem',
+                    fontWeight: '600',
                     boxShadow: 'none',
+                    transition: 'all 0.3s ease',
                     '&:hover': {
-                    backgroundColor: 'rgba(255, 140, 0, 1)',
-                    boxShadow: '0 2px 8px rgba(255, 140, 0, 0.3)'
+                    background: 'linear-gradient(90deg, #FF5757, #FF7B3D)',
+                    boxShadow: '0 5px 15px rgba(255, 107, 107, 0.4)',
+                    transform: 'translateY(-2px)'
+                    },
+                    '&:active': {
+                    transform: 'translateY(0)'
                     }
                 }}
                 >
-                Delete Product
+                Удалить
                 </Button>
             </DialogActions>
         </Dialog>
