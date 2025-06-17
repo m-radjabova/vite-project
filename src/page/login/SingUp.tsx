@@ -1,10 +1,10 @@
-import { FaArrowRight, FaEnvelope, FaLock, FaUser, FaPhone } from "react-icons/fa"
-import { FiShoppingBag } from "react-icons/fi"
+import { FaEnvelope, FaLock, FaUser, FaPhone, FaIceCream } from "react-icons/fa"
 import { FieldValues, useForm } from "react-hook-form"
 import apiClient from "../../apiClient/ApiClient"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { GiIceCreamScoop } from "react-icons/gi"
 
 function SignUp() {
     const {register, handleSubmit, formState: { errors }, reset} = useForm()
@@ -35,8 +35,8 @@ function SignUp() {
 
     return (
         <div className="signup d-flex justify-content-center align-items-center min-vh-100" style={{ 
-            backgroundColor: '#fff8f0',
-            backgroundImage: 'linear-gradient(rgba(255,165,0,0.05), rgba(255,165,0,0.05))'
+            backgroundColor: '#fff0f5',
+            backgroundImage: 'linear-gradient(rgba(255, 182, 193, 0.05), rgba(255, 182, 193, 0.05))'
         }}>
             <div className="signup-form bg-white p-3 p-md-5 rounded-4 shadow" style={{ 
                 width: '95%', 
@@ -45,14 +45,14 @@ function SignUp() {
                 position: 'relative',
                 overflow: 'hidden'
             }}>
-                {/* Decorative elements */}
+                {/* Ice cream decorative elements */}
                 <div style={{
                     position: 'absolute',
                     top: '-50px',
                     right: '-50px',
                     width: '150px',
                     height: '150px',
-                    backgroundColor: 'rgba(255, 165, 0, 0.1)',
+                    backgroundColor: 'rgba(255, 182, 193, 0.1)',
                     borderRadius: '50%',
                     zIndex: 0
                 }}></div>
@@ -62,19 +62,19 @@ function SignUp() {
                     left: '-30px',
                     width: '100px',
                     height: '100px',
-                    backgroundColor: 'rgba(255, 165, 0, 0.1)',
+                    backgroundColor: 'rgba(255, 182, 193, 0.1)',
                     borderRadius: '50%',
                     zIndex: 0
                 }}></div>
                 
                 <div className="text-center mb-4" style={{ position: 'relative', zIndex: 1 }}>
-                    <FiShoppingBag className="mb-3" style={{ 
-                        fontSize: '2.5rem', 
-                        color: '#ff8c00',
-                        filter: 'drop-shadow(0 2px 4px rgba(255,140,0,0.3))'
+                    <GiIceCreamScoop className="mb-3" style={{ 
+                        fontSize: '3rem', 
+                        color: '#ff85a2',
+                        filter: 'drop-shadow(0 2px 4px rgba(255, 133, 162, 0.3))'
                     }} />
-                    <h2 className="fw-bold" style={{ color: '#ff8c00' }}>Join YouMeal</h2>
-                    <p className="text-muted">Create your account to start ordering</p>
+                    <h2 className="fw-bold" style={{ color: '#ff85a2' }}>Sweet Creations</h2>
+                    <p className="text-muted">Create your account for delicious treats</p>
                 </div>
                 
                 <form onSubmit={handleSubmit(checkUser)} style={{ position: 'relative', zIndex: 1 }}>
@@ -83,9 +83,9 @@ function SignUp() {
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff8c00'
+                                borderColor: '#ff85a2'
                             }}>
-                                <FaUser style={{ color: '#ff8c00' }} />
+                                <FaUser style={{ color: '#ff85a2' }} />
                             </span>
                             <input 
                                 {...register("username", { required: true })} 
@@ -95,12 +95,12 @@ function SignUp() {
                                 placeholder="John Doe"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff8c00',
+                                    borderColor: '#ff85a2',
                                     boxShadow: 'none'
                                 }}
                             />
                         </div>
-                        {errors.name && <p className="text-danger mt-1">Name is required</p>}
+                        {errors.username && <p className="text-danger mt-1">Name is required</p>}
                     </div>
                     
                     <div className="mb-3">
@@ -108,9 +108,9 @@ function SignUp() {
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff8c00'
+                                borderColor: '#ff85a2'
                             }}>
-                                <FaEnvelope style={{ color: '#ff8c00' }} />
+                                <FaEnvelope style={{ color: '#ff85a2' }} />
                             </span>
                             <input 
                                 {...register("email", { required: true })} 
@@ -120,7 +120,7 @@ function SignUp() {
                                 placeholder="john@example.com"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff8c00',
+                                    borderColor: '#ff85a2',
                                     boxShadow: 'none'
                                 }}
                             />
@@ -133,9 +133,9 @@ function SignUp() {
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff8c00'
+                                borderColor: '#ff85a2'
                             }}>
-                                <FaPhone style={{ color: '#ff8c00' }} />
+                                <FaPhone style={{ color: '#ff85a2' }} />
                             </span>
                             <input 
                                 {...register("phoneNumber", { required: true })} 
@@ -145,12 +145,12 @@ function SignUp() {
                                 placeholder="+1234567890"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff8c00',
+                                    borderColor: '#ff85a2',
                                     boxShadow: 'none'
                                 }}
                             />
                         </div>
-                        {errors.phone && <p className="text-danger mt-1">Phone number is required</p>}
+                        {errors.phoneNumber && <p className="text-danger mt-1">Phone number is required</p>}
                     </div>
 
                     <div className="mb-3">
@@ -158,9 +158,9 @@ function SignUp() {
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff8c00'
+                                borderColor: '#ff85a2'
                             }}>
-                                <FaLock style={{ color: '#ff8c00' }} />
+                                <FaLock style={{ color: '#ff85a2' }} />
                             </span>
                             <input 
                                 {...register("password", { required: true, minLength: 8 })}
@@ -170,7 +170,7 @@ function SignUp() {
                                 placeholder="At least 8 characters"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff8c00',
+                                    borderColor: '#ff85a2',
                                     boxShadow: 'none'
                                 }}
                             />
@@ -189,9 +189,9 @@ function SignUp() {
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff8c00'
+                                borderColor: '#ff85a2'
                             }}>
-                                <FaLock style={{ color: '#ff8c00' }} />
+                                <FaLock style={{ color: '#ff85a2' }} />
                             </span>
                             <input 
                                 {...register("confirmPassword", { required: true })}
@@ -201,7 +201,7 @@ function SignUp() {
                                 placeholder="Re-enter your password"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff8c00',
+                                    borderColor: '#ff85a2',
                                     boxShadow: 'none'
                                 }}
                             />
@@ -213,11 +213,11 @@ function SignUp() {
                         type="submit" 
                         className="btn w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2" 
                         style={{ 
-                            backgroundColor: '#ff8c00', 
+                            backgroundColor: '#ff85a2', 
                             color: 'white',
                             borderRadius: '50px',
                             border: 'none',
-                            boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)',
+                            boxShadow: '0 4px 15px rgba(255, 133, 162, 0.3)',
                             transition: 'all 0.3s ease',
                             fontSize: '1.1rem',
                             position: 'relative',
@@ -225,18 +225,18 @@ function SignUp() {
                             zIndex: 1
                         }}
                         onMouseOver={(e) => {
-                            e.currentTarget.style.backgroundColor = '#ff6b00';
+                            e.currentTarget.style.backgroundColor = '#ff6b8b';
                             e.currentTarget.style.transform = 'translateY(-2px)';
-                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 140, 0, 0.4)';
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 133, 162, 0.4)';
                         }}
                         onMouseOut={(e) => {
-                            e.currentTarget.style.backgroundColor = '#ff8c00';
+                            e.currentTarget.style.backgroundColor = '#ff85a2';
                             e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 140, 0, 0.3)';
+                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 133, 162, 0.3)';
                         }}
                     >
                         <span style={{ position: 'relative', zIndex: 2 }}>Sign Up Now</span>
-                        <FaArrowRight style={{ position: 'relative', zIndex: 2 }} />
+                        <FaIceCream style={{ position: 'relative', zIndex: 2 }} />
                         <span style={{
                             position: 'absolute',
                             top: '-10px',
@@ -255,7 +255,7 @@ function SignUp() {
                             <Link 
                                 to="/login" 
                                 style={{ 
-                                    color: '#ff8c00', 
+                                    color: '#ff85a2', 
                                     cursor: 'pointer',
                                     marginLeft: '5px',
                                     fontWeight: '600',

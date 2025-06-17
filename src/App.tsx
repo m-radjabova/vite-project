@@ -5,13 +5,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./page/admin/Admin";
 import Home from "./page/home/Home";
 import SingUp from "./page/login/SingUp";
-import AdminProduct from "./page/admin/AdminProduct";
-import Profile from "./page/admin/Profile";
-import AdminCategories from "./page/admin/AdminCategories";
-import AdminClients from "./page/admin/AdminClients";
-import PageNotFound from "./components/PageNotFound";
 import IsLoading from "./components/IsLoading";
-import AdminProductForm from "./page/admin/AdminProductForm";
+import PageNotFound from "./components/PageNotFound";
 
 export interface User {
   id: string;
@@ -20,7 +15,6 @@ export interface User {
   roles: ("ADMIN" | "USER")[];
   password: string;
   phoneNumber: string;
-  avatar: string;
 }
 
 function App() {
@@ -48,12 +42,6 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="product" element={<AdminProduct />} />
-          <Route path="product/add" element={<AdminProductForm />} />
-          <Route path="/admin/product/add/:id" element={<AdminProductForm />} />
-          <Route path="categories" element={<AdminCategories />} />
-          <Route path="clients" element={<AdminClients />} />
-          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

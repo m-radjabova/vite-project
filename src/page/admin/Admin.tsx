@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser, FaBox, FaList, FaCalendarAlt, FaChevronDown, FaClipboard, FaCog, FaUsers } from "react-icons/fa";
+import { FaSignOutAlt, FaUser,FaCalendarAlt, FaChevronDown,FaCog } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { GiHotMeal } from "react-icons/gi";
@@ -51,98 +51,6 @@ function Admin() {
           
           <hr className="bg-slate-600 opacity-10 my-3" />
           <ul className="nav nav-pills flex-column gap-2">
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white-50 d-flex align-items-center rounded"}
-                to="product"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 140, 0, 0.15)' : 'transparent',
-                  color: isActive ? '#ffaa00' : 'rgba(255,255,255,0.7)',
-                  borderLeft: isActive ? '3px solid #ff8c00' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.05)',
-                    color: !isActive && '#fff'
-                  }
-                })}
-              >
-                <FaBox className="me-3" />
-                <span>Products</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white-50 d-flex align-items-center rounded"}
-                to="categories"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 140, 0, 0.15)' : 'transparent',
-                  color: isActive ? '#ffaa00' : 'rgba(255,255,255,0.7)',
-                  borderLeft: isActive ? '3px solid #ff8c00' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.05)',
-                    color: !isActive && '#fff'
-                  }
-                })}
-              >
-                <FaList className="me-3" />
-                <span>Categories</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white-50 d-flex align-items-center rounded"}
-                to="orders"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 140, 0, 0.15)' : 'transparent',
-                  color: isActive ? '#ffaa00' : 'rgba(255,255,255,0.7)',
-                  borderLeft: isActive ? '3px solid #ff8c00' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.05)',
-                    color: !isActive && '#fff'
-                  }
-                })}
-              >
-                <FaClipboard className="me-3" />
-                <span>Orders</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white-50 d-flex align-items-center rounded"}
-                to="clients"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 140, 0, 0.15)' : 'transparent',
-                  color: isActive ? '#ffaa00' : 'rgba(255,255,255,0.7)',
-                  borderLeft: isActive ? '3px solid #ff8c00' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.05)',
-                    color: !isActive && '#fff'
-                  }
-                })}
-              >
-                <FaUsers className="me-3" />
-                <span>Clients</span>
-              </NavLink>
-            </li>
             <li className="nav-item">
               <NavLink
                 className={({ isActive }) => isActive ?

@@ -1,70 +1,104 @@
-import { FaHamburger, FaHome } from 'react-icons/fa';
-import { GiFrenchFries } from 'react-icons/gi';
-import { BiDrink } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { FaHome } from "react-icons/fa";
+import { GiIceCreamCone, GiIceCreamScoop } from "react-icons/gi";
+import { TbIceCream } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 function PageNotFound() {
   return (
     <div className="min-vh-100 d-flex flex-column justify-content-center align-items-center" 
-         style={{ backgroundColor: '#fff8f0' }}>
+        style={{ 
+            backgroundColor: '#fff5f7',
+            background: 'linear-gradient(to bottom, #fff5f7, #ffebee)'
+        }}>
       <div className="container text-center py-5">
         <div className="row justify-content-center">
           <div className="col-lg-8">
-            {/* Animated food icons */}
+            {/* Animated ice cream icons */}
             <div className="d-flex justify-content-center mb-4">
-              <FaHamburger className="text-warning mx-2" size={40} style={{ animation: 'bounce 2s infinite' }} />
-              <GiFrenchFries className="text-warning mx-2" size={40} style={{ animation: 'bounce 2s infinite 0.2s' }} />
-              <BiDrink className="text-warning mx-2" size={40} style={{ animation: 'bounce 2s infinite 0.4s' }} />
+              <GiIceCreamCone className="mx-3" size={50} style={{ 
+                color: '#ff85a2', 
+                animation: 'melt 4s infinite ease-in-out',
+                filter: 'drop-shadow(0 4px 8px rgba(255, 133, 162, 0.3))'
+              }} />
+              <GiIceCreamScoop className="mx-3" size={60} style={{ 
+                color: '#ffb6c1', 
+                animation: 'float 3s infinite ease-in-out 0.5s',
+                filter: 'drop-shadow(0 4px 8px rgba(255, 182, 193, 0.3))'
+              }} />
+              <TbIceCream className="mx-3" size={50} style={{ 
+                color: '#ff69b4', 
+                animation: 'melt 4s infinite ease-in-out 1s',
+                filter: 'drop-shadow(0 4px 8px rgba(255, 182, 193, 0.3))'
+              }} />
             </div>
             
             {/* Main message */}
-            <h1 className="display-1 fw-bold text-warning mb-3">404</h1>
-            <h2 className="h3 mb-4" style={{ color: '#e67e22' }}>Oops! Page Not Found</h2>
-            <p className="lead mb-5" style={{ color: '#d35400' }}>
-              The page you're looking for doesn't exist or has been moved. 
-              Maybe you were searching for one of our delicious menu items?
+            <h1 className="display-1 fw-bold mb-3" style={{ 
+              color: '#ff85a2',
+              textShadow: '2px 2px 4px rgba(255, 133, 162, 0.2)',
+              fontFamily: "'Comic Neue', cursive"
+            }}>404</h1>
+            
+            <h2 className="h2 mb-4" style={{ 
+              color: '#ff69b4',
+              fontFamily: "'Comic Neue', cursive",
+              fontWeight: 700
+            }}>
+              Oops! Sweet Nothing Here
+            </h2>
+            
+            <p className="lead mb-5" style={{ 
+              color: '#d3567e',
+              fontSize: '1.25rem',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}>
+              The page you're looking for has melted away!<br />
+              Maybe you were searching for one of our delicious ice cream flavors?
             </p>
         
-            
             {/* Action buttons */}
-            <div className="d-flex justify-content-center gap-3">
-              <Link to="/" className="btn btn-warning px-4 py-2">
+            <div className="d-flex justify-content-center gap-3 flex-wrap">
+              <Link to="/" className="btn px-4 py-3 rounded-pill" style={{
+                backgroundColor: '#ff85a2',
+                color: 'white',
+                border: 'none',
+                fontWeight: 600,
+                boxShadow: '0 4px 15px rgba(255, 133, 162, 0.4)',
+                transition: 'all 0.3s ease',
+                minWidth: '180px'
+              }}>
                 <FaHome className="me-2" />
                 Return Home
               </Link>
-              <Link to="/" className="btn btn-outline-warning px-4 py-2">
-                View Full Menu
+              
+              <Link to="/menu" className="btn px-4 py-3 rounded-pill" style={{
+                backgroundColor: 'white',
+                color: '#ff85a2',
+                border: '2px solid #ff85a2',
+                fontWeight: 600,
+                boxShadow: '0 4px 15px rgba(255, 133, 162, 0.2)',
+                transition: 'all 0.3s ease',
+                minWidth: '180px'
+              }}>
+                <GiIceCreamScoop className="me-2" />
+                View Flavors
               </Link>
             </div>
           </div>
         </div>
       </div>
       
-      <style>
-        {`
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-          }
-          .btn-warning {
-            background-color: #e67e22;
-            border-color: #e67e22;
-            color: white;
-          }
-          .btn-warning:hover {
-            background-color: #d35400;
-            border-color: #d35400;
-          }
-          .btn-outline-warning {
-            color: #e67e22;
-            border-color: #e67e22;
-          }
-          .btn-outline-warning:hover {
-            background-color: #e67e22;
-            color: white;
-          }
-        `}
-      </style>
+      {/* Ice cream sprinkles decoration */}
+      <div style={{
+        position: 'absolute',
+        bottom: '20px',
+        width: '100%',
+        height: '40px',
+        backgroundImage: 'radial-gradient(#ffb6c1 2px, transparent 2px)',
+        backgroundSize: '20px 20px',
+        opacity: 0.6
+      }}></div>
     </div>
   );
 }

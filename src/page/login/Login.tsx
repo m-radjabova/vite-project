@@ -1,10 +1,10 @@
 import { FaEnvelope, FaLock, FaArrowRight } from 'react-icons/fa';
-import { FiShoppingBag } from 'react-icons/fi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import apiClient from '../../apiClient/ApiClient';
 import { toast } from 'react-toastify';
 import { User } from '../../App';
+import { GiIceCreamCone } from 'react-icons/gi';
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm();
@@ -15,7 +15,7 @@ const LoginForm = () => {
       if (res.data.length > 0) {
         const user = res.data[0];
         if(res.data[0].password === data.password){
-          toast.success("Welcome back! 🍔");
+          toast.success("Welcome back! ");
           localStorage.setItem("token", user.id);
           navigate("/admin");
         }else{
@@ -29,47 +29,50 @@ const LoginForm = () => {
 
   return (
     <div className="login d-flex justify-content-center align-items-center min-vh-100" style={{ 
-      backgroundColor: '#fff8f0',
-      backgroundImage: 'linear-gradient(rgba(255,165,0,0.05), rgba(255,165,0,0.05))'
+      backgroundColor: '#fff5f7',
+      backgroundImage: 'linear-gradient(rgba(255,182,193,0.05), rgba(255,192,203,0.05))'
     }}>
       <div className="login-form bg-white p-4 p-md-5 rounded-4 shadow" style={{ 
         width: '95%', 
         maxWidth: '450px',
-        border: 'none',
+        border: '1px solid rgba(255, 182, 193, 0.3)',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
       }}>
-        {/* Decorative elements */}
         <div style={{
           position: 'absolute',
           top: '-50px',
           right: '-50px',
           width: '150px',
           height: '150px',
-          backgroundColor: 'rgba(255, 165, 0, 0.1)',
+          backgroundColor: 'rgba(255, 182, 193, 0.1)',
           borderRadius: '50%',
           zIndex: 0
         }}></div>
         
         <div className="text-center mb-4" style={{ position: 'relative', zIndex: 1 }}>
-          <FiShoppingBag className="mb-3" style={{ 
-            fontSize: '2.5rem', 
-            color: '#ff8c00',
-            filter: 'drop-shadow(0 2px 4px rgba(255,140,0,0.3))'
+          <GiIceCreamCone className="mb-3" style={{ 
+            fontSize: '3rem', 
+            color: '#ff85a2',
+            filter: 'drop-shadow(0 2px 4px rgba(255,133,162,0.3))'
           }} />
-          <h1 className="fw-bold" style={{ color: '#ff8c00' }}>Welcome Back</h1>
-          <p className="text-muted">Sign in to your FastFood account</p>
+          <h1 className="fw-bold" style={{ 
+            color: '#ff85a2',
+            fontFamily: "'Comic Sans MS', cursive, sans-serif"
+          }}>Sweet Treats</h1>
+          <p className="text-muted" style={{ color: '#888' }}>Sign in to your ice cream paradise</p>
         </div>
 
         <form onSubmit={handleSubmit(Login)} style={{ position: 'relative', zIndex: 1 }}>
           <div className="mb-4">
-            <label htmlFor="email" className="form-label fw-semibold">Email Address</label>
+            <label htmlFor="email" className="form-label fw-semibold" style={{ color: '#ff85a2' }}>Email Address</label>
             <div className="input-group">
               <span className="input-group-text bg-white" style={{ 
                 borderRight: 'none',
-                borderColor: '#ff8c00'
+                borderColor: '#ffb6c1',
+                color: '#ff85a2'
               }}>
-                <FaEnvelope style={{ color: '#ff8c00' }} />
+                <FaEnvelope />
               </span>
               <input
                 type="email"
@@ -79,21 +82,23 @@ const LoginForm = () => {
                 {...register('email', { required: true })}
                 style={{ 
                   borderLeft: 'none',
-                  borderColor: '#ff8c00',
-                  boxShadow: 'none'
+                  borderColor: '#ffb6c1',
+                  boxShadow: 'none',
+                  backgroundColor: '#fff9fa'
                 }}
               />
             </div>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="password" className="form-label fw-semibold">Password</label>
+            <label htmlFor="password" className="form-label fw-semibold" style={{ color: '#ff85a2' }}>Password</label>
             <div className="input-group">
               <span className="input-group-text bg-white" style={{ 
                 borderRight: 'none',
-                borderColor: '#ff8c00'
+                borderColor: '#ffb6c1',
+                color: '#ff85a2'
               }}>
-                <FaLock style={{ color: '#ff8c00' }} />
+                <FaLock />
               </span>
               <input
                 type="password"
@@ -103,8 +108,9 @@ const LoginForm = () => {
                 {...register('password', { required: true })}
                 style={{ 
                   borderLeft: 'none',
-                  borderColor: '#ff8c00',
-                  boxShadow: 'none'
+                  borderColor: '#ffb6c1',
+                  boxShadow: 'none',
+                  backgroundColor: '#fff9fa'
                 }}
               />
             </div>
@@ -112,9 +118,10 @@ const LoginForm = () => {
               <NavLink 
                 to="/forgot-password" 
                 style={{ 
-                  color: '#ff8c00', 
+                  color: '#ff85a2', 
                   fontSize: '0.85rem',
-                  textDecoration: 'none'
+                  textDecoration: 'none',
+                  fontWeight: '500'
                 }}
               >
                 Forgot password?
@@ -126,11 +133,11 @@ const LoginForm = () => {
             type="submit"
             className="btn w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2"
             style={{ 
-              backgroundColor: '#ff8c00', 
+              backgroundColor: '#ff85a2', 
               color: 'white',
               borderRadius: '50px',
               border: 'none',
-              boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)',
+              boxShadow: '0 4px 15px rgba(255, 133, 162, 0.3)',
               transition: 'all 0.3s ease',
               fontSize: '1.1rem',
               position: 'relative',
@@ -138,17 +145,17 @@ const LoginForm = () => {
               zIndex: 1
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#ff6b00';
+              e.currentTarget.style.backgroundColor = '#ff6b8b';
               e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 140, 0, 0.4)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 133, 162, 0.4)';
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#ff8c00';
+              e.currentTarget.style.backgroundColor = '#ff85a2';
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 140, 0, 0.3)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 133, 162, 0.3)';
             }}
           >
-            <span style={{ position: 'relative', zIndex: 2 }}>Sign In</span>
+            <span style={{ position: 'relative', zIndex: 2 }}>Sweet Sign In</span>
             <FaArrowRight style={{ position: 'relative', zIndex: 2 }} />
             <span style={{
               position: 'absolute',
@@ -163,12 +170,12 @@ const LoginForm = () => {
           </button>
 
           <div className="text-center mt-4">
-            <p className="text-muted small mb-0">
+            <p className="small mb-0" style={{ color: '#888' }}>
               Don't have an account?{' '}
               <NavLink 
                 to="/sign-up" 
                 style={{ 
-                  color: '#ff8c00', 
+                  color: '#ff85a2', 
                   fontWeight: '600',
                   textDecoration: 'none'
                 }}
@@ -178,6 +185,16 @@ const LoginForm = () => {
             </p>
           </div>
         </form>
+        <div style={{
+          position: 'absolute',
+          bottom: '-30px',
+          left: '-30px',
+          width: '100px',
+          height: '100px',
+          backgroundColor: 'rgba(255, 182, 193, 0.1)',
+          borderRadius: '50%',
+          zIndex: 0
+        }}></div>
       </div>
     </div>
   );
