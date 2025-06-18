@@ -2,6 +2,7 @@
 @import "./css/Main.css";
 @import "./css/MainServices.css";
 @import "./css/Oatmea.css";
+@import "./css/OurProducts.css";
 
 body {
   scroll-behavior: smooth;
