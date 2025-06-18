@@ -1,5 +1,7 @@
 @import "./css/Header.css";
 @import "./css/Main.css";
+@import "./css/MainServices.css";
+@import "./css/Oatmea.css";
 
 body {
   scroll-behavior: smooth;
@@ -13,7 +15,7 @@ body {
 
 .container{
   max-width: 1440px !important;
-  margin: 0 auto;
+  margin: 0 auto !important;
 }
 
 @keyframes float {

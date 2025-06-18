@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.oatmea{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 40px;
+}
+
+.oatmea .left-side{
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.oatmea .left-side h1{
+    font-family: 'Hind Madurai';
+    font-weight: 600;
+    font-size: 44.2px;
+    line-height: 111.00000000000001%;
+    letter-spacing: 0%;
+    color: #150101;
+}
+
+.oatmea .left-side p{
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: #150101;
+    opacity: 60%;
+}
+
+.oatmea .left-side button{
+  font-family: Hind Madurai;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border-radius: 5px;
+  border: none;
+  padding: 16px 40px;
+  color: #FAFAFA;
+  background-color: #D23166;
+}
+
+.oatmea .left-side button:hover{
+  cursor: pointer;
+  background: #b92e5c;
+  transition: all 0.3s ease-in-out;
+}
+
+.oatmea .right-side {
+  flex: 1.1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 400px;
+}
+
+.oatmea .right-side img {
+  width: 550px;
+  max-width: 100%;
+  filter: drop-shadow(0 16px 32px rgba(210,49,102,0.10));
+  border-radius: 50%;
+  background: transparent;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .oatmea {
+    flex-direction: column;
+    padding: 32px 4vw;
+    min-height: unset;
+    text-align: center;
+  }
+  .oatmea .left-side {
+    align-items: center;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .oatmea .right-side img {
+    width: 220px;
+  }
+}
