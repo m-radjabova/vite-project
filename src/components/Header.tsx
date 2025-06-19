@@ -31,7 +31,7 @@ function Header() {
         <img src={Logo} alt="Logo" className="header-logo" />
         <nav className="header-nav">
           <a href="#">Home</a>
-          <a href="#">Product</a>
+          <a href="#product">Product</a>
           <a href="#">Pricing</a>
           <a href="#">Testimonials</a>
           <a href="#">Contact Us</a>

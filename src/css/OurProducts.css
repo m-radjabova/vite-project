@@ -1,265 +1,231 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-.our-products{
-    margin-top: 100px;
-    margin-bottom: 100px;
+
+.our-products {
+  padding: 60px 20px;
+  font-family: 'Hind Madurai', "Roboto";
 }
 
-.our-products h1{
-    text-align: center;
-    font-family: 'Hind Madurai';
-    font-weight: 600;
-    font-size: 44.2px;
-    line-height: 111.00000000000001%;
-    letter-spacing: 0%;
-    color: #150101;
+.our-products h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #ff85a2;
+  margin-bottom: 50px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.our-products .products-categories{
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
+.our-products h1::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #ff85a2, transparent);
+  border-radius: 3px;
 }
 
-.our-products .products-categories .categories-item h5 {
-    font-family: Roboto;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
-    cursor: pointer;
-    transition: color 0.3s;
-    opacity: 0.6;
-    position: relative;
-    padding-bottom: 6px;
+.products-categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
 }
 
-.our-products .products-categories .categories-item h5.active {
-    color: #000;
-    opacity: 1;
+.categories-item h5 {
+  padding: 12px 25px;
+  color: #ff85a2;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  margin: 0;
+  position: relative;
+  font-weight: 500;
+  background: transparent;
+  border: none;
 }
 
-.our-products .products-categories .categories-item h5.active::after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 3px;
-    border-radius: 2px;
-    background: #D23166;
-    transition: width 0.3s;
-    width: 100%;
+.categories-item h5::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: #ff85a2;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-
-.our-products .products-list{
-    width: 100%;
-   display: flex;
-    flex-direction: column;
-    gap: 60px;
-    margin-top: 32px;
+.categories-item h5:hover::after {
+  width: 60%;
 }
 
-.our-products .products-list .product-item {
+.categories-item h5.active {
+  color: #ff5c8a;
+  font-weight: 600;
+}
+
+.categories-item h5.active::after {
+  width: 80%;
+  background: #ff5c8a;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+
+.product-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 48px;
-  background: transparent;
-  border-radius: 16px;
-  padding: 0;
-  box-shadow: none;
+  gap: 60px;
+  background: white;
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(255, 133, 162, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
 }
 
 .product-item.reverse {
   flex-direction: row-reverse;
 }
 
-.our-products .products-list .product-item .product-img {
+.product-img {
   flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 350px;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-
-.our-products .products-list .product-item .product-img img {
-  width: 700px;
-  max-width: 100%;
-  object-fit: contain;
-  background: transparent;
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
 }
 
-.our-products .products-list .product-item .right-content{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
-    max-width: 400px;
-}
 
 .product-info {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  min-width: 320px;
+  padding: 20px;
 }
 
 .product-info h2 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: #150101;
-  margin-bottom: 6px;
+  color: #ff5c8a;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .product-info p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 15px;
-  color: #222;
-  opacity: 0.7;
-  margin-bottom: 10px;
-  line-height: 24px;
+  color: #777;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
 }
 
 .product-price {
-  font-size: 22px;
+  color: #ff5c8a;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #150101;
-  margin: 0;
+  margin-bottom: 25px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
-.product-price .old-price {
-  font-size: 16px;
-  color: #888;
+.old-price {
+  color: #bbb;
+  font-size: 1.3rem;
   text-decoration: line-through;
   font-weight: 500;
-  opacity: 0.7;
 }
 
 .product-info button {
-  background: #d23166;
-  color: #fff;
+  background: linear-gradient(to right, #ff85a2, #ff5c8a);
+  color: white;
   border: none;
-  border-radius: 7px;
-  padding: 12px 38px;
-  font-size: 16px;
-  font-weight: 700;
-  margin-top: 8px;
+  padding: 14px 35px;
+  border-radius: 50px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(255, 133, 162, 0.3);
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
-
 
 .product-info button:hover {
-  background: #b92e5c;
+  background: linear-gradient(to right, #ff5c8a, #ff85a2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 133, 162, 0.4);
 }
-
-/* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 992px) {
   .product-item,
   .product-item.reverse {
-    flex-direction: column !important;
-    align-items: center;
-    gap: 24px;
-    padding: 24px 10px;
+    flex-direction: column;
+    gap: 30px;
+  padding: 30px;
+  text-align: center;
   }
-  .product-info {
-    align-items: center;
-    text-align: center;
-    min-width: unset;
+  
+  .product-img {
+    width: 100%;
+    min-height: 250px;
   }
-  .product-img img {
-    width: 180px;
+  
+  .product-price {
+    justify-content: center;
   }
 }
 
-
-/* .our-products .products-list .product-item .right-content h2{
-    font-family: 'Hind Madurai';
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 100%;
-    letter-spacing: 0%; 
-    color: #150101;
-}
-
-.our-products .products-list .product-item .right-content p{
-    width: 50%;
-    font-family: 'Roboto';
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0%;
-    color: #0F0101;
-
-}
-
-.product-price {
-  font-size: 22px;
-  font-weight: 700;
-  color: #150101; 
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.product-price .old-price {
-  font-size: 16px;
-  color: #676767;
-  text-decoration: line-through;
-  font-weight: 500;
-  opacity: 0.7;
-}
-
-.our-products .products-list .product-item .right-content button{
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    background-color: #D23166;
-    color: #fff;
-    font-family: 'Roboto';
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.our-products .products-list .product-item .right-content button:hover{
-    background-color: #d23c6b;
-}
-
-
-@media (max-width: 900px) {
-  .product-item,
-  .product-item.reverse {
-    flex-direction: column !important;
-    align-items: center;
-    gap: 24px;
-    padding: 24px 10px;
+@media (max-width: 576px) {
+  .our-products h1 {
+    font-size: 2.2rem;
   }
-  .right-content {
-    align-items: center;
-    text-align: center;
+  
+  .categories-item h5 {
+    padding: 10px 15px;
+    font-size: 1rem;
   }
-} */
-
-
-
-
-
-
-
+  
+  .product-item {
+    padding: 25px;
+  border-radius: 15px;
+  }
+  
+  .product-info h2 {
+    font-size: 1.6rem;
+  }
+  
+  .product-info p {
+    font-size: 1rem;
+  }
+  
+  .product-price {
+    font-size: 1.5rem;
+  }
+  
+  .old-price {
+    font-size: 1.1rem;
+  }
+  
+  .product-info button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}

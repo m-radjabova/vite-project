@@ -3,6 +3,7 @@
 @import "./css/MainServices.css";
 @import "./css/Oatmea.css";
 @import "./css/OurProducts.css";
+@import "./css/Order.css";
 
 body {
   scroll-behavior: smooth;

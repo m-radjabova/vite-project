@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoryType, ProductType } from "../page/types/Types";
 
 interface Props {
@@ -7,11 +7,19 @@ interface Props {
 }
 
 function OurProducts({ categories, products }: Props) {
-    const [activeId, setActiveId] = useState<string | number>(categories[0]?.id);
+    const [activeId, setActiveId] = useState(
+        categories.length > 0 ? categories[0].id : null
+    );
 
+    useEffect(() => {
+        if (categories.length > 0) {
+        setActiveId(categories[0].id);
+        }
+    }, [categories]);
+    
     return (
         <div>
-            <div className="our-products">
+            <div className="our-products" id="product">
                 <h1>Our Products</h1>
                 <div className="products-categories">
                     {categories.map((category) => (
@@ -25,7 +33,7 @@ function OurProducts({ categories, products }: Props) {
                         </div>
                     ))}
                 </div>
-                <div className="products-list container">
+                <div className="products-list">
                 {products
                     .filter((product) => product.categoryId === activeId)
                     .map((product, index) => (
@@ -40,6 +48,7 @@ function OurProducts({ categories, products }: Props) {
                             <h2>{product.name}</h2>
                             <p>{product.description}</p>
                         <h5 className="product-price">
+                            
                             ${product.price}
                             {product.oldPrice && (
                             <span className="old-price">${product.oldPrice}</span>

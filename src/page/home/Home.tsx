@@ -7,6 +7,7 @@ import Oatmea from "../../components/Oatmea";
 import { CategoryType, ProductType } from "../types/Types";
 import { toast } from "react-toastify";
 import OurProducts from "../../components/OurProducts";
+import Order from './../../components/Order';
 
 function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -51,6 +52,9 @@ function Home() {
       </div>
       <div className="container">
         <OurProducts categories={categories} products={products} />
+      </div>
+      <div style={{backgroundColor : "#F8EDF0"}}>
+        <Order/>
       </div>
     </div>
   );
