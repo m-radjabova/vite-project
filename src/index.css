@@ -4,6 +4,8 @@
 @import "./css/Oatmea.css";
 @import "./css/OurProducts.css";
 @import "./css/Order.css";
+@import "./css/Question.css";
+@import "./css/Footer.css";
 
 body {
   scroll-behavior: smooth;
@@ -16,7 +18,7 @@ body {
 }
 
 .container{
-  max-width: 1440px !important;
+  max-width: 1350px !important;
   margin: 0 auto !important;
 }
 

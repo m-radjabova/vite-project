@@ -4,10 +4,11 @@
     align-items: center;
     padding: 40px;
     margin-top: 40px;
+    
 }
 
 .order .order-item1 {
-    flex: 1;
+    flex: 1.1;
 }
 
 .order .order-item1 .telefon{

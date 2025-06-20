@@ -8,6 +8,9 @@ import { CategoryType, ProductType } from "../types/Types";
 import { toast } from "react-toastify";
 import OurProducts from "../../components/OurProducts";
 import Order from './../../components/Order';
+import Question from "../../components/Question";
+import Footer from "../../components/Footer";
+import CarouselProduct from "../../components/CarouselProduct";
 
 function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -44,6 +47,7 @@ function Home() {
       <div style={{backgroundColor : "#f0dde3"}}>
         <Main />
       </div>
+      <CarouselProduct />
       <div className="container">
         <MainServices />
       </div>
@@ -55,6 +59,12 @@ function Home() {
       </div>
       <div style={{backgroundColor : "#F8EDF0"}}>
         <Order/>
+      </div>
+      <div className="container">
+        <Question />
+      </div>
+      <div style={{backgroundColor : "#0A0808"}}>
+        <Footer />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import google from '../assets/en_badge_web_generic-removebg-preview 1.svg';
 import appstore from '../assets/logo-app-store-brand-font-png-favpng-Gb5FcTZcrb9bRikX49s26mMVn-removebg-preview 1 (1).svg'
 function Order() {
   return (
-    <div className='order'>
+    <div className='order container'>
         <div className="order-item1">
             <img className='telefon' src={telefon} alt="" />
         </div>

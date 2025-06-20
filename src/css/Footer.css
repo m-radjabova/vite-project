@@ -1,0 +1,112 @@
+.footer{
+    padding: 20px;
+    color: #ffffff;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    font-size: 12px;
+    margin-top: 40px;
+}
+
+.footer .footer-1 .footer-1-icons .footer-1-icons-img img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.footer .footer-1 .footer-1-icons .footer-1-icons-img img:hover{
+    transform: scale(1.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.footer .footer-2 ul{
+    list-style: none;
+    padding: 0;
+}
+
+.footer .footer-2 ul li{
+    margin-bottom: 10px;
+}
+
+.footer .footer-2 ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer .footer-2 ul li a:hover{
+    color: #D23166;
+}
+
+.footer .footer-3 ul{
+    list-style: none;
+    padding: 0;
+}
+.footer .footer-3 ul li{
+    margin-bottom: 10px;
+}
+
+.footer .footer-3 ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer .footer-3 ul li a:hover{
+    color: #D23166;
+}
+
+.footer .footer-4 h4{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer .footer-4 .inp-email {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 10px;
+}
+
+.footer .footer-4 .inp-email input {
+    padding: 10px 20px;
+    border: 2px solid #D64374;
+    background-color: transparent;
+    border-radius: 5px 0 0 5px;
+    margin-bottom: 0;
+    font-size: 15px;
+    outline: none;
+    border-right: none; /* button bilan yopishib turadi */
+}
+
+.footer .footer-4 .inp-email input:focus {
+    border-color: #D23166;
+}
+
+.footer .footer-4 .inp-email button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #D23166;
+    border: 2px solid #D64374;
+    color: #ffffff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 15px;
+}
+
+.footer .footer-4 .inp-email button:hover {
+    background-color: #b92e5c;
+}
+
+.footer .footer-4 .inp-email button:focus {
+    outline: none;
+}
+
+.footer .footer-4 .footer-4-icons{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
