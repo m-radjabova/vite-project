@@ -7,6 +7,7 @@ import Home from "./page/home/Home";
 import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
+import Profile from "./page/admin/Profile";
 
 export interface User {
   id: string;
@@ -34,7 +35,7 @@ function App() {
         <Route path="/sign-up" element={<SingUp />} />
 
         {/* ADMIN */}
-        <Route
+         <Route
           path="/admin"
           element={
             <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
@@ -42,6 +43,7 @@ function App() {
             </ProtectedRoute>
           }
         >
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

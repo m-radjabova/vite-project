@@ -6,6 +6,7 @@
 @import "./css/Order.css";
 @import "./css/Question.css";
 @import "./css/Footer.css";
+@import "./css/Admin.css";
 
 body {
   scroll-behavior: smooth;

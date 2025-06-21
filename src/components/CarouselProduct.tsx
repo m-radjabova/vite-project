@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { styled } from "@mui/material/styles";
 import { JSX, useEffect, useState } from "react";
 import apiClient from "../apiClient/ApiClient";
-import { FaIceCream, FaCookieBite, FaStar } from "react-icons/fa";
+import { FaIceCream, FaCookieBite} from "react-icons/fa";
 import { GiChocolateBar, GiStrawberry, GiIcePop } from "react-icons/gi";
 import { RiRainbowLine } from "react-icons/ri";
 import { IoIosIceCream } from "react-icons/io";
@@ -143,37 +143,6 @@ function CarouselProduct() {
         return icons[flavor || 'default'] || icons.default;
     };
 
-    const FloatingStars = () => (
-        <>
-            {[...Array(10)].map((_, i) => (
-                <Box
-                    key={i}
-                    sx={{
-                        position: "absolute",
-                        color: "#FFD700",
-                        fontSize: `${Math.random() * 10 + 10}px`,
-                        opacity: 0,
-                        animation: `floatStar ${Math.random() * 3 + 2}s infinite ease-in-out`,
-                        top: `${Math.random() * 100}%`,
-                        left: `${Math.random() * 100}%`,
-                        '@keyframes floatStar': {
-                            '0%, 100%': { 
-                                opacity: 0,
-                                transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(0deg)`
-                            },
-                            '50%': { 
-                                opacity: 0.8,
-                                transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(180deg)`
-                            }
-                        }
-                    }}
-                >
-                    <FaStar />
-                </Box>
-            ))}
-        </>
-    );
-
     return (
         <Box
             py={10}
@@ -207,46 +176,6 @@ function CarouselProduct() {
                 }
             }}
         >
-            {/* Animated floating elements */}
-            <Box sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                overflow: "hidden",
-                zIndex: 0
-            }}>
-                <FloatingStars />
-                {[...Array(5)].map((_, i) => (
-                    <Box
-                        key={i}
-                        sx={{
-                            position: "absolute",
-                            background: "rgba(255, 182, 193, 0.15)",
-                            borderRadius: "50%",
-                            filter: "blur(20px)",
-                            width: `${Math.random() * 300 + 100}px`,
-                            height: `${Math.random() * 300 + 100}px`,
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            opacity: 0.3,
-                            animation: `floatBubble ${Math.random() * 10 + 10}s infinite ease-in-out`,
-                            '@keyframes floatBubble': {
-                                '0%, 100%': { 
-                                    opacity: 0.3,
-                                    transform: `translate(0, 0)`
-                                },
-                                '50%': { 
-                                    opacity: 0.5,
-                                    transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`
-                                }
-                            }
-                        }}
-                    />
-                ))}
-            </Box>
-
             <Box
                 sx={{
                     opacity: 0,
