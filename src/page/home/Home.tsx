@@ -4,21 +4,20 @@ import Header from "../../components/Header";
 import Main from "../../components/Main";
 import MainServices from "../../components/MainServices";
 import Oatmea from "../../components/Oatmea";
-import { CategoryType, ProductType } from "../types/Types";
+import { CategoryType } from "../types/Types";
 import { toast } from "react-toastify";
 import OurProducts from "../../components/OurProducts";
 import Order from './../../components/Order';
 import Question from "../../components/Question";
 import Footer from "../../components/Footer";
 import CarouselProduct from "../../components/CarouselProduct";
+import useProducts from "../../hooks/useProduct";
 
 function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [products, setProducts] = useState<ProductType[]>([]);
-
+  const {products} = useProducts();
   useEffect(() => {
     getCategory();
-    getProducts();
   }, [])
 
   const getCategory = () => {
@@ -31,15 +30,6 @@ function Home() {
     })
   }
 
-  const getProducts = () => {
-    apiClient.get("/products").then((res) => {
-      setProducts(res.data);
-      toast.success("Products fetched successfully");
-    }).catch((err) => {
-      toast.error("Error fetching products");
-      console.log(err);
-    })
-  }
 
   return (
     <div>

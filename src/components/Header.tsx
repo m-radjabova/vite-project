@@ -3,13 +3,14 @@ import useContextPro from '../hooks/useContextPro';
 import { useState } from 'react';
 import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
 import {FaUserShield, FaSignOutAlt, FaUserAlt, FaChevronDown } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 function Header() {
     const { state: { user }, dispatch } = useContextPro();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate();
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
       setAnchorEl(event.currentTarget);
@@ -36,7 +37,10 @@ function Header() {
           <a href="#">Testimonials</a>
           <a href="#">Contact Us</a>
         </nav>
-        <button className="header-btn">Buy Now</button>
+        <button onClick={
+          user ? () => navigate('/checkout-product') : () => navigate('/login')
+        } className="header-btn">Buy Now</button>
+        
         {!user ? (
               <NavLink 
                   to="/login" 

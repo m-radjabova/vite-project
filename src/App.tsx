@@ -8,6 +8,7 @@ import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
 import Profile from "./page/admin/Profile";
+import CheckoutPage from "./components/CheckoutPage";
 
 export interface User {
   id: string;
@@ -33,7 +34,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SingUp />} />
-
+        <Route path="/checkout-product/:id" element={<CheckoutPage />} />
         {/* ADMIN */}
          <Route
           path="/admin"

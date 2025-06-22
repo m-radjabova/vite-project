@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CategoryType, ProductType } from "../page/types/Types";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     categories: CategoryType[];
@@ -7,6 +8,7 @@ interface Props {
 }
 
 function OurProducts({ categories, products }: Props) {
+    const navigate = useNavigate();
     const [activeId, setActiveId] = useState(
         categories.length > 0 ? categories[0].id : null
     );
@@ -54,7 +56,7 @@ function OurProducts({ categories, products }: Props) {
                             <span className="old-price">${product.oldPrice}</span>
                             )}
                         </h5>
-                        <button>Buy Now</button>
+                        <button onClick={() => navigate(`/checkout-product/${product.id}`)} >Buy Now</button>
                         </div>
                     </div>
                     ))}

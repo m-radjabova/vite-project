@@ -7,6 +7,7 @@
 @import "./css/Question.css";
 @import "./css/Footer.css";
 @import "./css/Admin.css";
+@import "./css/CheckoutPage.css";
 
 body {
   scroll-behavior: smooth;
