@@ -8,7 +8,7 @@ import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
 import Profile from "./page/admin/Profile";
-import CheckoutPage from "./components/CheckoutPage";
+import CheckoutPage from "./components/forCheckoutPage/CheckoutPage";
 
 export interface User {
   id: string;
@@ -25,7 +25,7 @@ function App() {
   } = useContextPro();
 
   if (isLoading) {
-    return <IsLoading/>;
+    return <IsLoading />;
   }
 
   return (
@@ -35,8 +35,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SingUp />} />
         <Route path="/checkout-product/:id" element={<CheckoutPage />} />
+        <Route path="/checkout-product/:id/delivery" element={<CheckoutPage />} />
+        <Route path="/checkout-product/:id/summary" element={<CheckoutPage />} />
         {/* ADMIN */}
-         <Route
+        <Route
           path="/admin"
           element={
             <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
@@ -52,4 +54,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
