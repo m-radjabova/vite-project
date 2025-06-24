@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { FiUser, FiPhone, FiHome, FiClock, FiTruck, FiInfo, FiArrowRight } from "react-icons/fi";
-import { FaRegSmile } from "react-icons/fa";
+import { FiUser, FiPhone, FiHome, FiClock, FiTruck, FiArrowRight, FiAlertCircle } from "react-icons/fi";
 import {useNavigate, useParams } from "react-router-dom";
+import { useCheckout } from "../../context/MyContext";
 
 type DeliveryForm = {
   fullName: string;
@@ -14,12 +14,17 @@ type DeliveryForm = {
 function CheckoutDeliveryPage() {
     const navigate = useNavigate();
     const { id } = useParams();
-  const { register, handleSubmit, formState: { errors } } = useForm<DeliveryForm>();
+    const { register, handleSubmit, formState: { errors } , watch} = useForm<DeliveryForm>();
+    const selectedType = watch("deliveryType");
+    const {setData} = useCheckout();
 
-  const onSubmit = (data: DeliveryForm) => {
-    console.log(data);
-     navigate(`/checkout-product/${id}/summary`);
-  };
+    const onSubmit = (data: DeliveryForm) => {
+      setData(prev => ({
+        ...prev,
+        delivery: data,
+      }));
+      navigate(`/checkout-product/${id}/summary`);
+    };
 
   return (
     <div
@@ -28,23 +33,23 @@ function CheckoutDeliveryPage() {
         minHeight: "60vh",
         background: "linear-gradient(135deg, #fff5f7 60%, #ffe0ec 100%)",
         borderRadius: "2.5rem",
-        boxShadow: "0 8px 40px 0 rgba(251, 111, 146, 0.10), 0 1.5px 8px 0 rgba(0,0,0,0.04)",
+        boxShadow: "0 8px 40px 0 rgba(251, 111, 146, 0.15)",
         padding: "2.5rem 1rem",
         maxWidth: 520,
         margin: "0 auto",
-        border: "1px solid rgba(251, 111, 146, 0.15)"
+        border: "1px solid rgba(251, 111, 146, 0.2)"
       }}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{
           width: "100%",
-          background: "rgba(255,255,255,0.92)",
+          background: "rgba(255,255,255,0.96)",
           borderRadius: "2rem",
-          boxShadow: "0 4px 24px rgba(251, 111, 146, 0.12)",
+          boxShadow: "0 8px 32px rgba(251, 111, 146, 0.15)",
           padding: "2.5rem 2rem",
-          backdropFilter: "blur(8px)",
-          border: "1px solid rgba(251, 111, 146, 0.1)"
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(251, 111, 146, 0.15)"
         }}
       >
         <div className="text-center mb-4">
@@ -55,177 +60,250 @@ function CheckoutDeliveryPage() {
               letterSpacing: "-0.5px",
               fontSize: "1.8rem",
               position: "relative",
-              display: "inline-block"
+              display: "inline-block",
+              marginBottom: "1.5rem"
             }}
           >
             <span style={{
               position: "absolute",
-              bottom: "-5px",
+              bottom: "-8px",
               left: "0",
               width: "100%",
-              height: "6px",
-              background: "linear-gradient(90deg, rgba(251, 111, 146, 0.2), rgba(251, 111, 146, 0.1))",
-              borderRadius: "3px"
+              height: "8px",
+              background: "linear-gradient(90deg, rgba(251, 111, 146, 0.3), rgba(251, 111, 146, 0.1))",
+              borderRadius: "4px",
+              zIndex: "-1"
             }}></span>
             Delivery Details
           </h3>
-          <p className="text-muted mt-2" style={{ fontSize: "0.95rem" }}>
+          <p style={{ 
+            color: "#b5839d", 
+            fontSize: "0.95rem",
+            marginTop: "-0.5rem"
+          }}>
             Fill in your details to receive your order
           </p>
         </div>
 
         <div className="mb-4 position-relative">
-          <label className="form-label d-flex align-items-center" style={{ color: "#fb6f92", fontWeight: 600 }}>
-            <FiUser className="me-2" size={18} />
+          <label className="form-label d-flex align-items-center" style={{ 
+            color: "#d14d82", 
+            fontWeight: 600,
+            marginBottom: "0.75rem"
+          }}>
+            <div style={{
+              background: "rgba(251, 111, 146, 0.1)",
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "0.75rem"
+            }}>
+              <FiUser size={16} color="#fb6f92" />
+            </div>
             Full Name
           </label>
           <input
             className="form-control"
             style={{
-              borderRadius: "1.5rem",
-              border: "1.5px solid rgba(251, 111, 146, 0.3)",
+              borderRadius: "1.25rem",
+              border: "1.5px solid rgba(251, 111, 146, 0.25)",
               background: "#fff9fb",
               fontWeight: 500,
               padding: "0.75rem 1.25rem",
-              transition: "all 0.2s ease"
+              transition: "all 0.2s ease",
+              fontSize: "0.95rem",
+              boxShadow: "inset 0 1px 4px rgba(251, 111, 146, 0.05)"
             }}
             {...register("fullName", { required: "Full name is required" })}
             placeholder="Your full name"
           />
           {errors.fullName && (
-            <div className="d-flex align-items-center mt-1">
-              <FiInfo className="text-danger me-1" size={14} />
+            <div className="d-flex align-items-center mt-2">
+              <FiAlertCircle className="text-danger me-1" size={14} />
               <span className="text-danger" style={{ fontSize: "0.85rem" }}>{errors.fullName.message}</span>
             </div>
           )}
         </div>
 
         <div className="mb-4">
-          <label className="form-label d-flex align-items-center" style={{ color: "#fb6f92", fontWeight: 600 }}>
-            <FiPhone className="me-2" size={18} />
+          <label className="form-label d-flex align-items-center" style={{ 
+            color: "#d14d82", 
+            fontWeight: 600,
+            marginBottom: "0.75rem"
+          }}>
+            <div style={{
+              background: "rgba(251, 111, 146, 0.1)",
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "0.75rem"
+            }}>
+              <FiPhone size={16} color="#fb6f92" />
+            </div>
             Phone Number
           </label>
           <input
             className="form-control"
             style={{
-              borderRadius: "1.5rem",
-              border: "1.5px solid rgba(251, 111, 146, 0.3)",
+              borderRadius: "1.25rem",
+              border: "1.5px solid rgba(251, 111, 146, 0.25)",
               background: "#fff9fb",
               fontWeight: 500,
-              padding: "0.75rem 1.25rem"
+              padding: "0.75rem 1.25rem",
+              fontSize: "0.95rem",
+              boxShadow: "inset 0 1px 4px rgba(251, 111, 146, 0.05)"
             }}
             {...register("phone", { 
               required: "Phone number is required",
-              pattern: {
-                value: /^\+998\d{2}\d{3}\d{2}\d{2}$/,
-                message: "Invalid phone number"
-              }
             })}
             placeholder="+998 90 123 45 67"
           />
           {errors.phone && (
-            <div className="d-flex align-items-center mt-1">
-              <FiInfo className="text-danger me-1" size={14} />
+            <div className="d-flex align-items-center mt-2">
+              <FiAlertCircle className="text-danger me-1" size={14} />
               <span className="text-danger" style={{ fontSize: "0.85rem" }}>{errors.phone.message}</span>
             </div>
           )}
         </div>
 
         <div className="mb-4">
-          <label className="form-label d-flex align-items-center" style={{ color: "#fb6f92", fontWeight: 600 }}>
-            <FiHome className="me-2" size={18} />
+          <label className="form-label d-flex align-items-center" style={{ 
+            color: "#d14d82", 
+            fontWeight: 600,
+            marginBottom: "0.75rem"
+          }}>
+            <div style={{
+              background: "rgba(251, 111, 146, 0.1)",
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "0.75rem"
+            }}>
+              <FiHome size={16} color="#fb6f92" />
+            </div>
             Address
           </label>
           <textarea
             className="form-control"
             rows={3}
             style={{
-              borderRadius: "1.5rem",
-              border: "1.5px solid rgba(251, 111, 146, 0.3)",
+              borderRadius: "1.25rem",
+              border: "1.5px solid rgba(251, 111, 146, 0.25)",
               background: "#fff9fb",
               fontWeight: 500,
               padding: "0.75rem 1.25rem",
-              resize: "none"
+              resize: "none",
+              fontSize: "0.95rem",
+              boxShadow: "inset 0 1px 4px rgba(251, 111, 146, 0.05)"
             }}
             {...register("address", { required: "Address is required" })}
             placeholder="Street, house, apartment, city, region"
           />
           {errors.address && (
-            <div className="d-flex align-items-center mt-1">
-              <FiInfo className="text-danger me-1" size={14} />
+            <div className="d-flex align-items-center mt-2">
+              <FiAlertCircle className="text-danger me-1" size={14} />
               <span className="text-danger" style={{ fontSize: "0.85rem" }}>{errors.address.message}</span>
             </div>
           )}
         </div>
 
         <div className="mb-4">
-          <label className="form-label d-flex align-items-center" style={{ color: "#fb6f92", fontWeight: 600 }}>
-            <FiTruck className="me-2" size={18} />
+          <label className="form-label d-flex align-items-center" style={{ 
+            color: "#d14d82", 
+            fontWeight: 600,
+            marginBottom: "1rem"
+          }}>
+            <div style={{
+              background: "rgba(251, 111, 146, 0.1)",
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "0.75rem"
+            }}>
+              <FiTruck size={16} color="#fb6f92" />
+            </div>
             Delivery Type
           </label>
-          <div className="d-flex gap-3 mt-2 flex-wrap">
-            <div className="form-check flex-grow-1" style={{ minWidth: "120px" }}>
+          <div className="d-flex gap-3 flex-wrap">
+            <div 
+              className="flex-grow-1" 
+              style={{ minWidth: "120px" }}
+            >
               <input
-                className="form-check-input"
+                className="btn-check"
                 type="radio"
                 id="standard"
                 value="Standard"
                 {...register("deliveryType", { required: true })}
-                style={{
-                  width: "1.1em",
-                  height: "1.1em",
-                  marginTop: "0.2em"
-                }}
               />
-              <label className="form-check-label d-flex align-items-center" htmlFor="standard" style={{ fontWeight: 600, color: "#fb6f92" }}>
+              <label 
+                className="btn w-100 d-flex align-items-center justify-content-center" 
+                htmlFor="standard" 
+                style={{ 
+                  fontWeight: 600, 
+                  color: "#fb6f92",
+                  background: selectedType === "Standard" ? "#ffe0ec" : "rgba(251, 111, 146, 0.08)",
+                  border: "1.5px solid rgba(251, 111, 146, 0.2)",
+                  borderRadius: "1.25rem",
+                  padding: "0.75rem",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  boxShadow: selectedType === "Standard" ? "0 2px 8px #ffb6c1" : undefined
+                }}
+              >
                 <FiClock className="me-2" size={16} />
-                Standard (3-5 days)
+                Standard
               </label>
             </div>
-            <div className="form-check flex-grow-1" style={{ minWidth: "120px" }}>
+            <div 
+              className="flex-grow-1" 
+              style={{ minWidth: "120px" }}
+            >
               <input
-                className="form-check-input"
+                className="btn-check"
                 type="radio"
                 id="express"
                 value="Express"
                 {...register("deliveryType", { required: true })}
-                style={{
-                  width: "1.1em",
-                  height: "1.1em",
-                  marginTop: "0.2em"
-                }}
               />
-              <label className="form-check-label d-flex align-items-center" htmlFor="express" style={{ fontWeight: 600, color: "#fb6f92" }}>
+              <label 
+                className="btn w-100 d-flex align-items-center justify-content-center" 
+                htmlFor="express" 
+                style={{ 
+                  fontWeight: 600, 
+                  color: "#fb6f92",
+                  background: selectedType === "Express" ? "#ffe0ec" : "rgba(251, 111, 146, 0.08)",
+                  border: "1.5px solid rgba(251, 111, 146, 0.2)",
+                  borderRadius: "1.25rem",
+                  padding: "0.75rem",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  boxShadow: selectedType === "Express" ? "0 2px 8px #ffb6c1" : undefined
+                }}
+              >
                 <FiTruck className="me-2" size={16} />
-                Express (1-2 days)
+                Express
               </label>
             </div>
           </div>
           {errors.deliveryType && (
-            <div className="d-flex align-items-center mt-1">
-              <FiInfo className="text-danger me-1" size={14} />
+            <div className="d-flex align-items-center mt-2">
+              <FiAlertCircle className="text-danger me-1" size={14} />
               <span className="text-danger" style={{ fontSize: "0.85rem" }}>Please select delivery type</span>
             </div>
           )}
-        </div>
-
-        <div className="mb-4">
-          <label className="form-label d-flex align-items-center" style={{ color: "#fb6f92", fontWeight: 600 }}>
-            <FaRegSmile className="me-2" size={16} />
-            Additional Notes
-          </label>
-          <input
-            className="form-control"
-            style={{
-              borderRadius: "1.5rem",
-              border: "1.5px solid rgba(251, 111, 146, 0.3)",
-              background: "#fff9fb",
-              fontWeight: 500,
-              padding: "0.75rem 1.25rem"
-            }}
-            {...register("notes")}
-            placeholder="Any special instructions (optional)"
-          />
         </div>
 
         <button
@@ -237,18 +315,19 @@ function CheckoutDeliveryPage() {
             fontWeight: 700,
             fontSize: "1rem",
             border: "none",
-            borderRadius: "2rem",
-            boxShadow: "0 4px 16px rgba(251, 111, 146, 0.3)",
-            padding: "0.85rem 0",
+            borderRadius: "1.5rem",
+            boxShadow: "0 4px 20px rgba(251, 111, 146, 0.3)",
+            padding: "1rem 0",
             transition: "all 0.3s ease",
-            zIndex: "1"
+            zIndex: "1",
+            marginTop: "1rem"
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(251, 111, 146, 0.4)";
+            e.currentTarget.style.boxShadow = "0 6px 24px rgba(251, 111, 146, 0.4)";
             e.currentTarget.style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = "0 4px 16px rgba(251, 111, 146, 0.3)";
+            e.currentTarget.style.boxShadow = "0 4px 20px rgba(251, 111, 146, 0.3)";
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
@@ -260,7 +339,7 @@ function CheckoutDeliveryPage() {
             left: "-50%",
             width: "200%",
             height: "200%",
-            background: "linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0))",
+            background: "linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0))",
             transform: "rotate(45deg)",
             transition: "all 0.3s ease",
             zIndex: "-1"

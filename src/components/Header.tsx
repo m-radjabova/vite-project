@@ -29,7 +29,7 @@ function Header() {
   return (
     <header className="main-header">
       <div className="header-content">
-        <img src={Logo} alt="Logo" className="header-logo" />
+        <img src={Logo} alt="Logo" className="header-logo" onClick={() => navigate('/')} />
         <nav className="header-nav">
           <a href="#">Home</a>
           <a href="#product">Product</a>

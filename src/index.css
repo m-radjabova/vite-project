@@ -9,6 +9,7 @@
 @import "./css/Admin.css";
 @import "./css/CheckoutPage.css";
 
+
 body {
   scroll-behavior: smooth;
   animation: fadeIn 0.5s ease-in-out;
@@ -37,4 +38,9 @@ body {
 .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(255, 133, 162, 0.5) !important;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

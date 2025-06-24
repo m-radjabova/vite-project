@@ -9,7 +9,6 @@ const useProducts = () => {
   const getProducts = () => {
     apiClient.get("/products").then((res) => {
       setProducts(res.data);
-      toast.success("Products fetched successfully");
     }).catch((err) => {
       toast.error("Error fetching products");
       console.log(err);

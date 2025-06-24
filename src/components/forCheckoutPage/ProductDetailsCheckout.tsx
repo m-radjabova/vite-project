@@ -2,6 +2,7 @@ import { ProductType } from "../../page/types/Types";
 import { FiPlus, FiMinus, FiPackage, FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useCheckout } from "../../context/MyContext";
 
 interface Props {
     product: ProductType | undefined;
@@ -11,9 +12,19 @@ function ProductDetailsCheckout({ product }: Props) {
     const [quantity, setQuantity] = useState(1);
     const { id } = useParams()
     const navigate = useNavigate()
+    const {setData} = useCheckout()
 
     const handleMinus = () => setQuantity(q => Math.max(1, q - 1));
     const handlePlus = () => setQuantity(q => q + 1);
+
+    const handleContinue = () => {
+        setData(prev => ({
+            ...prev,
+            product: product ? [product] : [],
+            quantity
+        }));
+        navigate(`/checkout-product/${id}/delivery`);
+    };
 
     return (
         <div
@@ -270,7 +281,7 @@ function ProductDetailsCheckout({ product }: Props) {
                             </div>
                             <div className="mb-4">
                                 <button
-                                    onClick={() => navigate(`/checkout-product/${id}/delivery`)}
+                                    onClick={handleContinue}
                                     type="button"
                                     className="btn w-100 d-flex align-items-center justify-content-center position-relative overflow-hidden mt-4"
                                     style={{

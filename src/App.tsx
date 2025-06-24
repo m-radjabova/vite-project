@@ -9,6 +9,8 @@ import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
 import Profile from "./page/admin/Profile";
 import CheckoutPage from "./components/forCheckoutPage/CheckoutPage";
+import { CheckoutProvider } from "./context/CheckoutProvider";
+import NotProduct from "./components/NotProduct";
 
 export interface User {
   id: string;
@@ -30,26 +32,29 @@ function App() {
 
   return (
     <div>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SingUp />} />
-        <Route path="/checkout-product/:id" element={<CheckoutPage />} />
-        <Route path="/checkout-product/:id/delivery" element={<CheckoutPage />} />
-        <Route path="/checkout-product/:id/summary" element={<CheckoutPage />} />
-        {/* ADMIN */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
-              <Admin />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="profile" element={<Profile />} />
-        </Route>
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <CheckoutProvider>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SingUp />} />
+          <Route path="/checkout-product" element={<NotProduct />} />
+          <Route path="/checkout-product/:id" element={<CheckoutPage />} />
+          <Route path="/checkout-product/:id/delivery" element={<CheckoutPage />} />
+          <Route path="/checkout-product/:id/summary" element={<CheckoutPage />} />
+          {/* ADMIN */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
+                <Admin />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="profile" element={<Profile />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </CheckoutProvider>
     </div>
   );
 }

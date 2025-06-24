@@ -4,7 +4,8 @@ import Header from "../Header";
 import ProductDetailsCheckout from "./ProductDetailsCheckout";
 import { FiShoppingCart, FiTruck, FiCreditCard } from "react-icons/fi";
 import CheckoutDeliveryPage from "./CheckoutDeliveryPage";
-import CheckoutSummaryPage from "./CheckoutSummaryPage";
+import CheckoutSummaryPaymetPage from "./CheckoutSummaryPaymetPage";
+
 
 function CheckoutPage() {
     const { id } = useParams();
@@ -25,7 +26,7 @@ function CheckoutPage() {
     const renderStep = () => {
         if (step === 0) return <ProductDetailsCheckout product={product} />;
         if (step === 1) return <CheckoutDeliveryPage />;
-        if (step === 2) return <CheckoutSummaryPage />;
+        if (step === 2) return <CheckoutSummaryPaymetPage />;
         return null;
     };
 

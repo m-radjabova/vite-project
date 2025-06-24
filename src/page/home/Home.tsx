@@ -12,6 +12,9 @@ import Question from "../../components/Question";
 import Footer from "../../components/Footer";
 import CarouselProduct from "../../components/CarouselProduct";
 import useProducts from "../../hooks/useProduct";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -20,10 +23,13 @@ function Home() {
     getCategory();
   }, [])
 
+  useEffect(() => {
+        AOS.init({ duration: 3000 });
+   }, []);
+
   const getCategory = () => {
     apiClient.get("/categories").then((res) => {
       setCategories(res.data);
-      toast.success("Categories fetched successfully");
     }).catch((err) => {
       toast.error("Error fetching categories");
       console.log(err);

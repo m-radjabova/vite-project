@@ -19,7 +19,7 @@
 .header-logo {
   width: 79px;
   height: 79px;
-
+  cursor: pointer;
 }
 
 .header-nav {

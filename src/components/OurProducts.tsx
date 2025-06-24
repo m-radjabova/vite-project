@@ -35,7 +35,7 @@ function OurProducts({ categories, products }: Props) {
                         </div>
                     ))}
                 </div>
-                <div className="products-list">
+                <div className="products-list" data-aos="fade-right">
                 {products
                     .filter((product) => product.categoryId === activeId)
                     .map((product, index) => (

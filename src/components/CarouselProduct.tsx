@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import apiClient from "../apiClient/ApiClient";
 import {FaStar } from "react-icons/fa";
 import { IoIosIceCream } from "react-icons/io";
+import { LuIceCreamBowl } from "react-icons/lu";
+import { GiIceCreamCone } from "react-icons/gi";
 
 export interface CarouselImg {
   id: number;
@@ -311,7 +313,7 @@ function CarouselProduct() {
                                     justifyContent: "center",
                                     boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
                                 }}>
-                                    <IoIosIceCream style={{ color: "#FF69B4", fontSize: "1.6rem" }} />
+                                    <GiIceCreamCone style={{ color: "#FF69B4", fontSize: "1.6rem" }} />
                                 </Box>
                             </Box>
                             <Typography 
@@ -340,7 +342,7 @@ function CarouselProduct() {
                                     }
                                 }}
                             >
-                                {photo.title}
+                                {photo.title} <LuIceCreamBowl style={{ color: "#FF69B4" }} size={20} />
                             </Typography>
                         </Box>
                     ))}
