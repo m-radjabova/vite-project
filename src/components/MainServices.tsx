@@ -5,7 +5,7 @@ import delivery from '../assets/fast-delivery 1.svg';
 
 function MainServices() {
   return (
-    <div className='services-box'>
+    <div className='services-box' id="testimonials">
         <div className='services-item' data-aos="zoom-in">
             <img src={shipping} alt="#" />
             <p>Free Shipping</p>

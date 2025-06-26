@@ -11,6 +11,8 @@ import Profile from "./page/admin/Profile";
 import CheckoutPage from "./components/forCheckoutPage/CheckoutPage";
 import { CheckoutProvider } from "./context/CheckoutProvider";
 import NotProduct from "./components/NotProduct";
+import AdminProducts from "./page/admin/AdminProducts";
+import AdminCarousel from "./page/admin/AdminCarousel";
 
 export interface User {
   id: string;
@@ -51,6 +53,8 @@ function App() {
             }
           >
             <Route path="profile" element={<Profile />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="carousel" element={<AdminCarousel />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

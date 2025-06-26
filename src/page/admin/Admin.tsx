@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { LuCrown } from "react-icons/lu";
 import { GiStrawberry } from "react-icons/gi";
-import { IoImageOutline, IoIceCream } from "react-icons/io5";
+import { IoImages, IoIceCream } from "react-icons/io5";
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
@@ -59,30 +59,6 @@ function Admin() {
                 className={({ isActive }) => isActive ?
                   "active nav-link d-flex align-items-center rounded" :
                   "nav-link text-white d-flex align-items-center rounded"}
-                to="profile"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
-                  color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
-                  borderLeft: isActive ? '3px solid white' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  backdropFilter: isActive ? 'blur(5px)' : 'none',
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
-                  }
-                })}
-              >
-                <FaUser className="me-2" style={{ fontSize: '1.2em' }} />
-                <span className="ms-1">Profile</span>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white d-flex align-items-center rounded"}
                 to="products"
                 style={({isActive}) => ({
                   backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
@@ -121,8 +97,31 @@ function Admin() {
                   }
                 })}
               >
-                <IoImageOutline className="me-2" style={{ fontSize: '1.2em' }} />
+                <IoImages className="me-2" style={{ fontSize: '1.2em' }} />
                 <span className="ms-1">Carousel Images</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) => isActive ?
+                  "active nav-link d-flex align-items-center rounded" :
+                  "nav-link text-white d-flex align-items-center rounded"}
+                to="profile"
+                style={({isActive}) => ({
+                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
+                  color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
+                  borderLeft: isActive ? '3px solid white' : '3px solid transparent',
+                  transition: 'all 0.3s ease',
+                  padding: '12px 16px',
+                  fontWeight: 500,
+                  backdropFilter: isActive ? 'blur(5px)' : 'none',
+                  ':hover': {
+                    backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
+                  }
+                })}
+              >
+                <FaUser className="me-2" style={{ fontSize: '1.2em' }} />
+                <span className="ms-1">Profile</span>
               </NavLink>
             </li>
           </ul>

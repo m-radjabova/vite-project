@@ -9,7 +9,7 @@ import viza from '../assets/Group (5).svg';
 
 function Footer() {
   return (
-    <div className='footer container'>
+    <div className='footer container' id='contact'>
         <div className='footer-1'>
             <img src={Logo} alt="Logo" />
             <p>Some food has looked so awful that <br /> it's looked like something that the <br /> dog's brought home.</p>
@@ -25,12 +25,12 @@ function Footer() {
         </div>
         <div className='footer-2'>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#product">Product</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
         </div>
         <div className='footer-3'>

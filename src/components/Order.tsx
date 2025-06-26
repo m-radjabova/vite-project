@@ -8,10 +8,10 @@ import appstore from '../assets/logo-app-store-brand-font-png-favpng-Gb5FcTZcrb9
 function Order() {
   return (
     <div className='order container'>
-        <div className="order-item1" data-aos="zoom-in">
+        <div className="order-item1" data-aos="fade-right">
             <img className='telefon' src={telefon} alt="" />
         </div>
-        <div className="order-info" data-aos="zoom-in">
+        <div className="order-info" data-aos="fade-left">
             <h1>Simple Way To Order Your Food</h1>
             <p>Some food has looked so awful that it's looked like something that 
                 the <br /> dog's brought home, yet after one mouthful I've been left eating my <br /> thoughts.

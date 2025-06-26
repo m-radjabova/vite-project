@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-import apiClient from "../../apiClient/ApiClient";
+import { useEffect } from "react";
 import Header from "../../components/Header";
 import Main from "../../components/Main";
 import MainServices from "../../components/MainServices";
 import Oatmea from "../../components/Oatmea";
-import { CategoryType } from "../types/Types";
-import { toast } from "react-toastify";
 import OurProducts from "../../components/OurProducts";
 import Order from './../../components/Order';
 import Question from "../../components/Question";
@@ -14,27 +11,16 @@ import CarouselProduct from "../../components/CarouselProduct";
 import useProducts from "../../hooks/useProduct";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useCategories from "../../hooks/useCategories";
 
 
-function Home() {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+function Home() { 
+  const {categories} = useCategories();
   const {products} = useProducts();
-  useEffect(() => {
-    getCategory();
-  }, [])
 
   useEffect(() => {
-        AOS.init({ duration: 3000 });
+        AOS.init({ duration: 2000 });
    }, []);
-
-  const getCategory = () => {
-    apiClient.get("/categories").then((res) => {
-      setCategories(res.data);
-    }).catch((err) => {
-      toast.error("Error fetching categories");
-      console.log(err);
-    })
-  }
 
 
   return (

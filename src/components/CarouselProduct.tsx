@@ -148,6 +148,7 @@ function CarouselProduct() {
 
     return (
         <Box
+            id="premium"
             py={10}
             sx={{
                 background: "linear-gradient(135deg, #FFF0F5 0%, #FFDEE8 50%, #FFF0F5 100%)",

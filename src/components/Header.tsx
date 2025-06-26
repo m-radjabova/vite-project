@@ -33,9 +33,9 @@ function Header() {
         <nav className="header-nav">
           <a href="#">Home</a>
           <a href="#product">Product</a>
-          <a href="#">Pricing</a>
-          <a href="#">Testimonials</a>
-          <a href="#">Contact Us</a>
+          <a href="#premium">Premium Ice Cream</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#contact">Contact Us</a>
         </nav>
         <button onClick={
           user ? () => navigate('/checkout-product') : () => navigate('/login')
