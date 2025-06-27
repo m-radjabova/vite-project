@@ -12,3 +12,9 @@ export interface ProductType {
     categoryId : string;
     image: string;
 }
+
+export interface CarouselImg {
+  id: number;
+  image: string;
+  title: string;
+}

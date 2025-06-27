@@ -3,31 +3,14 @@ import { Box, Typography } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { styled } from "@mui/material/styles";
-import { useEffect, useState } from "react";
-import apiClient from "../apiClient/ApiClient";
 import {FaStar } from "react-icons/fa";
 import { IoIosIceCream } from "react-icons/io";
 import { LuIceCreamBowl } from "react-icons/lu";
 import { GiIceCreamCone } from "react-icons/gi";
-
-export interface CarouselImg {
-  id: number;
-  image: string;
-  title: string;
-}
+import useImageCarousel from "../hooks/useImageCarousel";
 
 function CarouselProduct() {
-    const [carouselImg, setCarouselImg] = useState<CarouselImg[]>([]);
-
-    useEffect(() => {
-        try {
-            apiClient.get<CarouselImg[]>("/carouselImg").then((res) => {
-                setCarouselImg(res.data);
-            });
-        } catch {
-            console.error("Failed to fetch carousel images");
-        }
-    }, []);
+    const {carouselImg} = useImageCarousel();
 
     const settings = {
         dots: false,

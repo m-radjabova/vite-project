@@ -13,6 +13,7 @@ import { CheckoutProvider } from "./context/CheckoutProvider";
 import NotProduct from "./components/NotProduct";
 import AdminProducts from "./page/admin/AdminProducts";
 import AdminCarousel from "./page/admin/AdminCarousel";
+import AdminCategories from "./page/admin/AdminCategories";
 
 export interface User {
   id: string;
@@ -55,6 +56,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="products" element={<AdminProducts />} />
             <Route path="carousel" element={<AdminCarousel />} />
+            <Route path="categories" element={<AdminCategories />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

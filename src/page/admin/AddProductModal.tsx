@@ -1,4 +1,4 @@
-import { FieldValues, useForm } from "react-hook-form";
+import { Controller, FieldValues, useForm } from "react-hook-form";
 import useCategories from "../../hooks/useCategories";
 import {Dialog,DialogTitle,DialogContent,DialogActions,TextField,Select,MenuItem,InputLabel,FormControl,
 Button,Box,Divider,IconButton} from '@mui/material';
@@ -6,8 +6,9 @@ import { styled } from '@mui/material/styles';
 import {AddCircleOutline,Close,ImageOutlined,CategoryOutlined,DescriptionOutlined,AttachMoneyOutlined,MoneyOffOutlined
 } from '@mui/icons-material';
 import useProducts from "../../hooks/useProduct";
+import { useEffect } from "react";
 
-const PinkDialog = styled(Dialog)(({ theme }) => ({
+export const PinkDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiPaper-root': {
     borderRadius: theme.spacing(2),
     backgroundColor: '#fff9fa',
@@ -17,7 +18,7 @@ const PinkDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const PinkTextField = styled(TextField)(({ theme }) => ({
+export const PinkTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderRadius: theme.spacing(1.5),
     backgroundColor: '#ffffff',
@@ -54,7 +55,7 @@ const PinkButton = styled(Button)(({ theme }) => ({
   margin: '8px',
 }));
 
-const SubmitButton = styled(PinkButton)(({ theme }) => ({
+export const SubmitButton = styled(PinkButton)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.primary.contrastText,
   '&:hover': {
@@ -63,7 +64,7 @@ const SubmitButton = styled(PinkButton)(({ theme }) => ({
   },
 }));
 
-const CancelButton = styled(PinkButton)(({ theme }) => ({
+export const CancelButton = styled(PinkButton)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   color: theme.palette.secondary.contrastText,
   '&:hover': {
@@ -73,19 +74,31 @@ const CancelButton = styled(PinkButton)(({ theme }) => ({
 }));
 
 interface Props{
-    open: boolean;
-    onClose: () => void;
+  open: boolean;
+  onClose: () => void;
+  editProduct?: FieldValues | null; 
 }
 
-
-function AddProductModal({ open, onClose }: Props) {
-  const {addProducts} = useProducts();
+function AddProductModal({ open, onClose, editProduct }: Props) {
+  const {addProducts, updateProduct} = useProducts();
   const { categories } = useCategories();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors }, control } = useForm();
+
+  useEffect(() => {
+    if (editProduct) {
+      reset(editProduct); 
+    } else {
+      reset();
+    }
+  }, [editProduct, reset]);
+
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
-    addProducts(data);
+    if (editProduct && editProduct.id) {
+      updateProduct(editProduct.id, data);
+    } else {
+      addProducts(data);
+    }
     reset();
     onClose();
   };
@@ -101,7 +114,9 @@ function AddProductModal({ open, onClose }: Props) {
       }}>
         <Box display="flex" alignItems="center" gap={1}>
           <AddCircleOutline fontSize="medium" />
-          Add New Product
+          {
+            editProduct ? 'Edit Product' : 'Add New Product'
+          }
         </Box>
         <IconButton onClick={onClose} sx={{ color: '#ff8fab' }}>
           <Close />
@@ -189,32 +204,39 @@ function AddProductModal({ open, onClose }: Props) {
           </Box>
           
           <Box mb={3}>
-            <FormControl fullWidth>
-              <InputLabel id="category-label">Product Category</InputLabel>
-              <PinkSelect
-                labelId="category-label"
-                label="Product Category"
-                {...register("categoryId", { required: true })}
-                error={!!errors.categoryId}
-                startAdornment={
-                  <CategoryOutlined sx={{ color: '#ff8fab', mr: 1 }} />
-                }
-              >
-                <MenuItem value="">
-                  <em>Select a category</em>
-                </MenuItem>
-                {categories.map((category) => (
-                  <MenuItem key={category.id} value={category.id}>
-                    {category.categoryName}
-                  </MenuItem>
-                ))}
-              </PinkSelect>
-              {errors.categoryId && (
-                <Box sx={{ color: '#d32f2f', fontSize: '0.75rem', mt: 1 }}>
-                  Product category is required
-                </Box>
+            <Controller
+              name="categoryId"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormControl fullWidth error={!!errors.categoryId}>
+                  <InputLabel id="category-label">Product Category</InputLabel>
+                  <PinkSelect
+                    labelId="category-label"
+                    label="Product Category"
+                    {...field}
+                    value={field.value || ""}
+                    startAdornment={
+                      <CategoryOutlined sx={{ color: '#ff8fab', mr: 1 }} />
+                    }
+                  >
+                    <MenuItem value="">
+                      <em>Select a category</em>
+                    </MenuItem>
+                    {categories.map((category) => (
+                      <MenuItem key={category.id} value={category.id}>
+                        {category.categoryName}
+                      </MenuItem>
+                    ))}
+                  </PinkSelect>
+                  {errors.categoryId && (
+                    <Box sx={{ color: '#d32f2f', fontSize: '0.75rem', mt: 1 }}>
+                      Product category is required
+                    </Box>
+                  )}
+                </FormControl>
               )}
-            </FormControl>
+            />
           </Box>
         </form>
       </DialogContent>
@@ -226,7 +248,7 @@ function AddProductModal({ open, onClose }: Props) {
           Cancel
         </CancelButton>
         <SubmitButton onClick={handleSubmit(onSubmit)}>
-          Add Product
+          {editProduct ? 'Edit Product' : 'Add Product'}
         </SubmitButton>
       </DialogActions>
     </PinkDialog>

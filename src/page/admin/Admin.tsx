@@ -4,7 +4,7 @@ import { FaSignOutAlt, FaUser,FaCalendarAlt, FaChevronDown,FaCog, FaIceCream} fr
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { LuCrown } from "react-icons/lu";
-import { GiStrawberry } from "react-icons/gi";
+import { GiFruitBowl, GiStrawberry } from "react-icons/gi";
 import { IoImages, IoIceCream } from "react-icons/io5";
 
 function Admin() {
@@ -14,6 +14,29 @@ function Admin() {
     localStorage.removeItem("token");
     dispatch({ type: "LOGOUT" });
   };
+
+  const sidebarLinks = [
+    {
+      to: "products",
+      label: "Products",
+      icon: <IoIceCream className="me-2" style={{ fontSize: '1.2em' }} />,
+    },
+    {
+      to: "carousel",
+      label: "Carousel Images",
+      icon: <IoImages className="me-2" style={{ fontSize: '1.2em' }} />,
+    },
+    {
+      to: "categories",
+      label: "Categories",
+      icon: <GiFruitBowl className="me-2" style={{ fontSize: '1.2em' }} />,
+    },
+    {
+      to: "profile",
+      label: "Profile",
+      icon: <FaUser className="me-2" style={{ fontSize: '1.2em' }} />,
+    },
+  ];
 
   return (
     <div className="admin-container d-flex" style={{ 
@@ -54,80 +77,36 @@ function Admin() {
           <hr className="bg-white opacity-20 my-3" />
           
           <ul className="nav nav-pills flex-column gap-2">
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white d-flex align-items-center rounded"}
-                to="products"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
-                  color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
-                  borderLeft: isActive ? '3px solid white' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  backdropFilter: isActive ? 'blur(5px)' : 'none',
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
+            {sidebarLinks.map(link => (
+              <li className="nav-item" key={link.to}>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "active nav-link d-flex align-items-center rounded"
+                      : "nav-link text-white d-flex align-items-center rounded"
                   }
-                })}
-              >
-                <IoIceCream className="me-2" style={{ fontSize: '1.2em' }} />
-                <span className="ms-1">Products</span>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white d-flex align-items-center rounded"}
-                to="carousel"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
-                  color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
-                  borderLeft: isActive ? '3px solid white' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  backdropFilter: isActive ? 'blur(5px)' : 'none',
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
-                  }
-                })}
-              >
-                <IoImages className="me-2" style={{ fontSize: '1.2em' }} />
-                <span className="ms-1">Carousel Images</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className={({ isActive }) => isActive ?
-                  "active nav-link d-flex align-items-center rounded" :
-                  "nav-link text-white d-flex align-items-center rounded"}
-                to="profile"
-                style={({isActive}) => ({
-                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
-                  color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
-                  borderLeft: isActive ? '3px solid white' : '3px solid transparent',
-                  transition: 'all 0.3s ease',
-                  padding: '12px 16px',
-                  fontWeight: 500,
-                  backdropFilter: isActive ? 'blur(5px)' : 'none',
-                  ':hover': {
-                    backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
-                  }
-                })}
-              >
-                <FaUser className="me-2" style={{ fontSize: '1.2em' }} />
-                <span className="ms-1">Profile</span>
-              </NavLink>
-            </li>
+                  to={link.to}
+                  style={({ isActive }) => ({
+                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
+                    color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
+                    borderLeft: isActive ? '3px solid white' : '3px solid transparent',
+                    transition: 'all 0.3s ease',
+                    padding: '12px 16px',
+                    fontWeight: 500,
+                    backdropFilter: isActive ? 'blur(5px)' : 'none',
+                    ':hover': {
+                      backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
+                    }
+                  })}
+                >
+                  {link.icon}
+                  <span className="ms-1">{link.label}</span>
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* User profile section */}
         <div className="mb-3">
           <div className="d-flex align-items-center p-3 rounded" style={{
             backgroundColor: 'rgba(255, 255, 255, 0.25)',

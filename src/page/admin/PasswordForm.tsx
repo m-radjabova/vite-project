@@ -11,14 +11,7 @@ interface Props {
 }
 
 function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors, isSubmitting },
-  } = useForm();
-
+  const {register,handleSubmit,reset,watch,formState: { errors, isSubmitting },} = useForm();
   const { state: { user }, dispatch } = useContextPro();
 
   const onSubmit = async (data: FieldValues) => {
@@ -26,9 +19,7 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
       await apiClient.patch(`/users/${user?.id}`, {
         password: data.password
       });
-      
       dispatch({ type: "CHANGE_PASSWORD", payload: data.password });
-      
       toast.success("Password updated successfully!");
       handlePasswordClose();
       reset();
@@ -48,23 +39,28 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
       fullWidth
       PaperProps={{
         sx: {
-          borderRadius: 3,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+          borderRadius: 4,
+          boxShadow: '0 8px 40px 0 rgba(251, 111, 146, 0.15)',
           overflow: 'hidden',
-          border: '1px solid #ffd8b2'
+          border: '1.5px solid #ffd6de',
+          background: 'linear-gradient(135deg, #fff5fa 0%, #ffe0ec 100%)',
+          backdropFilter: 'blur(2px)'
         }
       }}
     >
       <DialogTitle sx={{
-        bgcolor: '#ffb347',
-        color: 'white',
+        bgcolor: 'linear-gradient(90deg, #ffb6c1 0%, #fb6f92 100%)',
+        color: ' #fb6f92',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        py: 2,
-        px: 3,
-        fontWeight: 600,
-        fontSize: '1.25rem'
+        py: 2.5,
+        px: 4,
+        fontWeight: 700,
+        fontSize: '1.35rem',
+        letterSpacing: '0.5px',
+        borderBottom: '1.5px solid #ffd6de',
+        boxShadow: '0 2px 12px 0 rgba(251, 111, 146, 0.07)'
       }}>
         Change Password
         <IconButton
@@ -73,8 +69,12 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
           onClick={handlePasswordClose}
           disabled={isSubmitting}
           sx={{
+            background: 'rgba(255,255,255,0.18)',
+            color: '#fb6f92',
+            ml: 1,
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              backgroundColor: '#fb6f92',
+              color: '#fff',
               transform: 'scale(1.1)',
               transition: 'all 0.2s ease'
             }
@@ -85,10 +85,10 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
       </DialogTitle>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogContent sx={{ 
-          py: 3, 
-          px: 3,
-          bgcolor: '#fff8f0'
+        <DialogContent sx={{
+          py: 4,
+          px: 4,
+          bgcolor: 'transparent'
         }}>
           <Box sx={{ mb: 3 }}>
             <TextField
@@ -109,24 +109,29 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
               })}
               InputProps={{
                 sx: {
-                  borderRadius: 2,
-                  bgcolor: 'white',
+                  borderRadius: 3,
+                  bgcolor: '#fff',
+                  fontWeight: 500,
+                  fontSize: '1.08rem',
+                  color: '#fb6f92',
+                  boxShadow: '0 2px 12px 0 rgba(251, 111, 146, 0.05)',
                   '& fieldset': {
-                    borderColor: '#ffd8b2'
+                    borderColor: '#ffd6de'
                   },
                   '&:hover fieldset': {
-                    borderColor: '#ffb347'
+                    borderColor: '#fb6f92'
                   },
                   '&.Mui-focused fieldset': {
-                    borderColor: '#e67a00 !important'
+                    borderColor: '#fb6f92 !important'
                   }
                 }
               }}
               InputLabelProps={{
                 sx: {
-                  color: '#e67a00',
+                  color: '#fb6f92',
+                  fontWeight: 600,
                   '&.Mui-focused': {
-                    color: '#e67a00'
+                    color: '#fb6f92'
                   }
                 }
               }}
@@ -154,24 +159,29 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
               })}
               InputProps={{
                 sx: {
-                  borderRadius: 2,
-                  bgcolor: 'white',
+                  borderRadius: 3,
+                  bgcolor: '#fff',
+                  fontWeight: 500,
+                  fontSize: '1.08rem',
+                  color: '#fb6f92',
+                  boxShadow: '0 2px 12px 0 rgba(251, 111, 146, 0.05)',
                   '& fieldset': {
-                    borderColor: '#ffd8b2'
+                    borderColor: '#ffd6de'
                   },
                   '&:hover fieldset': {
-                    borderColor: '#ffb347'
+                    borderColor: '#fb6f92'
                   },
                   '&.Mui-focused fieldset': {
-                    borderColor: '#e67a00 !important'
+                    borderColor: '#fb6f92 !important'
                   }
                 }
               }}
               InputLabelProps={{
                 sx: {
-                  color: '#e67a00',
+                  color: '#fb6f92',
+                  fontWeight: 600,
                   '&.Mui-focused': {
-                    color: '#e67a00'
+                    color: '#fb6f92'
                   }
                 }
               }}
@@ -179,11 +189,11 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
           </Box>
         </DialogContent>
 
-        <DialogActions sx={{ 
-          px: 3, 
-          py: 2,
-          bgcolor: '#fff8f0',
-          borderTop: '1px solid #ffd8b2'
+        <DialogActions sx={{
+          px: 4,
+          py: 2.5,
+          bgcolor: 'transparent',
+          borderTop: '1.5px solid #ffd6de'
         }}>
           <Button
             onClick={() => {
@@ -194,16 +204,16 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
             sx={{
               px: 3,
               py: 1,
-              borderRadius: 2,
-              border: '1px solid',
-              borderColor: '#ffb347',
-              color: '#e67a00',
-              fontWeight: 500,
+              borderRadius: 3,
+              border: '1.5px solid #fb6f92',
+              color: '#fb6f92',
+              fontWeight: 600,
               textTransform: 'none',
               fontSize: '1rem',
+              bgcolor: 'rgba(251, 111, 146, 0.08)',
               '&:hover': {
-                bgcolor: 'rgba(255, 179, 71, 0.1)',
-                borderColor: '#e67a00'
+                bgcolor: '#ffd6de',
+                borderColor: '#fb6f92'
               },
               transition: 'all 0.2s ease'
             }}
@@ -217,20 +227,20 @@ function PasswordForm({ passwordOpen, handlePasswordClose }: Props) {
             sx={{
               px: 3,
               py: 1,
-              borderRadius: 2,
-              bgcolor: '#ffb347',
-              color: 'white',
-              fontWeight: 500,
+              borderRadius: 3,
+              bgcolor: '#fb6f92',
+              color: '#fff',
+              fontWeight: 600,
               textTransform: 'none',
               fontSize: '1rem',
-              boxShadow: 'none',
+              boxShadow: '0 2px 12px 0 rgba(251, 111, 146, 0.10)',
               '&:hover': {
-                bgcolor: '#e67a00',
-                boxShadow: 'none'
+                bgcolor: '#d23c67',
+                boxShadow: '0 2px 12px 0 rgba(251, 111, 146, 0.18)'
               },
               '&:disabled': {
-                bgcolor: '#ffd8b2',
-                color: 'white'
+                bgcolor: '#ffd6de',
+                color: '#fff'
               },
               transition: 'all 0.2s ease'
             }}

@@ -41,8 +41,18 @@ const useProducts = () => {
     })
   }
 
+  const updateProduct = (id: string, data: FieldValues) => {
+    apiClient.put(`/products/${id}`, data).then((res) => {
+      setProducts(products.map(product => product.id === id ? res.data : product));
+      toast.success("Product updated successfully");
+    }).catch((err) => {
+      toast.error("Error updating product");
+      console.log(err);
+    })
+  }
 
-  return { products, deleteProduct, addProducts};
+
+  return { products, deleteProduct, addProducts, updateProduct };
 };
 
 export default useProducts;

@@ -4,6 +4,7 @@ import useProducts from "../../hooks/useProduct";
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import DeleteModal from "./DeleteModal";
 import AddProductModal from "./AddProductModal";
+import { ProductType } from "../types/Types";
 
 function AdminProducts() {
     const {products, deleteProduct} = useProducts();
@@ -14,6 +15,7 @@ function AdminProducts() {
     const [deleteProductId, setDeleteProductId] = useState<string | null>(null);
     const [deleteOpenModal, setDeleteOpenModal] = useState(false);
     const [openAddModal, setOpenAddModal] = useState(false);
+    const [editProduct, setEditProduct] = useState<ProductType | null>(null);
 
   return (
     <>
@@ -46,7 +48,12 @@ function AdminProducts() {
                         <div className="product-image-container">
                             <img src={product.image} alt={product.name} className="admin-product-image" />
                             <div className="product-actions">
-                                <button className="edit-btn">
+                                <button 
+                                    onClick={() => {
+                                        setEditProduct(product); 
+                                        setOpenAddModal(true);  
+                                    }}
+                                    className="edit-btn">
                                     <FaEdit />
                                 </button>
                                 <button 
@@ -85,7 +92,11 @@ function AdminProducts() {
         />
         <AddProductModal 
             open={openAddModal} 
-            onClose={() => setOpenAddModal(false)} 
+            onClose={() =>{ 
+                setEditProduct(null);
+                setOpenAddModal(false)
+            }}
+            editProduct={editProduct}
         />
     </>
   )
