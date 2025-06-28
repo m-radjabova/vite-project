@@ -1,13 +1,13 @@
 import { useState } from "react";
-import useCategories from "../../hooks/useCategories";
-import useProducts from "../../hooks/useProduct";
+import useCategories from "../../../hooks/useCategories";
+import useProducts from "../../../hooks/useProduct";
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import DeleteModal from "./DeleteModal";
 import AddProductModal from "./AddProductModal";
-import { ProductType } from "../types/Types";
+import { ProductType } from "../../types/Types";
 
 function AdminProducts() {
-    const {products, deleteProduct} = useProducts();
+    const {products, deleteProduct, addProducts, updateProduct} = useProducts();
     const {categories} = useCategories();
     const [activeId, setActiveId] = useState(
         categories.length > 0 ? categories[0].id : null
@@ -97,6 +97,8 @@ function AdminProducts() {
                 setOpenAddModal(false)
             }}
             editProduct={editProduct}
+            addProducts={addProducts}
+            updateProduct={updateProduct}
         />
     </>
   )

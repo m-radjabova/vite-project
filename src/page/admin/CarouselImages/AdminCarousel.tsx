@@ -1,12 +1,12 @@
 import { FaPlus, FaEdit, FaTrashAlt, FaImage } from 'react-icons/fa';
-import useImageCarousel from "../../hooks/useImageCarousel";
+import useImageCarousel from "../../../hooks/useImageCarousel";
 import { useState } from 'react';
-import DeleteModalImage from './DeleteModalImage';
-import { CarouselImg } from '../types/Types';
-import AddImageModal from './AddImageModal';
+import DeleteModalImage from '../CarouselImages/DeleteModalImage';
+import { CarouselImg } from '../../types/Types';
+import AddImageModal from '../CarouselImages/AddImageModal';
 
 function AdminCarousel() {
-  const { carouselImg, deleteImage } = useImageCarousel();
+  const { carouselImg, deleteImage, updateImage, addImage } = useImageCarousel();
   const [deleteImageId, setDeleteImageId] = useState<string | null>(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -76,6 +76,8 @@ function AdminCarousel() {
           }
         } 
         editImage={editImage}
+        addImage={addImage}
+        updateImage={updateImage}
       />
     </div>
   );

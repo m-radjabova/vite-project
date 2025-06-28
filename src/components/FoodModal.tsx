@@ -48,7 +48,7 @@ const FoodModal = ({ show, onClose, food } : Props) => {
             opacity: isVisible ? 1 : 0,
             transition: "opacity 0.3s ease",
             backdropFilter: "blur(5px)",
-            padding: "1rem",
+            padding: "1rem"
         }}
         onClick={handleClose}
         >
@@ -117,7 +117,7 @@ const FoodModal = ({ show, onClose, food } : Props) => {
             </div>
 
             <div style={{ 
-                    overflowY: "auto",
+                    overflowY: "hidden",
                     flex: 1,
                     paddingRight: "0.5rem",
                     marginRight: "-0.5rem",

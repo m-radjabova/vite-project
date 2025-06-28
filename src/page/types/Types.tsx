@@ -14,7 +14,7 @@ export interface ProductType {
 }
 
 export interface CarouselImg {
-  id: number;
+  id: string;
   image: string;
   title: string;
 }

@@ -1,11 +1,10 @@
 import { Controller, FieldValues, useForm } from "react-hook-form";
-import useCategories from "../../hooks/useCategories";
+import useCategories from "../../../hooks/useCategories";
 import {Dialog,DialogTitle,DialogContent,DialogActions,TextField,Select,MenuItem,InputLabel,FormControl,
 Button,Box,Divider,IconButton} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {AddCircleOutline,Close,ImageOutlined,CategoryOutlined,DescriptionOutlined,AttachMoneyOutlined,MoneyOffOutlined
 } from '@mui/icons-material';
-import useProducts from "../../hooks/useProduct";
 import { useEffect } from "react";
 
 export const PinkDialog = styled(Dialog)(({ theme }) => ({
@@ -77,10 +76,11 @@ interface Props{
   open: boolean;
   onClose: () => void;
   editProduct?: FieldValues | null; 
+  addProducts: (data: FieldValues) => void;
+  updateProduct: (id: string, data: FieldValues) => void;
 }
 
-function AddProductModal({ open, onClose, editProduct }: Props) {
-  const {addProducts, updateProduct} = useProducts();
+function AddProductModal({ open, onClose, editProduct, addProducts, updateProduct }: Props) {
   const { categories } = useCategories();
   const { register, handleSubmit, reset, formState: { errors }, control } = useForm();
 
@@ -88,7 +88,7 @@ function AddProductModal({ open, onClose, editProduct }: Props) {
     if (editProduct) {
       reset(editProduct); 
     } else {
-      reset();
+      reset( { name: "", description: "", price: "", category: "", image: "" });
     }
   }, [editProduct, reset]);
 

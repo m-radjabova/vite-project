@@ -1,8 +1,8 @@
 import { FaUser, FaEnvelope, FaEdit, FaLock, FaCamera, FaIceCream, FaHeart } from 'react-icons/fa';
-import useContextPro from '../../hooks/useContextPro';
+import useContextPro from '../../../hooks/useContextPro';
 import ProfileForm from './ProfileFom';
 import { ChangeEvent, useState } from 'react';
-import apiClient from '../../apiClient/ApiClient';
+import apiClient from '../../../apiClient/ApiClient';
 import { toast } from 'react-toastify';
 import PasswordForm from './PasswordForm';
 

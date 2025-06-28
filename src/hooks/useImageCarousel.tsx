@@ -22,7 +22,7 @@ const useImageCarousel = () => {
 
   const addImage = (data: FieldValues) => {
     apiClient.post("/carouselImg", data).then((res) => {
-      setCarouselImg([...carouselImg, res.data]);
+      setCarouselImg(prev => [...prev, res.data]);
       toast.success("Image added successfully");
     }).catch((err) => {
       toast.error("Error adding image");
@@ -32,7 +32,7 @@ const useImageCarousel = () => {
 
   const deleteImage = (id: string) => {
     apiClient.delete(`/carouselImg/${id}`).then(() => {
-      setCarouselImg(carouselImg.filter((img) => img.id !== Number(id)));
+      setCarouselImg(carouselImg.filter((img) => img.id !== id));
       toast.success("Image deleted successfully");
     }).catch((err) => {
       toast.error("Error deleting image");
@@ -40,7 +40,7 @@ const useImageCarousel = () => {
     });
   }
 
-  const updateImage = (id: number, data: FieldValues) => {
+  const updateImage = (id: string, data: FieldValues) => {
     apiClient.put(`/carouselImg/${id}`, data).then((res) => {
       setCarouselImg(carouselImg.map((img) => (img.id === id ? res.data : img)));
       toast.success("Image updated successfully");

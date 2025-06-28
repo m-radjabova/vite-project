@@ -1,34 +1,34 @@
 import {FieldValues, useForm } from "react-hook-form";
 import {DialogTitle,DialogContent,DialogActions,Box,Divider,IconButton} from '@mui/material';
-import {AddCircleOutline,Close,DescriptionOutlined,ImageOutlined} from '@mui/icons-material';
+import {AddCircleOutline,Close,DescriptionOutlined} from '@mui/icons-material';
 import { useEffect } from "react";
-import useImageCarousel from "../../hooks/useImageCarousel";
-import { CancelButton, PinkDialog, PinkTextField, SubmitButton } from "./AddProductModal";
+import { CancelButton, PinkDialog, PinkTextField, SubmitButton } from "../Products/AddProductModal";
 
 interface Props{
   open: boolean;
   onClose: () => void;
-  editImage?: FieldValues | null; 
+  editCategory?: FieldValues | null
+  addCategory: (data: FieldValues) => void;
+  updateCategory: (id: string, data: FieldValues) => void;
 }
 
-function AddImageModal({ open, onClose, editImage }: Props) {
-  const {addImage, updateImage } = useImageCarousel();
+function AddCategoryModal({ open, onClose, editCategory, addCategory, updateCategory }: Props) {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
-    if (editImage) {
-      reset(editImage); 
+    if (editCategory) {
+      reset(editCategory); 
     } else {
-      reset();
+      reset({ categoryName: "" });
     }
-  }, [editImage, reset]);
+  }, [editCategory, reset]);
 
 
   const onSubmit = (data: FieldValues) => {
-    if (editImage && editImage.id) {
-      updateImage(editImage.id, data);
+    if (editCategory && editCategory.id) {
+      updateCategory(editCategory.id, data);
     } else {
-      addImage(data);
+      addCategory(data);
     }
     reset();
     onClose();
@@ -46,7 +46,7 @@ function AddImageModal({ open, onClose, editImage }: Props) {
         <Box display="flex" alignItems="center" gap={1}>
           <AddCircleOutline fontSize="medium" />
           {
-            editImage ? 'Edit Image' : 'Add New Image'
+            editCategory ? 'Edit Category' : 'Add New Category'
           }
         </Box>
         <IconButton onClick={onClose} sx={{ color: '#ff8fab' }}>
@@ -62,26 +62,11 @@ function AddImageModal({ open, onClose, editImage }: Props) {
           <Box mb={3}>
             <PinkTextField
               fullWidth
-              label="Carousel Image URL"
+              label="Category Name"
               variant="outlined"
-              {...register("image", { required: true })}
-              error={!!errors.image}
-              helperText={errors.image && "Carousel image URL is required"}
-              InputProps={{
-                startAdornment: (
-                  <ImageOutlined sx={{ color: '#ff8fab', mr: 1 }} />
-                ),
-              }}
-            />
-          </Box>
-          <Box mb={3}>
-            <PinkTextField
-              fullWidth
-              label="Image Title"
-              variant="outlined"
-              {...register("title", { required: true })}
-              error={!!errors.title}
-              helperText={errors.title && "Carousel image title is required"}
+              {...register("categoryName", { required: true })}
+              error={!!errors.categoryName}
+              helperText={errors.categoryName && "Category name is required"}
               InputProps={{
                 startAdornment: (
                   <DescriptionOutlined sx={{ color: '#ff8fab', mr: 1 }} />
@@ -100,11 +85,11 @@ function AddImageModal({ open, onClose, editImage }: Props) {
           Cancel
         </CancelButton>
         <SubmitButton onClick={handleSubmit(onSubmit)}>
-          {editImage ? 'Edit Image' : 'Add Image'}
+          {editCategory ? 'Edit Category' : 'Add Category'}
         </SubmitButton>
       </DialogActions>
     </PinkDialog>
   );
 }
 
-export default AddImageModal;
+export default AddCategoryModal;

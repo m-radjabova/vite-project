@@ -2,8 +2,8 @@ import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, Di
 import { FieldValues, useForm } from "react-hook-form";
 import { RiCloseLargeFill } from "react-icons/ri"
 import { toast } from "react-toastify";
-import apiClient from "../../apiClient/ApiClient";
-import useContextPro from "../../hooks/useContextPro";
+import apiClient from "../../../apiClient/ApiClient";
+import useContextPro from "../../../hooks/useContextPro";
 
 interface Props {
   passwordOpen: boolean;

@@ -32,8 +32,7 @@ const useProducts = () => {
 
   const addProducts = (data: FieldValues) => {
     apiClient.post("/products", data).then((res) => {
-      setProducts([...products, res.data]);
-      getProducts();
+      setProducts(prev => [...prev, res.data]);
       toast.success("Product added successfully");
     }).catch((err) => {
       toast.error("Error adding product");

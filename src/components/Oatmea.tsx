@@ -16,7 +16,7 @@ function Oatmea() {
 
   return (
     <div className='oatmea container'>
-      <div className='left-side' data-aos="zoom-in-right">
+      <div className='left-side' data-aos="fade-right">
         <h1>Brown Sugar <br /> Oatmea</h1>
         <p>
           Together with McDonald’s, Burger King has grown to become <br />
@@ -25,7 +25,7 @@ function Oatmea() {
         </p>
         <button onClick={() => setShowModal(true)}>See Details</button>
       </div>
-      <div className='right-side' data-aos="zoom-in-left">
+      <div className='right-side' data-aos="fade-left">
         <img src={morojni} alt="#" />
       </div>
       <FoodModal

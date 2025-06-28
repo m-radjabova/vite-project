@@ -7,13 +7,13 @@ import Home from "./page/home/Home";
 import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
-import Profile from "./page/admin/Profile";
+import Profile from "./page/admin/Profile/Profile";
 import CheckoutPage from "./components/forCheckoutPage/CheckoutPage";
 import { CheckoutProvider } from "./context/CheckoutProvider";
 import NotProduct from "./components/NotProduct";
-import AdminProducts from "./page/admin/AdminProducts";
-import AdminCarousel from "./page/admin/AdminCarousel";
-import AdminCategories from "./page/admin/AdminCategories";
+import AdminProducts from "./page/admin/Products/AdminProducts";
+import AdminCarousel from "./page/admin/CarouselImages/AdminCarousel";
+import AdminCategories from "./page/admin/Categories/AdminCategories";
 
 export interface User {
   id: string;
