@@ -1,15 +1,20 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser,FaCalendarAlt, FaChevronDown,FaCog, FaIceCream} from "react-icons/fa";
+import { FaSignOutAlt, FaUser,FaCalendarAlt,FaCog, FaIceCream} from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
 import { LuCrown } from "react-icons/lu";
-import { GiFruitBowl, GiStrawberry } from "react-icons/gi";
-import { IoImages, IoIceCream } from "react-icons/io5";
+import {GiStrawberry } from "react-icons/gi";
+import IcecreamOutlinedIcon from '@mui/icons-material/IcecreamOutlined';
+import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
+import KitchenOutlinedIcon from '@mui/icons-material/KitchenOutlined';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
-
+  const navigate = useNavigate();
+ 
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch({ type: "LOGOUT" });
@@ -19,22 +24,32 @@ function Admin() {
     {
       to: "products",
       label: "Products",
-      icon: <IoIceCream className="me-2" style={{ fontSize: '1.2em' }} />,
+      icon: <IcecreamOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
     },
     {
       to: "carousel",
       label: "Carousel Images",
-      icon: <IoImages className="me-2" style={{ fontSize: '1.2em' }} />,
+      icon: <CollectionsOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
     },
     {
       to: "categories",
       label: "Categories",
-      icon: <GiFruitBowl className="me-2" style={{ fontSize: '1.2em' }} />,
+      icon: <KitchenOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
+    },
+    {
+      to: "orders",
+      label: "Orders",
+      icon: <CalendarTodayOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
+    },
+    {
+      to: "questions",
+      label: "Questions",
+      icon: <QuestionAnswerOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
     },
     {
       to: "profile",
       label: "Profile",
-      icon: <FaUser className="me-2" style={{ fontSize: '1.2em' }} />,
+      icon: <PersonOutlineOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
     },
   ];
 
@@ -213,7 +228,7 @@ function Admin() {
           </h2>
           
           <div className="d-flex align-items-center gap-4">
-            <button className="btn p-0 btn-setting" style={{
+            <button onClick={() => navigate('/admin/profile')} className="btn p-0 btn-setting" style={{
               color: '#ff8fab',
               transition: 'all 0.3s ease'
             }}>
@@ -223,81 +238,27 @@ function Admin() {
             <div className="d-flex align-items-center" style={{
               color: '#ff8fab',
               fontSize: '14px',
-              fontWeight: 500
+              fontWeight: 500,
+              cursor: 'pointer'
             }}>
               <FaCalendarAlt className="me-2" />
               <span>
-                {new Date().toLocaleDateString('en-US', { 
-                  weekday: 'short', 
-                  month: 'short', 
-                  day: 'numeric' 
+                {new Date().toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
                 })}
               </span>
             </div>
-            
-            {/* User dropdown */}
-            <Dropdown>
-              <Dropdown.Toggle variant="link" className="d-flex align-items-center p-0 text-decoration-none admin-dropdown" >
-                <div className="d-flex align-items-center gap-2">
-                  <div style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: '50%',
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.2) 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: 14,
-                    border: '1px solid rgba(255,255,255,0.3)'
-                  }}>
-                    <FaUser />
-                  </div>
-                  <span className="small fw-medium" style={{ color: '#d23c67' }}>
-                    {user?.username || 'Admin'}
-                  </span>
-                  <FaChevronDown size={12} style={{ color: '#ff8fab' }} />
-                </div>
-              </Dropdown.Toggle>
 
-              <Dropdown.Menu className="dropdown-menu-end shadow-sm border-0" style={{ 
-                minWidth: '200px',
-                borderRadius: '8px',
-                border: '1px solid rgba(255, 182, 193, 0.3)',
-                padding: '8px 0',
-                marginTop: '10px',
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(10px)'
-              }}>
-                <Dropdown.Item className="d-flex align-items-center gap-3 py-2 px-3 admin-drpdown-item" href="#" style={{
-                  color: '#ff6b8b',
-                  transition: 'all 0.2s ease',
-                  borderRadius: '6px',
-                  margin: '0 4px'
-                }}>
-                  <FaUser size={14} />
-                  <NavLink to="/admin/profile" className="text-decoration-none" style={{color: 'inherit'}}>My Profile</NavLink>
-                </Dropdown.Item>
-                <Dropdown.Divider style={{ margin: '8px 0', borderColor: 'rgba(255, 182, 193, 0.3)' }} />
-                <Dropdown.Item 
-                  className="d-flex align-items-center gap-3 py-2 px-3" 
-                  onClick={handleLogout}
-                  style={{
-                    color: '#ff6b8b',
-                    transition: 'all 0.2s ease',
-                    borderRadius: '6px',
-                    margin: '0 4px'
-                  }}
-                >
-                  <FaSignOutAlt size={14} />
-                  <span>Logout</span>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <div className="d-flex align-items-center">
+                <FaUser className="me-2" style={{ color: '#ff8fab' }} />
+                <span className="fw-semibold" style={{ color: '#d23c67' }}>
+                  {user?.username || 'Admin'}
+                </span>
+            </div>
           </div>
         </div>
-        
-        {/* Main content container */}
         <div className="p-4" style={{ 
           minHeight: 'calc(100vh - 56px)',
           background: 'linear-gradient(135deg, rgba(255, 236, 236, 0.4) 0%, rgba(255, 240, 245, 0.2) 100%)'

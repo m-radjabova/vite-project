@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-.question {
+.questions {
     max-width: 600px;
   padding: 40px 0;
   text-align: center;
@@ -7,7 +7,7 @@
   margin-top: 40px; 
 }
 
-.question h1 {
+.questions h1 {
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 44px;

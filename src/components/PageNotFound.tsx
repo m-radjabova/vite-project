@@ -2,8 +2,12 @@ import { FaHome } from "react-icons/fa";
 import { GiIceCreamCone, GiIceCreamScoop } from "react-icons/gi";
 import { TbIceCream } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import useContextPro from "../hooks/useContextPro";
+import { FaUserShield } from "react-icons/fa"; 
 
 function PageNotFound() {
+  const {state: { user }} = useContextPro();
+  
   return (
     <div className="min-vh-100 d-flex flex-column justify-content-center align-items-center" 
         style={{ 
@@ -31,8 +35,7 @@ function PageNotFound() {
                 filter: 'drop-shadow(0 4px 8px rgba(255, 182, 193, 0.3))'
               }} />
             </div>
-            
-            {/* Main message */}
+        
             <h1 className="display-1 fw-bold mb-3" style={{ 
               color: '#ff85a2',
               textShadow: '2px 2px 4px rgba(255, 133, 162, 0.2)',
@@ -57,7 +60,6 @@ function PageNotFound() {
               Maybe you were searching for one of our delicious ice cream flavors?
             </p>
         
-            {/* Action buttons */}
             <div className="d-flex justify-content-center gap-3 flex-wrap">
               <Link to="/" className="btn px-4 py-3 rounded-pill" style={{
                 backgroundColor: '#ff85a2',
@@ -72,7 +74,7 @@ function PageNotFound() {
                 Return Home
               </Link>
               
-              <Link to="/menu" className="btn px-4 py-3 rounded-pill" style={{
+              <Link to="/" className="btn px-4 py-3 rounded-pill" style={{
                 backgroundColor: 'white',
                 color: '#ff85a2',
                 border: '2px solid #ff85a2',
@@ -84,6 +86,20 @@ function PageNotFound() {
                 <GiIceCreamScoop className="me-2" />
                 View Flavors
               </Link>
+              {user?.roles?.includes("ADMIN") && (
+                <Link to="/admin" className="btn px-4 py-3 rounded-pill" style={{
+                  backgroundColor: '#6a1b9a',
+                  color: 'white',
+                  border: 'none',
+                  fontWeight: 600,
+                  boxShadow: '0 4px 15px rgba(106, 27, 154, 0.4)',
+                  transition: 'all 0.3s ease',
+                  minWidth: '180px'
+                }}>
+                  <FaUserShield className="me-2" />
+                  Admin Panel
+                </Link>
+              )}
             </div>
           </div>
         </div>

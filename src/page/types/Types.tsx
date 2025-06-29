@@ -18,3 +18,12 @@ export interface CarouselImg {
   image: string;
   title: string;
 }
+
+export interface QuestionType {
+  id: string;
+  question: string;
+  userId: string;
+  username: string;
+  createdAt: string;
+  answer: string;
+}

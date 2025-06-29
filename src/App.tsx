@@ -14,6 +14,7 @@ import NotProduct from "./components/NotProduct";
 import AdminProducts from "./page/admin/Products/AdminProducts";
 import AdminCarousel from "./page/admin/CarouselImages/AdminCarousel";
 import AdminCategories from "./page/admin/Categories/AdminCategories";
+import AdminQuestion from './page/admin/Questions/AdminQuestion';
 
 export interface User {
   id: string;
@@ -57,6 +58,7 @@ function App() {
             <Route path="products" element={<AdminProducts />} />
             <Route path="carousel" element={<AdminCarousel />} />
             <Route path="categories" element={<AdminCategories />} />
+            <Route path="questions" element={<AdminQuestion />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
