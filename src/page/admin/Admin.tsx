@@ -1,20 +1,19 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser,FaCalendarAlt,FaCog, FaIceCream} from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaIceCream} from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { LuCrown } from "react-icons/lu";
-import {GiStrawberry } from "react-icons/gi";
 import IcecreamOutlinedIcon from '@mui/icons-material/IcecreamOutlined';
 import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import KitchenOutlinedIcon from '@mui/icons-material/KitchenOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import 'react-datepicker/dist/react-datepicker.css';
+import TopNavigatorBar from "./TopNavigatorBar";
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
-  const navigate = useNavigate();
- 
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch({ type: "LOGOUT" });
@@ -167,8 +166,7 @@ function Admin() {
               </div>
             </div>
           </div>
-          
-          {/* Logout button */}
+
           <button
             onClick={handleLogout}
             className="btn w-100 d-flex align-items-center justify-content-center py-2 position-relative btn-logout"
@@ -192,73 +190,12 @@ function Admin() {
         </div>
       </div>
 
-      {/* Main content area */}
       <div className="content flex-grow-1" style={{ 
         background: 'linear-gradient(135deg, #fff5f5 0%, #fff9fb 100%)',
         overflowY: 'auto',
         position: 'relative'
       }}>
-        {/* Top navigation bar */}
-        <div className="px-4 py-3 d-flex align-items-center justify-content-between" style={{
-          background: 'rgba(255, 245, 245, 0.8)',
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 2px 10px rgba(255, 192, 203, 0.2)',
-          position: 'sticky',
-          top: 0,
-          zIndex: 5,
-          borderBottom: '1px solid rgba(255, 182, 193, 0.3)'
-        }}>
-          <h2 className="mb-0 fs-5 fw-semibold" style={{
-            color: '#d23c67',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px'
-          }}>
-            <GiStrawberry style={{ 
-              color: '#ff6b8b',
-              fontSize: '1.4em'
-            }} />
-            <span>Sweet Scoops</span>
-            <span style={{
-              background: 'linear-gradient(90deg, #d23c67, #ff6b8b)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontWeight: 700
-            }}>Dashboard</span>
-          </h2>
-          
-          <div className="d-flex align-items-center gap-4">
-            <button onClick={() => navigate('/admin/profile')} className="btn p-0 btn-setting" style={{
-              color: '#ff8fab',
-              transition: 'all 0.3s ease'
-            }}>
-              <FaCog size={18} />
-            </button>
-            
-            <div className="d-flex align-items-center" style={{
-              color: '#ff8fab',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer'
-            }}>
-              <FaCalendarAlt className="me-2" />
-              <span>
-                {new Date().toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </span>
-            </div>
-
-            <div className="d-flex align-items-center">
-                <FaUser className="me-2" style={{ color: '#ff8fab' }} />
-                <span className="fw-semibold" style={{ color: '#d23c67' }}>
-                  {user?.username || 'Admin'}
-                </span>
-            </div>
-          </div>
-        </div>
+        <TopNavigatorBar />
         <div className="p-4" style={{ 
           minHeight: 'calc(100vh - 56px)',
           background: 'linear-gradient(135deg, rgba(255, 236, 236, 0.4) 0%, rgba(255, 240, 245, 0.2) 100%)'
