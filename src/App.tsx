@@ -15,6 +15,7 @@ import AdminProducts from "./page/admin/Products/AdminProducts";
 import AdminCarousel from "./page/admin/CarouselImages/AdminCarousel";
 import AdminCategories from "./page/admin/Categories/AdminCategories";
 import AdminQuestion from './page/admin/Questions/AdminQuestion';
+import OrderSuccessPage from "./components/forCheckoutPage/OrderSuccessPage";
 
 export interface User {
   id: string;
@@ -45,6 +46,7 @@ function App() {
           <Route path="/checkout-product/:id" element={<CheckoutPage />} />
           <Route path="/checkout-product/:id/delivery" element={<CheckoutPage />} />
           <Route path="/checkout-product/:id/summary" element={<CheckoutPage />} />
+          <Route path="/order-success" element={<OrderSuccessPage />} />
           {/* ADMIN */}
           <Route
             path="/admin"

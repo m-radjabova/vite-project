@@ -1,8 +1,13 @@
 import { FiCreditCard, FiCheckCircle, FiLock, FiShoppingBag, FiCalendar, FiMapPin } from "react-icons/fi";
 import { FaCcVisa, FaCcMastercard, FaCcPaypal } from "react-icons/fa";
 import { useCheckout } from "../../context/MyContext";
+import { OrderData } from "./CheckoutPage";
 
-function CheckoutSummaryPaymentPage() {
+interface Props {
+  submitOrder: (orderData: OrderData) => void;
+}
+
+function CheckoutSummaryPaymentPage( { submitOrder }: Props ) {
   const { data } = useCheckout();
 
   if (!data.product || !data.product.length || !data.delivery) {
@@ -10,7 +15,7 @@ function CheckoutSummaryPaymentPage() {
       <div style={{ textAlign: "center", marginTop: "4rem", color: "#fb6f92" }}>
         Please complete previous steps to see your order summary.
       </div>
-    );
+    );  
   }
 
   const items = data.product.map((item, idx) => ({
@@ -357,7 +362,15 @@ function CheckoutSummaryPaymentPage() {
             </div>
           </div>
 
-          <button style={{
+          <button 
+          onClick={() =>
+            submitOrder({
+              product: data.product,
+              quantity: data.quantity,
+              delivery: data.delivery,
+              paymentMethod: "card",
+            })}
+          style={{
             width: "100%",
             padding: "1rem",
             backgroundColor: "#d14d82",

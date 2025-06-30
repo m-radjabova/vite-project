@@ -3,6 +3,7 @@ import { ProductType } from "../page/types/Types";
 
 export type CheckoutData = {
   product?: ProductType[];
+  productId?: string;
   quantity?: number;
   delivery?: {
     fullName: string;
