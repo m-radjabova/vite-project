@@ -7,11 +7,12 @@
 @import "./css/Question.css";
 @import "./css/Footer.css";
 @import "./css/Admin.css";
-@import "./css/CheckoutPage.css";
 @import "./css/AdminProduct.css";
 @import "./css/AdminCarousel.css";
 @import "./css/AdminCategories.css";
 @import "./css/AdminQuestion.css";
+@import "./css/CheckoutSummary.css";
+@import "./css/AdminOrder.css";
 
 
 body {

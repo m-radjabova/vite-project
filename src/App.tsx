@@ -15,7 +15,7 @@ import AdminProducts from "./page/admin/Products/AdminProducts";
 import AdminCarousel from "./page/admin/CarouselImages/AdminCarousel";
 import AdminCategories from "./page/admin/Categories/AdminCategories";
 import AdminQuestion from './page/admin/Questions/AdminQuestion';
-import OrderSuccessPage from "./components/forCheckoutPage/OrderSuccessPage";
+import AdminOrder from "./page/admin/Order/AdminOrder";
 
 export interface User {
   id: string;
@@ -46,7 +46,7 @@ function App() {
           <Route path="/checkout-product/:id" element={<CheckoutPage />} />
           <Route path="/checkout-product/:id/delivery" element={<CheckoutPage />} />
           <Route path="/checkout-product/:id/summary" element={<CheckoutPage />} />
-          <Route path="/order-success" element={<OrderSuccessPage />} />
+          <Route path="/checkout-product/:id/order-success" element={<CheckoutPage />} />
           {/* ADMIN */}
           <Route
             path="/admin"
@@ -61,6 +61,7 @@ function App() {
             <Route path="carousel" element={<AdminCarousel />} />
             <Route path="categories" element={<AdminCategories />} />
             <Route path="questions" element={<AdminQuestion />} />
+            <Route path="orders" element={<AdminOrder />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

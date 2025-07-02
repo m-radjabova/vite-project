@@ -1,0 +1,269 @@
+.checkout-summary-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff9fb;
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.checkout-header h1 {
+  color: #d14d82;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.checkout-header h1 svg {
+  color: #d14d82;
+}
+
+.checkout-header p {
+  color: #9e6a7e;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.order-summary-card,
+.payment-methods-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(209,77,130,0.05);
+  border: 1px solid #ffebf1;
+}
+
+.order-summary-card h2,
+.payment-methods-card h2 {
+  color: #d14d82;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.order-items {
+  margin-bottom: 2rem;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ffebf1;
+}
+
+.order-item h3 {
+  margin: 0;
+  color: #7a3a5c;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.order-item p {
+  margin: 0;
+  color: #b58ba3;
+  font-size: 0.9rem;
+}
+
+.order-item span {
+  font-weight: 600;
+  color: #7a3a5c;
+}
+
+.delivery-info {
+  margin-bottom: 2rem;
+}
+
+.delivery-info h3 {
+  color: #d14d82;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.delivery-details {
+  background-color: #fff5f8;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.delivery-details p {
+  margin: 0.5rem 0;
+  color: #7a3a5c;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.delivery-estimate {
+  margin: 0.5rem 0;
+  color: #7a3a5c;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.order-totals {
+  background-color: #fff5f8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border: 1px solid #ffebf1;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: #7a3a5c;
+}
+
+.total-row.discount {
+  color: #d14d82;
+}
+
+.grand-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ffebf1;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #d14d82;
+}
+
+.payment-method {
+  padding: 1.25rem;
+  border: 2px solid #ffebf1;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fff5f8;
+}
+
+.payment-method input[type="radio"] {
+  margin-right: 1rem;
+  accent-color: #d14d82;
+}
+
+.payment-method label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card-icons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.payment-method label span {
+  flex-grow: 1;
+  font-weight: 500;
+  color: #7a3a5c;
+}
+
+.card-form {
+  margin-top: 1.5rem;
+  padding-left: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #7a3a5c;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ffebf1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.pay-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #d14d82;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+  box-shadow: 0 2px 10px rgba(209,77,130,0.3);
+}
+
+.secure-payment {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #b58ba3;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Icon colors */
+.FaCcVisa {
+  color: #1a1f71;
+}
+
+.FaCcMastercard {
+  color: #eb001b;
+}
+
+.FaCcPaypal {
+  color: #003087;
+}

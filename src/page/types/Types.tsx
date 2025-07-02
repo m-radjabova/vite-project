@@ -27,3 +27,18 @@ export interface QuestionType {
   createdAt: string;
   answer: string;
 }
+
+export interface OrderType{
+  id: string;
+  product: ProductType[];
+  quantity: number;
+  delivery: {
+    fullName: string;
+    phone: string;
+    address: string;
+    deliveryType: string;
+    notes?: string;
+  };
+  paymentMethod: string;
+  userId: string | undefined;
+}

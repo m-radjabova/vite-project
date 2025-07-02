@@ -12,6 +12,7 @@ export type CheckoutData = {
     deliveryType: string;
     notes?: string;
   };
+  paymentMethod?: string;
 };
 
 export const CheckoutContext = createContext<{

@@ -7,6 +7,7 @@ import CheckoutSummaryPaymetPage from "./CheckoutSummaryPaymetPage";
 import apiClient from "../../apiClient/ApiClient";
 import { toast } from "react-toastify";
 import { ProductType } from "../../page/types/Types";
+import OrderSuccessPage from "./OrderSuccessPage";
 
 export interface OrderData {
   product: ProductType[] | undefined;
@@ -19,6 +20,7 @@ export interface OrderData {
     notes?: string;
   } | undefined;
   paymentMethod: string;
+  userId: string | undefined;
 }
 
 
@@ -32,33 +34,38 @@ function CheckoutPage() {
     let step = 0;
     if (location.pathname.endsWith("/delivery")) step = 1;
     if (location.pathname.endsWith("/summary")) step = 2;
+    if (location.pathname.endsWith("/order-success")) step = 3;
 
     const steps = [
         { label: "Your Product", icon: <FiShoppingCart size={24} /> },
         { label: "Delivery", icon: <FiTruck size={24} /> },
-        { label: "Payment", icon: <FiCreditCard size={24} /> }
+        { label: "Payment", icon: <FiCreditCard size={24} /> },
+        { label: "Success", icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg> },
     ];
-
-    const submitOrder = async (orderData: OrderData) => {
-        try {
-        await apiClient.post("/orders", orderData);
-        toast.success("Order placed successfully!");
-        navigate("/order-success");
-        } catch (err) {
-        toast.error("Order placement failed!");
-        console.log(err);
-        }
-    };
 
     const renderStep = () => {
         if (step === 0) return <ProductDetailsCheckout product={product} />;
         if (step === 1) return <CheckoutDeliveryPage />;
         if (step === 2) return <CheckoutSummaryPaymetPage submitOrder={submitOrder} />;
+        if (step === 3) return <OrderSuccessPage />
         return null;
     };
 
     const navigateToStep = (index: number) => {
         navigate(`/step/${index}`);
+    };
+
+    const submitOrder = async (orderData: OrderData) => {
+        try {
+            await apiClient.post("/orders", orderData);
+            toast.success("Order placed successfully!");
+            navigate(`/checkout-product/${id}/order-success`);
+        } catch (err) {
+            toast.error("Order placement failed!");
+            console.log(err);
+        }
     };
 
     return (
@@ -117,7 +124,7 @@ function CheckoutPage() {
                     </div>
                     
                     {steps.map((s, index) => (
-                        <div className="col-4 text-center" key={index}>
+                        <div className="col-3 text-center" key={index}>
                             <div className="d-flex flex-column align-items-center position-relative" style={{ zIndex: "1" }}>
                                 <div
                                     className="rounded-circle d-flex align-items-center justify-content-center mb-2"
