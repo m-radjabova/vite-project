@@ -1,60 +1,85 @@
 import { Box, Typography } from "@mui/material";
 import { styled, keyframes } from "@mui/system";
 
-const drip = keyframes`
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(15px);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(30px);
-    opacity: 0;
-  }
+const fadeInOut = keyframes`
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 `;
 
-const spin = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+const float = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 `;
 
-const IceCreamCone = styled('div')({
-  width: '40px',
-  height: '60px',
-  background: 'linear-gradient(to bottom, #F4A460, #D2691E)',
-  clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
+const spray = keyframes`
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.2); opacity: 0; }
+`;
+
+const PerfumeBottle = styled('div')({
   position: 'relative',
-  margin: '0 auto',
+  width: '60px',
+  height: '120px',
+  margin: '0 auto 40px',
 });
 
-const Scoop = styled('div')(({ color }: { color: string }) => ({
+const BottleBase = styled('div')({
+  position: 'absolute',
+  bottom: 0,
   width: '60px',
-  height: '50px',
-  borderRadius: '50% 50% 0 0',
-  background: color,
-  position: 'absolute',
-  top: '-45px',
-  left: '50%',
-  transform: 'translateX(-50%)',
-}));
+  height: '80px',
+  background: 'linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.3))',
+  border: '1px solid rgba(255,255,255,0.5)',
+  borderRadius: '5px 5px 20px 20px',
+  boxShadow: '0 0 15px rgba(0,0,0,0.1)',
+});
 
-const Drip = styled('div')(({ color, delay }: { color: string; delay: string }) => ({
-  width: '10px',
-  height: '15px',
-  background: color,
-  borderRadius: '0 0 5px 5px',
+const BottleNeck = styled('div')({
   position: 'absolute',
-  top: '5px',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  animation: `${drip} 1.5s ease-in-out infinite`,
+  top: '60px',
+  left: '25px',
+  width: '10px',
+  height: '30px',
+  background: 'rgba(255,255,255,0.3)',
+  border: '1px solid rgba(255,255,255,0.5)',
+  borderBottom: 'none',
+});
+
+const BottleSprayer = styled('div')({
+  position: 'absolute',
+  top: '50px',
+  left: '20px',
+  width: '20px',
+  height: '10px',
+  background: 'rgba(255,255,255,0.4)',
+  borderRadius: '10px',
+});
+
+const PerfumeLiquid = styled('div')({
+  position: 'absolute',
+  bottom: '5px',
+  left: '5px',
+  right: '5px',
+  height: '70px',
+  background: 'linear-gradient(to top, #e6c8f8, #d8a7f1)',
+  borderRadius: '0 0 15px 15px',
+  animation: `${float} 3s ease-in-out infinite`,
+});
+
+const SprayParticle = styled('div')(({ delay, left, size, color }: { delay: string, left: string, size: string, color: string }) => ({
+  position: 'absolute',
+  width: size,
+  height: size,
+  background: color,
+  borderRadius: '50%',
+  top: '30px',
+  left: left,
+  filter: 'blur(1px)',
+  opacity: 0,
+  animation: `${spray} 2s ease-out infinite`,
   animationDelay: delay,
 }));
 
@@ -67,94 +92,85 @@ function IsLoading() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        background: 'linear-gradient(135deg, #FFF0F5 0%, #FFDEE8 100%)',
+        background: 'linear-gradient(135deg, #f8f4ff 0%, #f0e6ff 100%)',
       }}
     >
       <Box sx={{ position: 'relative', mb: 4 }}>
-        {/* Ice cream scoops */}
-        <Scoop color="#FFB6C1" />
-        <Scoop color="#98FB98" sx={{ top: '-85px', width: '50px', height: '40px' }} />
-        <Scoop color="#FFD700" sx={{ top: '-115px', width: '40px', height: '30px' }} />
-        
-        {/* Drips */}
-        <Drip color="#FFB6C1" delay="0s" />
-        <Drip color="#98FB98" delay="0.2s" sx={{ left: 'calc(50% - 15px)' }} />
-        <Drip color="#FFD700" delay="0.4s" sx={{ left: 'calc(50% + 15px)' }} />
-        
-        {/* Cone */}
-        <IceCreamCone />
-        
-        {/* Spinning sprinkles */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '-130px',
-            left: '50%',
-            width: '60px',
-            height: '60px',
-            transform: 'translateX(-50%)',
-            animation: `${spin} 2s linear infinite`,
-          }}
-        >
+        <PerfumeBottle>
+          <BottleBase />
+          <BottleNeck />
+          <BottleSprayer />
+          <PerfumeLiquid />
+          
+          {/* Spray particles */}
           {[...Array(8)].map((_, i) => (
-            <Box
+            <SprayParticle
               key={i}
-              sx={{
-                position: 'absolute',
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: ['#FF1493', '#00BFFF', '#FFD700', '#7CFC00'][i % 4],
-                top: '50%',
-                left: '50%',
-                transform: `rotate(${i * 45}deg) translate(25px) rotate(-${i * 45}deg)`,
-              }}
+              delay={`${i * 0.2}s`}
+              left={`${Math.random() * 40 + 10}px`}
+              size={`${Math.random() * 8 + 4}px`}
+              color={`rgba(${Math.floor(Math.random() * 100 + 155)}, 
+                      ${Math.floor(Math.random() * 100 + 155)}, 
+                      ${Math.floor(Math.random() * 100 + 255)}, 
+                      0.7)`}
             />
           ))}
-        </Box>
+        </PerfumeBottle>
       </Box>
       
       <Typography
         variant="h6"
         sx={{
-          color: '#FF69B4',
-          fontWeight: 600,
+          color: '#7e57c2',
+          fontWeight: 500,
+          fontFamily: '"Playfair Display", serif',
+          letterSpacing: '1px',
           mt: 2,
           position: 'relative',
           '&:after': {
             content: '""',
             display: 'block',
-            width: '100%',
-            height: '2px',
-            background: 'linear-gradient(90deg, transparent, #FF69B4, transparent)',
+            width: '60%',
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, #b39ddb, transparent)',
             position: 'absolute',
-            bottom: '-5px',
-            left: 0,
+            bottom: '-8px',
+            left: '20%',
           },
         }}
       >
-        Preparing your sweet treats...
+        Crafting your fragrance experience...
       </Typography>
       
-      <Box sx={{ display: 'flex', gap: 1, mt: 3 }}>
-        {[...Array(5)].map((_, i) => (
+      <Box sx={{ display: 'flex', gap: 1.5, mt: 4 }}>
+        {[...Array(3)].map((_, i) => (
           <Box
             key={i}
             sx={{
-              width: '10px',
-              height: '10px',
+              width: '12px',
+              height: '12px',
               borderRadius: '50%',
-              background: '#FF69B4',
-              opacity: 0.3,
-              animation: `${keyframes`
-                0%, 100% { opacity: 0.3; transform: scale(1); }
-                50% { opacity: 1; transform: scale(1.3); }
-              `} 1.5s ease-in-out infinite`,
-              animationDelay: `${i * 0.2}s`,
+              background: '#b39ddb',
+              opacity: 0.6,
+              animation: `${fadeInOut} 1.5s ease-in-out infinite`,
+              animationDelay: `${i * 0.3}s`,
             }}
           />
         ))}
       </Box>
+      
+      <Typography
+        variant="caption"
+        sx={{
+          display: 'block',
+          color: '#9575cd',
+          mt: 4,
+          fontStyle: 'italic',
+          letterSpacing: '0.5px',
+        }}
+      >
+        Luxury takes time to perfect
+      </Typography>
     </Box>
   );
 }

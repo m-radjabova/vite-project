@@ -1,13 +1,15 @@
-import { FaEnvelope, FaLock, FaUser, FaPhone, FaIceCream } from "react-icons/fa"
+import { FaEnvelope, FaLock, FaUser, FaPhone, FaRegSmile } from "react-icons/fa"
 import { FieldValues, useForm } from "react-hook-form"
 import apiClient from "../../apiClient/ApiClient"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { GiIceCreamScoop } from "react-icons/gi"
+import { GiDelicatePerfume } from "react-icons/gi";
+import { v4 as uuidv4 } from 'uuid';
+import { motion } from "framer-motion"
 
 function SignUp() {
-    const {register, handleSubmit, formState: { errors }, reset} = useForm()
+    const {register, handleSubmit, formState: { errors }, reset, watch} = useForm()
     const navigate = useNavigate()
 
     const checkUser = async (data: FieldValues) => {
@@ -21,10 +23,10 @@ function SignUp() {
     }
 
     const regiterUser = async (data: FieldValues) => {
-        apiClient.post("/users", {...data, roles: ["USER"]}).then((res) => {
+        apiClient.post("/users", {...data, id: uuidv4(), roles: ["USER"]}).then((res) => {
             console.log(res)
             navigate("/login")
-            toast.success("User registered successfully")
+            toast.success("Account created successfully!")
             reset()
         }).catch((err) => {
             toast.error("Error registering user")
@@ -32,238 +34,331 @@ function SignUp() {
         })
     }
 
-
     return (
         <div className="signup d-flex justify-content-center align-items-center min-vh-100" style={{ 
-            backgroundColor: '#fff0f5',
-            backgroundImage: 'linear-gradient(rgba(255, 182, 193, 0.05), rgba(255, 182, 193, 0.05))'
+            backgroundColor: '#fafafa',
+            backgroundImage: 'linear-gradient(to bottom right, #ffffff, #f5f5f5)'
         }}>
-            <div className="signup-form bg-white p-3 p-md-5 rounded-4 shadow" style={{ 
+            <div className="signup-form bg-white p-4 p-md-5 rounded-4" style={{ 
                 width: '95%', 
                 maxWidth: '500px', 
-                border: 'none',
+                border: '1px solid #eaeaea',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.03)'
             }}>
-                {/* Ice cream decorative elements */}
+                {/* Decorative elements */}
                 <div style={{
                     position: 'absolute',
-                    top: '-50px',
-                    right: '-50px',
-                    width: '150px',
-                    height: '150px',
-                    backgroundColor: 'rgba(255, 182, 193, 0.1)',
-                    borderRadius: '50%',
+                    top: '-100px',
+                    right: '-100px',
+                    width: '300px',
+                    height: '300px',
+                    background: 'radial-gradient(circle, rgba(240,240,240,0.3) 0%, rgba(240,240,240,0) 70%)',
                     zIndex: 0
                 }}></div>
+                
                 <div style={{
                     position: 'absolute',
-                    bottom: '-30px',
-                    left: '-30px',
+                    bottom: '-50px',
+                    left: '-50px',
                     width: '100px',
                     height: '100px',
-                    backgroundColor: 'rgba(255, 182, 193, 0.1)',
-                    borderRadius: '50%',
+                    background: 'radial-gradient(circle, rgba(230,230,230,0.2) 0%, rgba(230,230,230,0) 70%)',
                     zIndex: 0
                 }}></div>
                 
                 <div className="text-center mb-4" style={{ position: 'relative', zIndex: 1 }}>
-                    <GiIceCreamScoop className="mb-3" style={{ 
-                        fontSize: '3rem', 
-                        color: '#ff85a2',
-                        filter: 'drop-shadow(0 2px 4px rgba(255, 133, 162, 0.3))'
-                    }} />
-                    <h2 className="fw-bold" style={{ color: '#ff85a2' }}>Sweet Creations</h2>
-                    <p className="text-muted">Create your account for delicious treats</p>
+                    <motion.div
+                        initial={{ scale: 0.9, rotate: -10 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                    >
+                        <GiDelicatePerfume className="mb-3" style={{ 
+                            fontSize: '3.5rem', 
+                            color: '#333',
+                            filter: 'drop-shadow(0 3px 5px rgba(0, 0, 0, 0.05))'
+                        }} />
+                    </motion.div>
+                    <h2 className="fw-bold mb-2" style={{ 
+                        color: '#222',
+                        fontSize: '1.8rem',
+                        letterSpacing: '0.5px'
+                    }}>Soling Cosmetics</h2>
+                    <p className="text-muted" style={{ fontSize: '0.9rem', color: '#777' }}>Create your beauty account</p>
                 </div>
                 
                 <form onSubmit={handleSubmit(checkUser)} style={{ position: 'relative', zIndex: 1 }}>
                     <div className="mb-3">
-                        <label htmlFor="name" className="form-label fw-semibold">Full Name</label>
+                        <label htmlFor="name" className="form-label" style={{ 
+                            color: '#444',
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            letterSpacing: '0.3px'
+                        }}>Full Name</label>
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff85a2'
+                                borderColor: '#e0e0e0',
+                                color: '#666'
                             }}>
-                                <FaUser style={{ color: '#ff85a2' }} />
+                                <FaUser />
                             </span>
                             <input 
                                 {...register("username", { required: true })} 
                                 type="text" 
                                 className="form-control" 
                                 id="username"
-                                placeholder="John Doe"
+                                placeholder="Enter your full name"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff85a2',
-                                    boxShadow: 'none'
+                                    borderColor: '#e0e0e0',
+                                    boxShadow: 'none',
+                                    fontSize: '0.9rem',
+                                    padding: '0.75rem',
+                                    backgroundColor: '#fcfcfc',
+                                    color: '#333'
                                 }}
                             />
                         </div>
-                        {errors.username && <p className="text-danger mt-1">Name is required</p>}
+                        {errors.username && <p className="text-danger mt-1" style={{ fontSize: '0.8rem' }}>Name is required</p>}
                     </div>
                     
                     <div className="mb-3">
-                        <label htmlFor="email" className="form-label fw-semibold">Email Address</label>
+                        <label htmlFor="email" className="form-label" style={{ 
+                            color: '#444',
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            letterSpacing: '0.3px'
+                        }}>Email Address</label>
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff85a2'
+                                borderColor: '#e0e0e0',
+                                color: '#666'
                             }}>
-                                <FaEnvelope style={{ color: '#ff85a2' }} />
+                                <FaEnvelope />
                             </span>
                             <input 
-                                {...register("email", { required: true })} 
+                                {...register("email", { 
+                                    required: true,
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "Invalid email address"
+                                    }
+                                })} 
                                 type="email" 
                                 className="form-control" 
                                 id="email" 
-                                placeholder="john@example.com"
+                                placeholder="your@email.com"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff85a2',
-                                    boxShadow: 'none'
+                                    borderColor: '#e0e0e0',
+                                    boxShadow: 'none',
+                                    fontSize: '0.9rem',
+                                    padding: '0.75rem',
+                                    backgroundColor: '#fcfcfc',
+                                    color: '#333'
                                 }}
                             />
                         </div>
-                        {errors.email && <p className="text-danger mt-1">Email is required</p>}
+                        {errors.email && <p className="text-danger mt-1" style={{ fontSize: '0.8rem' }}>
+                            {errors.email.type === 'required' ? 'Email is required' : 'Invalid email address'}
+                        </p>}
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="phone" className="form-label fw-semibold">Phone Number</label>
+                        <label htmlFor="phone" className="form-label" style={{ 
+                            color: '#444',
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            letterSpacing: '0.3px'
+                        }}>Phone Number</label>
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff85a2'
+                                borderColor: '#e0e0e0',
+                                color: '#666'
                             }}>
-                                <FaPhone style={{ color: '#ff85a2' }} />
+                                <FaPhone />
                             </span>
                             <input 
-                                {...register("phoneNumber", { required: true })} 
+                                {...register("phone", { 
+                                    required: true,
+                                    pattern: {
+                                        value: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im,
+                                        message: "Invalid phone number"
+                                    }
+                                })} 
                                 type="tel" 
                                 className="form-control" 
                                 id="phone" 
                                 placeholder="+1234567890"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff85a2',
-                                    boxShadow: 'none'
+                                    borderColor: '#e0e0e0',
+                                    boxShadow: 'none',
+                                    fontSize: '0.9rem',
+                                    padding: '0.75rem',
+                                    backgroundColor: '#fcfcfc',
+                                    color: '#333'
                                 }}
                             />
                         </div>
-                        {errors.phoneNumber && <p className="text-danger mt-1">Phone number is required</p>}
+                        {errors.phone && <p className="text-danger mt-1" style={{ fontSize: '0.8rem' }}>
+                            {errors.phone.type === 'required' ? 'Phone is required' : 'Invalid phone number'}
+                        </p>}
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="password" className="form-label fw-semibold">Password</label>
+                        <label htmlFor="password" className="form-label" style={{ 
+                            color: '#444',
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            letterSpacing: '0.3px'
+                        }}>Password</label>
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff85a2'
+                                borderColor: '#e0e0e0',
+                                color: '#666'
                             }}>
-                                <FaLock style={{ color: '#ff85a2' }} />
+                                <FaLock />
                             </span>
                             <input 
-                                {...register("password", { required: true, minLength: 8 })}
+                                {...register("password", { 
+                                    required: true, 
+                                    minLength: 8,
+                                    pattern: {
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                                        message: "Must contain uppercase, lowercase, and number"
+                                    }
+                                })}
                                 type="password" 
                                 className="form-control" 
                                 id="password" 
                                 placeholder="At least 8 characters"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff85a2',
-                                    boxShadow: 'none'
+                                    borderColor: '#e0e0e0',
+                                    boxShadow: 'none',
+                                    fontSize: '0.9rem',
+                                    padding: '0.75rem',
+                                    backgroundColor: '#fcfcfc',
+                                    color: '#333'
                                 }}
                             />
                         </div>
                         {errors.password && (
-                            <p className="text-danger mt-1">
+                            <p className="text-danger mt-1" style={{ fontSize: '0.8rem' }}>
                                 {errors.password.type === 'required' 
                                     ? 'Password is required' 
-                                    : 'Password must be at least 8 characters'}
+                                    : errors.password.type === 'minLength'
+                                        ? 'Password must be at least 8 characters'
+                                        : 'Must include uppercase, lowercase, and number'}
                             </p>
                         )}
                     </div>
                     
                     <div className="mb-4">
-                        <label htmlFor="confirm-password" className="form-label fw-semibold">Confirm Password</label>
+                        <label htmlFor="confirm-password" className="form-label" style={{ 
+                            color: '#444',
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            letterSpacing: '0.3px'
+                        }}>Confirm Password</label>
                         <div className="input-group">
                             <span className="input-group-text bg-white" style={{ 
                                 borderRight: 'none',
-                                borderColor: '#ff85a2'
+                                borderColor: '#e0e0e0',
+                                color: '#666'
                             }}>
-                                <FaLock style={{ color: '#ff85a2' }} />
+                                <FaLock />
                             </span>
                             <input 
-                                {...register("confirmPassword", { required: true })}
+                                {...register("confirmPassword", { 
+                                    required: true,
+                                    validate: value => value === watch('password') || "Passwords don't match"
+                                })}
                                 type="password" 
                                 className="form-control" 
                                 id="confirm-password" 
                                 placeholder="Re-enter your password"
                                 style={{
                                     borderLeft: 'none',
-                                    borderColor: '#ff85a2',
-                                    boxShadow: 'none'
+                                    borderColor: '#e0e0e0',
+                                    boxShadow: 'none',
+                                    fontSize: '0.9rem',
+                                    padding: '0.75rem',
+                                    backgroundColor: '#fcfcfc',
+                                    color: '#333'
                                 }}
                             />
                         </div>
-                        {errors.confirmPassword && <p className="text-danger mt-1">Please confirm your password</p>}
+                        {errors.confirmPassword && (
+                            <p className="text-danger mt-1" style={{ fontSize: '0.8rem' }}>
+                                {errors.confirmPassword.type === 'required' || 'Please confirm your password'}
+                            </p>
+                        )}
                     </div>         
                     
-                    <button 
+                    <motion.button 
+                        whileHover={{ scale: 1.02, backgroundColor: '#222' }}
+                        whileTap={{ scale: 0.98 }}
                         type="submit" 
                         className="btn w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2" 
                         style={{ 
-                            backgroundColor: '#ff85a2', 
+                            backgroundColor: '#333', 
                             color: 'white',
-                            borderRadius: '50px',
+                            borderRadius: '8px',
                             border: 'none',
-                            boxShadow: '0 4px 15px rgba(255, 133, 162, 0.3)',
+                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                             transition: 'all 0.3s ease',
-                            fontSize: '1.1rem',
+                            fontSize: '1rem',
                             position: 'relative',
                             overflow: 'hidden',
-                            zIndex: 1
-                        }}
-                        onMouseOver={(e) => {
-                            e.currentTarget.style.backgroundColor = '#ff6b8b';
-                            e.currentTarget.style.transform = 'translateY(-2px)';
-                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 133, 162, 0.4)';
-                        }}
-                        onMouseOut={(e) => {
-                            e.currentTarget.style.backgroundColor = '#ff85a2';
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 133, 162, 0.3)';
+                            zIndex: 1,
+                            letterSpacing: '0.5px'
                         }}
                     >
-                        <span style={{ position: 'relative', zIndex: 2 }}>Sign Up Now</span>
-                        <FaIceCream style={{ position: 'relative', zIndex: 2 }} />
+                        <span style={{ position: 'relative', zIndex: 2 }}>Create Account</span>
+                        <FaRegSmile style={{ position: 'relative', zIndex: 2 }} />
                         <span style={{
                             position: 'absolute',
-                            top: '-10px',
-                            right: '-10px',
-                            width: '40px',
-                            height: '40px',
-                            backgroundColor: 'rgba(255,255,255,0.2)',
-                            borderRadius: '50%',
-                            zIndex: 0
-                        }}></span>
-                    </button>
+                            top: '-50%',
+                            left: '-50%',
+                            width: '200%',
+                            height: '200%',
+                            background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)',
+                            transform: 'rotate(45deg)',
+                            transition: 'all 0.5s ease',
+                            zIndex: 1
+                        }} className="btn-shine"></span>
+                    </motion.button>
                     
                     <div className="text-center mt-4">
-                        <p className="text-muted small mb-0">
+                        <p className="text-muted small mb-0" style={{ fontSize: '0.85rem', color: '#777' }}>
                             Already have an account? 
                             <Link 
                                 to="/login" 
                                 style={{ 
-                                    color: '#ff85a2', 
+                                    color: '#333', 
                                     cursor: 'pointer',
                                     marginLeft: '5px',
                                     fontWeight: '600',
-                                    textDecoration: 'none'
+                                    textDecoration: 'none',
+                                    transition: 'all 0.2s ease',
+                                    letterSpacing: '0.3px'
                                 }}
                                 className="hover-underline"
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.color = '#000';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.color = '#333';
+                                }}
                             >
-                                Login here
+                                Sign in
                             </Link>
                         </p>
                     </div>

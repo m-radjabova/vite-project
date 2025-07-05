@@ -1,4 +1,9 @@
-
+@import "./css/header.css";
+@import "./css/footer.css";
+@import "./css/main.css";
+@import "./css//profcosmetic.css";
+@import "./css/partners.css";
+@import "./css/brands.css";
 
 body {
   scroll-behavior: smooth;
@@ -13,7 +18,6 @@ body {
 }
 
 .container{
-  max-width: 1350px !important;
+  max-width: 1300px !important;
   margin: 0 auto !important;
-
 }

@@ -8,15 +8,8 @@ import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
 import Profile from "./page/admin/Profile/Profile";
-
-export interface User {
-  id: string;
-  username: string;
-  email: string;
-  roles: ("ADMIN" | "USER")[];
-  password: string;
-  phoneNumber: string;
-}
+import Header from "./components/Header"; 
+import Footer from "./components/Footer"; 
 
 function App() {
   const {
@@ -29,7 +22,9 @@ function App() {
 
   return (
     <div>
-      <Routes>
+      <Header /> {/* Doim ko‘rinadi */}
+      <main>
+        <Routes>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SingUp />} />
@@ -44,8 +39,16 @@ function App() {
           >
             <Route path="profile" element={<Profile />} />
           </Route>
+    
+          <Route path="/professional" element={<h1>Профессиональная косметика</h1>} />
+          <Route path="/perfumery" element={<h1>Парфюмерия</h1>} />
+          <Route path="/about" element={<h1>О компании</h1>} />
+          <Route path="/partners" element={<h1>Партнеры</h1>} />
+          <Route path="/contacts" element={<h1>Контакты</h1>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+      </main>
+      <Footer /> 
     </div>
   );
 }

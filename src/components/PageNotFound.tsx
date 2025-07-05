@@ -1,9 +1,8 @@
-import { FaHome } from "react-icons/fa";
-import { GiIceCreamCone, GiIceCreamScoop } from "react-icons/gi";
-import { TbIceCream } from "react-icons/tb";
+import { FaHome, FaUserShield } from "react-icons/fa";
+import { GiPerfumeBottle } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import useContextPro from "../hooks/useContextPro";
-import { FaUserShield } from "react-icons/fa"; 
+import { motion } from "framer-motion";
 
 function PageNotFound() {
   const {state: { user }} = useContextPro();
@@ -11,110 +10,203 @@ function PageNotFound() {
   return (
     <div className="min-vh-100 d-flex flex-column justify-content-center align-items-center" 
         style={{ 
-            backgroundColor: '#fff5f7',
-            background: 'linear-gradient(to bottom, #fff5f7, #ffebee)'
+            backgroundColor: '#fafafa',
+            background: 'linear-gradient(to bottom, #ffffff, #f5f5f5)'
         }}>
       <div className="container text-center py-5">
         <div className="row justify-content-center">
           <div className="col-lg-8">
-            {/* Animated ice cream icons */}
-            <div className="d-flex justify-content-center mb-4">
-              <GiIceCreamCone className="mx-3" size={50} style={{ 
-                color: '#ff85a2', 
-                animation: 'melt 4s infinite ease-in-out',
-                filter: 'drop-shadow(0 4px 8px rgba(255, 133, 162, 0.3))'
+            <motion.div 
+              className="d-flex justify-content-center mb-4"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <GiPerfumeBottle className="mx-3" size={60} style={{ 
+                color: '#333', 
+                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
               }} />
-              <GiIceCreamScoop className="mx-3" size={60} style={{ 
-                color: '#ffb6c1', 
-                animation: 'float 3s infinite ease-in-out 0.5s',
-                filter: 'drop-shadow(0 4px 8px rgba(255, 182, 193, 0.3))'
+              <motion.div
+                style={{
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, #e6e6e6, #f8f8f8)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  margin: '0 15px'
+                }}
+                animate={{ 
+                  rotate: 360,
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2, repeat: Infinity }
+                }}
+              >
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, #d5d5d5, #f0f0f0)',
+                  border: '1px solid rgba(0,0,0,0.05)'
+                }}></div>
+              </motion.div>
+              <GiPerfumeBottle className="mx-3" size={60} style={{ 
+                color: '#555', 
+                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
               }} />
-              <TbIceCream className="mx-3" size={50} style={{ 
-                color: '#ff69b4', 
-                animation: 'melt 4s infinite ease-in-out 1s',
-                filter: 'drop-shadow(0 4px 8px rgba(255, 182, 193, 0.3))'
-              }} />
-            </div>
+            </motion.div>
         
             <h1 className="display-1 fw-bold mb-3" style={{ 
-              color: '#ff85a2',
-              textShadow: '2px 2px 4px rgba(255, 133, 162, 0.2)',
-              fontFamily: "'Comic Neue', cursive"
+              color: '#333',
+              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.1)',
+              fontFamily: "'Playfair Display', serif",
+              letterSpacing: '2px'
             }}>404</h1>
             
             <h2 className="h2 mb-4" style={{ 
-              color: '#ff69b4',
-              fontFamily: "'Comic Neue', cursive",
-              fontWeight: 700
+              color: '#555',
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 500,
+              letterSpacing: '1px'
             }}>
-              Oops! Sweet Nothing Here
+              Scent Not Found
             </h2>
             
             <p className="lead mb-5" style={{ 
-              color: '#d3567e',
-              fontSize: '1.25rem',
+              color: '#777',
+              fontSize: '1.1rem',
               maxWidth: '600px',
-              margin: '0 auto'
+              margin: '0 auto',
+              lineHeight: '1.6'
             }}>
-              The page you're looking for has melted away!<br />
-              Maybe you were searching for one of our delicious ice cream flavors?
+              The fragrance you're seeking has evaporated.<br />
+              Perhaps you'd like to explore our exquisite collection instead?
             </p>
         
             <div className="d-flex justify-content-center gap-3 flex-wrap">
-              <Link to="/" className="btn px-4 py-3 rounded-pill" style={{
-                backgroundColor: '#ff85a2',
-                color: 'white',
-                border: 'none',
-                fontWeight: 600,
-                boxShadow: '0 4px 15px rgba(255, 133, 162, 0.4)',
-                transition: 'all 0.3s ease',
-                minWidth: '180px'
-              }}>
-                <FaHome className="me-2" />
-                Return Home
-              </Link>
-              
-              <Link to="/" className="btn px-4 py-3 rounded-pill" style={{
-                backgroundColor: 'white',
-                color: '#ff85a2',
-                border: '2px solid #ff85a2',
-                fontWeight: 600,
-                boxShadow: '0 4px 15px rgba(255, 133, 162, 0.2)',
-                transition: 'all 0.3s ease',
-                minWidth: '180px'
-              }}>
-                <GiIceCreamScoop className="me-2" />
-                View Flavors
-              </Link>
-              {user?.roles?.includes("ADMIN") && (
-                <Link to="/admin" className="btn px-4 py-3 rounded-pill" style={{
-                  backgroundColor: '#6a1b9a',
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link to="/" className="btn px-4 py-3 rounded-0" style={{
+                  backgroundColor: '#333',
                   color: 'white',
                   border: 'none',
-                  fontWeight: 600,
-                  boxShadow: '0 4px 15px rgba(106, 27, 154, 0.4)',
-                  transition: 'all 0.3s ease',
-                  minWidth: '180px'
+                  fontWeight: 500,
+                  letterSpacing: '1px',
+                  minWidth: '200px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
-                  <FaUserShield className="me-2" />
-                  Admin Panel
+                  <FaHome className="me-2" />
+                  Return Home
                 </Link>
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link to="/products" className="btn px-4 py-3 rounded-0" style={{
+                  backgroundColor: 'transparent',
+                  color: '#333',
+                  border: '1px solid #333',
+                  fontWeight: 500,
+                  letterSpacing: '1px',
+                  minWidth: '200px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  Explore Fragrances
+                </Link>
+              </motion.div>
+              
+              {user?.roles?.includes("ADMIN") && (
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <Link to="/admin" className="btn px-4 py-3 rounded-0" style={{
+                    backgroundColor: '#222',
+                    color: 'white',
+                    border: 'none',
+                    fontWeight: 500,
+                    letterSpacing: '1px',
+                    minWidth: '200px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <FaUserShield className="me-2" />
+                    Admin Panel
+                  </Link>
+                </motion.div>
               )}
             </div>
           </div>
         </div>
       </div>
       
-      {/* Ice cream sprinkles decoration */}
+      {/* Decorative elements */}
       <div style={{
         position: 'absolute',
-        bottom: '20px',
+        bottom: '0',
         width: '100%',
         height: '40px',
-        backgroundImage: 'radial-gradient(#ffb6c1 2px, transparent 2px)',
-        backgroundSize: '20px 20px',
+        background: 'linear-gradient(to right, transparent, #eee, transparent)',
         opacity: 0.6
       }}></div>
+      
+      <motion.div 
+        style={{
+          position: 'absolute',
+          top: '20%',
+          right: '10%',
+          width: '100px',
+          height: '100px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(0,0,0,0.02) 0%, transparent 70%)',
+          zIndex: 0
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div 
+        style={{
+          position: 'absolute',
+          bottom: '20%',
+          left: '10%',
+          width: '150px',
+          height: '150px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(0,0,0,0.02) 0%, transparent 70%)',
+          zIndex: 0
+        }}
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.5, 0.2]
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
     </div>
   );
 }
