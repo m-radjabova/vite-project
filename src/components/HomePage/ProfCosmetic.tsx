@@ -1,4 +1,4 @@
-import daybyday from "../assets/day_by_day_gamma_new 1.svg"
+import daybyday from "../../assets/day_by_day_gamma_new 1.svg"
 function ProfCosmetic() {
   return (
     <div className="prof-cosmetic">

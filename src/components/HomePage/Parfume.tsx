@@ -1,4 +1,4 @@
-import foto from "../assets/o 1.svg"
+import foto from "../../assets/o 1.svg"
 function Parfume() {
   return (
      <div className="prof-cosmetic">

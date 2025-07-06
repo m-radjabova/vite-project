@@ -14,68 +14,71 @@ const float = keyframes`
 `;
 
 const spray = keyframes`
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(1.2); opacity: 0; }
+  0% { transform: scale(0.5) translateX(0); opacity: 0; }
+  50% { transform: scale(1) translateX(5px); opacity: 0.8; }
+  100% { transform: scale(1.2) translateX(10px); opacity: 0; }
 `;
 
 const PerfumeBottle = styled('div')({
   position: 'relative',
-  width: '60px',
-  height: '120px',
+  width: '80px',
+  height: '160px',
   margin: '0 auto 40px',
+  filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.1))',
 });
 
 const BottleBase = styled('div')({
   position: 'absolute',
   bottom: 0,
-  width: '60px',
-  height: '80px',
-  background: 'linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.3))',
-  border: '1px solid rgba(255,255,255,0.5)',
-  borderRadius: '5px 5px 20px 20px',
-  boxShadow: '0 0 15px rgba(0,0,0,0.1)',
+  width: '80px',
+  height: '120px',
+  background: 'linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.9))',
+  border: '1px solid rgba(0,0,0,0.1)',
+  borderRadius: '8px 8px 30px 30px',
+  boxShadow: 'inset 0 0 20px rgba(0,0,0,0.1)',
 });
 
 const BottleNeck = styled('div')({
   position: 'absolute',
-  top: '60px',
-  left: '25px',
+  top: '90px',
+  left: '35px',
   width: '10px',
-  height: '30px',
-  background: 'rgba(255,255,255,0.3)',
-  border: '1px solid rgba(255,255,255,0.5)',
+  height: '40px',
+  background: 'rgba(255,255,255,0.8)',
+  border: '1px solid rgba(0,0,0,0.1)',
   borderBottom: 'none',
 });
 
 const BottleSprayer = styled('div')({
   position: 'absolute',
-  top: '50px',
-  left: '20px',
+  top: '80px',
+  left: '30px',
   width: '20px',
   height: '10px',
-  background: 'rgba(255,255,255,0.4)',
+  background: 'rgba(255,255,255,0.6)',
   borderRadius: '10px',
+  transform: 'rotate(-5deg)',
 });
 
 const PerfumeLiquid = styled('div')({
   position: 'absolute',
-  bottom: '5px',
-  left: '5px',
-  right: '5px',
-  height: '70px',
-  background: 'linear-gradient(to top, #e6c8f8, #d8a7f1)',
-  borderRadius: '0 0 15px 15px',
+  bottom: '10px',
+  left: '10px',
+  right: '10px',
+  height: '100px',
+  background: 'linear-gradient(to top, #e1bee7, #ce93d8)',
+  borderRadius: '0 0 20px 20px',
   animation: `${float} 3s ease-in-out infinite`,
+  boxShadow: 'inset 0 0 20px rgba(255,255,255,0.5)',
 });
 
-const SprayParticle = styled('div')(({ delay, left, size, color }: { delay: string, left: string, size: string, color: string }) => ({
+const SprayParticle = styled('div')<{delay: string, left: string, size: string, color: string}>(({ delay, left, size, color }) => ({
   position: 'absolute',
   width: size,
   height: size,
   background: color,
   borderRadius: '50%',
-  top: '30px',
+  top: '50px',
   left: left,
   filter: 'blur(1px)',
   opacity: 0,
@@ -92,10 +95,10 @@ function IsLoading() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        background: 'linear-gradient(135deg, #f8f4ff 0%, #f0e6ff 100%)',
+        background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)',
       }}
     >
-      <Box sx={{ position: 'relative', mb: 4 }}>
+      <Box sx={{ position: 'relative', mb: 6 }}>
         <PerfumeBottle>
           <BottleBase />
           <BottleNeck />
@@ -103,16 +106,13 @@ function IsLoading() {
           <PerfumeLiquid />
           
           {/* Spray particles */}
-          {[...Array(8)].map((_, i) => (
+          {[...Array(12)].map((_, i) => (
             <SprayParticle
               key={i}
-              delay={`${i * 0.2}s`}
-              left={`${Math.random() * 40 + 10}px`}
-              size={`${Math.random() * 8 + 4}px`}
-              color={`rgba(${Math.floor(Math.random() * 100 + 155)}, 
-                      ${Math.floor(Math.random() * 100 + 155)}, 
-                      ${Math.floor(Math.random() * 100 + 255)}, 
-                      0.7)`}
+              delay={`${i * 0.15}s`}
+              left={`${Math.random() * 60 + 10}px`}
+              size={`${Math.random() * 10 + 4}px`}
+              color={`hsla(${Math.floor(Math.random() * 30 + 270)}, 70%, 60%, 0.7)`}
             />
           ))}
         </PerfumeBottle>
@@ -123,37 +123,39 @@ function IsLoading() {
         sx={{
           color: '#7e57c2',
           fontWeight: 500,
-          fontFamily: '"Playfair Display", serif',
-          letterSpacing: '1px',
+          fontFamily: '"Montserrat", "Helvetica", sans-serif',
+          letterSpacing: '2px',
           mt: 2,
+          textTransform: 'uppercase',
+          fontSize: '0.9rem',
           position: 'relative',
           '&:after': {
             content: '""',
             display: 'block',
-            width: '60%',
+            width: '40%',
             height: '1px',
             background: 'linear-gradient(90deg, transparent, #b39ddb, transparent)',
             position: 'absolute',
-            bottom: '-8px',
-            left: '20%',
+            bottom: '-12px',
+            left: '30%',
           },
         }}
       >
-        Crafting your fragrance experience...
+        Curating Your Scent Journey
       </Typography>
       
-      <Box sx={{ display: 'flex', gap: 1.5, mt: 4 }}>
-        {[...Array(3)].map((_, i) => (
+      <Box sx={{ display: 'flex', gap: 2, mt: 6 }}>
+        {[...Array(5)].map((_, i) => (
           <Box
             key={i}
             sx={{
-              width: '12px',
-              height: '12px',
+              width: '8px',
+              height: '8px',
               borderRadius: '50%',
               background: '#b39ddb',
               opacity: 0.6,
               animation: `${fadeInOut} 1.5s ease-in-out infinite`,
-              animationDelay: `${i * 0.3}s`,
+              animationDelay: `${i * 0.2}s`,
             }}
           />
         ))}
@@ -166,10 +168,12 @@ function IsLoading() {
           color: '#9575cd',
           mt: 4,
           fontStyle: 'italic',
-          letterSpacing: '0.5px',
+          letterSpacing: '1px',
+          fontSize: '0.7rem',
+          opacity: 0.8,
         }}
       >
-        Luxury takes time to perfect
+        Crafting olfactory perfection...
       </Typography>
     </Box>
   );

@@ -1,8 +1,8 @@
-import Brands from "../../components/Brands"
-import Main from "../../components/Main"
-import Parfume from "../../components/Parfume"
-import Partners from "../../components/Partners"
-import ProfCosmetic from "../../components/ProfCosmetic"
+import Brands from "../../components/HomePage/Brands"
+import Main from "../../components/HomePage/Main"
+import Parfume from "../../components/HomePage/Parfume"
+import Partners from "../../components/HomePage/Partners"
+import ProfCosmetic from "../../components/HomePage/ProfCosmetic"
 
 function Home() {
   return (

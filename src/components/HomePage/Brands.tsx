@@ -1,4 +1,4 @@
-import useBrands from "../hooks/useBrands"
+import useBrands from "../../hooks/useBrands"
 
 function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
   const res = [];
