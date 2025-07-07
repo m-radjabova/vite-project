@@ -108,3 +108,15 @@
     align-self: stretch;
   }
 }
+
+
+.close-icon{
+  margin-top: 30px;
+  font-size: 40px;
+  cursor: pointer;
+  color: #7d7c7c;
+}
+
+.close-icon:hover{
+  color: #fb6f92;
+}

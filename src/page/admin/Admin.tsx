@@ -1,16 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser, FaIceCream} from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaSprayCan} from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { LuCrown } from "react-icons/lu";
-import IcecreamOutlinedIcon from '@mui/icons-material/IcecreamOutlined';
-import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
-import KitchenOutlinedIcon from '@mui/icons-material/KitchenOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import 'react-datepicker/dist/react-datepicker.css';
 import TopNavigatorBar from "./TopNavigatorBar";
+import  PersonOutlineOutlinedIcon  from '@mui/icons-material/PersonOutlineOutlined';
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
@@ -21,31 +16,6 @@ function Admin() {
 
   const sidebarLinks = [
     {
-      to: "products",
-      label: "Products",
-      icon: <IcecreamOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
-    },
-    {
-      to: "carousel",
-      label: "Carousel Images",
-      icon: <CollectionsOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
-    },
-    {
-      to: "categories",
-      label: "Categories",
-      icon: <KitchenOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
-    },
-    {
-      to: "orders",
-      label: "Orders",
-      icon: <CalendarTodayOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
-    },
-    {
-      to: "questions",
-      label: "Questions",
-      icon: <QuestionAnswerOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
-    },
-    {
       to: "profile",
       label: "Profile",
       icon: <PersonOutlineOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
@@ -55,40 +25,41 @@ function Admin() {
   return (
     <div className="admin-container d-flex" style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #fff5f5 0%, #fff9fb 100%)'
+      background: 'linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%)'
     }}>
+      {/* Sidebar */}
       <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
         width: '280px', 
         minWidth: '280px',
-        background: 'linear-gradient(180deg, #ffb6c1 0%, #ff8fab 100%)',
-        boxShadow: '4px 0 15px rgba(255, 192, 203, 0.2)',
+        background: 'linear-gradient(180deg, #1a1a1a 0%, #000000 100%)',
+        boxShadow: '4px 0 15px rgba(0, 0, 0, 0.1)',
         position: 'relative',
         zIndex: 10,
-        borderRight: '1px solid rgba(255, 182, 193, 0.3)'
+        borderRight: '1px solid rgba(255, 255, 255, 0.05)'
       }}>
         <div>
           <Link to="/" className="text-decoration-none">
             <div className="d-flex align-items-center mb-4 p-3 rounded" style={{ 
-              background: 'rgba(255, 255, 255, 0.3)',
-              borderLeft: '4px solid #ff6b8b',
+              background: 'rgba(255, 255, 255, 0.05)',
+              borderLeft: '4px solid #ffffff',
               transition: 'all 0.3s ease',
-              backdropFilter: 'blur(5px)'
+              backdropFilter: 'blur(5px)',
             }}>
-              <FaIceCream className="fs-4 me-3" style={{ 
-                color: '#d23c67',
-                animation: 'pulse 2s infinite'
+              <FaSprayCan className="fs-4 me-3" style={{ 
+                color: '#ffffff',
+                filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.3))'
               }} />
               <h1 className="sidebar-title fs-5 mb-0" style={{ 
-                fontWeight: 700,
-                letterSpacing: '0.5px',
-                background: 'linear-gradient(90deg, #d23c67, #ff6b8b)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>Sweet Scoops Admin</h1>
+                fontWeight: 600,
+                letterSpacing: '1px',
+                color: 'white',
+                textTransform: 'uppercase',
+                fontSize: '14px'
+              }}>Essence Admin</h1>
             </div>
           </Link>
           
-          <hr className="bg-white opacity-20 my-3" />
+          <hr className="bg-white opacity-10 my-3" />
           
           <ul className="nav nav-pills flex-column gap-2">
             {sidebarLinks.map(link => (
@@ -101,20 +72,22 @@ function Admin() {
                   }
                   to={link.to}
                   style={({ isActive }) => ({
-                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
-                    color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
+                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                    color: isActive ? '#fff' : 'rgba(255,255,255,0.7)',
                     borderLeft: isActive ? '3px solid white' : '3px solid transparent',
                     transition: 'all 0.3s ease',
                     padding: '12px 16px',
                     fontWeight: 500,
+                    fontSize: '14px',
+                    letterSpacing: '0.5px',
                     backdropFilter: isActive ? 'blur(5px)' : 'none',
                     ':hover': {
-                      backgroundColor: !isActive && 'rgba(255,255,255,0.2)',
+                      backgroundColor: !isActive && 'rgba(255,255,255,0.05)',
                     }
                   })}
                 >
                   {link.icon}
-                  <span className="ms-1">{link.label}</span>
+                  <span className="ms-2">{link.label}</span>
                 </NavLink>
               </li>
             ))}
@@ -123,17 +96,17 @@ function Admin() {
 
         <div className="mb-3">
           <div className="d-flex align-items-center p-3 rounded" style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.25)',
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
             transition: 'all 0.3s ease',
             marginBottom: '16px',
-            border: '1px solid rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(5px)'
+            border: '1px solid rgba(255,255,255,0.05)',
+            backdropFilter: 'blur(5px)',
           }}>
             <div style={{
               width: 42,
               height: 42,
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.2) 100%)',
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -141,28 +114,29 @@ function Admin() {
               fontSize: 16,
               marginRight: 12,
               flexShrink: 0,
-              border: '1px solid rgba(255,255,255,0.3)'
+              border: '1px solid rgba(255,255,255,0.1)'
             }}>
               <FaUser />
             </div>
             <div className="overflow-hidden">
               <div className="text-white" style={{ 
-                fontWeight: 600, 
+                fontWeight: 500, 
                 fontSize: 14,
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
                 overflow: 'hidden'
               }}>
-                {user?.username || 'Ice Cream Admin'}
+                {user?.username || 'Perfume Admin'}
               </div>
               <div style={{
-                color: 'rgba(255,255,255,0.8)', 
+                color: 'rgba(255,255,255,0.5)', 
                 fontSize: 12,
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                letterSpacing: '0.5px'
               }}>
-                <LuCrown className="me-1" style={{color: '#ffeb3b'}} /> Administrator
+                <LuCrown className="me-1" style={{color: 'rgba(255,255,255,0.8)'}} /> Administrator
               </div>
             </div>
           </div>
@@ -171,17 +145,18 @@ function Admin() {
             onClick={handleLogout}
             className="btn w-100 d-flex align-items-center justify-content-center py-2 position-relative btn-logout"
             style={{
-              background: 'rgba(255, 255, 255, 0.25)',
-              color: 'white',
-              border: '1px solid rgba(255,255,255,0.3)',
-              borderRadius: 8,
-              fontWeight: 600,
+              background: 'rgba(255, 255, 255, 0.05)',
+              color: 'rgba(255,255,255,0.8)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 6,
+              fontWeight: 500,
               fontSize: 14,
               transition: 'all 0.3s ease',
               gap: 8,
               overflow: 'hidden',
               zIndex: 1,
-              backdropFilter: 'blur(5px)'
+              backdropFilter: 'blur(5px)',
+              letterSpacing: '0.5px',
             }}
           >
             <FaSignOutAlt style={{ fontSize: 14 }} />
@@ -190,22 +165,23 @@ function Admin() {
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="content flex-grow-1" style={{ 
-        background: 'linear-gradient(135deg, #fff5f5 0%, #fff9fb 100%)',
+        background: 'linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%)',
         overflowY: 'auto',
         position: 'relative'
       }}>
         <TopNavigatorBar />
         <div className="p-4" style={{ 
           minHeight: 'calc(100vh - 56px)',
-          background: 'linear-gradient(135deg, rgba(255, 236, 236, 0.4) 0%, rgba(255, 240, 245, 0.2) 100%)'
+          background: 'linear-gradient(135deg, rgba(240, 240, 240, 0.4) 0%, rgba(245, 245, 245, 0.2) 100%)'
         }}>
           <div className="rounded-lg p-4" style={{ 
             minHeight: 'calc(100vh - 120px)',
-            background: 'rgba(255, 255, 255, 0.8)',
-            borderRadius: '12px',
-            boxShadow: '0 4px 20px rgba(255, 192, 203, 0.1)',
-            border: '1px solid rgba(255, 182, 193, 0.2)',
+            background: 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '8px',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+            border: '1px solid rgba(0, 0, 0, 0.05)',
             backdropFilter: 'blur(5px)'
           }}>
             <Outlet/>

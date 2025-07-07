@@ -10,6 +10,19 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 }
 
+.login{
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    font-style: Light;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #000000;
+}
+
 .main-header .header-content{
     display: flex;
     justify-content: space-between;

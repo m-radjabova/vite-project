@@ -1,6 +1,9 @@
 import { FiPhone, FiMail, FiMapPin, FiInstagram } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
+  const navigate = useNavigate();
+
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -41,7 +44,7 @@ function Footer() {
           <div className="footer-row">
             <span>ИНН 6720275595<br />ОГРН 1166722000591</span>
           </div>
-          <button className="footer-btn">Заказать звонок</button>
+          <button className="footer-btn" onClick={() => navigate('/order-a-call')}>📞 Заказать звонок</button>
         </div>
       </div>
       <div className="footer-bottom">

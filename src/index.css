@@ -8,7 +8,6 @@
 @import "./css/parfumeryDetail.css";
 @import "./css/contactPage.css";
 
-
 body {
   scroll-behavior: smooth;
   animation: fadeIn 0.5s ease-in-out;
