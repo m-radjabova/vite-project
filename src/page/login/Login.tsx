@@ -4,8 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import apiClient from '../../apiClient/ApiClient';
 import { toast } from 'react-toastify';
 import { User } from '../../App';
-import { GiDelicatePerfume } from 'react-icons/gi';
-import { motion } from 'framer-motion';
+import { GiFlowerPot } from 'react-icons/gi';
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm();
@@ -16,75 +15,75 @@ const LoginForm = () => {
       if (res.data.length > 0) {
         const user = res.data[0];
         if(res.data[0].password === data.password){
-          toast.success("Welcome back!");
+          toast.success("Добро пожаловать!");
           localStorage.setItem("token", user.id);
           navigate("/admin");
         }else{
-          toast.error("Incorrect password");
+          toast.error("Неверный пароль");
         }
       } else{
-        toast.error("Account not found. Please sign up!");
+        toast.error("Аккаунт не найден. Пожалуйста, зарегистрируйтесь!");
       }
     });
   };
 
   return (
     <div className="login d-flex justify-content-center align-items-center min-vh-100" style={{ 
-      backgroundColor: '#fafafa',
-      backgroundImage: 'linear-gradient(to bottom, #ffffff, #f5f5f5)'
+      backgroundColor: '#f8f9fa',
+      backgroundImage: 'linear-gradient(135deg, #f9f0ff 0%, #f0f9ff 100%)'
     }}>
       <div className="login-form bg-white p-4 p-md-5 rounded-4" style={{ 
         width: '95%', 
         maxWidth: '450px',
-        border: '1px solid #eaeaea',
+        border: '1px solid rgba(0,0,0,0.05)',
         position: 'relative',
         overflow: 'hidden',
-        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.05)'
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.05)',
+        backdropFilter: 'blur(5px)',
+        background: 'rgba(255, 255, 255, 0.9)'
       }}>
-        {/* Decorative elements */}
+        {/* Декоративные элементы */}
         <div style={{
           position: 'absolute',
-          top: '-100px',
-          right: '-100px',
-          width: '300px',
-          height: '300px',
-          background: 'radial-gradient(circle, rgba(240,240,240,0.3) 0%, rgba(240,240,240,0) 70%)',
-          zIndex: 0
+          top: '-50px',
+          right: '-50px',
+          width: '150px',
+          height: '150px',
+          background: 'radial-gradient(circle, rgba(255,230,240,0.3) 0%, rgba(255,230,240,0) 70%)',
+          zIndex: 0,
+          borderRadius: '50%'
         }}></div>
         
         <div className="text-center mb-4" style={{ position: 'relative', zIndex: 1 }}>
-          <motion.div
-            initial={{ scale: 0.9, rotate: -5 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
-          >
-            <GiDelicatePerfume className="mb-3" style={{ 
+          <div>
+            <GiFlowerPot className="mb-3" style={{ 
               fontSize: '3.5rem', 
-              color: '#333',
+              color: '#8e44ad',
               filter: 'drop-shadow(0 3px 5px rgba(0, 0, 0, 0.05))'
             }} />
-          </motion.div>
+          </div>
           <h1 className="fw-bold mb-2" style={{ 
-            color: '#222',
+            color: '#2c3e50',
             fontSize: '1.8rem',
-            letterSpacing: '0.5px'
-          }}>Soling Cosmetics</h1>
-          <p className="text-muted" style={{ color: '#777', fontSize: '0.95rem' }}>Sign in to your beauty account</p>
+            letterSpacing: '0.5px',
+            fontFamily: "'Playfair Display', serif"
+          }}>Цветочная Лавка</h1>
+          <p className="text-muted" style={{ color: '#7f8c8d', fontSize: '0.95rem' }}>Войдите в свой цветочный аккаунт</p>
         </div>
 
         <form onSubmit={handleSubmit(Login)} style={{ position: 'relative', zIndex: 1 }}>
           <div className="mb-4">
             <label htmlFor="email" className="form-label" style={{ 
-              color: '#444',
+              color: '#34495e',
               fontSize: '0.9rem',
               fontWeight: '500',
               letterSpacing: '0.3px'
-            }}>Email Address</label>
+            }}>Email адрес</label>
             <div className="input-group">
               <span className="input-group-text bg-white" style={{ 
                 borderRight: 'none',
                 borderColor: '#e0e0e0',
-                color: '#666'
+                color: '#8e44ad'
               }}>
                 <FaEnvelope />
               </span>
@@ -92,16 +91,17 @@ const LoginForm = () => {
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="your@email.com"
+                placeholder="ваш@email.com"
                 {...register('email', { required: true })}
                 style={{ 
                   borderLeft: 'none',
                   borderColor: '#e0e0e0',
                   boxShadow: 'none',
-                  backgroundColor: '#fcfcfc',
-                  color: '#333',
+                  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                  color: '#2c3e50',
                   fontSize: '0.9rem',
-                  padding: '0.75rem'
+                  padding: '0.75rem',
+                  borderRadius: '0 0.375rem 0.375rem 0'
                 }}
               />
             </div>
@@ -109,16 +109,16 @@ const LoginForm = () => {
 
           <div className="mb-4">
             <label htmlFor="password" className="form-label" style={{ 
-              color: '#444',
+              color: '#34495e',
               fontSize: '0.9rem',
               fontWeight: '500',
               letterSpacing: '0.3px'
-            }}>Password</label>
+            }}>Пароль</label>
             <div className="input-group">
               <span className="input-group-text bg-white" style={{ 
                 borderRight: 'none',
                 borderColor: '#e0e0e0',
-                color: '#666'
+                color: '#8e44ad'
               }}>
                 <FaLock />
               </span>
@@ -132,10 +132,11 @@ const LoginForm = () => {
                   borderLeft: 'none',
                   borderColor: '#e0e0e0',
                   boxShadow: 'none',
-                  backgroundColor: '#fcfcfc',
-                  color: '#333',
+                  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                  color: '#2c3e50',
                   fontSize: '0.9rem',
-                  padding: '0.75rem'
+                  padding: '0.75rem',
+                  borderRadius: '0 0.375rem 0.375rem 0'
                 }}
               />
             </div>
@@ -143,44 +144,51 @@ const LoginForm = () => {
               <NavLink 
                 to="/forgot-password" 
                 style={{ 
-                  color: '#666', 
+                  color: '#7f8c8d', 
                   fontSize: '0.85rem',
                   textDecoration: 'none',
                   fontWeight: '500',
                   transition: 'all 0.2s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.color = '#333';
+                  e.currentTarget.style.color = '#8e44ad';
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.color = '#666';
+                  e.currentTarget.style.color = '#7f8c8d';
                 }}
               >
-                Forgot password?
+                Забыли пароль?
               </NavLink>
             </div>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.02, backgroundColor: '#222' }}
-            whileTap={{ scale: 0.98 }}
+          <button
             type="submit"
             className="btn w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2"
             style={{ 
-              backgroundColor: '#333', 
+              backgroundColor: '#8e44ad', 
               color: 'white',
               borderRadius: '8px',
               border: 'none',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+              boxShadow: '0 4px 15px rgba(142, 68, 173, 0.3)',
               transition: 'all 0.3s ease',
               fontSize: '1rem',
               position: 'relative',
               overflow: 'hidden',
               zIndex: 1,
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
+              fontFamily: "'Montserrat', sans-serif"
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#9b59b6';
+              e.currentTarget.style.transform = 'scale(1.02)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = '#8e44ad';
+              e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            <span style={{ position: 'relative', zIndex: 2 }}>Sign In</span>
+            <span style={{ position: 'relative', zIndex: 2 }}>Войти</span>
             <FaArrowRight style={{ position: 'relative', zIndex: 2 }} />
             <span style={{
               position: 'absolute',
@@ -188,44 +196,46 @@ const LoginForm = () => {
               left: '-50%',
               width: '200%',
               height: '200%',
-              background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)',
+              background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent)',
               transform: 'rotate(45deg)',
               transition: 'all 0.5s ease',
               zIndex: 1
             }} className="btn-shine"></span>
-          </motion.button>
+          </button>
 
           <div className="text-center mt-4">
-            <p className="small mb-0" style={{ color: '#777', fontSize: '0.85rem' }}>
-              Don't have an account?{' '}
+            <p className="small mb-0" style={{ color: '#7f8c8d', fontSize: '0.85rem' }}>
+              Нет аккаунта?{' '}
               <NavLink 
                 to="/sign-up" 
                 style={{ 
-                  color: '#333', 
+                  color: '#8e44ad', 
                   fontWeight: '600',
                   textDecoration: 'none',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  fontFamily: "'Montserrat', sans-serif"
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.color = '#000';
+                  e.currentTarget.style.color = '#9b59b6';
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.color = '#333';
+                  e.currentTarget.style.color = '#8e44ad';
                 }}
               >
-                Create account
+                Зарегистрироваться
               </NavLink>
             </p>
           </div>
         </form>
         <div style={{
           position: 'absolute',
-          bottom: '-50px',
-          left: '-50px',
-          width: '200px',
-          height: '200px',
-          background: 'radial-gradient(circle, rgba(230,230,230,0.2) 0%, rgba(230,230,230,0) 70%)',
-          zIndex: 0
+          bottom: '-30px',
+          left: '-30px',
+          width: '100px',
+          height: '100px',
+          background: 'radial-gradient(circle, rgba(230,255,240,0.2) 0%, rgba(230,255,240,0) 70%)',
+          zIndex: 0,
+          borderRadius: '50%'
         }}></div>
       </div>
     </div>

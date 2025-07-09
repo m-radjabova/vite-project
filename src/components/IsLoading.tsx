@@ -13,76 +13,87 @@ const float = keyframes`
   100% { transform: translateY(0px); }
 `;
 
-const spray = keyframes`
-  0% { transform: scale(0.5) translateX(0); opacity: 0; }
-  50% { transform: scale(1) translateX(5px); opacity: 0.8; }
-  100% { transform: scale(1.2) translateX(10px); opacity: 0; }
+const petalsFall = keyframes`
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(100px) rotate(360deg); opacity: 0; }
 `;
 
-const PerfumeBottle = styled('div')({
+const FlowerPot = styled('div')({
   position: 'relative',
-  width: '80px',
-  height: '160px',
+  width: '120px',
+  height: '140px',
   margin: '0 auto 40px',
-  filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.1))',
 });
 
-const BottleBase = styled('div')({
+const PotBase = styled('div')({
   position: 'absolute',
   bottom: 0,
-  width: '80px',
-  height: '120px',
-  background: 'linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.9))',
+  width: '120px',
+  height: '80px',
+  background: 'linear-gradient(to right, #e0f7fa, #b2ebf2)',
   border: '1px solid rgba(0,0,0,0.1)',
-  borderRadius: '8px 8px 30px 30px',
+  borderRadius: '0 0 50px 50px',
   boxShadow: 'inset 0 0 20px rgba(0,0,0,0.1)',
 });
 
-const BottleNeck = styled('div')({
+const PotNeck = styled('div')({
   position: 'absolute',
-  top: '90px',
-  left: '35px',
-  width: '10px',
-  height: '40px',
-  background: 'rgba(255,255,255,0.8)',
+  top: '40px',
+  left: '40px',
+  width: '40px',
+  height: '60px',
+  background: 'linear-gradient(to bottom, #81d4fa, #4fc3f7)',
   border: '1px solid rgba(0,0,0,0.1)',
   borderBottom: 'none',
+  borderRadius: '20px 20px 0 0',
 });
 
-const BottleSprayer = styled('div')({
+const FlowerStem = styled('div')({
   position: 'absolute',
-  top: '80px',
-  left: '30px',
+  top: '20px',
+  left: '59px',
+  width: '2px',
+  height: '80px',
+  background: '#81c784',
+  transformOrigin: 'bottom center',
+});
+
+const FlowerHead = styled('div')({
+  position: 'absolute',
+  top: '0',
+  left: '50px',
   width: '20px',
-  height: '10px',
-  background: 'rgba(255,255,255,0.6)',
-  borderRadius: '10px',
-  transform: 'rotate(-5deg)',
-});
-
-const PerfumeLiquid = styled('div')({
-  position: 'absolute',
-  bottom: '10px',
-  left: '10px',
-  right: '10px',
-  height: '100px',
-  background: 'linear-gradient(to top, #e1bee7, #ce93d8)',
-  borderRadius: '0 0 20px 20px',
+  height: '20px',
+  background: '#ffeb3b',
+  borderRadius: '50%',
+  boxShadow: '0 0 10px rgba(255,235,59,0.5)',
   animation: `${float} 3s ease-in-out infinite`,
-  boxShadow: 'inset 0 0 20px rgba(255,255,255,0.5)',
 });
 
-const SprayParticle = styled('div')<{delay: string, left: string, size: string, color: string}>(({ delay, left, size, color }) => ({
+const Petal = styled('div')<{angle: string, color: string}>(({ angle, color }) => ({
+  position: 'absolute',
+  width: '15px',
+  height: '25px',
+  background: color,
+  borderRadius: '50% 50% 0 50%',
+  top: '5px',
+  left: '5px',
+  transform: `rotate(${angle}deg) translateX(15px)`,
+  transformOrigin: 'bottom center',
+}));
+
+const FallingPetal = styled('div')<{delay: string, left: string, size: string, color: string, duration: string}>(({ delay, left, size, color, duration }) => ({
   position: 'absolute',
   width: size,
   height: size,
   background: color,
-  borderRadius: '50%',
-  top: '50px',
+  borderRadius: '50% 50% 0 50%',
+  top: '0',
   left: left,
-  filter: 'blur(1px)',
+  filter: 'blur(0.5px)',
   opacity: 0,
-  animation: `${spray} 2s ease-out infinite`,
+  animation: `${petalsFall} ${duration} linear infinite`,
   animationDelay: delay,
 }));
 
@@ -95,53 +106,60 @@ function IsLoading() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)',
+        background: 'linear-gradient(135deg, #f1f8e9 0%, #e8f5e9 100%)',
+        overflow: 'hidden',
       }}
     >
       <Box sx={{ position: 'relative', mb: 6 }}>
-        <PerfumeBottle>
-          <BottleBase />
-          <BottleNeck />
-          <BottleSprayer />
-          <PerfumeLiquid />
+        <FlowerPot>
+          <PotBase />
+          <PotNeck />
+          <FlowerStem />
+          <FlowerHead>
+            <Petal angle="0" color="#f8bbd0" />
+            <Petal angle="72" color="#e1bee7" />
+            <Petal angle="144" color="#d1c4e9" />
+            <Petal angle="216" color="#c5cae9" />
+            <Petal angle="288" color="#b3e5fc" />
+          </FlowerHead>
           
-          {/* Spray particles */}
-          {[...Array(12)].map((_, i) => (
-            <SprayParticle
+          {/* Falling petals */}
+          {[...Array(15)].map((_, i) => (
+            <FallingPetal
               key={i}
-              delay={`${i * 0.15}s`}
-              left={`${Math.random() * 60 + 10}px`}
-              size={`${Math.random() * 10 + 4}px`}
-              color={`hsla(${Math.floor(Math.random() * 30 + 270)}, 70%, 60%, 0.7)`}
+              delay={`${i * 0.5}s`}
+              left={`${Math.random() * 100}%`}
+              size={`${Math.random() * 15 + 10}px`}
+              color={`hsl(${Math.floor(Math.random() * 60 + 300)}, 70%, 80%)`}
+              duration={`${Math.random() * 3 + 5}s`}
             />
           ))}
-        </PerfumeBottle>
+        </FlowerPot>
       </Box>
       
       <Typography
         variant="h6"
         sx={{
-          color: '#7e57c2',
+          color: '#2e7d32',
           fontWeight: 500,
-          fontFamily: '"Montserrat", "Helvetica", sans-serif',
+          fontFamily: '"Playfair Display", serif',
           letterSpacing: '2px',
           mt: 2,
-          textTransform: 'uppercase',
-          fontSize: '0.9rem',
+          fontSize: '1.1rem',
           position: 'relative',
           '&:after': {
             content: '""',
             display: 'block',
             width: '40%',
             height: '1px',
-            background: 'linear-gradient(90deg, transparent, #b39ddb, transparent)',
+            background: 'linear-gradient(90deg, transparent, #81c784, transparent)',
             position: 'absolute',
             bottom: '-12px',
             left: '30%',
           },
         }}
       >
-        Curating Your Scent Journey
+        Цветочная композиция
       </Typography>
       
       <Box sx={{ display: 'flex', gap: 2, mt: 6 }}>
@@ -149,10 +167,10 @@ function IsLoading() {
           <Box
             key={i}
             sx={{
-              width: '8px',
-              height: '8px',
+              width: '10px',
+              height: '10px',
               borderRadius: '50%',
-              background: '#b39ddb',
+              background: '#81c784',
               opacity: 0.6,
               animation: `${fadeInOut} 1.5s ease-in-out infinite`,
               animationDelay: `${i * 0.2}s`,
@@ -165,15 +183,16 @@ function IsLoading() {
         variant="caption"
         sx={{
           display: 'block',
-          color: '#9575cd',
+          color: '#689f38',
           mt: 4,
           fontStyle: 'italic',
           letterSpacing: '1px',
-          fontSize: '0.7rem',
+          fontSize: '0.8rem',
           opacity: 0.8,
+          fontFamily: '"Montserrat", sans-serif',
         }}
       >
-        Crafting olfactory perfection...
+        Собираем ваш идеальный букет...
       </Typography>
     </Box>
   );

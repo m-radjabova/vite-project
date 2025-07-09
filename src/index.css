@@ -1,13 +1,3 @@
-@import "./css/header.css";
-@import "./css/footer.css";
-@import "./css/main.css";
-@import "./css//profcosmetic.css";
-@import "./css/partners.css";
-@import "./css/brands.css";
-@import "./css/parfumery.css";
-@import "./css/parfumeryDetail.css";
-@import "./css/contactPage.css";
-
 body {
   scroll-behavior: smooth;
   animation: fadeIn 0.5s ease-in-out;
