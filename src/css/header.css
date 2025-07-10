@@ -1,63 +1,236 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
-
-.main-header{
-    padding: 5px 20px;
-    background-color: #fff;
-    font-family: "Roboto";
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+.header {
+  background: #fff;
+  border-bottom: 1px solid #ececec;
+  font-family: 'Rubik', Arial, sans-serif;
+  /* width: 100%; */
+  z-index: 100;
 }
 
-.login{
-    color: #000000;
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-    font-family: 'Open Sans';
-    font-weight: 300;
-    font-style: Light;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 32px;
+  min-height: 70px;
 }
 
-.main-header .header-content{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+.header-nav {
+  display: flex;
+  gap: 25px;
+  flex: 1;
 }
 
-.main-header .header-logo{
-    width: 240px;
+.header-link {
+  color: #222;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-weight: 400;
+  padding: 0 2px;
+  transition: color 0.18s;
+  position: relative;
+}
+
+.header-link.active,
+.header-link:hover {
+  color: #43b02a;
+}
+
+.header-link.active::after {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  height: 2px;
+  background: #43b02a;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.login {
+  color: #222;
+  font-size: 1.05rem;
+  font-family: 'Rubik', Arial, sans-serif;
+  margin-left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.18s;
+  cursor: pointer;
+}
+
+.login:hover {
+  color: #43b02a;
+}
+
+.header-middle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 36px;
+  padding: 10px 32px;
+  min-height: 70px;
+  border-top: 1px solid #ececec;
+}
+
+.header-logo {
+  height: 50px;
+  cursor: pointer;
+  margin-right: 18px;
+}
+
+.phone-number {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.13rem;
+  color: #222;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-weight: 400;
+  margin-right: 24px;
+  min-width: 150px;
+}
+
+.timeAndAddress {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #222;
+  font-size: 1.02rem;
+  font-family: 'Rubik', Arial, sans-serif;
+  margin-right: 24px;
+}
+
+.time, .address {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.02rem;
+  font-family: 'Rubik', Arial, sans-serif;
+}
+
+.address {
     cursor: pointer;
 }
 
-.main-header .header-nav{
-    display: flex;
-    gap: 40px;
+.likeAndCart {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
 }
 
-.main-header .header-link{
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-    font-family: 'Open Sans';
-    font-weight: 300;
-    font-style: Light;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
+.like, .cart {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #d23c67;
+  font-size: 1.05rem;
+  font-family: 'Rubik', Arial, sans-serif;
+  cursor: pointer;
+  transition: color 0.18s;
 }
 
-.main-header .header-link:hover{
-    color: #5c5c5c;
+.like span {
+  color: #222;
+  font-size: 1.05rem;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-weight: 400;
 }
 
-.main-header .header-link.active{
-    color: #000000;
-    text-decoration: underline;
+.cart {
+  color: #43b02a;
 }
 
+.cart span {
+  color: #222;
+  font-size: 1.05rem;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-weight: 400;
+}
+
+.profile {
+  margin-left: 18px;
+  font-family: 'Rubik',
+}
+
+.header-bottom {
+  background: #27d33a;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.header-bottom-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-bottom-link {
+  color: #fff;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0 28px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #39e64a;
+  transition: background 0.18s, color 0.18s;
+  letter-spacing: 0.5px;
+}
+
+.header-bottom-link:first-child {
+  border-left: 1px solid #39e64a;
+}
+
+.header-bottom-link.active,
+.header-bottom-link:hover {
+  background: #22c334;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .header-bottom-nav {
+    flex-wrap: wrap;
+  }
+  .header-bottom-link {
+    padding: 0 14px;
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .header-content, .header-bottom {
+    padding: 0 12px;
+    gap: 18px;
+  }
+  .header-logo {
+    height: 38px;
+  }
+  .phone-number {
+    font-size: 1rem;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 800px) {
+  .header-content, .header-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .header-logo {
+    height: 32px;
+  }
+  .likeAndCart {
+    margin-left: 0;
+  }
+}

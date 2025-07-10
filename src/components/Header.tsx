@@ -1,11 +1,15 @@
-import Logo from '../assets/Логотип.svg'
 import useContextPro from '../hooks/useContextPro';
 import { useState } from 'react';
 import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
-import {FaUserShield, FaSignOutAlt, FaUserAlt, FaChevronDown } from 'react-icons/fa';
+import {FaUserShield, FaSignOutAlt, FaUserAlt, FaChevronDown, FaRegHeart } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-
+import singIn from '../assets/sign-in.svg';
+import UserLogo from '../assets/user.svg'
+import Logo from '../assets/Frame 6.svg'
+import { LuClock } from "react-icons/lu";
+import { CiLocationOn } from "react-icons/ci";
+import { IoCartOutline } from "react-icons/io5";
 function Header() {
     const { state: { user }, dispatch } = useContextPro();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -27,24 +31,35 @@ function Header() {
     };
 
   return (
-    <header className="main-header">
+    <header className="header">
       <div className="header-content">
-        <img src={Logo} alt="Logo" className="header-logo" onClick={() => navigate('/')} />
         <nav className="header-nav">
-            <NavLink to="/" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Главная</NavLink>
-            <NavLink to="/professional" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Профессиональная косметика</NavLink>
-            <NavLink to="/perfumery" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Парфюмерия</NavLink>
+            <NavLink to="/catalog" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Каталог</NavLink>
             <NavLink to="/about" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>О компании</NavLink>
-            <NavLink to="/partners" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Партнеры</NavLink>
+            <NavLink to="/payment" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Способы оплаты</NavLink>
+            <NavLink to="/delivery" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Доставка</NavLink>
+            <NavLink to="/reviews" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Отзывы</NavLink>
+            <NavLink to="/discount" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Дисконтные карты</NavLink>
+            <NavLink to="/video" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Видео</NavLink>
             <NavLink to="/contacts" className={({ isActive }) => "header-link" + (isActive ? " active" : "")}>Контакты</NavLink>
         </nav>
         {!user ? (
-              <NavLink 
-                  to="/login" 
-                  className="login text-decoration-none login" 
-                >
-                  Login
-              </NavLink>
+              <div>
+                  <NavLink 
+                    to="/login" 
+                    className="login text-decoration-none login" 
+                  >
+                    <img src={UserLogo} alt="sing-in" className="me-2" />
+                    Войти
+                </NavLink>
+                <NavLink 
+                    to="/sing-up" 
+                    className="login text-decoration-none login" 
+                  >
+                    <img src={singIn} alt="sing-in" className="me-2" />
+                    Регистрация
+                </NavLink>
+              </div>
             ) : (
               <li className="profile" style={{ listStyle: 'none' }}>
                 <div 
@@ -159,6 +174,44 @@ function Header() {
               </li>
             )}
       </div>
+      <div className='header-middle'>
+        <img src={Logo} alt="header-logo" className="header-logo" onClick={() => navigate('/')} />
+        <div className='phone-number'>
+          <span>+7 965 151 18 39 </span>
+          <span>+7 916 122 18 98</span>
+        </div>
+        <div className='timeAndAddress'>
+          <div className='time'>
+            <LuClock color='#43b02a' size={20} className="me-2 "  /> 
+            Ждем вас с 8:00 до 22:00
+          </div>
+          <div className='address'>
+            <CiLocationOn color='#43b02a' size={20} className="me-2" /> 
+            Адреса цветочных центров
+          </div>
+        </div>
+        <div className='likeAndCart'>
+          <div className='like'>
+            <FaRegHeart size={30} className="me-2" />
+            <span>Избранное</span>
+          </div>
+          <div className='cart'>
+            <IoCartOutline size={30} className="me-2" />
+            <span>0 ₽</span>
+          </div>
+        </div>
+      </div>
+     <div className='header-bottom'>
+      <nav className='header-bottom-nav'>
+        <NavLink to="/bouquets" className="header-bottom-link">Букеты</NavLink>
+        <NavLink to="/roses" className="header-bottom-link">Розы</NavLink>
+        <NavLink to="/flowers" className="header-bottom-link">Цветы</NavLink>
+        <NavLink to="/plants" className="header-bottom-link">Горшечные растения</NavLink>
+        <NavLink to="/about" className="header-bottom-link">Повод</NavLink>
+        <NavLink to="/gifts" className="header-bottom-link">Подарки</NavLink>
+        <NavLink to="/sales" className="header-bottom-link">Акции</NavLink>
+      </nav>
+    </div>
     </header>
   )
 }
