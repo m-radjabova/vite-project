@@ -1,6 +1,7 @@
 @import "./css/header.css";
 @import "./css/main.css";
 @import "./css/deliveryMoscow.css";
+@import "./css/seasonFlower.css";
 
 body {
   scroll-behavior: smooth;

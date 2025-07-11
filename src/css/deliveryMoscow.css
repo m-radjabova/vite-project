@@ -6,7 +6,8 @@
     margin-top: 40px;
 }
 
-.deliveryMoskow .title h1 {
+.title h1 {
+    margin-bottom: 40px;
     font-family: 'Cormorant Garamond';
     font-weight: 700;
     font-size: 36px;

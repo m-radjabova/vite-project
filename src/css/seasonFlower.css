@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+.season-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 38px 24px;
+  justify-items: center;
+  margin-top: 24px;
+}
+
+.season-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(60, 60, 60, 0.06);
+  padding: 18px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 220px;
+  transition: box-shadow 0.18s;
+  /* overflow: hidden; */
+}
+
+.season-card.active {
+  box-shadow: 0 4px 24px rgba(60, 60, 60, 0.12);
+  z-index: 2;
+}
+
+.card-top {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card-img {
+  width: 330px;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-heart {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  color: #d23c67;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.card-status {
+    position: absolute;
+    bottom: 20px;
+    padding: 6px 18px;
+    border-radius: 22px;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: 'Rubik', Arial, sans-serif;
+    font-weight: 500;
+    border: 2px solid rgba(255, 255, 255, 1);
+    transition: background 0.18s, color 0.18s;
+}
+
+
+.card-price {
+  margin-top: 12px;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #43b02a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.old-price {
+  font-size: 1rem;
+  color: #bdbdbd;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.card-name {
+  margin-top: 6px;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1.05rem;
+  color: #444;
+  text-align: center;
+}
+
+.season-all {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.season-btn {
+    background: #f8fbf4;
+    color: rgba(75, 180, 94, 1);
+    border-radius: 50px;
+    padding: 15px 33px;
+    font-family: 'Rubik', Arial, sans-serif;
+    font-size: 1.08rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s;
+    border: 1px solid #3CB950 !important;
+}
+
+.season-btn:hover {
+  background: #e6efdf;
+}
+
+.card-status.badge-red {
+  background: #ff5a5a;
+  color: #fff;
+}
+.card-status.badge-green {
+  background: rgba(75, 180, 94, 1);
+  color: #fff;
+}
+.card-status.badge-blue {
+  background: #3bb2f9;
+  color: #fff;
+}
+
+.card-expanded {
+  position: absolute;
+  left: 0;
+  bottom: -200px;
+  width: 100%;
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  margin-top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 3;
+  padding: 10px 0;
+  box-shadow: 0 4px 24px rgba(60, 60, 60, 0.12);
+}
+
+.card-compound {
+  background-color: #3CB950;
+  padding: 14px 10px 10px 10px; 
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.card-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: #43b02a;
+  font-weight: 500;
+  border: 1px solid rgba(230, 230, 230, 1)
+}
+
+.qty-btn {
+  background: none;
+  border: none;
+  color: #43b02a;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 6px;
+}
+
+.cart-btn {
+  background: rgba(75, 180, 94, 1);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.cart-btn:hover {
+  background: #3CB950;
+}
+
+.card-buyone {
+  color: #43b02a;
+  background: none;
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.card-buyone:hover {
+  text-decoration: underline;
+}
