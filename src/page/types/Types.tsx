@@ -10,3 +10,18 @@ export interface BouqetType {
     isLiked: boolean;
     category: string[];
 }
+
+export interface ReviewsType{
+    id: string;
+    author: string;
+    date: string;
+    time: string;
+    location: string;
+    rating: number;
+    text: string;
+}
+
+export interface PartnerType{
+    id: string;
+    imageLogo: string;
+}

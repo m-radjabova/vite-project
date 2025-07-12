@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+.reviews {
+    padding: 40px 0;
+    background-color: #f9f9f9;
+}
+
+.reviews .container{
+    border-top: 1px solid #696969;
+    padding: 20px 0;
+}
+
+
+.reviews-title {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.reviews-title h1 {
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+}
+
+.reviews-link {
+    display: flex;
+    align-items: center;
+    color: #4CAF50;
+    text-decoration: underline;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+
+.reviews-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 20px;
+}
+
+.reviews-item {
+    position: relative;
+    background: #FFFEF2;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.reviews-item .quote-icon {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 40px;
+    color: #FDF481;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.review-header .review-author {
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    font-style: italic;
+    color: #444444;
+}
+
+.review-header .review-date {
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #BDBDBD;
+}
+
+.review-rating {
+    margin: 10px 0;
+}
+
+.review-rating .star-icon {
+    color: #FF5555;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.review-text {
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #444444;
+}
+

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+.flower-center{
+    margin-top: 40px;
+    padding: 30px;
+    background: #FFF5F5;
+}
+
+.flower-center-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 38px 24px;
+    justify-items: center;
+    margin-top: 24px;
+}
+
+.flower-center-list ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    color: #444444;
+    font-family: 'Montserrat';
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.flower-center-list ul li{
+     padding: 8px 12px;
+}
+
+.flower-center-list ul li:hover{
+    background: #FF5555;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 8px 12px;
+}

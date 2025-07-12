@@ -92,6 +92,7 @@ function Roses() {
         </div>
         <div className="season-all">
           <button className="season-btn">СМОТРЕТЬ ВСЕ</button>
+          <button className="season-btn-all"> Смотреть весь каталог </button>
         </div>
       </div>
     </div>

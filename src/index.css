@@ -2,6 +2,9 @@
 @import "./css/main.css";
 @import "./css/deliveryMoscow.css";
 @import "./css/seasonFlower.css";
+@import "./css//flowerCenter.css";
+@import "./css/reviews.css";
+@import "./css/partners.css";
 
 body {
   scroll-behavior: smooth;
