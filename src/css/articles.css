@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+.articles{
+    margin-top: 40px;
+    background-color: #F5F9EC;
+    padding: 40px 40px 60px 40px;
+}
+
+.articles .articles-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.articles-title h1{
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    color: #444444;
+}
+
+.articles-link {
+    display: flex;
+    align-items: center;
+    color: #4CAF50;
+    text-decoration: underline;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.articles-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 24px;
+    justify-items: center;
+    margin-top: 24px;
+}
+
+.articles-item{
+    border-radius: 10px;
+}
+
+.articles-text{
+    background-color: #ffff;
+    padding: 20px;
+}
+
+.articles-text .article-date{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+}
+
+.articles-text .article-title{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #4BB45E;
+    margin: 10px 0;
+}
+
+.articles-text .article-description{
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 15px;
+    color: #444444;
+}
+
+.articles-list .articles-item img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}

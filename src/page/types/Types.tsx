@@ -25,3 +25,20 @@ export interface PartnerType{
     id: string;
     imageLogo: string;
 }
+
+export interface ArticleType {
+    id: string;
+    title: string;
+    date: string;
+    description: string;
+    image: string;
+    createdAt: string;
+}
+
+export interface NewsType {
+    id: string;
+    title: string;
+    text: string;
+    date: string;
+    createdAt: string;
+}

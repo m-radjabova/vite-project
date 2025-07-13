@@ -5,6 +5,11 @@
 @import "./css//flowerCenter.css";
 @import "./css/reviews.css";
 @import "./css/partners.css";
+@import "./css//articles.css";
+@import "./css/news.css";
+@import "./css//follow.css";
+@import "./css/floramarkbase.css";
+@import "./css//footer.css";
 
 body {
   scroll-behavior: smooth;

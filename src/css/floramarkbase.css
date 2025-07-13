@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+.flora-mark{
+    margin-top: 30px;
+    padding: 40px 40px 60px 40px;
+}
+
+.flora-mark-title h1{
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    color: #444444;
+    margin-bottom: 30px;
+}
+
+.flora-mark-title p{
+    font-family: "Rubik";
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #444444;
+}
+
+.flora-mark-items{
+    margin-top: 40px;
+}
+
+.flora-mark-items .flora-mark-item{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.flora-mark-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.flora-mark-item h1{
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+}
+
+.flora-mark-item p{
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 15px;
+    color: #444444;
+}

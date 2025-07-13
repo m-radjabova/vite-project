@@ -1,13 +1,18 @@
-import ClientsAndPartners from "../../components/ClientsAndPartners"
-import DeliveryMoscow from "../../components/DeliveryMoscow"
-import DiscoundFlower from "../../components/DiscoundFlower"
-import FlowerCenter from "../../components/FlowerCenter"
+import Articles from "../../components/HomePage/Articles"
+import ClientsAndPartners from "../../components/HomePage/ClientsAndPartners"
+import DeliveryMoscow from "../../components/HomePage/DeliveryMoscow"
+import DiscoundFlower from "../../components/HomePage/DiscoundFlower"
+import FlowerCenter from "../../components/HomePage/FlowerCenter"
 import Header from "../../components/Header"
-import HitFlowers from "../../components/HitFlowers"
-import Main from "../../components/Main"
-import Reviews from "../../components/Reviews"
-import Roses from "../../components/Roses"
-import SeasonFlower from "../../components/SeasonFlower"
+import HitFlowers from "../../components/HomePage/HitFlowers"
+import Main from "../../components/HomePage/Main"
+import News from "../../components/HomePage/News"
+import Reviews from "../../components/HomePage/Reviews"
+import Roses from "../../components/HomePage/Roses"
+import SeasonFlower from "../../components/HomePage/SeasonFlower"
+import Follow from "../../components/HomePage/Follow"
+import FloraMarkBase from "../../components/HomePage/FloraMarkBase"
+import Footer from "../../components/Footer"
 
 function Home() {
   return (
@@ -22,6 +27,11 @@ function Home() {
       <FlowerCenter />
       <Reviews />
       <ClientsAndPartners />
+      <Articles />
+      <News />
+      <Follow />
+      <FloraMarkBase />
+      <Footer />
     </div>
   )
 }

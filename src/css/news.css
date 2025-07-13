@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+.news{
+    margin-top: 40px;
+    padding: 40px 40px 60px 40px;
+}
+
+.news .news-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.news-title h1{
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    color: #444444;
+}
+
+.news-link {
+    display: flex;
+    align-items: center;
+    color: #4CAF50;
+    text-decoration: underline;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.news-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 24px;
+    justify-items: center;
+    margin-top: 24px;
+}
+
+.news-item{
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    padding: 20px 20px 30px 20px;
+    box-shadow: 0 4px 12px rgba(60, 60, 60, 0.06);
+}
+
+.news-item .news-text{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.news-text .news-date{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+}
+
+.news-text .news-title{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #4CAF50;
+}
+
+.news-item .news-description{
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 15px;
+    color: #444444;
+}
