@@ -1,9 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
 .footer {
     background: linear-gradient(92.08deg, #317014 20.3%, #426D0D 48.62%, #095F07 79.4%);
 }
 
 .footer .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1f;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 50px;
     padding: 50px 0;
+}
+
+.footer .footer-left .logo img{
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer .footer-left .phone{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer .footer-left .phone a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.footer .phone{
+    margin-bottom: 20px;
+}
+
+.footer .footer-left p{
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0%;
+    color: #fff;
+}
+
+.footer .footer-left p:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer .footer-nav{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer .footer-nav .footer-link{
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer .footer-nav .footer-link:hover{
+    text-decoration: underline;
 }

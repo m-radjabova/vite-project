@@ -11,19 +11,27 @@ function Articles() {
             <div className="articles-title">
                 <h1>Полезные статьи</h1>
                 <Link className="articles-link" to="/articles">
-                    Все статьи <IoIosArrowForward />
+                    Все статьи <IoIosArrowForward className="arrow-icon" />
                 </Link>
             </div>
             <div className="articles-list">
                 {articles.map(item => (
-                    <div className="articles-item" key={item.id}>
-                        <img src={item.image} alt="" />
-                        <div className="articles-text">
-                            <div className="article-date">{item.date}</div>
-                            <div className="article-title">{item.title}</div>
-                            <div className="article-description">{item.description}</div>
+                    <Link to={`/articles/${item.id}`} className="article-link-wrapper" key={item.id}>
+                        <div className="articles-item">
+                            <div className="article-image-container">
+                                <img src={item.image} alt={item.title} />
+                                <div className="image-overlay"></div>
+                            </div>
+                            <div className="articles-text">
+                                <div className="article-date">{item.date}</div>
+                                <h3 className="article-title">{item.title}</h3>
+                                <div className="article-description">{item.description}</div>
+                                <div className="read-more">
+                                    Читать далее <IoIosArrowForward className="arrow-icon" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

@@ -1,238 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
-.season-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: 38px 24px;
-  justify-items: center;
-  margin-top: 24px;
+.season-section {
+  padding: 80px 0;
 }
 
-.season-card {
-  background: #fff;
-  border-radius: 14px;
-  /* box-shadow: 0 2px 12px rgba(60, 60, 60, 0.06); */
-  padding: 18px 0;
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-family: "Cormorant Garamond";
+  font-weight: 700;
+  font-size: 36px;
+  color: #444444;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #4BB45E;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+.bouquet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.bouquet-card-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.bouquet-card {
+  background: white;
+  border-radius: 12px;
+  overflow: visible;
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); */
+  transition: all 0.3s ease;
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
-  min-width: 220px;
-  transition: box-shadow 0.18s;
-  /* overflow: hidden; */
+  font-family: "Rubik";
 }
 
+.bouquet-card.hovered {
+  z-index: 10;
+}
 
-.season-card.active {
-  box-shadow: 0 4px 24px rgba(60, 60, 60, 0.12);
+/* Card Media */
+.card-media {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.bouquet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.bouquet-card:hover .bouquet-image {
+  transform: scale(1.05);
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #d23c67;
+  font-size: 18px;
   z-index: 2;
 }
 
-.card-top {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.favorite-btn:hover {
+  background: white;
+  transform: scale(1.1);
 }
 
-.card-img {
-  width: 330px;
-  height: 330px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.card-heart {
-  position: absolute;
-  top: 6px;
-  right: 6px;
+.favorite-btn.favorited {
   color: #d23c67;
-  font-size: 22px;
-  cursor: pointer;
+}
+.status-badge {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: white;
+  background: #4BB45E;
+  border: 2px solid white;
+  z-index: 2;
 }
 
-.card-status {
-    position: absolute;
-    bottom: 20px;
-    padding: 6px 18px;
-    border-radius: 22px;
-    font-size: 15px;
-    text-transform: uppercase;
-    color: #fff;
-    font-family: 'Rubik', Arial, sans-serif;
-    font-weight: 500;
-    border: 2px solid rgba(255, 255, 255, 1);
-    transition: background 0.18s, color 0.18s;
+.status-badge img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
 }
 
+.status-badge.badge-red {
+  background: #ff5a5a;
+}
 
-.card-price {
-  margin-top: 12px;
-  font-family: 'Rubik', Arial, sans-serif;
-  font-size: 34px;
-  font-weight: 300;
+.status-badge.badge-green {
+  background: #4BB45E;
+}
+
+.status-badge.badge-blue {
+  background: #3bb2f9;
+}
+
+.card-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bouquet-name {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.bouquet-card:hover .bouquet-name {
   color: #4BB45E;
+}
+
+.price-container {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: auto;
+}
+
+.current-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4BB45E;
 }
 
 .old-price {
   font-size: 1rem;
-  color: #bdbdbd;
+  color: #bdc3c7;
   text-decoration: line-through;
-  font-weight: 400;
 }
 
-.card-name {
-  margin-top: 6px;
-  font-family: 'Rubik', Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  color: #444444;
-  text-align: center;
+/* Hover Content */
+.hover-content {
+  position: absolute;
+  top: calc(100% - 20px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 0 0 12px 12px;
+  padding: 25px 20px 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
-.season-all {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
+.bouquet-card.hovered .hover-content {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
-.season-btn {
-  background-color: #fff;
-    color: rgba(75, 180, 94, 1);
-    border-radius: 50px;
-    padding: 15px 33px;
-    font-family: 'Rubik', Arial, sans-serif;
-    font-size: 1.08rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.18s;
-    border: 1px solid #3CB950 !important;
+.composition h4 {
+  font-size: 1rem;
+  color: #4BB45E;
+  margin-bottom: 8px;
 }
 
-.season-btn:hover {
-  background: #e6efdf;
+.composition ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 20px;
 }
 
-.card-status.badge-red {
-  background: #ff5a5a;
-  color: #fff;
-}
-.card-status.badge-green {
-  background: rgba(75, 180, 94, 1);
-  color: #fff;
-}
-.card-status.badge-blue {
-  background: #3bb2f9;
-  color: #fff;
+.composition li {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 15px;
 }
 
-.card-expanded {
+.composition li::before {
+  content: '•';
   position: absolute;
   left: 0;
-  bottom: -250px;
-  width: 100%;
-  color: #fff;
-  border-radius: 0 0 8px 8px;
-  margin-top: 0;
-  background: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  z-index: 3;
-  padding: 10px 0;
+  color: #4BB45E;
 }
 
-.card-compound {
-  background-color: #3CB950;
-  padding: 14px 10px 10px 10px; 
-  font-family: 'Rubik', Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  text-align: left;
-  width: 100%;
-  margin-bottom: 8px;
-  color: #fff;
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.card-actions {
+.quantity-selector {
   display: flex;
   align-items: center;
-  gap: 12px;
-  width: 100%;
-  justify-content: center;
-  padding: 25px 15px 15px 15px;
-
-}
-
-.card-qty {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
+  border: 1px solid #ecf0f1;
   border-radius: 6px;
-  padding: 4px 10px;
-  color: #43b02a;
-  font-weight: 500;
-  border: 1px solid rgba(230, 230, 230, 1)
+  overflow: hidden;
 }
 
 .qty-btn {
   background: none;
   border: none;
-  color: #43b02a;
-  font-size: 1.2rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 0 6px;
-}
-
-.cart-btn {
-  background: rgba(75, 180, 94, 1);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 18px;
-  font-family: 'Rubik', Arial, sans-serif;
+  color: #4BB45E;
   font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.18s;
+  transition: background 0.2s ease;
 }
 
-.cart-btn:hover {
-  background: #3CB950;
+.qty-btn:hover {
+  background: #f1f8f1;
 }
 
-.card-buyone {
-  color: #43b02a;
-  background: none;
-  font-family: 'Rubik', Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-top: 4px;
-  cursor: pointer;
+.qty-btn.minus {
+  border-right: 1px solid #ecf0f1;
+}
+
+.qty-btn.plus {
+  border-left: 1px solid #ecf0f1;
+}
+
+.qty-value {
+  width: 30px;
   text-align: center;
+  font-weight: 500;
 }
 
-.card-buyone:hover {
-  text-decoration: underline;
-}
-
-.season-btn-all{
-  margin-top: 50px;
-  padding: 15px 30px;
-  border-radius: 50px;
-  color: #fff;
-  font-family: 'Rubik', Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+.add-to-cart {
+  background: #4BB45E;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.18s;
-  border: 1px solid #3CB950 !important;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #3CB950 0%, #13DD33 100%);
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: #3a8d49;
+  transform: translateY(-2px);
+}
+
+.quick-buy {
+  width: 100%;
+  background: none;
+  border: 1px solid #4BB45E;
+  color: #4BB45E;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quick-buy:hover {
+  background: rgba(75, 180, 94, 0.1);
+}
+
+/* View All Button */
+.view-all-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4BB45E;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background: #3a8d49;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(75, 180, 94, 0.3);
+}
+
+.view-all-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover svg {
+  transform: translateX(5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bouquet-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .card-media {
+    height: 250px;
+  }
+  
+  .hover-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    box-shadow: none;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    padding: 15px;
+    margin-top: 10px;
+    border-top: 1px solid #ecf0f1;
+  }
 }

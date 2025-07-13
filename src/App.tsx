@@ -8,15 +8,11 @@ import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
 import Profile from "./page/admin/Profile/Profile";
+import Catalog from "./components/Catalog";
 
-export interface User {
-  id: string;
-  username: string;
-  email: string;
-  roles: ("ADMIN" | "USER")[];
-  password: string;
-  phone: string;
-}
+import MainLayout from "./Layout/MainLayout";
+import AuthLayout from "./Layout/AuthLayout";
+import AdminLayout from "./Layout/AdminLayout";
 
 function App() {
   const {
@@ -28,25 +24,33 @@ function App() {
   }
 
   return (
-    <div>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SingUp />} />
-          {/* ADMIN */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
-                <Admin />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-    </div>
+    <Routes>
+
+      <Route element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+      </Route>
+
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SingUp />} />
+      </Route>
+
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Admin />} />
+        <Route path="profile" element={<Profile />} />
+      </Route>
+
+  
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
 }
 

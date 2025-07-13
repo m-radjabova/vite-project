@@ -2,7 +2,7 @@ import { Select, MenuItem, FormControl, InputBase } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styled } from "@mui/material/styles";
 
-const CustomSelect = styled(Select)({
+export const CustomSelect = styled(Select)({
   background: "transparent",
   border: "none",
   fontFamily: "'Rubik', Arial, sans-serif",
@@ -27,7 +27,7 @@ const CustomSelect = styled(Select)({
   },
 });
 
-const CustomFormControl = styled(FormControl)({
+export const CustomFormControl = styled(FormControl)({
   flex: 1,
   borderRight: "1px solid #e6efdf",
   '&:last-of-type': {

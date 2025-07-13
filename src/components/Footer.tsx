@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import logoFooter from '../assets/Frame 86.svg';
 import phone from "../assets/Frame 91.svg";
+
 function Footer() {
   return (
     <div className="footer">
@@ -11,9 +12,13 @@ function Footer() {
                 </div>
                 <div className="phone">
                     <img src={phone} alt="" />
-                    <a href="tel:+74952222222">+7 (495) 222-22-22</a>
-                    <a href="tel:+74952222222">+7 (495) 222-22-22</a>
+                    <div className='phone-number'>
+                        <a href="tel:+74952222222">+7 (495) 222-22-22</a>
+                        <a href="tel:+74952222222">+7 (495) 222-22-22</a>
+                    </div>
                 </div>
+                <p>Адреса цветочных центров</p>
+                <p>Политика конфиденциальности</p>
             </div>
             <div className="footer-middle1">
                 <nav className="footer-nav">
