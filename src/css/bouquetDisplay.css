@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+.bouquet-display{
+    margin-top: 1rem;
+}
+
+.bouquet-title{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bouquet-title .bouquet-link{
+   font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.bouquet-title .bouquet-link:hover{
+    text-decoration: underline;
+}
+
+.bouquet-container{
+    padding: 20px ;
+    margin-top: 2rem;
+    display: flex;
+}
+
+.bouquet-container .bouquet-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bouquet-container .bouquet-img{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bouquet-container .bouquet-text{
+    margin-left: 2rem;
+}
+
+.bouquet-text .bouquet-name{
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+    margin-bottom: 1rem;
+}
+
+
+.flower-status-price{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 4rem;
+}
+
+.flower-price{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flower-price-current{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #4BB45E;
+}
+
+.flower-price-old{
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 40px;
+    letter-spacing: 0%;
+    vertical-align: bottom;
+    text-decoration: line-through;
+    color: #444444;
+}
+
+.flower-status-badge{
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    background: #4BB45E;
+    border: 2px solid white;
+    z-index: 2;
+}
+
+.flower-status-badge img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.flower-status-badge.badge-red {
+  background: #ff5a5a;
+}
+
+.flower-status-badge.badge-green {
+  background: #4BB45E;
+}
+
+.flower-status-badge.badge-blue {
+  background: #3bb2f9;
+}
+
+.flower-favorite-btn{
+    background: rgba(222, 12, 12, 0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #f1f1f1;
+    font-size: 20px;
+    z-index: 2;
+}
+
+.flower-favorite-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.flower-favorite-btn.favorited {
+  color: #d23c67;
+}
+
+.flower-action-buttons{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin: 1rem 0;
+}
+
+.quick-actions{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 1px solid #c8c7c7;
+    border-top: 1px solid #c8c7c7;
+    padding: 1rem 0;
+}
+
+.quick-actions .quick-action-btn{
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(75, 180, 94, 0.1);
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    text-align: center;
+    color:#4BB45E;
+}
+
+.quick-actions .quick-action-btn:hover{
+    background: #4BB45E;
+    color: white;
+}
+
+.flower-details{
+    margin-top: 2rem;
+}
+
+.flower-details .details-title{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: bottom;
+    color: #444444;
+    margin-bottom: 1rem;
+
+}
+
+.flower-details  ul{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #444444;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.flower-details li {
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+    margin-bottom: 1rem;
+}
+
+.details-divider{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    padding: 0.5rem 0;
+}
+
+.details-divider h3{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: bottom;
+    color: #444444;
+}
+.details-divider p{
+    margin: 0 ;
+   color: #444444;
+}
+
+.package-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    padding: 0.5rem 0;
+}
+
+.package-info .package-note p{
+    margin: 0;
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: bottom;
+    color: #444444;
+}
+
+.package-info .package-note span{
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: bottom;
+    color: #444444;
+}
+
+.info-icon{
+    font-size: 24px;
+    color: #4BB45E;
+    cursor: pointer;
+}
+
+.payment-methods{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.payment-methods h3{
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: bottom;
+    color: #444444;
+}
+
+.payment-methods .payment-options{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.payment-methods .payment-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 0.5rem; */
+    cursor: pointer;
+}
+
+.payment-option .payment-icon{
+    font-size: 24px;
+    color: #4BB45E;
+}
+
+.bouquet-overlay{
+    margin-top: 2rem;
+}
+
+.bouquet-overlay-title{
+   font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #444444;
+}
+
+.flower-bouquet-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.service{
+    margin: 2rem 0;
+}
+
+.service .service-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    align-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #0000001A;
+    padding: 3rem;
+    border-radius: 10px;
+}
+
+.service-grid span{
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444444;
+}
+
+.service-grid .service-item{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}

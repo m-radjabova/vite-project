@@ -3,10 +3,44 @@ import useReviews from "../../hooks/useReviews";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import { FaQuoteLeft } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Reviews() {
     const { reviews } = useReviews();
-    const displayedReviews = reviews.slice(0, 2);
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 2,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    };
 
     return (
         <section className="floramarket-testimonials">
@@ -22,7 +56,8 @@ function Reviews() {
                 </div>
                 
                 <div className="fm-testimonials-grid">
-                    {displayedReviews.map(item => (
+                    <Slider {...settings}>
+                    {reviews.map(item => (
                         <div className="fm-testimonial-card" key={item.id}>
                             <div className="fm-quote-icon">
                                 <FaQuoteLeft />
@@ -51,6 +86,7 @@ function Reviews() {
                             </div>
                         </div>
                     ))}
+                    </Slider>
                 </div>
             </div>
         </section>

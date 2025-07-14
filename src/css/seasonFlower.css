@@ -58,6 +58,7 @@
   display: flex;
   flex-direction: column;
   font-family: "Rubik";
+  cursor: pointer;
 }
 
 .bouquet-card.hovered {
@@ -241,7 +242,7 @@
 .quantity-selector {
   display: flex;
   align-items: center;
-  border: 1px solid #ecf0f1;
+  border: 1px solid #c2c1c1;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -265,11 +266,11 @@
 }
 
 .qty-btn.minus {
-  border-right: 1px solid #ecf0f1;
+  border-right: 1px solid #c2c1c1;
 }
 
 .qty-btn.plus {
-  border-left: 1px solid #ecf0f1;
+  border-left: 1px solid #c2c1c1;
 }
 
 .qty-value {

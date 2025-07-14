@@ -4,6 +4,7 @@ import useNews from "../../hooks/useNews";
 
 function News() {
     const { news } = useNews();
+    const newsList = news.slice(0, 2);
   return (
     <div className="news">
         <div className="container">
@@ -14,7 +15,7 @@ function News() {
                 </Link>
             </div>
             <div className="news-list">
-                {news.map(item => (
+                {newsList.map(item => (
                     <div className="news-item" key={item.id}>
                         <div className="news-text">
                             <div className="news-title">{item.title}</div>

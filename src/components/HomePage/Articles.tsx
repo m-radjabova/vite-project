@@ -4,7 +4,7 @@ import useArticles from "../../hooks/useArticles";
 
 function Articles() {
     const { articles } = useArticles();
-
+    const articlesList = articles.slice(0, 3);
   return (
     <div className="articles">
         <div className="container">
@@ -15,7 +15,7 @@ function Articles() {
                 </Link>
             </div>
             <div className="articles-list">
-                {articles.map(item => (
+                {articlesList.map(item => (
                     <Link to={`/articles/${item.id}`} className="article-link-wrapper" key={item.id}>
                         <div className="articles-item">
                             <div className="article-image-container">

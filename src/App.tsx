@@ -13,6 +13,7 @@ import Catalog from "./components/Catalog";
 import MainLayout from "./Layout/MainLayout";
 import AuthLayout from "./Layout/AuthLayout";
 import AdminLayout from "./Layout/AdminLayout";
+import BouquetDisplay from "./components/BouquetDisplay";
 
 function App() {
   const {
@@ -29,6 +30,7 @@ function App() {
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog/:id" element={<BouquetDisplay />} />
       </Route>
 
       <Route element={<AuthLayout />}>

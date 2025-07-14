@@ -8,6 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { CustomFormControl, CustomSelect } from "./HomePage/DeliveryMoscow";
 import { InputBase, MenuItem } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useNavigate } from "react-router-dom";
 
 
 function Catalog() {
@@ -15,6 +16,7 @@ function Catalog() {
     const [hoverId, setHoverId] = useState<string | null>(null);
     const [favorites, setFavorites] = useState<{[key: string]: boolean}>({});
     const [counts, setCounts] = useState(0)
+    const navigate = useNavigate();
     
     const toggleFavorite = (id: string) => {
       setFavorites(prev => ({...prev, [id]: !prev[id]}));
@@ -31,7 +33,8 @@ function Catalog() {
     <div className="catalog">
         <div className="container">
             <div className="catalog-title">
-                <span>Главная <IoIosArrowForward className="arrow-icon" /> Каталог цветов </span>
+                <span className="catalog-link" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
+                <span className="catalog-link">Каталог цветов</span>
             </div>
             <div className="catalog-text">
                 <h1>Каталог цветов</h1>
@@ -109,12 +112,6 @@ function Catalog() {
                         <button className="sort-toggle">
                             Популярности
                         </button>
-                        <div className="sort-dropdown">
-                            <div className="sort-item active">Популярности</div>
-                            <div className="sort-item">Цене</div>
-                            <div className="sort-item">Новизне</div>
-                            <div className="sort-item">Рейтингу</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -126,7 +123,9 @@ function Catalog() {
                           onMouseEnter={() => setHoverId(item.id)}
                           onMouseLeave={() => setHoverId(null)}
                         >
-                          <div className={`bouquet-card ${hoverId === item.id ? "hovered" : ""}`}>
+                          <div className={`bouquet-card ${hoverId === item.id ? "hovered" : ""}`}
+                            onClick={() => navigate(`/catalog/${item.id}`)}
+                          >
                             <div className="card-media">
                               <img src={item.image} alt={item.name} className="bouquet-image" />
                               

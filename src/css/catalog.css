@@ -24,6 +24,14 @@
     z-index: 1;
 }
 
+.catalog-link{
+    cursor: pointer;
+}
+
+.catalog-link:hover{
+    text-decoration: underline;
+}
+
 .catalog-title {
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
@@ -75,40 +83,7 @@
     flex-wrap: wrap;
 }
 
-.CustomFormControl {
-    flex: 1;
-    min-width: 180px;
-    border-right: 1px solid #f0f0f0;
-    position: relative;
-}
 
-.CustomFormControl:last-child {
-    border-right: none;
-}
-
-.CustomSelect {
-    width: 100%;
-    padding: 12px 20px;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    color: #444;
-    transition: all 0.3s ease;
-}
-
-.CustomSelect:hover {
-    background-color: #f8f8f8;
-}
-
-.MenuItem {
-    font-family: 'Rubik', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    padding: 10px 20px;
-}
-
-
-/* Popularity Filter Section Styling */
 .popularity-filter {
     margin: 30px 0;
     padding: 20px;
@@ -181,20 +156,6 @@
     transform: rotate(180deg);
 }
 
-.sort-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 200px;
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    display: none;
-    padding: 5px 0;
-}
-
-.sort-options.active .sort-dropdown {
-    display: block;
+.catalog .bouquet-grid{
+    margin-bottom: 300px;
 }
