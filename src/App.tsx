@@ -14,6 +14,7 @@ import MainLayout from "./Layout/MainLayout";
 import AuthLayout from "./Layout/AuthLayout";
 import AdminLayout from "./Layout/AdminLayout";
 import BouquetDisplay from "./components/BouquetDisplay";
+import AboutCompany from "./components/AboutCompany";
 
 function App() {
   const {
@@ -31,6 +32,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/:id" element={<BouquetDisplay />} />
+        <Route path="/about" element={<AboutCompany />} />
       </Route>
 
       <Route element={<AuthLayout />}>

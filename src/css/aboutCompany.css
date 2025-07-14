@@ -1,0 +1,85 @@
+.about-company{
+    margin: 1rem 0;
+}
+
+.about-container{
+    margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.about-left{
+    width: 75%;
+}
+
+
+.about-container .about-left h1{
+    margin: 1rem 0;
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    color: #444;
+}
+
+.about-left span{
+    margin: 1rem 0;
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #444;
+}
+
+.about-left h3{
+    margin: 1rem 0;
+    font-family: 'Cormorant Garamond';
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #444;
+}
+
+.about-left p{
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 17px;
+    color: #444;
+}
+
+.about-right {
+    width: 25%;
+    padding: 30px;
+}
+
+.about-right .about-nav{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.about-nav .about-link{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #43b02a;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-family: 'Rubik', Arial, sans-serif;
+    font-weight: 400;
+    padding: 0 2px;
+    transition: color 0.18s;
+    position: relative;
+    padding: 15px;
+    border-bottom: 1px solid #4BB45E1A;
+}
+
+.about-link.active{
+    background-color: #4BB45E1A;
+    padding: 15px;
+
+}
