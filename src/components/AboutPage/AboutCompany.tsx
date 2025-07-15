@@ -1,26 +1,38 @@
 import { IoIosArrowForward } from "react-icons/io"
-import { NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { RiStore2Line } from "react-icons/ri";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
-import { LuFlower } from "react-icons/lu";
-import { FaRegCommentDots } from "react-icons/fa6";
-import { BsCreditCard } from "react-icons/bs";
-import { IoVideocamOutline } from "react-icons/io5";
-import { IoLocationOutline } from "react-icons/io5";
+import AboutCompanyGirls from "./AboutCompanyGirls";
+import Reviews from "../HomePage/Reviews";
+import ClientsAndPartners from "../HomePage/ClientsAndPartners";
+import AboutNavBar from "./AboutNavBar";
+import { useEffect, useState } from "react";
+import IsLoading from "../IsLoading";
 
 function AboutCompany() {
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 800); 
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return <IsLoading />;
+    }
+
   return (
     <div className="about-company">
         <div className="container">
             <div className="catalog-title">
-                <span className="catalog-link" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
+                <span className="catalog-link catalog-bold" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
                 <span className="catalog-link"> О комании</span>
             </div>
             <div className="about-container">
                 <div className="about-left">
-                    <h1>О компании</h1>
+                    <h1 className="about-title">О компании</h1>
                     <span>Уважаемые Дамы и Господа, Компания ФлораМаркт рада приветствовать Вас на своем сайте!</span>
                     <h3>Цветочная оптово розничная компания «ФлораМаркт»</h3>
                     <p>Одна из ведущих компаний, успешно работающих в цветочной индустрии России более 15 лет.</p>
@@ -70,18 +82,11 @@ function AboutCompany() {
                         Оплата заказа осуществляется в ФлораМаркт любым удобным для Вас способом: наличными при доставке, курьеру, безналичным способом, при помощи кредитной карты, электронным платежом.
                     </p>
                 </div>
-                <div className="about-right">
-                    <nav className="about-nav">
-                        <NavLink to="/about" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <RiStore2Line className="about-icon" /> О компании</NavLink>
-                        <NavLink to="/payment" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <FaRegMoneyBillAlt className="about-icons"/>Способы оплаты</NavLink>
-                        <NavLink to="/delivery" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <LuFlower className="about-icon" /> Доставка</NavLink>
-                        <NavLink to="/reviews" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <FaRegCommentDots className="about-icon" /> Отзывы</NavLink>
-                        <NavLink to="/discount" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <BsCreditCard className="about-icon" /> Дисконтные карты</NavLink>
-                        <NavLink to="/video" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <IoVideocamOutline  className="about-icon"/>Видео</NavLink>
-                        <NavLink to="/contacts" className={({ isActive }) => "about-link" + (isActive ? " active" : "")}> <IoLocationOutline className="about-icon" /> Контакты</NavLink>
-                    </nav>
-                </div>
+                <AboutNavBar />
             </div>
+            <AboutCompanyGirls />
+            <Reviews />
+            <ClientsAndPartners />
         </div>
     </div>
   )

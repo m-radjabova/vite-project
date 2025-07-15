@@ -138,13 +138,11 @@
     z-index: 2;
 }
 
-.flower-favorite-btn:hover {
-  background: white;
-  transform: scale(1.1);
-}
 
 .flower-favorite-btn.favorited {
-  color: #d23c67;
+  color: #d6003d;
+  border: 1px solid #d6003d;
+  background-color: #ffffff;
 }
 
 .flower-action-buttons{

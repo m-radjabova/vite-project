@@ -14,7 +14,10 @@ import MainLayout from "./Layout/MainLayout";
 import AuthLayout from "./Layout/AuthLayout";
 import AdminLayout from "./Layout/AdminLayout";
 import BouquetDisplay from "./components/BouquetDisplay";
-import AboutCompany from "./components/AboutCompany";
+import AboutCompany from "./components/AboutPage/AboutCompany";
+import PaymentPage from "./components/PaymentPage";
+import DeliveryPage from "./components/DeliveryPage";
+import ReviewsPage from "./components/ReviewsPage";
 
 function App() {
   const {
@@ -33,6 +36,9 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/:id" element={<BouquetDisplay />} />
         <Route path="/about" element={<AboutCompany />} />
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/delivery" element={<DeliveryPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
       </Route>
 
       <Route element={<AuthLayout />}>

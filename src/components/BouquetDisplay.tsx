@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useBouquet from "../hooks/useBouquet";
 import { IoIosArrowForward } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { GoQuestion } from "react-icons/go";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
@@ -13,6 +13,7 @@ import tint from "../assets/tint.svg";
 import delivery from "../assets/Frame.svg";
 import flower6 from "../assets/Frame 28.svg";
 import skidka from "../assets/Frame (1).svg"
+import IsLoading from "./IsLoading";
 
 function BouquetDisplay() {
     const { id } = useParams();
@@ -23,6 +24,19 @@ function BouquetDisplay() {
     const [counts, setCounts] = useState(1);
     const [favorites, setFavorites] = useState<{[key: string]: boolean}>({});
     const [hoverId, setHoverId] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 800); 
+            
+        return () => clearTimeout(timer);
+    }, []);
+            
+    if (loading) {
+        return <IsLoading />;
+    }
 
     const toggleFavorite = (id: string) => {
         setFavorites(prev => ({...prev, [id]: !prev[id]}));
@@ -42,10 +56,10 @@ function BouquetDisplay() {
     return (
         <div className="bouquet-display">
             <div className="container">
-                <div className="bouquet-title">
-                    <span className="bouquet-link" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
-                    <span className="bouquet-link" onClick={() => navigate("/catalog")}>Каталог цветов <IoIosArrowForward className="arrow-icon" /></span>
-                    <span className="bouquet-link">{flower.name}</span>
+                <div className="catalog-title">
+                    <span className="catalog-link catalog-bold" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
+                    <span className="catalog-link">Каталог цветов <IoIosArrowForward className="arrow-icon" /></span>
+                    <span className="catalog-link">«{flower.name}»</span>
                 </div>
                 <div className="bouquet-container">
                     <div className="bouquet-img">

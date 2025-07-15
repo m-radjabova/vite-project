@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useBouquet from "../hooks/useBouquet";
 import leaf from "../assets/seedling.svg";
 import award from "../assets/award.svg";
@@ -9,6 +9,7 @@ import { CustomFormControl, CustomSelect } from "./HomePage/DeliveryMoscow";
 import { InputBase, MenuItem } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
+import IsLoading from "./IsLoading";
 
 
 function Catalog() {
@@ -17,6 +18,7 @@ function Catalog() {
     const [favorites, setFavorites] = useState<{[key: string]: boolean}>({});
     const [counts, setCounts] = useState(0)
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
     
     const toggleFavorite = (id: string) => {
       setFavorites(prev => ({...prev, [id]: !prev[id]}));
@@ -28,12 +30,25 @@ function Catalog() {
       if (status === "С водой") return "badge-blue";
       return "";
     };
+        
+      useEffect(() => {
+          const timer = setTimeout(() => {
+              setLoading(false);
+          }, 800); 
+        
+          return () => clearTimeout(timer);
+      }, []);
+        
+      if (loading) {
+          return <IsLoading />;
+      }
+        
 
   return (
     <div className="catalog">
         <div className="container">
             <div className="catalog-title">
-                <span className="catalog-link" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
+                <span className="catalog-link catalog-bold" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
                 <span className="catalog-link">Каталог цветов</span>
             </div>
             <div className="catalog-text">

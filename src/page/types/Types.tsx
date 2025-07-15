@@ -9,9 +9,12 @@ export interface BouqetType {
     size: string;
     isLiked: boolean;
     category: string[];
+    reviews: ReviewsType[];
 }
 
 export interface ReviewsType{
+    userId: string;
+    username: string;
     id: string;
     author: string;
     date: string;

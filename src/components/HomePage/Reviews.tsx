@@ -1,14 +1,18 @@
 import { IoIosArrowForward } from "react-icons/io";
-import useReviews from "../../hooks/useReviews";
+
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import { FaQuoteLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import useBouquet from "../../hooks/useBouquet";
 
 function Reviews() {
-    const { reviews } = useReviews();
+    const { bouquet } = useBouquet();
+    const allReviews = bouquet
+    .filter(b => b.reviews && b.reviews.length > 0)
+    .flatMap(b => b.reviews);
 
     const settings = {
         dots: true,
@@ -57,7 +61,7 @@ function Reviews() {
                 
                 <div className="fm-testimonials-grid">
                     <Slider {...settings}>
-                    {reviews.map(item => (
+                    {allReviews.map(item => (
                         <div className="fm-testimonial-card" key={item.id}>
                             <div className="fm-quote-icon">
                                 <FaQuoteLeft />

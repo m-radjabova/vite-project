@@ -1,0 +1,76 @@
+import { useNavigate } from "react-router-dom"
+import AboutNavBar from "./AboutPage/AboutNavBar"
+import { IoIosArrowForward } from "react-icons/io"
+import IsLoading from "./IsLoading";
+import { useEffect, useState } from "react";
+
+function PaymentPage() {
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 800); 
+    
+        return () => clearTimeout(timer);
+    }, []);
+    
+    if (loading) {
+        return <IsLoading />;
+    }
+
+  return (
+    <div className="payment-page">
+        <div className="container">
+            <div className="catalog-title">
+                <span className="catalog-link catalog-bold" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
+                <span className="catalog-link"> Способы оплаты</span>
+            </div>
+            <div className="about-container">
+                <div className="about-left">
+                    <h1 className="about-title">Способы оплаты</h1>
+                    <span>Виды оплаты товаров в инернет-магазине стандартно делятся на наличный и безналичный расчет.</span>
+                    <h3>1. Наличный расчет</h3>
+                    <p>
+                        Наличными можно расплатиться в торговом <span className="about-bold">оптово-розничном центре</span> 
+                        или непосредственно <span className="about-bold">с курьером,</span> доставившим товар.
+                    </p>
+                    <h3>2. Безналичный расчет</h3>
+                    <p>— <span className="about-bold">Сбербанк.</span> Оплата через Сбербанк 
+                        онлайн (выставление счета по реквизитам, указанным на сайте магазина) требует времени. Операция занимает несколько рабочих дней.
+                    </p>
+                    <p>— <span className="about-bold">Кредитной карточкой</span> можно оплатить покупку в торговом оптово-розничном центре (через терминал) или через сайт онлайн-платеж.</p>
+                    <p> — <span className="about-bold">Со счета в банке по реквизитам,</span>  указанным на сайте. Эта операция также займет несколько рабочих дней.</p>
+                    <p><span className="about-bold">ООО «СП Букет»</span></p>
+                    <span>Юридический адрес: 107553, г.Москва, ул. Большая Черкизовская, д. 93, стр. 1</span>
+                    <br />
+                    <span> ИНН: 7718885232</span> <br />
+                    <span> КПП: 771801001</span> <br />
+                    <span>Расчетный счет: 40702810300080016673</span> <br />
+                    <span>Кор. счет: 30101810900000000521</span> <br />
+                    <span>Банк: в АКБ МОСОБЛБАНК ОАО</span> <br />
+                    <span>БИК: 044525521</span>
+                    <h3>3. Электронные деньги</h3>
+                    <p>—<span>Яндекс деньги (ЯД).</span> Это наиболее простой, современный и безопасный 
+                        способ оплаты в режиме реального времени. Для оплаты через ЯД необходимо зарегистрироваться 
+                        на сайте yandex.ru (завести почту) и пополнить счет, который прикрепится к почтовому ящику 
+                        автоматически. Пополнить счет можно через банковскую карту, денежный перевод или через терминалы. 
+                        Перед тем, как оплатить заказ, убедитесь, что средств на счете достаточно.
+                    </p>
+                    <p> —<span>WebMoney (WM).</span> Система WM позволяет завести кошельки в рублях, евро и долларах. 
+                    Для оплаты в интернет-магазине нужен кошелек в рублях.
+                    </p>
+                    <p><span className="about-bold">ВАЖНО:</span> Условия, опубликованные на сайте (в том числе – цены) не являются публичной офертой.</p>
+                    <h3>Профессионализм операторов и флористов</h3>
+                    <p>Компания ФлораМаркт во главу угла ставит не только высокое качество самих цветов, но и качество предоставляемых услуг. Именно поэтому в компании работают только профессионалы.</p>
+                    <p>Опытные операторы на телефоне всегда помогут подобрать подходящий букет по случаю, а профессиональные флористы, победители многочисленных флористических конкурсов, создадут для Вас оригинальные и неповторимые букеты и цветочные композиции на заказ.</p>
+                </div>
+                <AboutNavBar />
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default PaymentPage

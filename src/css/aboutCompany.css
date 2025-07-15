@@ -12,8 +12,7 @@
     width: 75%;
 }
 
-
-.about-container .about-left h1{
+.about-title{
     margin: 1rem 0;
     font-family: 'Cormorant Garamond';
     font-weight: 700;
@@ -49,6 +48,10 @@
     font-weight: 300;
     font-size: 17px;
     color: #444;
+}
+
+p .about-bold{
+    font-weight: bold;
 }
 
 .about-right {

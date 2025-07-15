@@ -3,7 +3,6 @@ import ClientsAndPartners from "../../components/HomePage/ClientsAndPartners"
 import DeliveryMoscow from "../../components/HomePage/DeliveryMoscow"
 import DiscoundFlower from "../../components/HomePage/DiscoundFlower"
 import FlowerCenter from "../../components/HomePage/FlowerCenter"
-// import Header from "../../components/Header"
 import HitFlowers from "../../components/HomePage/HitFlowers"
 import Main from "../../components/HomePage/Main"
 import News from "../../components/HomePage/News"
@@ -12,9 +11,24 @@ import Roses from "../../components/HomePage/Roses"
 import SeasonFlower from "../../components/HomePage/SeasonFlower"
 import Follow from "../../components/HomePage/Follow"
 import FloraMarkBase from "../../components/HomePage/FloraMarkBase"
-// import Footer from "../../components/Footer"
+import { useEffect, useState } from "react"
+import IsLoading from "../../components/IsLoading"
 
 function Home() {
+  const [loading, setLoading] = useState(true);
+  
+      useEffect(() => {
+          const timer = setTimeout(() => {
+              setLoading(false);
+          }, 800); 
+  
+          return () => clearTimeout(timer);
+      }, []);
+  
+      if (loading) {
+          return <IsLoading />;
+      }
+
   return (
     <div>
       {/* <Header /> */}
