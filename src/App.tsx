@@ -9,7 +9,6 @@ import IsLoading from "./components/IsLoading";
 import PageNotFound from "./components/PageNotFound";
 import Profile from "./page/admin/Profile/Profile";
 import Catalog from "./components/Catalog";
-
 import MainLayout from "./Layout/MainLayout";
 import AuthLayout from "./Layout/AuthLayout";
 import AdminLayout from "./Layout/AdminLayout";
@@ -18,6 +17,8 @@ import AboutCompany from "./components/AboutPage/AboutCompany";
 import PaymentPage from "./components/PaymentPage";
 import DeliveryPage from "./components/DeliveryPage";
 import ReviewsPage from "./components/ReviewsPage";
+import DiscountPage from "./components/DiscountPage";
+import VideoPage from "./components/VideoPage";
 
 function App() {
   const {
@@ -39,6 +40,8 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/discount" element={<DiscountPage />} />
+        <Route path="/video" element={<VideoPage />} />
       </Route>
 
       <Route element={<AuthLayout />}>

@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 .header {
   background: #fff;
   border-bottom: 1px solid #ececec;
   font-family: 'Rubik', Arial, sans-serif;
-  /* width: 100%; */
   z-index: 100;
 }
 

@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useBouquet from "../hooks/useBouquet";
 import { IoIosArrowForward } from "react-icons/io";
-import { useEffect, useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useState } from "react";
+import {FaRegHeart } from "react-icons/fa";
 import { GoQuestion } from "react-icons/go";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 import { CiBank } from "react-icons/ci";
@@ -14,6 +14,7 @@ import delivery from "../assets/Frame.svg";
 import flower6 from "../assets/Frame 28.svg";
 import skidka from "../assets/Frame (1).svg"
 import IsLoading from "./IsLoading";
+import useLoading from "../hooks/useLoading";
 
 function BouquetDisplay() {
     const { id } = useParams();
@@ -22,25 +23,12 @@ function BouquetDisplay() {
     const flower = bouquet.find((flower) => flower.id === id);
     const navigate = useNavigate();
     const [counts, setCounts] = useState(1);
-    const [favorites, setFavorites] = useState<{[key: string]: boolean}>({});
     const [hoverId, setHoverId] = useState<string | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 800); 
-            
-        return () => clearTimeout(timer);
-    }, []);
+    const {loading} = useLoading()
             
     if (loading) {
         return <IsLoading />;
     }
-
-    const toggleFavorite = (id: string) => {
-        setFavorites(prev => ({...prev, [id]: !prev[id]}));
-    };
 
     if (!flower) {
         return <div style={{ textAlign: "center", marginTop: "3rem" }}>Букет не найден</div>;
@@ -111,10 +99,8 @@ function BouquetDisplay() {
                                 В корзину
                             </button>
                             <button 
-                                className={`flower-favorite-btn ${favorites[flower.id] ? "favorited" : ""}`}
-                                onClick={() => toggleFavorite(flower.id)}
-                            >
-                                {favorites[flower.id] ? <FaHeart /> : <FaRegHeart />}
+                                className={`flower-favorite-btn`}
+                            ><FaRegHeart />
                             </button>   
                         </div>
                         <div className="quick-actions">
@@ -186,10 +172,8 @@ function BouquetDisplay() {
                                       <img src={item.image} alt={item.name} className="bouquet-image" />
                                       
                                       <button 
-                                        className={`favorite-btn ${favorites[item.id] ? "favorited" : ""}`}
-                                        onClick={() => toggleFavorite(item.id)}
-                                      >
-                                        {favorites[item.id] ? <FaHeart /> : <FaRegHeart />}
+                                        className={`favorite-btn`}
+                                      ><FaRegHeart  />
                                       </button>
                                       
                                       {item.status && (

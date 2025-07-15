@@ -45,3 +45,9 @@ export interface NewsType {
     date: string;
     createdAt: string;
 }
+
+export interface PointType{
+    id: string;
+    address: string;
+    phone: string;
+}

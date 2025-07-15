@@ -15,12 +15,6 @@
     background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
 }
 
-.fm-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.25rem;
-}
-
 
 .fm-testimonials-header {
     display: flex;
@@ -78,12 +72,12 @@
 
 .fm-testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(28.125rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 1.875rem;
 }
 
 .fm-testimonial-card {
-    background: white;
+    background: #FFFEF2;
     border-radius: 0.75rem;
     padding: 1.875rem;
     box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.03);

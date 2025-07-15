@@ -1,20 +1,15 @@
 import { IoIosArrowForward } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
 import AboutNavBar from "./AboutPage/AboutNavBar"
-import { useEffect, useState } from "react";
 import IsLoading from "./IsLoading";
+import useLoading from "../hooks/useLoading";
+import usePoints from "../hooks/usePoints";
 
 function DeliveryPage() {
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(true);
-        
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 800); 
-        
-        return () => clearTimeout(timer);
-    }, []);
+    const {loading} = useLoading()
+    const {points} = usePoints()
+    const pointList = points.slice(0, 12)
         
     if (loading) {
         return <IsLoading />;
@@ -97,18 +92,13 @@ function DeliveryPage() {
                     </p>
                     <h3>Пункты самовывоза</h3>
                     <ul className="delivery-list">
-                        <li>м. Площадь Ильича или Римская, Гжельский переулок 19, стр. 3</li>
-                        <li>м. Братиславская, ул. Братиславская 26</li>
-                        <li>м. Варшавская, Чонгарский бульвар 10, корп. 1</li>
-                        <li>м. Красносельская, Краснопрудная 22-24</li>
-                        <li>м. Каширская, Каширское шоссе 26, корп.3</li>
-                        <li>м. Дмитровская, ул. Бутырская 86б</li>
-                        <li>м. Черкизовская, Б.Черкизовская 93, стр. 1</li>
-                        <li>м. Пролетарская, ул. Марксистская 38</li>
-                        <li>м. Новогиреево, Свободный проспект 20</li>
-                        <li>м. Профсоюзная, Нахимовский проспект 44</li>
-                        <li>м. Академическая, ул. Дмитрия Ульянова, д. 14, корп. 1</li>
-                        <li>м. Нахимовский проспект, Москворецкий рынок, Болотниковская 12 тел. 8 495 532-49-33</li>
+                        {
+                            pointList.map((point) => (
+                                <li key={point.id} className="delivery-item">
+                                    <span>{point.address}</span>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
                 <AboutNavBar />

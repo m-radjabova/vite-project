@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import useBouquet from "../hooks/useBouquet";
 import leaf from "../assets/seedling.svg";
 import award from "../assets/award.svg";
 import tint from "../assets/tint.svg";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { CustomFormControl, CustomSelect } from "./HomePage/DeliveryMoscow";
 import { InputBase, MenuItem } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import IsLoading from "./IsLoading";
+import useLoading from "../hooks/useLoading";
 
 
 function Catalog() {
     const { bouquet} = useBouquet();
     const [hoverId, setHoverId] = useState<string | null>(null);
-    const [favorites, setFavorites] = useState<{[key: string]: boolean}>({});
     const [counts, setCounts] = useState(0)
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    
-    const toggleFavorite = (id: string) => {
-      setFavorites(prev => ({...prev, [id]: !prev[id]}));
-    };
+    const {loading} = useLoading()
     
     const getBadgeClass = (status: string) => {
       if (status === "Акция") return "badge-red";
@@ -30,14 +26,6 @@ function Catalog() {
       if (status === "С водой") return "badge-blue";
       return "";
     };
-        
-      useEffect(() => {
-          const timer = setTimeout(() => {
-              setLoading(false);
-          }, 800); 
-        
-          return () => clearTimeout(timer);
-      }, []);
         
       if (loading) {
           return <IsLoading />;
@@ -145,10 +133,9 @@ function Catalog() {
                               <img src={item.image} alt={item.name} className="bouquet-image" />
                               
                               <button 
-                                className={`favorite-btn ${favorites[item.id] ? "favorited" : ""}`}
-                                onClick={() => toggleFavorite(item.id)}
+                                className={`favorite-btn`}
                               >
-                                {favorites[item.id] ? <FaHeart /> : <FaRegHeart />}
+                                <FaRegHeart />
                               </button>
                               
                               {item.status && (

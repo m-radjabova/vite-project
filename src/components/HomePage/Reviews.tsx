@@ -48,7 +48,7 @@ function Reviews() {
 
     return (
         <section className="floramarket-testimonials">
-            <div className="fm-container">
+            <div className="container">
                 <div className="fm-testimonials-header">
                     <div className="fm-title-group">
                         <h2 className="fm-section-title">Отзывы о «Флорамаркт»</h2>

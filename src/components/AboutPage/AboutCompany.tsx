@@ -4,20 +4,12 @@ import AboutCompanyGirls from "./AboutCompanyGirls";
 import Reviews from "../HomePage/Reviews";
 import ClientsAndPartners from "../HomePage/ClientsAndPartners";
 import AboutNavBar from "./AboutNavBar";
-import { useEffect, useState } from "react";
 import IsLoading from "../IsLoading";
+import useLoading from "../../hooks/useLoading";
 
 function AboutCompany() {
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 800); 
-
-        return () => clearTimeout(timer);
-    }, []);
+    const {loading} = useLoading()
 
     if (loading) {
         return <IsLoading />;

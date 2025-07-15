@@ -11,27 +11,18 @@ import Roses from "../../components/HomePage/Roses"
 import SeasonFlower from "../../components/HomePage/SeasonFlower"
 import Follow from "../../components/HomePage/Follow"
 import FloraMarkBase from "../../components/HomePage/FloraMarkBase"
-import { useEffect, useState } from "react"
 import IsLoading from "../../components/IsLoading"
+import useLoading from "../../hooks/useLoading"
 
 function Home() {
-  const [loading, setLoading] = useState(true);
+  const { loading } = useLoading();
   
-      useEffect(() => {
-          const timer = setTimeout(() => {
-              setLoading(false);
-          }, 800); 
-  
-          return () => clearTimeout(timer);
-      }, []);
-  
-      if (loading) {
-          return <IsLoading />;
-      }
+    if (loading) {
+        return <IsLoading />;
+    }
 
   return (
     <div>
-      {/* <Header /> */}
       <Main />
       <DeliveryMoscow />
       <SeasonFlower />
@@ -45,7 +36,6 @@ function Home() {
       <News />
       <Follow />
       <FloraMarkBase />
-      {/* <Footer /> */}
     </div>
   )
 }

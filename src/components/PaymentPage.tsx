@@ -2,19 +2,11 @@ import { useNavigate } from "react-router-dom"
 import AboutNavBar from "./AboutPage/AboutNavBar"
 import { IoIosArrowForward } from "react-icons/io"
 import IsLoading from "./IsLoading";
-import { useEffect, useState } from "react";
+import useLoading from "../hooks/useLoading";
 
 function PaymentPage() {
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(true);
-    
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 800); 
-    
-        return () => clearTimeout(timer);
-    }, []);
+    const {loading} = useLoading()
     
     if (loading) {
         return <IsLoading />;
