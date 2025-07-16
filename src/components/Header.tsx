@@ -190,12 +190,12 @@ function Header() {
             Адреса цветочных центров
           </div>
         </div>
-        <div className='likeAndCart'>
-          <div className='like'>
+        <div className='likeAndCart' >
+          <div className='like' onClick={() => navigate('/favorites')}>
             <FaRegHeart size={30} className="me-2" />
             <span>Избранное</span>
           </div>
-          <div className='cart'>
+          <div className='cart' onClick={() => navigate('/cart')}>
             <IoCartOutline size={30} className="me-2" />
             <span>0 ₽</span>
           </div>

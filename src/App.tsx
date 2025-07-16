@@ -19,6 +19,15 @@ import DeliveryPage from "./components/DeliveryPage";
 import ReviewsPage from "./components/ReviewsPage";
 import DiscountPage from "./components/DiscountPage";
 import VideoPage from "./components/VideoPage";
+import ContactPage from "./components/ContactPage";
+import BouquetsPage from "./components/MainHeaderPage/BouquetsPage";
+import RosesPage from "./components/MainHeaderPage/RosesPage";
+import FlowersPage from "./components/MainHeaderPage/FlowersPage";
+import PlantsPage from "./components/MainHeaderPage/PlantsPage";
+import SalesPage from "./components/MainHeaderPage/SalesPage";
+import GiftsPage from "./components/MainHeaderPage/GiftsPage";
+import FavoritesPage from "./components/FavoritesPage";
+import CartPage from "./components/CartPage";
 
 function App() {
   const {
@@ -34,6 +43,8 @@ function App() {
 
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/:id" element={<BouquetDisplay />} />
         <Route path="/about" element={<AboutCompany />} />
@@ -42,6 +53,19 @@ function App() {
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/discount" element={<DiscountPage />} />
         <Route path="/video" element={<VideoPage />} />
+        <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/bouquets" element={<BouquetsPage />} />
+        <Route path="/bouquets/:id" element={<BouquetDisplay />} />
+        <Route path="/roses" element={<RosesPage />} />
+        <Route path="/roses/:id" element={<BouquetDisplay />} />
+        <Route path="/flowers" element={<FlowersPage />} />
+        <Route path="/flowers/:id" element={<BouquetDisplay />} />
+        <Route path="/plants" element={<PlantsPage />} />
+        <Route path="/plants/:id" element={<BouquetDisplay />} />
+        <Route path="/sales" element={<SalesPage />} />
+        <Route path="/sales/:id" element={<BouquetDisplay />} />
+        <Route path="/gifts" element={<GiftsPage />} />
+        <Route path="/gifts/:id" element={<BouquetDisplay />} />
       </Route>
 
       <Route element={<AuthLayout />}>

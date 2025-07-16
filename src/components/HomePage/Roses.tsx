@@ -6,18 +6,13 @@ import award from "../../assets/award.svg";
 import tint from "../../assets/tint.svg";
 
 function Roses() {
-  const { bouquet } = useBouquet();
+  const { bouquet, toggleLike } = useBouquet();
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [counts, setCounts] = useState(0)
-  const [favorites, setFavorites] = useState<{[key: string]: boolean}>({});
   
   const seasonBouquets = bouquet.filter(item =>
     item.category && item.category.includes("roses")
   );
-
-  const toggleFavorite = (id: string) => {
-    setFavorites(prev => ({...prev, [id]: !prev[id]}));
-  };
   
   const getBadgeClass = (status: string) => {
     if (status === "Акция") return "badge-red";
@@ -47,10 +42,10 @@ function Roses() {
                   <img src={item.image} alt={item.name} className="bouquet-image" />
                   
                   <button 
-                    className={`favorite-btn ${favorites[item.id] ? "favorited" : ""}`}
-                    onClick={() => toggleFavorite(item.id)}
+                    className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
+                    onClick={() => toggleLike(item.id)}
                   >
-                    {favorites[item.id] ? <FaHeart /> : <FaRegHeart />}
+                    {item.isLiked ? <FaHeart /> : <FaRegHeart />}
                   </button>
                   
                   {item.status && (

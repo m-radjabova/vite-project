@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
+.favorites-page {
+    margin: 1rem 0;
+}
+
+
+.favorites-container {
+    margin-bottom: 40px;
+}
+
+.favorites-title h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: #2a2a2a;
+    position: relative;
+    display: inline-block;
+}
+
+.favorites-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+}
+
+.favorites-bouquet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+
+.empty-favorites {
+    text-align: center;
+    padding: 80px 0;
+}
+
+.empty-favorites p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.empty-favorites-button {
+    background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.empty-favorites-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .favorites-bouquet-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .favorites-page {
+        padding: 60px 0;
+    }
+    
+    .favorites-title h2 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .favorites-title h2 {
+        font-size: 32px;
+    }
+    
+    .favorites-bouquet-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bouquet-name {
+        font-size: 18px;
+    }
+    
+    .current-price {
+        font-size: 16px;
+    }
+}

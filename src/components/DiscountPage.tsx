@@ -3,9 +3,16 @@ import { useNavigate } from "react-router-dom"
 import AboutNavBar from "./AboutPage/AboutNavBar"
 import karta5 from "../assets/karta5.svg"
 import kartavip from "../assets/kartavip.svg"
+import useLoading from "../hooks/useLoading"
+import IsLoading from "./IsLoading"
 
 function DiscountPage() {
     const navigate = useNavigate()
+     const { loading } = useLoading();
+
+    if (loading) {
+        return <IsLoading />;
+    }
   return (
     <div className="discount-page">
         <div className="container">

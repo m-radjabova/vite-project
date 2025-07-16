@@ -1,19 +1,25 @@
 import { useState } from "react";
 import useBouquet from "../../hooks/useBouquet";
-import { FaRegHeart, FaHeart } from "react-icons/fa"; 
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import leaf from "../../assets/seedling.svg";
 import award from "../../assets/award.svg";
 import tint from "../../assets/tint.svg";
+import useLoading from "../../hooks/useLoading";
+import IsLoading from "../IsLoading";
+import { useNavigate } from "react-router-dom";
 
-function SeasonFlower() {
+function BouquetsPage() {
   const { bouquet, toggleLike } = useBouquet();
   const [hoverId, setHoverId] = useState<string | null>(null);
-  const [counts, setCounts] = useState(0);
-
+  const [counts, setCounts] = useState(0)
+  const {loading} = useLoading();
+  const navigate = useNavigate();
+  
   const seasonBouquets = bouquet.filter(item =>
-    item.category?.includes("season")
+    item.category && item.category.includes("bouquets")
   );
 
+  
   const getBadgeClass = (status: string) => {
     if (status === "Акция") return "badge-red";
     if (status === "Новинка") return "badge-green";
@@ -21,14 +27,18 @@ function SeasonFlower() {
     return "";
   };
 
+  if (loading) {
+    return <IsLoading />;
+  }
+
   return (
     <div className="season-section">
       <div className="container">
         <div className="section-header">
-          <h2>Сезонное предложение</h2>
-          <p>Свежие цветы для каждого времени года</p>
+          <h2>Букеты</h2>
+          <p>Букеты на любой вкус</p>
         </div>
-
+        
         <div className="bouquet-grid">
           {seasonBouquets.map(item => (
             <div
@@ -36,12 +46,13 @@ function SeasonFlower() {
               key={item.id}
               onMouseEnter={() => setHoverId(item.id)}
               onMouseLeave={() => setHoverId(null)}
+              onClick={() => navigate(`/bouquets/${item.id}`)}
             >
               <div className={`bouquet-card ${hoverId === item.id ? "hovered" : ""}`}>
                 <div className="card-media">
                   <img src={item.image} alt={item.name} className="bouquet-image" />
-
-                  <button
+                  
+                  <button 
                     className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -50,7 +61,7 @@ function SeasonFlower() {
                   >
                     {item.isLiked ? <FaHeart /> : <FaRegHeart />}
                   </button>
-
+                  
                   {item.status && (
                     <div className={`status-badge ${getBadgeClass(item.status)}`}>
                       <img
@@ -67,10 +78,10 @@ function SeasonFlower() {
                     </div>
                   )}
                 </div>
-
+                
                 <div className="card-content">
                   <h3 className="bouquet-name">{item.name}</h3>
-
+                  
                   <div className="price-container">
                     <span className="current-price">{item.price} ₽</span>
                     {item.oldPrice && (
@@ -78,7 +89,7 @@ function SeasonFlower() {
                     )}
                   </div>
                 </div>
-
+                
                 {hoverId === item.id && (
                   <div className="hover-content">
                     <div className="composition">
@@ -89,29 +100,29 @@ function SeasonFlower() {
                         ))}
                       </ul>
                     </div>
-
+                    
                     <div className="action-buttons">
                       <div className="quantity-selector">
-                        <button
-                          className="qty-btn minus"
+                        <button 
+                          className="qty-btn minus" 
                           onClick={() => setCounts(counts - 1)}
                         >
                           -
                         </button>
                         <span className="qty-value">{counts}</span>
-                        <button
-                          className="qty-btn plus"
+                        <button 
+                          className="qty-btn plus" 
                           onClick={() => setCounts(counts + 1)}
                         >
                           +
                         </button>
                       </div>
-
+                      
                       <button className="add-to-cart">
                         В корзину
                       </button>
                     </div>
-
+                    
                     <button className="quick-buy">
                       Купить в один клик
                     </button>
@@ -121,12 +132,12 @@ function SeasonFlower() {
             </div>
           ))}
         </div>
-
+        
         <div className="view-all-container">
           <button className="view-all-btn">
             Смотреть все
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>
@@ -135,4 +146,4 @@ function SeasonFlower() {
   );
 }
 
-export default SeasonFlower;
+export default BouquetsPage;

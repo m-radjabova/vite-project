@@ -220,6 +220,11 @@
     margin: 0;
 }
 
+.delivery-list .delivery-item{
+    display: flex;
+}
+
+
 .delivery-list li span{
     display: inline-block;
     width: 100%;

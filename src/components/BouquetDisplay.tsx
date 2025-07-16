@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useBouquet from "../hooks/useBouquet";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
-import {FaRegHeart } from "react-icons/fa";
+import {FaHeart, FaRegHeart } from "react-icons/fa";
 import { GoQuestion } from "react-icons/go";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 import { CiBank } from "react-icons/ci";
@@ -18,7 +18,7 @@ import useLoading from "../hooks/useLoading";
 
 function BouquetDisplay() {
     const { id } = useParams();
-    const { bouquet } = useBouquet();
+    const { bouquet , toggleLike} = useBouquet();
     const bouquets4 = bouquet.slice(0, 4);
     const flower = bouquet.find((flower) => flower.id === id);
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ function BouquetDisplay() {
             <div className="container">
                 <div className="catalog-title">
                     <span className="catalog-link catalog-bold" onClick={() => navigate("/")}>Главная <IoIosArrowForward className="arrow-icon" /> </span>
-                    <span className="catalog-link">Каталог цветов <IoIosArrowForward className="arrow-icon" /></span>
+                    <span className="catalog-link" onClick={() => navigate("/catalog")}>Каталог цветов <IoIosArrowForward className="arrow-icon" /></span>
                     <span className="catalog-link">«{flower.name}»</span>
                 </div>
                 <div className="bouquet-container">
@@ -99,8 +99,10 @@ function BouquetDisplay() {
                                 В корзину
                             </button>
                             <button 
-                                className={`flower-favorite-btn`}
-                            ><FaRegHeart />
+                                onClick={() => toggleLike(flower.id)}
+                                className={`flower-favorite-btn ${flower.isLiked ? "favorited" : ""}`}
+                            >
+                                {flower.isLiked ? <FaHeart /> : <FaRegHeart />}
                             </button>   
                         </div>
                         <div className="quick-actions">

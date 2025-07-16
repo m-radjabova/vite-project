@@ -6,9 +6,12 @@ import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import leaf from "../assets/seedling.svg";
 import award from "../assets/award.svg";
 import tint from "../assets/tint.svg";
+import useLoading from './../hooks/useLoading';
+import IsLoading from './IsLoading';
 
 function ReviewsPage() {
     const { bouquet } = useBouquet();
+    const { loading } = useLoading();
     const navigate = useNavigate();
     
     const reviewedBouquets = bouquet
@@ -25,6 +28,10 @@ function ReviewsPage() {
         if (status === "С водой") return "badge-blue";
         return "";
     };
+
+    if (loading) {
+        return <IsLoading />;
+    }
 
   return (
     <div className="reviews">

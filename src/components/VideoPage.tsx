@@ -1,9 +1,16 @@
 import { IoIosArrowForward } from "react-icons/io"
 import { useNavigate } from "react-router-dom"
 import AboutNavBar from "./AboutPage/AboutNavBar"
+import useLoading from "../hooks/useLoading";
+import IsLoading from "./IsLoading";
 
 function VideoPage() {
     const navigate = useNavigate()
+     const { loading } = useLoading();
+
+    if (loading) {
+        return <IsLoading />;
+    }
   return (
     <div className="video-page">
         <div className="container">
