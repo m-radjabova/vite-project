@@ -19,7 +19,6 @@
     "aos": "^2.3.4",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
-    "framer-motion": "^12.23.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-datepicker": "^8.4.0",

@@ -1,4 +1,5 @@
-import { FaCalendarAlt, FaCog, FaSprayCan, FaUser } from "react-icons/fa";
+import { FaCalendarAlt, FaCog, FaUser } from "react-icons/fa";
+import { LuFlower2 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import { useState } from "react";
@@ -12,13 +13,13 @@ function TopNavigatorBar() {
 
   return (
     <div className="px-4 py-3 d-flex align-items-center justify-content-between" style={{
-      background: 'rgba(255, 255, 255, 0.95)',
+      background: 'rgba(255, 255, 255, 0.98)',
       backdropFilter: 'blur(12px)',
-      boxShadow: '0 2px 15px rgba(0, 0, 0, 0.08)',
+      boxShadow: '0 2px 15px rgba(0, 0, 0, 0.05)',
       position: 'sticky',
       top: 0,
       zIndex: 100,
-      borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.03)',
       transition: 'all 0.3s ease'
     }}>
       <h2 className="mb-0 fs-5 fw-semibold" style={{
@@ -28,39 +29,41 @@ function TopNavigatorBar() {
         gap: '12px',
         letterSpacing: '0.5px'
       }}>
-        <FaSprayCan style={{ 
-          color: '#1a1a1a',
+        <LuFlower2 style={{ 
+          color: '#2a7f62',
           fontSize: '1.4em',
-          opacity: 0.8
+          opacity: 0.9
         }} />
-        <span>Essence</span>
-        <span style={{
-          background: 'linear-gradient(90deg, #1a1a1a, #444)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          fontWeight: 700
-        }}>Dashboard</span>
+        <span style={{ color: '#2a7f62' }}>Floral</span>
+        <span style={{ color: '#2a7f62' }} >Haven</span>
       </h2>
             
-      <div className="d-flex align-items-center gap-4" style={{ color: '#444' }}>
+      <div className="d-flex align-items-center gap-4" style={{ color: '#555' }}>
         <button 
           onClick={() => navigate('/admin/profile')} 
           style={{
-            color: 'rgba(0, 0, 0, 0.6)',
+            color: 'rgba(0, 0, 0, 0.5)',
             transition: 'all 0.3s ease',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            padding: '4px',
-            borderRadius: '50%',
+            padding: '6px 8px',
+            borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
-          onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(0, 0, 0, 0.6)'}
+          onMouseEnter={e => {
+            e.currentTarget.style.color = '#2a7f62';
+            e.currentTarget.style.backgroundColor = 'rgba(42, 127, 98, 0.1)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.color = 'rgba(0, 0, 0, 0.5)';
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
-          <FaCog size={18} />
+          <FaCog size={16} style={{ marginRight: '6px' }} />
+          <span style={{ fontSize: '14px', fontWeight: 500 }}>Settings</span>
         </button>
                 
         <div 
@@ -72,17 +75,25 @@ function TopNavigatorBar() {
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            color: 'rgba(0, 0, 0, 0.7)'
+            color: 'rgba(0, 0, 0, 0.6)',
+            padding: '6px 10px',
+            borderRadius: '8px',
           }}
           onClick={() => setShowCalendar(!showCalendar)}
-          onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(0, 0, 0, 0.7)'}
+          onMouseEnter={e => {
+            e.currentTarget.style.color = '#2a7f62';
+            e.currentTarget.style.backgroundColor = 'rgba(42, 127, 98, 0.1)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.color = 'rgba(0, 0, 0, 0.6)';
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
-          <FaCalendarAlt style={{ marginRight: '8px', opacity: 0.7 }} />
+          <FaCalendarAlt style={{ marginRight: '8px', fontSize: '14px' }} />
           <span>
             {startDate.toLocaleDateString('en-US', {
               year: 'numeric',
-              month: 'long',
+              month: 'short',
               day: 'numeric'
             })}
           </span>
@@ -93,10 +104,11 @@ function TopNavigatorBar() {
               right: 0,
               zIndex: 1000,
               background: 'white',
-              borderRadius: '8px',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-              padding: '8px',
-              marginTop: '8px'
+              borderRadius: '12px',
+              boxShadow: '0 4px 25px rgba(0, 0, 0, 0.08)',
+              padding: '12px',
+              marginTop: '8px',
+              border: '1px solid rgba(0, 0, 0, 0.05)'
             }}>
               <DatePicker
                 selected={startDate}
@@ -105,6 +117,7 @@ function TopNavigatorBar() {
                   setShowCalendar(false); 
                 }}
                 inline
+                calendarClassName="floral-calendar"
               />
             </div>
           )}
@@ -113,15 +126,22 @@ function TopNavigatorBar() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          fontWeight: 600,
-          color: '#1a1a1a'
+          fontWeight: 500,
+          color: '#1a1a1a',
+          padding: '6px 12px',
+          borderRadius: '8px',
+          backgroundColor: 'rgba(42, 127, 98, 0.1)',
+          transition: 'all 0.3s ease'
         }}>
           <FaUser style={{ 
             marginRight: '8px', 
-            opacity: 0.7,
+            color: '#2a7f62',
             fontSize: '0.9em'
           }} />
-          <span style={{ fontSize: '14px' }}>
+          <span style={{ 
+            fontSize: '14px',
+            color: '#2a7f62'
+          }}>
             {user?.username || 'Admin'}
           </span>
         </div>
@@ -130,4 +150,4 @@ function TopNavigatorBar() {
   )
 }
 
-export default TopNavigatorBar
+export default TopNavigatorBar;
