@@ -30,40 +30,42 @@ function TopNavigatorBar() {
         letterSpacing: '0.5px'
       }}>
         <LuFlower2 style={{ 
-          color: '#2a7f62',
+          color: '#9c27b0',
           fontSize: '1.4em',
           opacity: 0.9
         }} />
-        <span style={{ color: '#2a7f62' }}>Floral</span>
-        <span style={{ color: '#2a7f62' }} >Haven</span>
+        <span style={{ color: '#9c27b0' }}>Blooming</span>
+        <span style={{ color: '#7b1fa2' }}>Delights</span>
       </h2>
             
       <div className="d-flex align-items-center gap-4" style={{ color: '#555' }}>
         <button 
           onClick={() => navigate('/admin/profile')} 
           style={{
-            color: 'rgba(0, 0, 0, 0.5)',
+            color: 'rgba(0, 0, 0, 0.6)',
             transition: 'all 0.3s ease',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            padding: '6px 8px',
+            padding: '6px 12px',
             borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            fontSize: '14px',
+            fontWeight: 500,
           }}
           onMouseEnter={e => {
-            e.currentTarget.style.color = '#2a7f62';
-            e.currentTarget.style.backgroundColor = 'rgba(42, 127, 98, 0.1)';
+            e.currentTarget.style.color = '#9c27b0';
+            e.currentTarget.style.backgroundColor = 'rgba(156, 39, 176, 0.1)';
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.color = 'rgba(0, 0, 0, 0.5)';
+            e.currentTarget.style.color = 'rgba(0, 0, 0, 0.6)';
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <FaCog size={16} style={{ marginRight: '6px' }} />
-          <span style={{ fontSize: '14px', fontWeight: 500 }}>Settings</span>
+          <FaCog size={16} style={{ marginRight: '8px' }} />
+          <span>Settings</span>
         </button>
                 
         <div 
@@ -76,13 +78,13 @@ function TopNavigatorBar() {
             display: 'flex',
             alignItems: 'center',
             color: 'rgba(0, 0, 0, 0.6)',
-            padding: '6px 10px',
+            padding: '6px 12px',
             borderRadius: '8px',
           }}
           onClick={() => setShowCalendar(!showCalendar)}
           onMouseEnter={e => {
-            e.currentTarget.style.color = '#2a7f62';
-            e.currentTarget.style.backgroundColor = 'rgba(42, 127, 98, 0.1)';
+            e.currentTarget.style.color = '#9c27b0';
+            e.currentTarget.style.backgroundColor = 'rgba(156, 39, 176, 0.1)';
           }}
           onMouseLeave={e => {
             e.currentTarget.style.color = 'rgba(0, 0, 0, 0.6)';
@@ -130,17 +132,17 @@ function TopNavigatorBar() {
           color: '#1a1a1a',
           padding: '6px 12px',
           borderRadius: '8px',
-          backgroundColor: 'rgba(42, 127, 98, 0.1)',
+          backgroundColor: 'rgba(156, 39, 176, 0.1)',
           transition: 'all 0.3s ease'
         }}>
           <FaUser style={{ 
             marginRight: '8px', 
-            color: '#2a7f62',
+            color: '#9c27b0',
             fontSize: '0.9em'
           }} />
           <span style={{ 
             fontSize: '14px',
-            color: '#2a7f62'
+            color: '#9c27b0'
           }}>
             {user?.username || 'Admin'}
           </span>

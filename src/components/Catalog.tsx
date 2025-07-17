@@ -3,7 +3,7 @@ import useBouquet from "../hooks/useBouquet";
 import leaf from "../assets/seedling.svg";
 import award from "../assets/award.svg";
 import tint from "../assets/tint.svg";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { CustomFormControl, CustomSelect } from "./HomePage/DeliveryMoscow";
 import { InputBase, MenuItem } from "@mui/material";
@@ -14,7 +14,7 @@ import useLoading from "../hooks/useLoading";
 
 
 function Catalog() {
-    const { bouquet} = useBouquet();
+    const { bouquet, toggleLike} = useBouquet();
     const [hoverId, setHoverId] = useState<string | null>(null);
     const [counts, setCounts] = useState(0)
     const navigate = useNavigate();
@@ -132,10 +132,14 @@ function Catalog() {
                             <div className="card-media">
                               <img src={item.image} alt={item.name} className="bouquet-image" />
                               
-                              <button 
-                                className={`favorite-btn`}
+                              <button
+                                className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleLike(item.id);
+                                }}
                               >
-                                <FaRegHeart />
+                                {item.isLiked ? <FaHeart /> : <FaRegHeart />}
                               </button>
                               
                               {item.status && (

@@ -1,0 +1,258 @@
+
+.admin-bouquets-container {
+    padding: 2rem;
+    font-family: "Rubik";
+}
+
+.admin-bouquets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.admin-bouquets-title {
+    font-family: "Cormorant Garamond";
+    font-size: 3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    background: linear-gradient(to right, #9c27b0, #7b1fa2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+}
+
+.add-bouquet-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(156, 39, 176, 0.2);
+}
+
+.add-bouquet-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(156, 39, 176, 0.3);
+}
+
+.add-bouquet-btn:active {
+    transform: translateY(0);
+}
+
+.admin-btn-icon {
+    font-size: 0.9rem;
+}
+
+.admin-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(156, 39, 176, 0.3), transparent);
+    margin: 1.5rem 0;
+}
+
+.admin-bouquets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.admin-bouquet-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.admin-bouquet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.admin-bouquet-image-container {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.admin-bouquet-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.admin-bouquet-card:hover .bouquet-image {
+    transform: scale(1.05);
+}
+
+.admin-bouquet-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.admin-bouquet-card:hover .admin-bouquet-actions {
+    opacity: 1;
+}
+
+.admin-action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    background: rgba(76, 175, 80, 0.9);
+}
+
+.edit-btn:hover {
+    background: #4caf50;
+    transform: scale(1.1);
+}
+
+.delete-btn {
+    background: rgba(244, 67, 54, 0.9);
+}
+
+.delete-btn:hover {
+    background: #f44336;
+    transform: scale(1.1);
+}
+
+.admin-bouquet-details {
+    padding: 1.5rem;
+}
+
+.admin-bouquet-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+}
+
+.admin-bouquet-compound {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+}
+
+.admin-price-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.admin-current-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #9c27b0;
+}
+
+.admin-old-price {
+    font-size: 0.9rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.admin-bouquet-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.admin-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-meta-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.admin-status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.admin-status-badge.active {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+}
+
+.admin-status-badge.inactive {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-bouquets-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .admin-bouquets-title {
+        font-size: 1.75rem;
+    }
+    
+    .admin-bouquets-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-bouquet-card {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* Delay animations for each card */
+.admin-bouquet-card:nth-child(1) { animation-delay: 0.1s; }
+.admin-bouquet-card:nth-child(2) { animation-delay: 0.2s; }
+.admin-bouquet-card:nth-child(3) { animation-delay: 0.3s; }
+.admin-bouquet-card:nth-child(4) { animation-delay: 0.4s; }
+.admin-bouquet-card:nth-child(5) { animation-delay: 0.5s; }
+.admin-bouquet-card:nth-child(6) { animation-delay: 0.6s; }

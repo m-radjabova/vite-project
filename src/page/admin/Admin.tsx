@@ -1,15 +1,21 @@
 import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaRegComments, FaRegNewspaper } from "react-icons/fa";
+import { MdOutlineLocalShipping } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { LuFlower2 } from "react-icons/lu";
 import 'react-datepicker/dist/react-datepicker.css';
 import TopNavigatorBar from "./TopNavigatorBar";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import {FiSettings } from "react-icons/fi";
+import { FiBook } from "react-icons/fi";
+import { GiFlowerPot } from "react-icons/gi";
+import { useState } from "react";
+import { LuFlower } from "react-icons/lu";
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
+  const [isFlowersOpen, setIsFlowersOpen] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch({ type: "LOGOUT" });
@@ -18,169 +24,140 @@ function Admin() {
   const sidebarLinks = [
     {
       to: "profile",
-      label: "Profile",
-      icon: <PersonOutlineOutlinedIcon className="me-2" style={{ fontSize: '1.2em' }} />,
+      label: "My Profile",
+      icon: <PersonOutlineOutlinedIcon className="nav-icon" />,
     },
     {
-      to: "settings",
-      label: "Settings",
-      icon: <FiSettings className="me-2" style={{ fontSize: '1.2em' }} />,
+      to: "flowers",
+      label: "Flower Arrangements",
+      icon: <LuFlower2 className="nav-icon" />,
+      subItems: [
+        { to: "flowers/all", label: "All", icon: <LuFlower className="nav-icon" /> },
+        { to: "flowers/roses", label: "Roses" },
+        { to: "flowers/gifts", label: "Flower Gifts" },
+        { to: "flowers/seasonal", label: "Seasonal Arrangements" },
+      ]
     },
+    {
+      to:"categories",
+      label:"Categories",
+      icon: <GiFlowerPot className="nav-icon" />
+    },
+    {
+      to: "reviews",
+      label: "Customer Reviews",
+      icon: <FaRegComments className="nav-icon" />,
+    },
+    {
+      to: "articles",
+      label: "Blog Articles",
+      icon: <FiBook className="nav-icon" />,
+    },
+    {
+      to: "news",
+      label: "Company News",
+      icon: <FaRegNewspaper className="nav-icon" />,
+    },
+    {
+      to: "delivery",
+      label: "Delivery Points",
+      icon: <MdOutlineLocalShipping className="nav-icon" />,
+    }
   ];
 
   return (
-    <div className="admin-container d-flex" style={{ 
-      minHeight: '100vh', 
-      background: '#f9fafb'
-    }}>
+    <div className="admin-app">
       {/* Sidebar */}
-      <div className="sidebar p-3 d-flex flex-column justify-content-between" style={{ 
-        width: '280px', 
-        minWidth: '280px',
-        background: 'linear-gradient(180deg, #2a7f62 0%, #1e6b50 100%)',
-        boxShadow: '4px 0 15px rgba(0, 0, 0, 0.1)',
-        position: 'relative',
-        zIndex: 10,
-        borderRight: '1px solid rgba(255, 255, 255, 0.1)'
-      }}>
-        <div>
-          <Link to="/" className="text-decoration-none">
-            <div className="d-flex align-items-center mb-4 p-3 rounded" style={{ 
-              background: 'rgba(255, 255, 255, 0.1)',
-              transition: 'all 0.3s ease',
-              backdropFilter: 'blur(5px)',
-            }}>
-              <LuFlower2 className="fs-4 me-3" style={{ 
-                color: '#ffffff',
-              }} />
-              <h1 className="sidebar-title fs-5 mb-0" style={{ 
-                fontWeight: 600,
-                letterSpacing: '1px',
-                color: 'white',
-                fontSize: '16px'
-              }}>Floral Haven Admin</h1>
-            </div>
-          </Link>
-          
-          <hr className="bg-white opacity-10 my-3" />
-          
-          <ul className="nav nav-pills flex-column gap-2">
-            {sidebarLinks.map(link => (
-              <li className="nav-item" key={link.to}>
+      <div className="admin-sidebar">
+        <Link to="/" className="sidebar-brand">
+          <LuFlower2 className="brand-icon" />
+          <h1 className="brand-title">Blooming Delights Admin</h1>
+        </Link>
+        
+        <div className="sidebar-divider"></div>
+        
+        <ul className="sidebar-nav">
+          {sidebarLinks.map(link => (
+            <li className="nav-item" key={link.to}>
+              {link.subItems ? (
+                <>
+                  <div 
+                    className={`nav-link ${isFlowersOpen ? 'active' : ''}`}
+                    onClick={() => setIsFlowersOpen(!isFlowersOpen)}
+                  >
+                    {link.icon}
+                    <span className="nav-text">{link.label}</span>
+                    <span className={`nav-arrow ${isFlowersOpen ? 'open' : ''}`}>
+                      ▼
+                    </span>
+                    <span className="nav-highlight"></span>
+                  </div>
+                  {isFlowersOpen && (
+                    <ul className="submenu">
+                      {link.subItems.map(subItem => (
+                        <li key={subItem.to}>
+                          <NavLink
+                            className={({ isActive }) => 
+                              `submenu-link ${isActive ? 'active' : ''}`
+                            }
+                            to={subItem.to}
+                          >
+                            {subItem.icon}
+                            {subItem.label}
+                            
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              ) : (
                 <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "active nav-link d-flex align-items-center rounded"
-                      : "nav-link text-white d-flex align-items-center rounded"
+                  className={({ isActive }) => 
+                    `nav-link ${isActive ? 'active' : ''}`
                   }
                   to={link.to}
-                  style={({ isActive }) => ({
-                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
-                    color: isActive ? '#fff' : 'rgba(255,255,255,0.9)',
-                    transition: 'all 0.3s ease',
-                    padding: '12px 16px',
-                    fontWeight: 500,
-                    fontSize: '14px',
-                    letterSpacing: '0.5px',
-                    ':hover': {
-                      backgroundColor: !isActive && 'rgba(255,255,255,0.1)',
-                    }
-                  })}
                 >
                   {link.icon}
-                  <span className="ms-2">{link.label}</span>
+                  <span className="nav-text">{link.label}</span>
+                  <span className="nav-highlight"></span>
                 </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
+              )}
+            </li>
+          ))}
+        </ul>
 
-        <div className="mb-3">
-          <div className="d-flex align-items-center p-3 rounded" style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            transition: 'all 0.3s ease',
-            marginBottom: '16px',
-            border: '1px solid rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(5px)',
-          }}>
-            <div style={{
-              width: 42,
-              height: 42,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: 16,
-              marginRight: 12,
-              flexShrink: 0,
-            }}>
+        <div className="sidebar-footer">
+          <div className="user-profile">
+            <div className="user-avatar-sidebar">
               <FaUser />
             </div>
-            <div className="overflow-hidden">
-              <div className="text-white" style={{ 
-                fontWeight: 500, 
-                fontSize: 14,
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis',
-                overflow: 'hidden'
-              }}>
+            <div className="user-info">
+              <div className="user-name-sidebar">
                 {user?.username || 'Floral Admin'}
               </div>
-              <div style={{
-                color: 'rgba(255,255,255,0.8)', 
-                fontSize: 12,
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis',
-                overflow: 'hidden',
-                letterSpacing: '0.5px'
-              }}>
-                <LuFlower2 className="me-1" style={{color: 'rgba(255,255,255,0.8)'}} /> Administrator
+              <div className="user-role">
+                <LuFlower2 className="role-icon" /> Super Admin
               </div>
             </div>
           </div>
 
           <button
             onClick={handleLogout}
-            className="btn w-100 d-flex align-items-center justify-content-center py-2 position-relative btn-logout"
-            style={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              color: 'rgba(255,255,255,0.9)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: 6,
-              fontWeight: 500,
-              fontSize: 14,
-              transition: 'all 0.3s ease',
-              gap: 8,
-              overflow: 'hidden',
-              zIndex: 1,
-              letterSpacing: '0.5px'
-            }}
+            className="logout-btn"
           >
-            <FaSignOutAlt style={{ fontSize: 14 }} />
+            <FaSignOutAlt className="logout-icon" />
             <span>Sign Out</span>
+            <span className="logout-overlay"></span>
           </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="content flex-grow-1" style={{ 
-        background: '#f9fafb',
-        overflowY: 'auto',
-        position: 'relative'
-      }}>
+      <div className="admin-content">
         <TopNavigatorBar />
-        <div className="p-4" style={{ 
-          minHeight: 'calc(100vh - 56px)',
-        }}>
-          <div className="rounded-lg p-4" style={{ 
-            minHeight: 'calc(100vh - 120px)',
-            background: 'white',
-            borderRadius: '12px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-          }}>
+        <div className="content-container">
+          <div className="content-card">
             <Outlet/>
           </div>
         </div>

@@ -51,3 +51,8 @@ export interface PointType{
     address: string;
     phone: string;
 }
+
+export interface CategoryType{
+    id: string;
+    title: string;
+}

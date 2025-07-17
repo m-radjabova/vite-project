@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import useContextPro from "./hooks/useContextPro";
 import Login from "./page/login/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Admin from "./page/admin/Admin";
 import Home from "./page/home/Home";
 import SingUp from "./page/login/SingUp";
 import IsLoading from "./components/IsLoading";
@@ -28,6 +27,22 @@ import SalesPage from "./components/MainHeaderPage/SalesPage";
 import GiftsPage from "./components/MainHeaderPage/GiftsPage";
 import FavoritesPage from "./components/FavoritesPage";
 import CartPage from "./components/CartPage";
+import ArticlePage from "./components/ArticlePage";
+import NewsPage from "./components/NewsPage";
+import AdminBouquets from "./page/admin/Bouquets/AdminBouquets";
+import AdminCategories from "./page/admin/Categories/AdminCategories";
+import AdminArticles from "./page/admin/Articles/AdminArticles";
+import AdminNews from "./page/admin/News/AdminNews";
+
+export interface User{
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  roles: string[];
+  favorites: string[];
+  cart: string[];
+}
 
 function App() {
   const {
@@ -54,6 +69,8 @@ function App() {
         <Route path="/discount" element={<DiscountPage />} />
         <Route path="/video" element={<VideoPage />} />
         <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/articles" element={<ArticlePage />} />
+        <Route path="/news" element={<NewsPage />} />
         <Route path="/bouquets" element={<BouquetsPage />} />
         <Route path="/bouquets/:id" element={<BouquetDisplay />} />
         <Route path="/roses" element={<RosesPage />} />
@@ -81,7 +98,10 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Admin />} />
+        <Route path="flowers/all" element={<AdminBouquets />} />
+        <Route path="categories" element={<AdminCategories />} />
+        <Route path="articles" element={<AdminArticles />} />
+        <Route path="news" element={<AdminNews />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 

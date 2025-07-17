@@ -10,7 +10,7 @@ function News() {
         <div className="container">
             <div className="news-title">
                 <h1>Новости</h1>
-                <Link className="news-link" to="/articles">
+                <Link className="news-link" to="/news">
                     Все новости <IoIosArrowForward />
                 </Link>
             </div>
