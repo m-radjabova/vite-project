@@ -2,41 +2,36 @@ import {FieldValues, useForm } from "react-hook-form";
 import {DialogTitle, DialogContent, DialogActions, Box, Divider, IconButton, Dialog, TextField, Button, Typography} from '@mui/material';
 import {AddCircleOutline, Cancel, Close} from '@mui/icons-material';
 import { useEffect } from "react";
-import { formatDateTime } from "../../types/utils";
 import { IoMdFlower } from "react-icons/io";
 
 interface Props{
   open: boolean;
   onClose: () => void;
-  editArticle?: FieldValues | null;
-  addArticle: (data: FieldValues) => void;
-  updateArticle: (id: string, data: FieldValues) => void;
+  editPoint?: FieldValues | null;
+  addPoint: (data: FieldValues) => void;
+  updatePoint: (id: string, data: FieldValues) => void;
 }
 
-function AddArticleModal({ open, onClose, editArticle, addArticle, updateArticle }: Props) {
+function AddPointsModal({ open, onClose, editPoint, addPoint, updatePoint }: Props) {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
-    if (editArticle) {
-      reset(editArticle); 
+    if (editPoint) {
+      reset(editPoint); 
     } else {
-      reset({ title: "", date: "", description: "", image: "" });
+      reset({ address: "", phone: "" });
     }
-  }, [editArticle, reset]);
+  }, [editPoint, reset]);
 
   const onSubmit = (data: FieldValues) => {
-    const articleData = {
-      ...data,
-      createdAt: formatDateTime(new Date())
-    };
 
-    if (editArticle && editArticle.id) {
-      updateArticle(editArticle.id, articleData);
+    if (editPoint && editPoint.id) {
+      updatePoint(editPoint.id, data);
     } else {
-      addArticle(articleData);
+      addPoint(data);
     }
     
-    reset({ title: "", date: "", description: "", image: "" });
+    reset({ address: "", phone: "" });
     onClose();
   };
 
@@ -80,7 +75,7 @@ function AddArticleModal({ open, onClose, editArticle, addArticle, updateArticle
         <Box display="flex" alignItems="center" gap={1}>
           <AddCircleOutline fontSize="medium" sx={{ color: '#7b1fa2' }} />
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            {editArticle ? 'Edit Article' : 'Add New Article'}
+            {editPoint ? 'Edit Delivery Point' : 'Add New Delivery Point'}
           </Typography>
         </Box>
         <IconButton 
@@ -98,19 +93,18 @@ function AddArticleModal({ open, onClose, editArticle, addArticle, updateArticle
       
       <DialogContent sx={{ padding: '24px' }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {['title', 'date', 'description', 'image'].map((field) => (
+          {['address', 'phone'].map((field) => (
             <Box key={field} mb={3}>
               <TextField
                 fullWidth
                 label={field.charAt(0).toUpperCase() + field.slice(1)}
                 variant="outlined"
-                type={field === 'date' ? 'date' : 'text'}
+                type={field === 'number' ? 'number' : 'text'}
                 InputLabelProps={field === 'date' ? { shrink: true } : {}}
                 {...register(field, { required: true })}
                 error={!!errors[field]}
                 helperText={errors[field] && `${field} is required`}
-                multiline={field === 'description'}
-                rows={field === 'description' ? 4 : 1}
+                multiline
                 InputProps={{
                   startAdornment: (
                     <IoMdFlower size={24} color="#9c27b0" />
@@ -157,11 +151,11 @@ function AddArticleModal({ open, onClose, editArticle, addArticle, updateArticle
             fontWeight: 600
           }}
         >
-          {editArticle ? 'Update Article' : 'Add Article'}
+          {editPoint ? 'Update Delivery Point' : 'Add Delivery Point'}
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default AddArticleModal;
+export default AddPointsModal;

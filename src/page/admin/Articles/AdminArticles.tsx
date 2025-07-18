@@ -17,7 +17,10 @@ function AdminArticles() {
             <div className="admin-bouquets-header">
                 <h1 className="admin-bouquets-title">Articles</h1>
                 <button 
-                onClick={() => setOpenAddModal(true)}
+                onClick={() => {
+                    setOpenAddModal(true);
+                    setEditArticle(null);
+                }}
                 className="add-bouquet-btn">
                     <FaPlus className="admin-btn-icon" />
                     Add New Article
@@ -66,20 +69,22 @@ function AdminArticles() {
                     </div>
                 ))}
             </div>
-            <DeleteArticleModal
-                deleteOpenModal={openDeleteModal}
-                setDeleteOpenModal={setOpenDeleteModal}
-                deleteArtId={deleteArtId}
-                setDeleteArtId={setDeleteArtId}
-                deleteArticle={deleteArticle}
-            />
-            <AddArticleModal
-                open={openAddModal}
-                onClose={() => setOpenAddModal(false)}
-                editArticle={editArticle}
-                addArticle={addArticle}
-                updateArticle={updateArticle}
-            />
+            <div>
+                <DeleteArticleModal
+                    deleteOpenModal={openDeleteModal}
+                    setDeleteOpenModal={setOpenDeleteModal}
+                    deleteArtId={deleteArtId}
+                    setDeleteArtId={setDeleteArtId}
+                    deleteArticle={deleteArticle}
+                />
+                <AddArticleModal
+                    open={openAddModal}
+                    onClose={() => setOpenAddModal(false)}
+                    editArticle={editArticle}
+                    addArticle={addArticle}
+                    updateArticle={updateArticle}
+                />
+            </div>
         </div>
     );
 }

@@ -17,7 +17,7 @@
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    border-left: 4px solid #2ecc71;
+    border-left: 4px solid #9d2ecc;
 }
 
 .admin-news-card:hover {

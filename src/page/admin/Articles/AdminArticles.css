@@ -13,7 +13,7 @@
 }
 
 /* Article Card */
-.adminarticle-card {
+.admin-article-card {
     background: white;
     border-radius: 10px;
     overflow: hidden;
@@ -137,6 +137,7 @@
     color: #7f8c8d;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    word-break: break-word;
 }
 
 /* Card Footer */

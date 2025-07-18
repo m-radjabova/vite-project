@@ -1,13 +1,25 @@
 import { FaEdit, FaMapMarkerAlt, FaPhone, FaPlus, FaTrash } from "react-icons/fa"
 import usePoints from "../../../hooks/usePoints"
+import { PointType } from "../../types/Types";
+import { useState } from "react";
+import DeletePointsModal from "./DeletePointsModal";
+import AddPointsModal from "./AddPointsModal";
 
 function AdminPoints() {
-    const {points} = usePoints()
+    const {points, deletePoint, addPoint, updatePoint} = usePoints()
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deletePointId, setDeletePointId] = useState<string | null>(null);
+    const [openAddModal, setOpenAddModal] = useState(false);
+    const [editPoint, setEditPoint] = useState<PointType | null>(null);
+
   return (
     <div className="admin-points-container">
         <div className="admin-bouquets-header">
             <h1 className="admin-bouquets-title">Delivery Points</h1>
-                <button className="add-bouquet-btn">
+                <button 
+                    className="add-bouquet-btn"
+                    onClick={() => {setOpenAddModal(true); setEditPoint(null)}}
+                >
                     <FaPlus className="admin-btn-icon" />
                     Add Delivery Point
                 </button>
@@ -21,17 +33,23 @@ function AdminPoints() {
                         <div className="admin-card-icon">
                             <FaMapMarkerAlt className="marker-icon" />
                         </div>
-                        <div className="admin-card-content">
+                        <div className="admin-card-content-points">
                             <h3 className="admin-delivery-title">{item.address}</h3>
                             <div className="admin-delivery-info">
-                                <FaPhone className="info-icon" />
+                                <FaPhone className="info-icon-points" />
                                 <span className="info-text">{item.phone}</span>
                             </div>
                             <div className="admin-card-footer">
-                                <button className="admin-action-btn admin-edit-btn">
+                                <button 
+                                    onClick={() => {setOpenAddModal(true); setEditPoint(item)}}
+                                    className="admin-action-btn admin-edit-btn"
+                                >
                                     <FaEdit size={24} />
                                 </button>
-                                <button className="admin-action-btn admin-delete-btn">
+                                <button 
+                                    onClick={() => {setOpenDeleteModal(true); setDeletePointId(item.id)}}
+                                    className="admin-action-btn admin-delete-btn"
+                                >
                                     <FaTrash size={24} />
                                 </button>
                             </div>
@@ -39,6 +57,20 @@ function AdminPoints() {
                     </div>
                 ))}
             </div>
+            <AddPointsModal
+                open={openAddModal}
+                onClose={() => {setOpenAddModal(false); setEditPoint(null)}}
+                editPoint={editPoint}
+                addPoint={addPoint}
+                updatePoint={updatePoint}
+            />
+            <DeletePointsModal
+                deleteOpenModal={openDeleteModal}
+                setDeleteOpenModal={setOpenDeleteModal}
+                deletePointId={deletePointId}
+                setDeletePointId={setDeletePointId}
+                deletePoint={deletePoint}
+            />
     </div>
   )
 }

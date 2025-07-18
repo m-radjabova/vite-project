@@ -1,14 +1,25 @@
 import { FaPlus, FaEdit, FaTrash, FaCalendarAlt } from "react-icons/fa";
 import useNews from "../../../hooks/useNews";
+import { NewsType } from "../../types/Types";
+import { useState } from "react";
+import DeleteNewsModal from "./DeleteNewsModal";
+import AddNewsModal from "./AddNewsModal";
 
 function AdminNews() {
-    const { news } = useNews();
+    const { news, deleteNews, addNews, updateNews } = useNews();
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deleteNewsId, setDeleteNewsId] = useState<string | null>(null);
+    const [openAddModal, setOpenAddModal] = useState(false);
+    const [editNews, setEditNews] = useState<NewsType | null>(null);
 
     return (
         <div className="admin-news-container">
             <div className="admin-bouquets-header">
                 <h1 className="admin-bouquets-title">News</h1>
-                <button className="add-bouquet-btn">
+                <button 
+                    onClick={() => {setOpenAddModal(true); setEditNews(null)}}
+                    className="add-bouquet-btn"
+                >
                     <FaPlus className="admin-btn-icon" />
                     Add New News
                 </button>
@@ -32,16 +43,36 @@ function AdminNews() {
                             <p className="admin-news-text">{item.text}</p>
                         </div>
                         <div className="admin-card-footer">
-                            <button className="admin-action-btn admin-edit-btn">
+                            <button 
+                                onClick={() => {setOpenAddModal(true); setEditNews(item)}}
+                                className="admin-action-btn admin-edit-btn"
+                            >
                                 <FaEdit size={24} />
                             </button>
-                            <button className="admin-action-btn admin-delete-btn">
+                            <button 
+                                onClick={() => {setOpenDeleteModal(true); setDeleteNewsId(item.id)}}
+                                className="admin-action-btn admin-delete-btn"
+                            >
                                 <FaTrash size={24} />
                             </button>
                         </div>
                     </div>
                 ))}
             </div>
+            <AddNewsModal
+                open={openAddModal}
+                onClose={() => setOpenAddModal(false)}
+                editNews={editNews}
+                addNews={addNews}
+                updateNews={updateNews}
+            />
+            <DeleteNewsModal
+                deleteOpenModal={openDeleteModal}
+                setDeleteOpenModal={setOpenDeleteModal}
+                deleteNewsId={deleteNewsId}
+                setDeleteNewsId={setDeleteNewsId}
+                deleteNews={deleteNews}
+            />
         </div>
     );
 }
