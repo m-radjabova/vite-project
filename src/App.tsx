@@ -33,6 +33,8 @@ import AdminBouquets from "./page/admin/Bouquets/AdminBouquets";
 import AdminCategories from "./page/admin/Categories/AdminCategories";
 import AdminArticles from "./page/admin/Articles/AdminArticles";
 import AdminNews from "./page/admin/News/AdminNews";
+import AdminReviews from "./page/admin/Reviews/AdminReviews";
+import AdminPoints from "./page/admin/DeliveryPoints/AdminPoints";
 
 export interface User{
   id: number;
@@ -102,6 +104,8 @@ function App() {
         <Route path="categories" element={<AdminCategories />} />
         <Route path="articles" element={<AdminArticles />} />
         <Route path="news" element={<AdminNews />} />
+        <Route path="reviews" element={<AdminReviews />} />
+        <Route path="delivery" element={<AdminPoints />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 

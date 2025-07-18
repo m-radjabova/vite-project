@@ -115,7 +115,7 @@ function Profile() {
         {/* Personal Information Section */}
         <div className="profile-body">
           <div className="section-container">
-            <div className="section-header">
+            <div className="frofile-section-header">
               <div className="section-icon">
                 <FaUser />
               </div>
@@ -153,7 +153,7 @@ function Profile() {
           
           {/* Recent Activity Section */}
           <div className="section-container">
-            <div className="section-header">
+            <div className="frofile-section-header">
               <div className="section-icon">
                 <FaRegNewspaper />
               </div>

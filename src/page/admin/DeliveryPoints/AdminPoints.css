@@ -1,0 +1,82 @@
+
+.admin-delivery-container {
+    font-family: 'Rubik';
+}
+
+.admin-delivery-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.admin-delivery-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    padding: 10px ;
+    position: relative;
+    border-left: 4px solid #c212f3;
+}
+
+.admin-delivery-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Icon */
+.admin-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(194, 18, 243, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* margin-right: 1.5rem; */
+    flex-shrink: 0;
+}
+
+.admin-marker-icon {
+    color: #f39c12;
+    font-size: 1.5rem;
+}
+
+.admin-card-content {
+    flex: 1;
+}
+
+.admin-delivery-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    /* margin: 0 0 0.75rem; */
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+.admin-delivery-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* margin-bottom: 0.5rem; */
+    font-size: 0.95rem;
+    color: #34495e;
+}
+
+.info-icon {
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+.info-text {
+    color: #7f8c8d;
+}
+
+.admin-delivery-list .admin-card-footer{
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}

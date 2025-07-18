@@ -1,10 +1,11 @@
 import { IoIosArrowForward } from "react-icons/io"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useArticles from "../../hooks/useArticles";
 
 function Articles() {
     const { articles } = useArticles();
     const articlesList = articles.slice(0, 3);
+    const navigate = useNavigate();
   return (
     <div className="articles">
         <div className="container">
@@ -16,7 +17,7 @@ function Articles() {
             </div>
             <div className="articles-list">
                 {articlesList.map(item => (
-                    <Link to={`/articles/${item.id}`} className="article-link-wrapper" key={item.id}>
+                    <Link to={`/articles`} className="article-link-wrapper" key={item.id}>
                         <div className="articles-item">
                             <div className="article-image-container">
                                 <img src={item.image} alt={item.title} />
@@ -26,7 +27,7 @@ function Articles() {
                                 <div className="article-date">{item.date}</div>
                                 <h3 className="article-title">{item.title}</h3>
                                 <div className="article-description">{item.description}</div>
-                                <div className="read-more">
+                                <div className="read-more" onClick={() => navigate(`/articles`)} >
                                     Читать далее <IoIosArrowForward className="arrow-icon" />
                                 </div>
                             </div>

@@ -1,14 +1,24 @@
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import useArticles from "../../../hooks/useArticles";
+import { useState } from "react";
+import DeleteArticleModal from "./DeleteArticleModal";
+import { ArticleType } from "../../types/Types";
+import AddArticleModal from "./AddArticleModal";
 
 function AdminArticles() {
-    const { articles } = useArticles();
+    const { articles, deleteArticle, addArticle, updateArticle } = useArticles();
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [deleteArtId, setDeleteArtId] = useState<string | null>(null);
+    const [openAddModal, setOpenAddModal] = useState(false);
+    const [editArticle, setEditArticle] = useState<ArticleType | null>(null);
 
     return (
         <div className="admin-articles-container">
             <div className="admin-bouquets-header">
                 <h1 className="admin-bouquets-title">Articles</h1>
-                <button className="add-bouquet-btn">
+                <button 
+                onClick={() => setOpenAddModal(true)}
+                className="add-bouquet-btn">
                     <FaPlus className="admin-btn-icon" />
                     Add New Article
                 </button>
@@ -16,7 +26,6 @@ function AdminArticles() {
             
             <div className="admin-divider"></div>
 
-            {/* Articles Grid */}
             <div className="admin-articles-grid">
                 {articles.map((article) => (
                     <div key={article.id} className="admin-article-card">
@@ -28,11 +37,15 @@ function AdminArticles() {
                             />
                             <div className="admin-card-overlay"></div>
                             <div className="admin-action-buttons">
-                                <button className="admin-action-btn edit-btn">
+                                <button 
+                                onClick={() => {setOpenAddModal(true); setEditArticle(article)}}
+                                className="admin-action-btn edit-btn">
                                     <FaEdit />
                                 </button>
-                                <button className="admin-action-btn delete-btn">
-                                    <FaTrash />
+                                <button 
+                                onClick={() => {setOpenDeleteModal(true); setDeleteArtId(article.id)}}
+                                className="admin-action-btn delete-btn">
+                                    <FaTrash  />
                                 </button>
                             </div>
                         </div>
@@ -53,6 +66,20 @@ function AdminArticles() {
                     </div>
                 ))}
             </div>
+            <DeleteArticleModal
+                deleteOpenModal={openDeleteModal}
+                setDeleteOpenModal={setOpenDeleteModal}
+                deleteArtId={deleteArtId}
+                setDeleteArtId={setDeleteArtId}
+                deleteArticle={deleteArticle}
+            />
+            <AddArticleModal
+                open={openAddModal}
+                onClose={() => setOpenAddModal(false)}
+                editArticle={editArticle}
+                addArticle={addArticle}
+                updateArticle={updateArticle}
+            />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser, FaRegComments, FaRegNewspaper } from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaRegComments, FaRegNewspaper, FaGifts } from "react-icons/fa";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { LuFlower2 } from "react-icons/lu";
@@ -8,9 +8,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TopNavigatorBar from "./TopNavigatorBar";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { FiBook } from "react-icons/fi";
-import { GiFlowerPot } from "react-icons/gi";
+import { GiFlowerPot, GiLotusFlower } from "react-icons/gi";
 import { useState } from "react";
 import { LuFlower } from "react-icons/lu";
+import {PiPlantBold} from "react-icons/pi";
+import LocalFloristOutlinedIcon from '@mui/icons-material/LocalFloristOutlined';
+import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
+import { IoRoseOutline } from "react-icons/io5";
 
 function Admin() {
   const { state: { user }, dispatch } = useContextPro();
@@ -33,9 +37,14 @@ function Admin() {
       icon: <LuFlower2 className="nav-icon" />,
       subItems: [
         { to: "flowers/all", label: "All", icon: <LuFlower className="nav-icon" /> },
-        { to: "flowers/roses", label: "Roses" },
-        { to: "flowers/gifts", label: "Flower Gifts" },
-        { to: "flowers/seasonal", label: "Seasonal Arrangements" },
+        {to: "flower/season", label: "Season Flowers", icon: <GiLotusFlower className="nav-icon" />},
+        { to: "flowers/hit", label: "Best Sellers", icon: <YardOutlinedIcon className="nav-icon" /> },
+        { to: "flowers/discount", label: "At a Discount", icon: <LocalFloristOutlinedIcon className="nav-icon" /> },
+        { to: "flowers/roses", label: "Roses", icon: <IoRoseOutline className="nav-icon" /> },
+        { to: "flowers/bouquets", label: "Bouquets", icon: <LuFlower className="nav-icon" /> },
+        { to: "flowers/flower", label: "Flowers", icon: <GiFlowerPot className="nav-icon" /> },
+        { to: "flowers/plants", label: "Plants", icon: <PiPlantBold className="nav-icon" /> },
+        { to: "flowers/gifts", label: "Gifts", icon: <FaGifts className="nav-icon" /> },
       ]
     },
     {

@@ -21,6 +21,10 @@
 @import "./page/admin/Bouquets/AdminBouquets.css";
 @import "./page/admin/Articles/AdminArticles.css";
 @import "./page/admin/News/AdminNews.css";
+@import "./page/admin/Categories/AdminCategory.css";
+@import "./page/admin//Categories/DeleteModal.css";
+@import "./page/admin/DeliveryPoints/AdminPoints.css";
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');

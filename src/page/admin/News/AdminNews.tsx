@@ -16,7 +16,6 @@ function AdminNews() {
             
             <div className="admin-divider"></div>
 
-            {/* News List */}
             <div className="admin-news-list">
                 {news.map(item => (
                     <div className="admin-news-card" key={item.id}>
@@ -34,12 +33,10 @@ function AdminNews() {
                         </div>
                         <div className="admin-card-footer">
                             <button className="admin-action-btn admin-edit-btn">
-                                <FaEdit />
-                                <span>Edit</span>
+                                <FaEdit size={24} />
                             </button>
                             <button className="admin-action-btn admin-delete-btn">
-                                <FaTrash />
-                                <span>Delete</span>
+                                <FaTrash size={24} />
                             </button>
                         </div>
                     </div>
