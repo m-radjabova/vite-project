@@ -1,12 +1,12 @@
 import { useState } from "react";
-import useBouquet from "../../hooks/useBouquet";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import leaf from "../../assets/seedling.svg";
 import award from "../../assets/award.svg";
 import tint from "../../assets/tint.svg";
+import { useBouquetContext } from "../../context/BouquetProvider";
 
 function DiscoundFlower() {
-  const { bouquet, toggleLike } = useBouquet();
+  const { bouquet, favorites, toggleFavorite } = useBouquetContext();
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [counts, setCounts] = useState(0)
   
@@ -42,11 +42,14 @@ function DiscoundFlower() {
                 <div className="card-media">
                   <img src={item.image} alt={item.name} className="bouquet-image" />
                   
-                  <button 
-                    className={`favorite-btn ${item.isLiked? "favorited" : ""}`}
-                    onClick={() => toggleLike(item.id)}
+                  <button
+                    className={`favorite-btn ${favorites.includes(item.id) ? "favorited" : ""}`}
+                    onClick={e => {
+                      e.stopPropagation();
+                      toggleFavorite(item.id);
+                    }}
                   >
-                    {item.isLiked ? <FaHeart /> : <FaRegHeart />}
+                    {favorites.includes(item.id) ? <FaHeart /> : <FaRegHeart />}
                   </button>
                   
                   {item.status && (

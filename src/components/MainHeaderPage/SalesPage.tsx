@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useBouquet from "../../hooks/useBouquet";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import leaf from "../../assets/seedling.svg";
 import award from "../../assets/award.svg";
@@ -7,9 +6,10 @@ import tint from "../../assets/tint.svg";
 import useLoading from "../../hooks/useLoading";
 import IsLoading from "../IsLoading";
 import { useNavigate } from "react-router-dom";
+import { useBouquetContext } from "../../context/BouquetProvider";
 
 function SalesPage() {
-  const { bouquet, toggleLike } = useBouquet();
+  const { bouquet, favorites, toggleFavorite } = useBouquetContext();
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [counts, setCounts] = useState(0)
   const {loading} = useLoading();
@@ -67,13 +67,13 @@ function SalesPage() {
                   <img src={item.image} alt={item.name} className="bouquet-image" />
                   
                   <button 
-                    className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
+                    className={`favorite-btn ${favorites.includes(item.id) ? "favorited" : ""}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      toggleLike(item.id);
+                      toggleFavorite(item.id);
                     }}
                   >
-                    {item.isLiked ? <FaHeart /> : <FaRegHeart />}
+                    {favorites.includes(item.id) ? <FaHeart /> : <FaRegHeart />}
                   </button>
                   
                   {item.status && (

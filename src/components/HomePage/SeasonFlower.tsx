@@ -1,14 +1,14 @@
 import { useState } from "react";
-import useBouquet from "../../hooks/useBouquet";
 import { FaRegHeart, FaHeart } from "react-icons/fa"; 
 import leaf from "../../assets/seedling.svg";
 import award from "../../assets/award.svg";
 import tint from "../../assets/tint.svg";
+import { useBouquetContext } from "../../context/BouquetProvider";
 
 function SeasonFlower() {
-  const { bouquet, toggleLike } = useBouquet();
+  const { bouquet, favorites, toggleFavorite } = useBouquetContext();
   const [hoverId, setHoverId] = useState<string | null>(null);
-  const [counts, setCounts] = useState(0);
+  const [counts, setCounts] = useState<{ [id: string]: number }>({});
 
   const seasonBouquets = bouquet.filter(item =>
     item.category?.includes("season")
@@ -19,6 +19,13 @@ function SeasonFlower() {
     if (status === "Новинка") return "badge-green";
     if (status === "С водой") return "badge-blue";
     return "";
+  };
+
+  const handleCount = (id: string, diff: number) => {
+    setCounts(prev => ({
+      ...prev,
+      [id]: Math.max(1, (prev[id] || 1) + diff)
+    }));
   };
 
   return (
@@ -42,13 +49,13 @@ function SeasonFlower() {
                   <img src={item.image} alt={item.name} className="bouquet-image" />
 
                   <button
-                    className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
-                    onClick={(e) => {
+                    className={`favorite-btn ${favorites.includes(item.id) ? "favorited" : ""}`}
+                    onClick={e => {
                       e.stopPropagation();
-                      toggleLike(item.id);
+                      toggleFavorite(item.id);
                     }}
                   >
-                    {item.isLiked ? <FaHeart /> : <FaRegHeart />}
+                    {favorites.includes(item.id) ? <FaHeart /> : <FaRegHeart />}
                   </button>
 
                   {item.status && (
@@ -94,14 +101,14 @@ function SeasonFlower() {
                       <div className="quantity-selector">
                         <button
                           className="qty-btn minus"
-                          onClick={() => setCounts(counts - 1)}
+                          onClick={() => handleCount(item.id, -1)}
                         >
                           -
                         </button>
-                        <span className="qty-value">{counts}</span>
+                        <span className="qty-value">{counts[item.id] || 1}</span>
                         <button
                           className="qty-btn plus"
-                          onClick={() => setCounts(counts + 1)}
+                          onClick={() => handleCount(item.id, 1)}
                         >
                           +
                         </button>

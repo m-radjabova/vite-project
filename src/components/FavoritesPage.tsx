@@ -1,6 +1,5 @@
 import useLoading from "../hooks/useLoading";
 import IsLoading from "./IsLoading";
-import useBouquet from "../hooks/useBouquet"; 
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
@@ -8,11 +7,12 @@ import { useState } from "react";
 import leaf from "../assets/seedling.svg";
 import award from "../assets/award.svg";
 import tint from "../assets/tint.svg";
+import { useBouquetContext } from "../context/BouquetProvider";
 
 
 function FavoritesPage() {
   const { loading } = useLoading();
-  const { bouquet , toggleLike} = useBouquet(); 
+  const { bouquet, favorites, toggleFavorite } = useBouquetContext();
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [counts, setCounts] = useState(1);
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ function FavoritesPage() {
     return "";
   };
 
-  const likedBouquets = bouquet.filter(item => item.isLiked);
+  const likedBouquets = bouquet.filter(item => favorites.includes(item.id));
 
   return (
     <div className="favorites-page">
@@ -69,13 +69,13 @@ function FavoritesPage() {
                           <img src={item.image} alt={item.name} className="bouquet-image" />
         
                           <button
-                            className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
+                            className={`favorite-btn ${favorites.includes(item.id) ? "favorited" : ""}`}
                             onClick={(e) => {
                               e.stopPropagation();
-                              toggleLike(item.id);
+                              toggleFavorite(item.id);
                             }}
                           >
-                            {item.isLiked ? <FaHeart /> : <FaRegHeart />}
+                            {favorites.includes(item.id) ? <FaHeart /> : <FaRegHeart />}
                           </button>
         
                           {item.status && (

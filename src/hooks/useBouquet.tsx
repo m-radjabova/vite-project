@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { BouqetType } from "../page/types/Types";
 import apiClient from "../apiClient/ApiClient";
+import useContextPro from "./useContextPro";
 
 function useBouquet() {
   const [bouquet, setBouquet] = useState<BouqetType[]>([]);
+  const {state: {user}} = useContextPro();
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     getBouquet();
+    getFavorites();
   }, []);
 
   const getBouquet = async () => {
@@ -18,27 +22,25 @@ function useBouquet() {
     }
   };
 
-  const toggleLike = async (id: string) => {
-    setBouquet(prev =>
-      prev.map(b => {
-        if (b.id === id) {
-          return { ...b, isLiked: !b.isLiked };
-        }
-        return b;
-      })
-    );
-
-    try {
-      const liked = bouquet.find(b => b.id === id)?.isLiked;
-      await apiClient.patch(`/bouquets/${id}`, {
-        isLiked: !liked,
-      });
-    } catch (err) {
-      console.error("Like error:", err);
-    }
+  const getFavorites = async () => {
+    const res = await apiClient.get<{ id: string; bouquetId: string }[]>("/favorites");
+    setFavorites(res.data.map(fav => fav.bouquetId));
   };
 
-  return { bouquet, toggleLike };
+
+  const toggleFavorite = async (id: string) => {
+    let updated;
+    if (favorites.includes(id)) {
+      await apiClient.delete(`/favorites/${id}`);
+      updated = favorites.filter(favId => favId !== id);
+    } else {
+      await apiClient.post(`/favorites`, { bouquetId: id, userId: user?.id, userName: user?.username });
+      updated = [...favorites, id];
+    }
+    setFavorites(updated);
+  };
+
+  return { bouquet, favorites, toggleFavorite };
 }
 
 export default useBouquet;

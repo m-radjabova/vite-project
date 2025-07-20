@@ -1,23 +1,22 @@
-import useBouquet from "../../../hooks/useBouquet";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import {FaEdit, FaTrash } from "react-icons/fa";
+import { useBouquetContext } from "../../../../context/BouquetProvider";
 
-function AdminBouquets() {
-    const { bouquet } = useBouquet();
-    
+function AdminDiscount() {
+    const { bouquet } = useBouquetContext();
+    const rosesBouquets = bouquet.filter(item =>
+        item.category?.includes("discount")
+    );
+
     return (
         <div className="admin-bouquets-container">
             <div className="admin-bouquets-header">
-                <h1 className="admin-bouquets-title">Bouquets</h1>
-                <button className="add-bouquet-btn">
-                    <FaPlus className="admin-btn-icon" />
-                    Add New Bouquet
-                </button>
+                <h1 className="admin-bouquets-title">Discounted Bouquets</h1>
             </div>
             
             <div className="admin-divider"></div>
             
             <div className="admin-bouquets-grid">
-                {bouquet.map((bouquet) => (
+                {rosesBouquets.map((bouquet) => (
                     <div key={bouquet.id} className="admin-bouquet-card">
                         <div className="admin-bouquet-image-container">
                             <img 
@@ -73,4 +72,4 @@ function AdminBouquets() {
     )
 }
 
-export default AdminBouquets;
+export default AdminDiscount;

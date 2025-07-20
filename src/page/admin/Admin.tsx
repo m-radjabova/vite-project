@@ -37,7 +37,7 @@ function Admin() {
       icon: <LuFlower2 className="nav-icon" />,
       subItems: [
         { to: "flowers/all", label: "All", icon: <LuFlower className="nav-icon" /> },
-        {to: "flower/season", label: "Season Flowers", icon: <GiLotusFlower className="nav-icon" />},
+        {to: "flowers/season", label: "Season Flowers", icon: <GiLotusFlower className="nav-icon" />},
         { to: "flowers/hit", label: "Best Sellers", icon: <YardOutlinedIcon className="nav-icon" /> },
         { to: "flowers/discount", label: "At a Discount", icon: <LocalFloristOutlinedIcon className="nav-icon" /> },
         { to: "flowers/roses", label: "Roses", icon: <IoRoseOutline className="nav-icon" /> },

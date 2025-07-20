@@ -1,5 +1,4 @@
 import {useState } from "react";
-import useBouquet from "../hooks/useBouquet";
 import leaf from "../assets/seedling.svg";
 import award from "../assets/award.svg";
 import tint from "../assets/tint.svg";
@@ -11,15 +10,16 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import IsLoading from "./IsLoading";
 import useLoading from "../hooks/useLoading";
+import { useBouquetContext } from "../context/BouquetProvider";
 
 
 function Catalog() {
-    const { bouquet, toggleLike} = useBouquet();
+    const { bouquet, favorites, toggleFavorite } = useBouquetContext();
     const [hoverId, setHoverId] = useState<string | null>(null);
     const [counts, setCounts] = useState(0)
     const navigate = useNavigate();
-    const {loading} = useLoading()
-    
+    const {loading} = useLoading();
+
     const getBadgeClass = (status: string) => {
       if (status === "Акция") return "badge-red";
       if (status === "Новинка") return "badge-green";
@@ -133,13 +133,13 @@ function Catalog() {
                               <img src={item.image} alt={item.name} className="bouquet-image" />
                               
                               <button
-                                className={`favorite-btn ${item.isLiked ? "favorited" : ""}`}
+                                className={`favorite-btn ${favorites.includes(item.id) ? "favorited" : ""}`}
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  toggleLike(item.id);
+                                  toggleFavorite(item.id);
                                 }}
                               >
-                                {item.isLiked ? <FaHeart /> : <FaRegHeart />}
+                                {favorites.includes(item.id) ? <FaHeart /> : <FaRegHeart />}
                               </button>
                               
                               {item.status && (

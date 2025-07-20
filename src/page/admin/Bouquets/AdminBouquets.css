@@ -4,6 +4,27 @@
     font-family: "Rubik";
 }
 
+.admin-bouquets-links{
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-bouquet-link {
+    background-color: #7b1fa2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.admin-bouquet-link:hover {
+    background-color: #9c27b0;
+}
+
+
 .admin-bouquets-header {
     display: flex;
     justify-content: space-between;

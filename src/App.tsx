@@ -29,12 +29,22 @@ import FavoritesPage from "./components/FavoritesPage";
 import CartPage from "./components/CartPage";
 import ArticlePage from "./components/ArticlePage";
 import NewsPage from "./components/NewsPage";
-import AdminBouquets from "./page/admin/Bouquets/AdminBouquets";
-import AdminCategories from "./page/admin/Categories/AdminCategories";
 import AdminArticles from "./page/admin/Articles/AdminArticles";
 import AdminNews from "./page/admin/News/AdminNews";
 import AdminReviews from "./page/admin/Reviews/AdminReviews";
 import AdminPoints from "./page/admin/DeliveryPoints/AdminPoints";
+import { BouquetProvider } from './context/BouquetProvider';
+import AdminSeason from "./page/admin/Bouquets/Pages/AdminSeason";
+import AdminBestSeller from "./page/admin/Bouquets/Pages/AdminBestSeller";
+import AdminDiscount from "./page/admin/Bouquets/Pages/AdminDiscount";
+import AdminRoses from "./page/admin/Bouquets/Pages/AdminRoses";
+import AdminBouquets from './page/admin/Bouquets/Pages/AdminBouquets';
+import AdminCategories from "./page/admin/Categories/AdminCategories";
+import AdminBouquetsPage from "./page/admin/Bouquets/AdminBouquetsPage";
+import AdminFlowers from './page/admin/Bouquets/Pages/AdminFlowers';
+import AdminPlants from "./page/admin/Bouquets/Pages/AdminPlants";
+import AdminGifts from "./page/admin/Bouquets/Pages/AdminGifts";
+import AddNewBouquets from "./page/admin/Bouquets/AddNewBouquets";
 
 export interface User{
   id: number;
@@ -56,8 +66,8 @@ function App() {
   }
 
   return (
+    <BouquetProvider>
     <Routes>
-
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="/favorites" element={<FavoritesPage />} />
@@ -100,7 +110,16 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route path="flowers/all" element={<AdminBouquets />} />
+        <Route path="flowers/all" element={<AdminBouquetsPage />} />
+        <Route path="flowers/all/new" element={<AddNewBouquets />} />
+        <Route path="flowers/season" element={<AdminSeason />} />
+        <Route path="flowers/hit" element={<AdminBestSeller />} />
+        <Route path="flowers/discount" element={<AdminDiscount />} />
+        <Route path="flowers/roses" element={<AdminRoses />} />  
+        <Route path="flowers/bouquets" element={<AdminBouquets />} />
+        <Route path="flowers/flower" element={<AdminFlowers />} />
+        <Route path="flowers/plants" element={<AdminPlants />} />
+        <Route path="flowers/gifts" element={<AdminGifts />} />
         <Route path="categories" element={<AdminCategories />} />
         <Route path="articles" element={<AdminArticles />} />
         <Route path="news" element={<AdminNews />} />
@@ -112,6 +131,7 @@ function App() {
   
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </BouquetProvider>
   );
 }
 
