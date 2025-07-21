@@ -112,6 +112,7 @@ function App() {
       >
         <Route path="flowers/all" element={<AdminBouquetsPage />} />
         <Route path="flowers/all/new" element={<AddNewBouquets />} />
+        <Route path="flowers/all/new/:id" element={<AddNewBouquets />} />
         <Route path="flowers/season" element={<AdminSeason />} />
         <Route path="flowers/hit" element={<AdminBestSeller />} />
         <Route path="flowers/discount" element={<AdminDiscount />} />

@@ -1,8 +1,10 @@
 import {FaEdit, FaTrash } from "react-icons/fa";
 import { useBouquetContext } from "../../../../context/BouquetProvider";
+import { useNavigate } from "react-router-dom";
 
 function AdminPlants() {
-    const { bouquet } = useBouquetContext();
+    const { bouquet, deleteBouquet } = useBouquetContext();
+    const navigate = useNavigate();
     const rosesBouquets = bouquet.filter(item =>
         item.category?.includes("plants")
     );
@@ -37,10 +39,14 @@ function AdminPlants() {
                                 className="admin-bouquet-image"
                             />
                             <div className="admin-bouquet-actions">
-                                <button className="admin-action-btn edit-btn">
+                                <button 
+                                onClick={() => navigate(`/admin/flowers/all/new/${bouquet.id}`)}
+                                className="admin-action-btn edit-btn">
                                     <FaEdit />
                                 </button>
-                                <button className="admin-action-btn delete-btn">
+                                <button 
+                                    onClick={() => deleteBouquet(bouquet.id)}
+                                className="admin-action-btn delete-btn">
                                     <FaTrash />
                                 </button>
                             </div>

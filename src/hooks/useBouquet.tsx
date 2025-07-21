@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { BouqetType } from "../page/types/Types";
 import apiClient from "../apiClient/ApiClient";
 import useContextPro from "./useContextPro";
+import { FieldValues } from "react-hook-form";
+import { toast } from "react-toastify";
 
 function useBouquet() {
   const [bouquet, setBouquet] = useState<BouqetType[]>([]);
@@ -40,7 +42,40 @@ function useBouquet() {
     setFavorites(updated);
   };
 
-  return { bouquet, favorites, toggleFavorite };
+  const addBouquet = async (data: FieldValues) => {
+    try {
+      const res = await apiClient.post("/bouquets", data);
+      setBouquet(prev => [...prev, res.data]);
+      toast.success("Bouquet added successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Error adding bouquet");
+    }
+  }
+
+  const updateBouquet = async (id: string, data: FieldValues) => {
+    try {
+      const res = await apiClient.put(`/bouquets/${id}`, data);
+      setBouquet(bouquet.map(bouq => bouq.id === id ? res.data : bouq));
+      toast.success("Bouquet updated successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Error updating bouquet");
+    }
+  };
+
+  const deleteBouquet = async (id: string) => {
+    try {
+      await apiClient.delete(`/bouquets/${id}`);
+      setBouquet(bouquet.filter(bouq => bouq.id !== id));
+      toast.success("Bouquet deleted successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Error deleting bouquet");
+    }
+  };
+
+  return { bouquet, favorites, toggleFavorite, addBouquet, updateBouquet, deleteBouquet,  getBouquet};
 }
 
 export default useBouquet;
