@@ -23,29 +23,30 @@ function AddNewBouquets() {
 
   const populateFormData = () => {
     if (!id) return;
-
     const current = bouquet.find(b => b.id === id);
     if (!current) return;
-
-    const selectedCategories =
-      current.category?.map(catId => {
-        const match = category.find(c => c.id === catId);
-        return match ? { value: match.id, label: match.title } : null;
-      }).filter(Boolean) || [];
-
-    reset({ ...current, category: selectedCategories });
+    reset({
+      ...current,
+      category: current.category?.map(catId => {
+        const cat = category.find(c => c.id === catId);
+        return cat ? { value: cat.id, label: cat.title } : null;
+      }).filter(Boolean) || []
+    });
   };
 
   const onSubmit = async (formData: FieldValues) => {
     const processedData = {
       ...formData,
       category: formData.category?.map((c: { value: string }) => c.value) || [],
+      isLiked: false,
+      size: formData.size + " см",
+      reviews: []
     };
 
     if (id) {
-      await updateBouquet(id, processedData);
+      updateBouquet(id, processedData);
     } else {
-      await addBouquet(processedData);
+      addBouquet(processedData);
     }
     navigate("/admin/flowers/all");
   };
@@ -209,15 +210,8 @@ function AddNewBouquets() {
                       options={category.map(cat => ({ value: cat.id, label: cat.title }))}
                       isMulti
                       placeholder="Select categories..."
-                      onChange={selectedOptions => field.onChange(selectedOptions)}
-                      value={category
-                        .map(cat => ({ value: cat.id, label: cat.title }))
-                        .filter(option =>
-                          Array.isArray(field.value)
-                            ? field.value.some((v: { value: string }) => v.value === option.value)
-                            : false
-                        )
-                      }
+                      onChange={field.onChange}
+                      value={field.value || []}
                     />
                   )}
                 />

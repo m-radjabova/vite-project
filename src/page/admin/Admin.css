@@ -1,14 +1,11 @@
-/* Admin.css */
 .admin-app {
   display: flex;
   min-height: 100vh;
-  background: #f8f9fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Sidebar Styles */
+
 .admin-sidebar {
-  width: 280px;
+  width: 300px;
   min-width: 280px;
   background: linear-gradient(180deg, #8e24aa 0%, #6a1b9a 100%);
   box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
@@ -298,6 +295,12 @@
   background: #f8f9fa;
   overflow-y: auto;
   position: relative;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.admin-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .content-container {
