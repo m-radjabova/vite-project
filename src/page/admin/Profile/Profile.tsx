@@ -126,7 +126,7 @@ function Profile() {
             
             <div className="info-grid">
               <div className="info-item">
-                <div className="info-icon">
+                <div className="info-icon-profile">
                   <FaUser />
                 </div>
                 <div>
@@ -138,7 +138,7 @@ function Profile() {
               </div>
               
               <div className="info-item">
-                <div className="info-icon">
+                <div className="info-icon-profile">
                   <FaEnvelope />
                 </div>
                 <div>

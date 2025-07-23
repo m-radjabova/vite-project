@@ -25,6 +25,8 @@
 @import "./page/admin//Categories/DeleteModal.css";
 @import "./page/admin/DeliveryPoints/AdminPoints.css";
 @import "./page//admin/Bouquets/AddNewBouquets.css";
+@import "./page/admin/Partners/AdminPartners.css";
+@import "./components/ReviewPage/AddReviewPage.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');

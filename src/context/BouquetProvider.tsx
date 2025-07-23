@@ -10,16 +10,20 @@ interface BouquetContextType {
   addBouquet: (data: FieldValues) => void;
   deleteBouquet: (id: string) => void;
   updateBouquet: (id: string, data: FieldValues) => void;
+  selectedBouquet: BouqetType | null; 
+  selectBouquet: (id: string) => void;
+  addReviews: (id: string, review: FieldValues) => void;
 }
 
 const BouquetContext = createContext<BouquetContextType | null>(null);
 
 export const BouquetProvider = ({ children }: { children: React.ReactNode }) => {
-  const { bouquet, favorites, toggleFavorite, addBouquet, deleteBouquet, updateBouquet } = useBouquet(); 
+  const { bouquet, favorites, toggleFavorite, addBouquet, deleteBouquet, updateBouquet, selectedBouquet, selectBouquet, addReviews } = useBouquet(); 
   return (
-    <BouquetContext.Provider value={{ bouquet, favorites, toggleFavorite, addBouquet, deleteBouquet, updateBouquet }}>
+    <BouquetContext.Provider value={{ bouquet, favorites, toggleFavorite, addBouquet, deleteBouquet, updateBouquet, selectedBouquet, selectBouquet, addReviews }}>
       {children}
     </BouquetContext.Provider>
+
   );
 };
 

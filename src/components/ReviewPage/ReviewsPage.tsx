@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import useBouquet from "../hooks/useBouquet";
+import useBouquet from "../../hooks/useBouquet";
 import { IoIosArrowForward } from "react-icons/io";
-import AboutNavBar from "./AboutPage/AboutNavBar";
+import AboutNavBar from "../AboutPage/AboutNavBar";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
-import leaf from "../assets/seedling.svg";
-import award from "../assets/award.svg";
-import tint from "../assets/tint.svg";
-import useLoading from './../hooks/useLoading';
-import IsLoading from './IsLoading';
+import leaf from "../../assets/seedling.svg";
+import award from "../../assets/award.svg";
+import tint from "../../assets/tint.svg";
+import useLoading from '../../hooks/useLoading';
+import IsLoading from '../IsLoading';
 
 function ReviewsPage() {
     const { bouquet } = useBouquet();
@@ -44,7 +44,7 @@ function ReviewsPage() {
                 <div className="reviews-left">
                     <div className="reviews-title">
                         <h1 className="about-title">Отзывы</h1>
-                        <button>Оставить отзыв</button>
+                        <button onClick={() => navigate("/reviews/add-review")}>Оставить отзыв</button>
                     </div>
                     <div className="reviews-list-box">
                         {reviewedBouquets.map((item, index) => (

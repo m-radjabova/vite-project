@@ -9,6 +9,7 @@ function useBouquet() {
   const [bouquet, setBouquet] = useState<BouqetType[]>([]);
   const {state: {user}} = useContextPro();
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [selectedBouquet, setSelectedBouquet] = useState<BouqetType | null>(null);
 
   useEffect(() => {
     getBouquet();
@@ -27,6 +28,11 @@ function useBouquet() {
   const getFavorites = async () => {
     const res = await apiClient.get<{ id: string; bouquetId: string }[]>("/favorites");
     setFavorites(res.data.map(fav => fav.bouquetId));
+  };
+
+  const selectBouquet = (id: string) => {
+    const found = bouquet.find(b => b.id === id) || null;
+    setSelectedBouquet(found);
   };
 
 
@@ -75,7 +81,26 @@ function useBouquet() {
     }
   };
 
-  return { bouquet, favorites, toggleFavorite, addBouquet, updateBouquet, deleteBouquet,  getBouquet};
+  const addReviews = async (id: string, review: FieldValues) => {
+    try {
+      const res = await apiClient.post(`/bouquets/${id}/reviews`, review);
+      setBouquet(bouquet.map(bouq =>
+        bouq.id === id
+          ? { ...bouq, reviews: [...(bouq.reviews || []), res.data] }
+          : bouq
+      ));
+      toast.success("Review added successfully");
+    } catch (err) {
+      console.error("Review error:", err);
+      toast.error("Error adding review");
+    }
+  }
+
+  return { bouquet, favorites, toggleFavorite, addBouquet, updateBouquet, deleteBouquet,  getBouquet,
+    selectedBouquet,
+    selectBouquet,
+    addReviews
+  };
 }
 
 export default useBouquet;

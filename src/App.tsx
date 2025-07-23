@@ -15,7 +15,7 @@ import BouquetDisplay from "./components/BouquetDisplay";
 import AboutCompany from "./components/AboutPage/AboutCompany";
 import PaymentPage from "./components/PaymentPage";
 import DeliveryPage from "./components/DeliveryPage";
-import ReviewsPage from "./components/ReviewsPage";
+import ReviewsPage from "./components/ReviewPage/ReviewsPage";
 import DiscountPage from "./components/DiscountPage";
 import VideoPage from "./components/VideoPage";
 import ContactPage from "./components/ContactPage";
@@ -45,6 +45,8 @@ import AdminFlowers from './page/admin/Bouquets/Pages/AdminFlowers';
 import AdminPlants from "./page/admin/Bouquets/Pages/AdminPlants";
 import AdminGifts from "./page/admin/Bouquets/Pages/AdminGifts";
 import AddNewBouquets from "./page/admin/Bouquets/AddNewBouquets";
+import AdminPartners from "./page/admin/Partners/AdminPartners";
+import AddReviewPage from "./components/ReviewPage/AddReviewPage";
 
 export interface User{
   id: number;
@@ -78,6 +80,7 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/reviews/add-review" element={<AddReviewPage />} />
         <Route path="/discount" element={<DiscountPage />} />
         <Route path="/video" element={<VideoPage />} />
         <Route path="/contacts" element={<ContactPage />} />
@@ -126,6 +129,7 @@ function App() {
         <Route path="news" element={<AdminNews />} />
         <Route path="reviews" element={<AdminReviews />} />
         <Route path="delivery" element={<AdminPoints />} />
+        <Route path="partners" element={<AdminPartners />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 

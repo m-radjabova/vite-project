@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useBouquetContext } from "../../../context/BouquetProvider";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import DeleteBouquetModal from "./DeleteBouquetModal";
+import { useState } from "react";
 
 function AdminBouquetsPage() {
     const { bouquet, deleteBouquet } = useBouquetContext();
+    const [deleteOpenModal, setDeleteOpenModal] = useState(false);
+    const [deleteBouquetId, setDeleteBouquetId] = useState<string | null>(null);
     const navigate = useNavigate();
 
     return (
@@ -34,7 +38,10 @@ function AdminBouquetsPage() {
                                     <FaEdit />
                                 </button>
                                 <button 
-                                    onClick={() => deleteBouquet(bouquet.id)}
+                                    onClick={() => {
+                                        setDeleteOpenModal(true);
+                                        setDeleteBouquetId(bouquet.id);
+                                    }}
                                     className="admin-action-btn delete-btn">
                                     <FaTrash />
                                 </button>
@@ -75,6 +82,14 @@ function AdminBouquetsPage() {
                     </div>
                 ))}
             </div>
+
+            <DeleteBouquetModal 
+                deleteOpenModal={deleteOpenModal}
+                setDeleteOpenModal={setDeleteOpenModal}
+                deleteBouquetId={deleteBouquetId}
+                setDeleteBouquetId={setDeleteBouquetId}
+                deleteBouquet={deleteBouquet}
+            />
         </div>
     )
 }

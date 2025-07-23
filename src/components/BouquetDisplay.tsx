@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import useBouquet from "../hooks/useBouquet";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import {FaHeart, FaRegHeart } from "react-icons/fa";
@@ -15,17 +14,18 @@ import flower6 from "../assets/Frame 28.svg";
 import skidka from "../assets/Frame (1).svg"
 import IsLoading from "./IsLoading";
 import useLoading from "../hooks/useLoading";
+import { useBouquetContext } from "../context/BouquetProvider";
 
 function BouquetDisplay() {
     const { id } = useParams();
-    const { bouquet , toggleLike} = useBouquet();
+    const { bouquet,favorites, toggleFavorite } = useBouquetContext();
     const bouquets4 = bouquet.slice(0, 4);
     const flower = bouquet.find((flower) => flower.id === id);
     const navigate = useNavigate();
     const [counts, setCounts] = useState(1);
     const [hoverId, setHoverId] = useState<string | null>(null);
-    const {loading} = useLoading()
-            
+    const { loading } = useLoading();
+
     if (loading) {
         return <IsLoading />;
     }
@@ -99,10 +99,10 @@ function BouquetDisplay() {
                                 В корзину
                             </button>
                             <button 
-                                onClick={() => toggleLike(flower.id)}
-                                className={`flower-favorite-btn ${flower.isLiked ? "favorited" : ""}`}
+                                onClick={() => toggleFavorite(flower.id)}
+                                className={`flower-favorite-btn ${favorites.includes(flower.id) ? "favorited" : ""}`}
                             >
-                                {flower.isLiked ? <FaHeart /> : <FaRegHeart />}
+                                {favorites.includes(flower.id) ? <FaHeart /> : <FaRegHeart />}
                             </button>   
                         </div>
                         <div className="quick-actions">

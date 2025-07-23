@@ -71,7 +71,12 @@ function Admin() {
       to: "delivery",
       label: "Delivery Points",
       icon: <MdOutlineLocalShipping className="nav-icon" />,
-    }
+    },
+    {
+      to: "partners",
+      label: "Partners",
+      icon: <FaUser className="nav-icon" />,
+    },
   ];
 
   return (
