@@ -10,6 +10,7 @@ import Logo from '../assets/Frame 6.svg'
 import { LuClock } from "react-icons/lu";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
+import { GiKing } from 'react-icons/gi';
 function Header() {
     const { state: { user }, dispatch } = useContextPro();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -152,6 +153,32 @@ function Header() {
                       >
                         <FaUserShield style={{ color: '#0288d1', fontSize: '16px' }} />
                         <span>Admin</span>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {user?.roles?.includes("SUPER_ADMIN") && (
+                    <MenuItem 
+                      onClick={handleMenuClose} 
+                      sx={{ 
+                        py: 1.5,
+                        '&:hover': {
+                          backgroundColor: 'rgba(2, 136, 209, 0.08)'
+                        }
+                      }}
+                    >
+                      <Link 
+                        to="/super-admin" 
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '12px',
+                          textDecoration: 'none',
+                          color: 'inherit',
+                          width: '100%'
+                        }}
+                      >
+                        <GiKing style={{ color: '#0288d1', fontSize: '16px' }} />
+                        <span>Super Admin</span>
                       </Link>
                     </MenuItem>
                   )}

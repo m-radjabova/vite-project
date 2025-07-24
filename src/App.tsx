@@ -47,6 +47,8 @@ import AdminGifts from "./page/admin/Bouquets/Pages/AdminGifts";
 import AddNewBouquets from "./page/admin/Bouquets/AddNewBouquets";
 import AdminPartners from "./page/admin/Partners/AdminPartners";
 import AddReviewPage from "./components/ReviewPage/AddReviewPage";
+import SuperAdminLayout from "./Layout/SuperAdminLayout";
+import Settings from "./page/super_admin/Settings";
 
 export interface User{
   id: number;
@@ -54,8 +56,6 @@ export interface User{
   email: string;
   password: string;
   roles: string[];
-  favorites: string[];
-  cart: string[];
 }
 
 function App() {
@@ -132,7 +132,35 @@ function App() {
         <Route path="partners" element={<AdminPartners />} />
         <Route path="profile" element={<Profile />} />
       </Route>
-
+      
+      <Route
+        path="/super-admin"
+        element={
+          <ProtectedRoute isAllowed={!!user && user.roles.includes("SUPER_ADMIN")}>
+            <SuperAdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="flowers/all" element={<AdminBouquetsPage />} />
+        <Route path="flowers/all/new" element={<AddNewBouquets />} />
+        <Route path="flowers/all/new/:id" element={<AddNewBouquets />} />
+        <Route path="flowers/season" element={<AdminSeason />} />
+        <Route path="flowers/hit" element={<AdminBestSeller />} />
+        <Route path="flowers/discount" element={<AdminDiscount />} />
+        <Route path="flowers/roses" element={<AdminRoses />} />  
+        <Route path="flowers/bouquets" element={<AdminBouquets />} />
+        <Route path="flowers/flower" element={<AdminFlowers />} />
+        <Route path="flowers/plants" element={<AdminPlants />} />
+        <Route path="flowers/gifts" element={<AdminGifts />} />
+        <Route path="categories" element={<AdminCategories />} />
+        <Route path="articles" element={<AdminArticles />} />
+        <Route path="news" element={<AdminNews />} />
+        <Route path="reviews" element={<AdminReviews />} />
+        <Route path="delivery" element={<AdminPoints />} />
+        <Route path="partners" element={<AdminPartners />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
   
       <Route path="*" element={<PageNotFound />} />
     </Routes>

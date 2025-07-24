@@ -1,0 +1,230 @@
+/* Base Styles */
+.user-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header Styles */
+.user-management__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #f9f5ff 0%, #f3ebff 100%);
+}
+
+.user-management__header-icon {
+  color: #8a3ffb;
+  font-size: 1.75rem;
+  margin-right: 1rem;
+}
+
+.user-management__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #5e2cad;
+}
+
+.user-management__subtitle {
+  margin: 0.25rem 0 0;
+  color: #7d5ba6;
+  font-size: 0.875rem;
+}
+
+/* Table Container */
+.user-management__table-container {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(94, 44, 173, 0.08);
+  overflow: hidden;
+  border: 1px solid #f0e6ff;
+}
+
+.user-management__table-scroll {
+  overflow-x: auto;
+}
+
+/* Table Styles */
+.user-management__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.user-management__table-header {
+  background-color: #f9f5ff;
+  color: #5e2cad;
+}
+
+.user-management__table-header th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Table Cells */
+.user-management__avatar-column {
+  width: 56px;
+  text-align: center;
+}
+
+.user-management__row {
+  border-bottom: 1px solid #f3ebff;
+  transition: background 0.2s ease;
+}
+
+.user-management__row:hover {
+  background-color: #fcfaff;
+}
+
+.user-management__avatar-cell {
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+}
+
+.user-management__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0e6ff;
+  color: #8a3ffb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.user-management__avatar-icon {
+  font-size: 1rem;
+}
+
+.user-management__name-cell,
+.user-management__email-cell,
+.user-management__roles-cell,
+.user-management__edit-cell,
+.user-management__actions-cell {
+  padding: 0.75rem;
+}
+
+.user-management__username {
+  font-weight: 500;
+  color: #2d0a57;
+}
+
+.user-management__email {
+  display: flex;
+  align-items: center;
+  color: #5e3a87;
+  font-size: 0.875rem;
+}
+
+.user-management__email-icon {
+  margin-right: 0.5rem;
+  opacity: 0.7;
+}
+
+.user-management__roles {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Select Input */
+.user-management__role-select {
+  min-width: 200px;
+}
+
+.user-management__select__control {
+  min-height: 40px;
+  border-color: #e0d0ff !important;
+  box-shadow: none !important;
+}
+
+.user-management__select__control:hover {
+  border-color: #c7a6ff !important;
+}
+
+.user-management__select__multi-value {
+  background-color: #f0e6ff !important;
+  border-radius: 6px !important;
+}
+
+.user-management__select__multi-value__label {
+  color: #5e2cad !important;
+  font-weight: 500 !important;
+  padding: 2px 6px !important;
+}
+
+/* Action Buttons */
+.user-management__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.user-management__button {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.user-management__button:hover {
+  transform: translateY(-1px);
+}
+
+.user-management__button:active {
+  transform: translateY(0);
+}
+
+.user-management__button-icon {
+  margin-right: 0.375rem;
+}
+
+.user-management__button--save {
+  background-color: #e9d8fd;
+  color: #5e2cad;
+}
+
+.user-management__button--save:hover {
+  background-color: #e0d0ff;
+}
+
+.user-management__button--save.user-management__button--saving {
+  background-color: #f0e6ff;
+}
+
+.user-management__button--delete {
+  background-color: #ffebf1;
+  color: #d12e66;
+}
+
+.user-management__button--delete:hover {
+  background-color: #ffd6e7;
+}
+
+.user-management__spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(94, 44, 173, 0.3);
+  border-top-color: #5e2cad;
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: spin 1s linear infinite;
+}
+
+/* Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
