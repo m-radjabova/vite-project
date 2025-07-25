@@ -27,6 +27,7 @@
 @import "./page//admin/Bouquets/AddNewBouquets.css";
 @import "./page/admin/Partners/AdminPartners.css";
 @import "./components/ReviewPage/AddReviewPage.css";
+@import "./css/cartPage.css";
 
 @import "./page/super_admin/super_admin.css";
 

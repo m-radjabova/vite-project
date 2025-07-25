@@ -4,12 +4,15 @@ import { getRoleBadge } from './GetBadgeFunction';
 import useUsers from '../../hooks/useUsers';
 
 function Settings() {
-    const { users, deleteUsers, editedRoles, isSaving,  handleRoleChange, saveRoleChange } = useUsers();
+    const { users, deleteUsers, handleRoleChange, saveRoleChange, editedRoles, isSaving } = useUsers();
 
+    
     const roleOptions = [
         { value: 'ADMIN', label: 'Admin' },
         { value: 'USER', label: 'User' }
     ];
+
+    
 
     return (
         <div className="user-management">
@@ -52,7 +55,7 @@ function Settings() {
                                     </td>
                                     <td className="user-management__roles-cell">
                                         <div className="user-management__roles">
-                                            {getRoleBadge(user.roles as ("ADMIN" | "USER" | "SUPER_ADMIN")[])}
+                                            {getRoleBadge(user.roles)}
                                         </div>
                                     </td>
                                     <td className="user-management__edit-cell">

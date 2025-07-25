@@ -15,9 +15,12 @@ import skidka from "../assets/Frame (1).svg"
 import IsLoading from "./IsLoading";
 import useLoading from "../hooks/useLoading";
 import { useBouquetContext } from "../context/BouquetProvider";
+import { useCartContext } from "../context/CartContext";
+import useContextPro from "../hooks/useContextPro";
 
 function BouquetDisplay() {
     const { id } = useParams();
+    const { state: { user } } = useContextPro();
     const { bouquet,favorites, toggleFavorite } = useBouquetContext();
     const bouquets4 = bouquet.slice(0, 4);
     const flower = bouquet.find((flower) => flower.id === id);
@@ -25,6 +28,7 @@ function BouquetDisplay() {
     const [counts, setCounts] = useState(1);
     const [hoverId, setHoverId] = useState<string | null>(null);
     const { loading } = useLoading();
+    const { addToCart } = useCartContext();
 
     if (loading) {
         return <IsLoading />;
@@ -95,7 +99,11 @@ function BouquetDisplay() {
                                     +
                                 </button>
                             </div>
-                            <button className="add-to-cart">
+                            <button 
+                                onClick={() => addToCart(flower, counts, user?.id?.toString(), user?.username)}
+                                disabled={counts <= 0}
+                                className="add-to-cart"
+                            >
                                 В корзину
                             </button>
                             <button 

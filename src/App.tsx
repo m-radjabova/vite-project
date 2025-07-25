@@ -49,13 +49,14 @@ import AdminPartners from "./page/admin/Partners/AdminPartners";
 import AddReviewPage from "./components/ReviewPage/AddReviewPage";
 import SuperAdminLayout from "./Layout/SuperAdminLayout";
 import Settings from "./page/super_admin/Settings";
+import { CartProvider } from "./context/CartContext";
 
 export interface User{
   id: number;
   username: string;
   email: string;
   password: string;
-  roles: string[];
+  roles: ("ADMIN" | "USER" | "SUPER_ADMIN")[];
 }
 
 function App() {
@@ -68,103 +69,105 @@ function App() {
   }
 
   return (
-    <BouquetProvider>
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/catalog/:id" element={<BouquetDisplay />} />
-        <Route path="/about" element={<AboutCompany />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/delivery" element={<DeliveryPage />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
-        <Route path="/reviews/add-review" element={<AddReviewPage />} />
-        <Route path="/discount" element={<DiscountPage />} />
-        <Route path="/video" element={<VideoPage />} />
-        <Route path="/contacts" element={<ContactPage />} />
-        <Route path="/articles" element={<ArticlePage />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/bouquets" element={<BouquetsPage />} />
-        <Route path="/bouquets/:id" element={<BouquetDisplay />} />
-        <Route path="/roses" element={<RosesPage />} />
-        <Route path="/roses/:id" element={<BouquetDisplay />} />
-        <Route path="/flowers" element={<FlowersPage />} />
-        <Route path="/flowers/:id" element={<BouquetDisplay />} />
-        <Route path="/plants" element={<PlantsPage />} />
-        <Route path="/plants/:id" element={<BouquetDisplay />} />
-        <Route path="/sales" element={<SalesPage />} />
-        <Route path="/sales/:id" element={<BouquetDisplay />} />
-        <Route path="/gifts" element={<GiftsPage />} />
-        <Route path="/gifts/:id" element={<BouquetDisplay />} />
-      </Route>
+    <CartProvider>
+      <BouquetProvider>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/catalog/:id" element={<BouquetDisplay />} />
+            <Route path="/about" element={<AboutCompany />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/delivery" element={<DeliveryPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/reviews/add-review" element={<AddReviewPage />} />
+            <Route path="/discount" element={<DiscountPage />} />
+            <Route path="/video" element={<VideoPage />} />
+            <Route path="/contacts" element={<ContactPage />} />
+            <Route path="/articles" element={<ArticlePage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/bouquets" element={<BouquetsPage />} />
+            <Route path="/bouquets/:id" element={<BouquetDisplay />} />
+            <Route path="/roses" element={<RosesPage />} />
+            <Route path="/roses/:id" element={<BouquetDisplay />} />
+            <Route path="/flowers" element={<FlowersPage />} />
+            <Route path="/flowers/:id" element={<BouquetDisplay />} />
+            <Route path="/plants" element={<PlantsPage />} />
+            <Route path="/plants/:id" element={<BouquetDisplay />} />
+            <Route path="/sales" element={<SalesPage />} />
+            <Route path="/sales/:id" element={<BouquetDisplay />} />
+            <Route path="/gifts" element={<GiftsPage />} />
+            <Route path="/gifts/:id" element={<BouquetDisplay />} />
+          </Route>
 
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SingUp />} />
-      </Route>
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/sign-up" element={<SingUp />} />
+          </Route>
 
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route path="flowers/all" element={<AdminBouquetsPage />} />
-        <Route path="flowers/all/new" element={<AddNewBouquets />} />
-        <Route path="flowers/all/new/:id" element={<AddNewBouquets />} />
-        <Route path="flowers/season" element={<AdminSeason />} />
-        <Route path="flowers/hit" element={<AdminBestSeller />} />
-        <Route path="flowers/discount" element={<AdminDiscount />} />
-        <Route path="flowers/roses" element={<AdminRoses />} />  
-        <Route path="flowers/bouquets" element={<AdminBouquets />} />
-        <Route path="flowers/flower" element={<AdminFlowers />} />
-        <Route path="flowers/plants" element={<AdminPlants />} />
-        <Route path="flowers/gifts" element={<AdminGifts />} />
-        <Route path="categories" element={<AdminCategories />} />
-        <Route path="articles" element={<AdminArticles />} />
-        <Route path="news" element={<AdminNews />} />
-        <Route path="reviews" element={<AdminReviews />} />
-        <Route path="delivery" element={<AdminPoints />} />
-        <Route path="partners" element={<AdminPartners />} />
-        <Route path="profile" element={<Profile />} />
-      </Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute isAllowed={!!user && user.roles.includes("ADMIN")}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="flowers/all" element={<AdminBouquetsPage />} />
+            <Route path="flowers/all/new" element={<AddNewBouquets />} />
+            <Route path="flowers/all/new/:id" element={<AddNewBouquets />} />
+            <Route path="flowers/season" element={<AdminSeason />} />
+            <Route path="flowers/hit" element={<AdminBestSeller />} />
+            <Route path="flowers/discount" element={<AdminDiscount />} />
+            <Route path="flowers/roses" element={<AdminRoses />} />  
+            <Route path="flowers/bouquets" element={<AdminBouquets />} />
+            <Route path="flowers/flower" element={<AdminFlowers />} />
+            <Route path="flowers/plants" element={<AdminPlants />} />
+            <Route path="flowers/gifts" element={<AdminGifts />} />
+            <Route path="categories" element={<AdminCategories />} />
+            <Route path="articles" element={<AdminArticles />} />
+            <Route path="news" element={<AdminNews />} />
+            <Route path="reviews" element={<AdminReviews />} />
+            <Route path="delivery" element={<AdminPoints />} />
+            <Route path="partners" element={<AdminPartners />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+          
+          <Route
+            path="/super-admin"
+            element={
+              <ProtectedRoute isAllowed={!!user && user.roles.includes("SUPER_ADMIN")}>
+                <SuperAdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="flowers/all" element={<AdminBouquetsPage />} />
+            <Route path="flowers/all/new" element={<AddNewBouquets />} />
+            <Route path="flowers/all/new/:id" element={<AddNewBouquets />} />
+            <Route path="flowers/season" element={<AdminSeason />} />
+            <Route path="flowers/hit" element={<AdminBestSeller />} />
+            <Route path="flowers/discount" element={<AdminDiscount />} />
+            <Route path="flowers/roses" element={<AdminRoses />} />  
+            <Route path="flowers/bouquets" element={<AdminBouquets />} />
+            <Route path="flowers/flower" element={<AdminFlowers />} />
+            <Route path="flowers/plants" element={<AdminPlants />} />
+            <Route path="flowers/gifts" element={<AdminGifts />} />
+            <Route path="categories" element={<AdminCategories />} />
+            <Route path="articles" element={<AdminArticles />} />
+            <Route path="news" element={<AdminNews />} />
+            <Route path="reviews" element={<AdminReviews />} />
+            <Route path="delivery" element={<AdminPoints />} />
+            <Route path="partners" element={<AdminPartners />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
       
-      <Route
-        path="/super-admin"
-        element={
-          <ProtectedRoute isAllowed={!!user && user.roles.includes("SUPER_ADMIN")}>
-            <SuperAdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route path="flowers/all" element={<AdminBouquetsPage />} />
-        <Route path="flowers/all/new" element={<AddNewBouquets />} />
-        <Route path="flowers/all/new/:id" element={<AddNewBouquets />} />
-        <Route path="flowers/season" element={<AdminSeason />} />
-        <Route path="flowers/hit" element={<AdminBestSeller />} />
-        <Route path="flowers/discount" element={<AdminDiscount />} />
-        <Route path="flowers/roses" element={<AdminRoses />} />  
-        <Route path="flowers/bouquets" element={<AdminBouquets />} />
-        <Route path="flowers/flower" element={<AdminFlowers />} />
-        <Route path="flowers/plants" element={<AdminPlants />} />
-        <Route path="flowers/gifts" element={<AdminGifts />} />
-        <Route path="categories" element={<AdminCategories />} />
-        <Route path="articles" element={<AdminArticles />} />
-        <Route path="news" element={<AdminNews />} />
-        <Route path="reviews" element={<AdminReviews />} />
-        <Route path="delivery" element={<AdminPoints />} />
-        <Route path="partners" element={<AdminPartners />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="settings" element={<Settings />} />
-      </Route>
-  
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
-    </BouquetProvider>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BouquetProvider>
+    </CartProvider>
   );
 }
 

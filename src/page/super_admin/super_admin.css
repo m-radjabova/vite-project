@@ -1,10 +1,3 @@
-/* Base Styles */
-.user-management {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  font-family: 'Inter', sans-serif;
-}
 
 /* Header Styles */
 .user-management__header {
@@ -50,9 +43,9 @@
 
 /* Table Styles */
 .user-management__table {
-  width: 100%;
+  /* width: 100%; */
   border-collapse: collapse;
-  min-width: 800px;
+  /* min-width: 800px; */
 }
 
 .user-management__table-header {

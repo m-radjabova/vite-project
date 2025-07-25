@@ -10,6 +10,7 @@ export interface BouqetType {
     isLiked: boolean;
     category: string[];
     reviews: ReviewsType[];
+    count?: number; 
 }
 
 export interface ReviewsType{

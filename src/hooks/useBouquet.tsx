@@ -10,10 +10,12 @@ function useBouquet() {
   const {state: {user}} = useContextPro();
   const [favorites, setFavorites] = useState<string[]>([]);
   const [selectedBouquet, setSelectedBouquet] = useState<BouqetType | null>(null);
+  const [cart, setCart] = useState<BouqetType[]>([]);
 
   useEffect(() => {
     getBouquet();
     getFavorites();
+    getCart();
   }, []);
 
   const getBouquet = async () => {
@@ -83,23 +85,79 @@ function useBouquet() {
 
   const addReviews = async (id: string, review: FieldValues) => {
     try {
-      const res = await apiClient.post(`/bouquets/${id}/reviews`, review);
-      setBouquet(bouquet.map(bouq =>
-        bouq.id === id
-          ? { ...bouq, reviews: [...(bouq.reviews || []), res.data] }
-          : bouq
+      const bouq = bouquet.find(b => b.id === id);
+      if (!bouq) throw new Error("Bouquet not found");
+      const updatedBouquet = {
+        ...bouq,
+        reviews: [...(bouq.reviews || []), review]
+      };
+      const res = await apiClient.put(`/bouquets/${id}`, updatedBouquet);
+      setBouquet(bouquet.map(b =>
+        b.id === id ? res.data : b
       ));
-      toast.success("Review added successfully");
+      toast.success("Отзыв успешно добавлен! Спасибо за ваш отзыв! 💕");
     } catch (err) {
       console.error("Review error:", err);
       toast.error("Error adding review");
     }
   }
 
+  const getCart = async () => {
+    try {
+      const res = await apiClient.get<BouqetType[]>("/cart");
+      setCart(res.data);
+      return res.data;
+    }
+    catch (err) {
+      console.error("Error fetching cart:", err);
+      return [];
+    }
+  }
+
+  const addToCart = (item: BouqetType, count: number, userId?: string, userName?: string) => {
+    const cartItem = {
+      ...item,
+      count,
+      userId,
+      userName
+    };
+
+    apiClient.post("/cart", cartItem)
+      .then(() => {
+        setCart(prev => [...prev, cartItem]);
+        toast.success("Букет добавлен в корзину");
+      })
+      .catch(err => {
+        console.error("Error adding to cart:", err);
+        toast.error("Ошибка при добавлении букета в корзину");
+      });
+  };
+
+  const deleteBouquetFromCart = async (id: string) => {
+    try {
+      await apiClient.delete(`/cart/${id}`);
+      setCart(cart.filter(item => item.id !== id));
+      toast.success("Букет удален из корзины");
+    } catch (err) {
+      console.error("Error removing bouquet from cart:", err);
+      toast.error("Error removing bouquet from cart");
+    }
+  }
+
+  const updateItemCount = (id: string, count: number) => {
+    const updatedCart = cart.map(item => {
+      if (item.id === id) {
+        return { ...item, count };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  }
+
   return { bouquet, favorites, toggleFavorite, addBouquet, updateBouquet, deleteBouquet,  getBouquet,
     selectedBouquet,
     selectBouquet,
-    addReviews
+    addReviews, addToCart, cart, deleteBouquetFromCart, updateItemCount
   };
 }
 

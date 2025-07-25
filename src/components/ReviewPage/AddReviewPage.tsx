@@ -53,7 +53,6 @@ function AddReviewPage() {
       time: new Date().toLocaleTimeString(),
     };
     addReviews(selectedBouquet.id, reviewData);
-    toast.success("Отзыв успешно добавлен! Спасибо за ваш отзыв! 💕");
     navigate("/reviews");
   };
 
