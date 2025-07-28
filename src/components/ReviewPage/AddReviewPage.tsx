@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import './AddReviewPage.css';
 import { useBouquetContext } from "../../context/BouquetProvider";
 import { IoIosArrowForward } from "react-icons/io";
+import { v4 as uuidv4 } from 'uuid';
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -44,13 +45,18 @@ function AddReviewPage() {
       return;
     }
     
+    const now = new Date();
+    const date = now.toLocaleDateString("ru-RU");
+    const time = now.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+
     const reviewData = {
+      id: uuidv4(),
       ...data,
       bouquetId: selectedBouquet.id,
       userId: user.id,
       userName: user.username,
-      date: new Date().toISOString(),
-      time: new Date().toLocaleTimeString(),
+      date,
+      time,
     };
     addReviews(selectedBouquet.id, reviewData);
     navigate("/reviews");

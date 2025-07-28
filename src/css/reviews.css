@@ -156,6 +156,7 @@
     font-size: 1rem;
     line-height: 1.6;
     color: #4a5568;
+    word-break: break-word;
 }
 
 .fm-review-footer {

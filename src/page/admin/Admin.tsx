@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import useContextPro from "../../hooks/useContextPro";
-import { FaSignOutAlt, FaUser, FaRegComments, FaRegNewspaper, FaGifts } from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaRegComments, FaRegNewspaper, FaGifts, FaGift } from "react-icons/fa";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { LuFlower2 } from "react-icons/lu";
@@ -76,6 +76,11 @@ function Admin() {
       to: "partners",
       label: "Partners",
       icon: <FaUser className="nav-icon" />,
+    },
+    {
+      to: "orders",
+      label: "Orders",
+      icon: <FaGift className="nav-icon" />,
     },
   ];
 

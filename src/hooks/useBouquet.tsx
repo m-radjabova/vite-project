@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BouqetType } from "../page/types/Types";
+import { BouqetType, OrderType } from "../page/types/Types";
 import apiClient from "../apiClient/ApiClient";
 import useContextPro from "./useContextPro";
 import { FieldValues } from "react-hook-form";
@@ -11,11 +11,13 @@ function useBouquet() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [selectedBouquet, setSelectedBouquet] = useState<BouqetType | null>(null);
   const [cart, setCart] = useState<BouqetType[]>([]);
+  const [orders, setOrders] = useState<OrderType[]>([]);
 
   useEffect(() => {
     getBouquet();
     getFavorites();
     getCart();
+    getOrders();
   }, []);
 
   const getBouquet = async () => {
@@ -154,10 +156,52 @@ function useBouquet() {
     setCart(updatedCart);
   }
 
+  const addOrder = async (orderData: FieldValues) => {
+    try {
+      const res = await apiClient.post("/orders", orderData);
+      setOrders(prev => [...prev, res.data]);
+      return res.data;
+    } catch (err) {
+      console.error("Error adding order:", err);
+      return null;
+    }
+  }
+  
+  const clearCart = async () => {
+    try {
+      const res = await apiClient.get("/cart");
+      const userCart = res.data.filter((item: { userId: string }) => String(item.userId) === String(user?.id));
+
+      await Promise.all(
+        userCart.map((item: { id: string }) =>
+          apiClient.delete(`/cart/${item.id}`)
+        )
+      );
+
+      setCart([]); 
+      toast.success("Корзина успешно очищена!");
+    } catch (err) {
+      console.error("Ошибка при очистке корзины:", err);
+      toast.error("Ошибка при очистке корзины");
+    }
+  };
+
+  const getOrders = async () => {
+    try {
+      const res = await apiClient.get<OrderType[]>("/orders");
+      setOrders(res.data);
+      return res.data;
+    } catch (err) {
+      console.error("Error fetching orders:", err);
+      return [];
+    }
+  }
+
+
   return { bouquet, favorites, toggleFavorite, addBouquet, updateBouquet, deleteBouquet,  getBouquet,
     selectedBouquet,
     selectBouquet,
-    addReviews, addToCart, cart, deleteBouquetFromCart, updateItemCount
+    addReviews, addToCart, cart, deleteBouquetFromCart, updateItemCount, getCart, addOrder, orders, setOrders, clearCart
   };
 }
 

@@ -57,3 +57,19 @@ export interface CategoryType{
     id: string;
     title: string;
 }
+
+
+export interface OrderType {
+    id: string;
+    userId: string;
+    userName: string;
+    name: string;
+    phone: string;
+    email: string;
+    items: BouqetType[];
+    deliveryMethod: string;
+    address?: string;
+    paymentMethod: string;
+    totalPrice: number;
+    createdAt: string;
+}

@@ -28,6 +28,8 @@
 @import "./page/admin/Partners/AdminPartners.css";
 @import "./components/ReviewPage/AddReviewPage.css";
 @import "./css/cartPage.css";
+@import "./components/ReviewPage/CheckoutPage.css";
+@import "./page/admin/Orders/AdminOrders.css";
 
 @import "./page/super_admin/super_admin.css";
 

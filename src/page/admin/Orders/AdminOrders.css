@@ -1,0 +1,117 @@
+
+
+.orders-title-icon {
+    margin-right: 0.75rem;
+    color: #7c3aed;
+}
+
+.orders-heart-icon {
+    margin-left: 0.75rem;
+    color: #ec4899;
+}
+
+/* Divider */
+.admin-orders-divider {
+    height: 1px;
+    background: linear-gradient(to right, #e9d5ff, #f0abfc, #e9d5ff);
+    margin-bottom: 2rem;
+}
+
+/* Empty State */
+.admin-orders-empty {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.admin-orders-empty p {
+    color: #a78bfa;
+    font-size: 1.25rem;
+}
+
+/* Orders Grid */
+.admin-orders-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Order Card */
+.admin-order-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-left: 4px solid #8b5cf6;
+}
+
+.admin-order-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.order-card-content {
+    padding: 1.5rem;
+}
+
+/* Order Details */
+.order-customer-name,
+.order-customer-email,
+.order-customer-phone,
+.order-customer-address {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: #4c1d95;
+}
+
+.order-customer-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.order-icon {
+    margin-right: 0.5rem;
+    color: #8b5cf6;
+    min-width: 1rem;
+}
+
+/* Order Items Section */
+.order-items-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f3e8ff;
+}
+
+.order-items-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #6d28d9;
+    margin-bottom: 0.5rem;
+}
+
+.order-items-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.order-items-list li {
+    font-size: 0.9rem;
+    color: #7e22ce;
+    padding: 0.25rem 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .admin-orders-container {
+        padding: 1rem;
+    }
+    
+    .admin-orders-title {
+        font-size: 1.5rem;
+    }
+    
+    .admin-orders-grid {
+        grid-template-columns: 1fr;
+    }
+}

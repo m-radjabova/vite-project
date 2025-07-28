@@ -50,6 +50,8 @@ import AddReviewPage from "./components/ReviewPage/AddReviewPage";
 import SuperAdminLayout from "./Layout/SuperAdminLayout";
 import Settings from "./page/super_admin/Settings";
 import { CartProvider } from "./context/CartContext";
+import CheckoutPage from "./components/ReviewPage/CheckoutPage";
+import AdminOrders from "./page/admin/Orders/AdminOrders";
 
 export interface User{
   id: number;
@@ -76,6 +78,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/cart/checkout" element={<CheckoutPage />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/catalog/:id" element={<BouquetDisplay />} />
             <Route path="/about" element={<AboutCompany />} />
@@ -133,6 +136,7 @@ function App() {
             <Route path="delivery" element={<AdminPoints />} />
             <Route path="partners" element={<AdminPartners />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="orders" element={<AdminOrders />} />
           </Route>
           
           <Route
@@ -162,6 +166,7 @@ function App() {
             <Route path="partners" element={<AdminPartners />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="orders" element={<AdminOrders />} />
           </Route>
       
           <Route path="*" element={<PageNotFound />} />

@@ -1,22 +1,26 @@
 import { createContext, useContext } from "react";
-import { BouqetType } from "../page/types/Types";
+import { BouqetType, OrderType } from "../page/types/Types";
 import useBouquet from "../hooks/useBouquet";
+import { FieldValues } from "react-hook-form";
 
 type CartContextType = {
   cart: BouqetType[];
   addToCart: (item: BouqetType, count: number, userId?: string, userName?: string) => void;
   deleteBouquetFromCart: (id: string) => void;
-    updateItemCount: (id: string, count: number) => void;
+  updateItemCount: (id: string, count: number) => void;
+  addOrder : (orderData: FieldValues) => Promise<void>;
+  clearCart: () => void;
+  orders: OrderType[];
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const {addToCart, cart, deleteBouquetFromCart, updateItemCount } = useBouquet()
+    const {addToCart, cart, deleteBouquetFromCart, updateItemCount, addOrder, clearCart, orders } = useBouquet()
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, deleteBouquetFromCart, updateItemCount }}>
+    <CartContext.Provider value={{ cart, addToCart, deleteBouquetFromCart, updateItemCount, addOrder, clearCart, orders }}>
       {children}
     </CartContext.Provider>
   );

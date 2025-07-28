@@ -5,7 +5,7 @@ import IsLoading from "./IsLoading";
 import { useNavigate } from "react-router-dom";
 
 function CartPage() {
-  const { cart, deleteBouquetFromCart, updateItemCount } = useCartContext();
+  const { cart, deleteBouquetFromCart, updateItemCount} = useCartContext();
   const { loading } = useLoading();
   const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ function CartPage() {
               <div className="summary-details">
                 <div className="summary-row">
                   <span>Товары ({cart.reduce((acc, item) => acc + Number(item.count), 0)})</span>
-                  <span>{totalPrice.toFixed(2)} сум</span>
+                  <span>{totalPrice.toFixed(2)} $</span>
                 </div>
                 <div className="summary-row">
                   <span>Доставка</span>
@@ -109,11 +109,11 @@ function CartPage() {
                 
                 <div className="summary-row total">
                   <span>Общая сумма</span>
-                  <span className="total-price">{totalPrice.toFixed(2)} сум</span>
+                  <span className="total-price">{totalPrice.toFixed(2)} $</span>
                 </div>
               </div>
               
-              <button className="checkout-btn">
+              <button className="checkout-btn" onClick={() => navigate("/cart/checkout")}>
                 Оформить заказ <IoIosArrowForward className="btn-arrow" />
               </button>
               
