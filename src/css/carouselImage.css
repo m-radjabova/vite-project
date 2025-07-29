@@ -1,0 +1,241 @@
+
+.flower-carousel-container {
+    position: relative;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9f5e9 100%);
+    overflow: hidden;
+}
+
+.hearts-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.falling-heart {
+    position: absolute;
+    color: rgba(255, 105, 180, 0.6);
+    font-size: inherit;
+    animation: falling linear infinite;
+    transform: translateY(-100%);
+    z-index: 0;
+}
+
+@keyframes falling {
+    0% {
+        transform: translateY(-100%) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Card styling */
+.flower-carousel {
+    position: relative;
+    z-index: 1;
+}
+
+.flower-card {
+    position: relative;
+    margin: 0 15px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: white;
+}
+
+.flower-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container */
+.card-image-container {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.flower-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease, filter 0.5s ease;
+}
+
+.flower-card:hover .flower-image {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.flower-card:hover .image-overlay {
+    opacity: 1;
+}
+
+/* Heart button */
+.flower-heart {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    cursor: pointer;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.flower-card:hover .flower-heart {
+    transform: scale(1);
+}
+
+.flower-heart svg {
+    width: 20px;
+    height: 20px;
+    fill: #ff6b6b;
+    transition: all 0.3s ease;
+}
+
+.flower-heart:hover svg {
+    fill: #ff4757;
+    transform: scale(1.2);
+}
+
+/* Details section */
+.flower-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+    z-index: 2;
+}
+
+.flower-card:hover .flower-details {
+    transform: translateY(0);
+}
+
+.flower-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.flower-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .card-image-container {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .flower-carousel-container {
+        padding: 2rem 1rem;
+    }
+    
+    .card-image-container {
+        height: 220px;
+    }
+    
+    .flower-details {
+        padding: 15px;
+    }
+    
+    .flower-title {
+        font-size: 1.2rem;
+    }
+}
+
+.slick-dots li button:before {
+    color: #a5d8a7;
+    opacity: 0.5;
+    font-size: 10px;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #51cf66;
+    opacity: 1;
+}
+
+.heart-icon {
+    width: 24px;
+    height: 24px;
+    fill: #ff6b6b;
+    transition: all 0.3s ease;
+}
+
+.gift-icon {
+    width: 20px;
+    height: 20px;
+    color: #ff6b6b;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.inline-heart {
+    width: 18px;
+    height: 18px;
+    color: #ff6b6b;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.flower-heart {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    cursor: pointer;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.flower-card:hover .flower-heart {
+    transform: scale(1);
+}
+
+.flower-heart:hover .heart-icon {
+    fill: #ff4757;
+    transform: scale(1.2);
+}

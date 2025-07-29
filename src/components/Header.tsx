@@ -11,7 +11,10 @@ import { LuClock } from "react-icons/lu";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { GiKing } from 'react-icons/gi';
+import { useCartContext } from '../context/CartContext';
 function Header() {
+    const { cart } = useCartContext();
+    const totalPrice = cart.reduce((total, item) => total + (Number(item.price) * Number(item.count)), 0);
     const { state: { user }, dispatch } = useContextPro();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -224,7 +227,7 @@ function Header() {
           </div>
           <div className='cart' onClick={() => navigate('/cart')}>
             <IoCartOutline size={30} className="me-2" />
-            <span>0 ₽</span>
+            <span>{totalPrice} $</span>
           </div>
         </div>
       </div>

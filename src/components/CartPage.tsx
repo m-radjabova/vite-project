@@ -76,7 +76,7 @@ function CartPage() {
                 
                 <div className="item-price-section">
                   <span className="item-price">
-                    {(Number(item.price) * Number(item.count)).toFixed(2)} сум
+                    {(Number(item.price) * Number(item.count)).toFixed(2)} $
                   </span>
                   <button 
                     onClick={() => deleteBouquetFromCart(item.id)}

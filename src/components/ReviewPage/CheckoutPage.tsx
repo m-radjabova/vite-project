@@ -8,6 +8,7 @@ import CheckoutPersonalInf from "./CheckoutPersonalInf";
 import CheckoutDelivery from "./CheckoutDelivery";
 import CheckoutPayment from "./CheckoutPayment";
 import { formatDateTime } from './../../page/types/utils';
+import { OrderType } from "../../page/types/Types";
 
 function CheckoutPage() {
   const { cart, addOrder, clearCart } = useCartContext();
@@ -21,20 +22,33 @@ function CheckoutPage() {
   const paymentMethod = watch("payment", "cash"); 
 
   const onSubmit = (data: FieldValues) => {
-    console.log("Order Data:", data);
+    const mappedData: OrderType = {
+      id: crypto.randomUUID(), 
+      userName: data.name,
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      items: cart,
+      deliveryMethod: data.delivery,
+      address: data.address,
+      paymentMethod: data.payment,
+      totalPrice: deliveryMethod === 'express' ? totalPrice + 15 : totalPrice,
+      createdAt: formatDateTime(new Date()),
+    };
+
     setIsSubmitting(true);
-    addOrder({ ...data, items: cart, createdAt: formatDateTime(new Date()) })
-        .then(() => {
+    addOrder(mappedData)
+      .then(() => {
         clearCart(); 
         setOrderSuccess(true); 
-        })
-        .catch((err) => {
+      })
+      .catch((err) => {
         console.error("Error adding order:", err);
-        })
-        .finally(() => {
+      })
+      .finally(() => {
         setIsSubmitting(false);
-        });
-    };
+      });
+  };
 
 
   if (orderSuccess) {

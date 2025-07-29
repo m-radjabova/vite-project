@@ -13,6 +13,7 @@ import Follow from "../../components/HomePage/Follow"
 import FloraMarkBase from "../../components/HomePage/FloraMarkBase"
 import IsLoading from "../../components/IsLoading"
 import useLoading from "../../hooks/useLoading"
+import CarouselImages from "../../components/CarouselImages"
 
 function Home() {
   const { loading } = useLoading();
@@ -24,6 +25,7 @@ function Home() {
   return (
     <div>
       <Main />
+      <CarouselImages />
       <DeliveryMoscow />
       <SeasonFlower />
       <HitFlowers />

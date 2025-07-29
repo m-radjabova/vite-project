@@ -4,12 +4,13 @@ import leaf from "../../assets/seedling.svg";
 import award from "../../assets/award.svg";
 import tint from "../../assets/tint.svg";
 import { useBouquetContext } from "../../context/BouquetProvider";
+import { useNavigate } from "react-router-dom";
 
 function Roses() {
   const { bouquet, favorites, toggleFavorite } = useBouquetContext();
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [counts, setCounts] = useState(0)
-  
+  const navigate = useNavigate();
   const seasonBouquets = bouquet.filter(item =>
     item.category && item.category.includes("roses")
   );
@@ -37,7 +38,9 @@ function Roses() {
               onMouseEnter={() => setHoverId(item.id)}
               onMouseLeave={() => setHoverId(null)}
             >
-              <div className={`bouquet-card ${hoverId === item.id ? "hovered" : ""}`}>
+              <div className={`bouquet-card ${hoverId === item.id ? "hovered" : ""}`}
+              onClick={() => navigate(`/catalog/${item.id}`)}
+              >
                 <div className="card-media">
                   <img src={item.image} alt={item.name} className="bouquet-image" />
 

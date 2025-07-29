@@ -179,7 +179,6 @@ function useBouquet() {
       );
 
       setCart([]); 
-      toast.success("Корзина успешно очищена!");
     } catch (err) {
       console.error("Ошибка при очистке корзины:", err);
       toast.error("Ошибка при очистке корзины");

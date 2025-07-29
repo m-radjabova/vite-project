@@ -61,7 +61,6 @@ export interface CategoryType{
 
 export interface OrderType {
     id: string;
-    userId: string;
     userName: string;
     name: string;
     phone: string;
@@ -72,4 +71,9 @@ export interface OrderType {
     paymentMethod: string;
     totalPrice: number;
     createdAt: string;
+}
+
+export interface ImageType{
+    id: string;
+    image: string
 }
