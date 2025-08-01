@@ -40,7 +40,7 @@ function TopNavigationBar() {
             
       <div className="d-flex align-items-center gap-4" style={{ color: '#555' }}>
         <button 
-          onClick={() => navigate('/super-admin/profile')} 
+          onClick={() => navigate('/super-admin/settings')} 
           style={{
             color: 'rgba(0, 0, 0, 0.6)',
             transition: 'all 0.3s ease',

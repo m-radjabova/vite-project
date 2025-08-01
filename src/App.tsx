@@ -52,6 +52,7 @@ import Settings from "./page/super_admin/Settings";
 import { CartProvider } from "./context/CartContext";
 import CheckoutPage from "./components/ReviewPage/CheckoutPage";
 import AdminOrders from "./page/admin/Orders/AdminOrders";
+import AdminCarousel from "./page/admin/Carousel/AdminCarousel";
 
 export interface User{
   id: number;
@@ -137,6 +138,7 @@ function App() {
             <Route path="partners" element={<AdminPartners />} />
             <Route path="profile" element={<Profile />} />
             <Route path="orders" element={<AdminOrders />} />
+            <Route path="carousel" element={<AdminCarousel />} />
           </Route>
           
           <Route
@@ -167,6 +169,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
             <Route path="orders" element={<AdminOrders />} />
+            <Route path="carousel" element={<AdminCarousel />} />
           </Route>
       
           <Route path="*" element={<PageNotFound />} />
