@@ -46,13 +46,15 @@ function FlowersPage() {
   }
 
   return (
-    <div className="season-section">
+    <div className="bouquet-section">
+      <section className="flower-hero">
+          <div className="hero-content">
+            <h1>Цветы</h1>
+            <p>Идеальные цветы для самых важных моментов в жизни</p>
+            <button onClick={() => navigate('/catalog')} className="cta-button">Выбрать цветы</button>
+          </div>
+      </section>
       <div className="container">
-        <div className="section-header">
-          <h2>Цветы</h2>
-          <p>Все цветы магазина</p>
-        </div>
-        
         <div className="bouquet-grid">
           {seasonBouquets.map(item => (
             <div

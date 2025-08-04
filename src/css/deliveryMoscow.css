@@ -71,3 +71,14 @@
     line-height: 150%;
     letter-spacing: 0%;
 }
+
+@media screen and (max-width: 768px) {
+    .discount-cards{
+        flex-direction: column;
+    }
+    .discount-cards img{
+        width: 100%;
+    }
+}
+
+

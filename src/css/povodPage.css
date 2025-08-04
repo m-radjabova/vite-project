@@ -1,0 +1,734 @@
+.povod-page {
+  font-family: 'Rubik', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.povod-hero {
+  background-image: url(../assets/povod-hero.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.povod-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  padding: 0 2rem;
+  z-index: 2;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  color: white;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.cta-button:hover {
+  background: #3d8b40;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+/* Occasions Section with Floating Animation */
+.occasions-section {
+  padding: 5rem 0;
+  background: #f9f9f9;
+}
+
+.occasions-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.occasions-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #4CAF50;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.occasions-section:hover h2::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.occasions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  perspective: 1000px;
+}
+
+.occasion-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: #333;
+  transform-style: preserve-3d;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateY(5deg);
+  }
+}
+
+.occasion-card:hover {
+  transform: translateY(-10px) rotateY(10deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.icon-wrapper {
+  font-size: 2.5rem;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.occasion-card:hover .icon-wrapper {
+  transform: scale(1.2) rotate(15deg);
+}
+
+.occasion-card h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.occasion-card:hover h3 {
+  color: #4CAF50;
+}
+
+/* Popular Bouquets Section */
+.popular-section {
+  padding: 5rem 0;
+  background: white;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  position: relative;
+}
+
+.view-all {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  align-items: center;
+}
+
+.view-all:hover {
+  color: #3d8b40;
+  transform: translateX(5px);
+}
+
+.view-all:hover::after {
+  transform: translateX(5px);
+}
+
+.povod-bouquets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.povod-bouquet-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.povod-bouquet-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(76, 175, 80, 0.1);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.povod-bouquet-card:hover::before {
+  opacity: 1;
+}
+
+.povod-bouquet-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.image-wrapper {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.povod-bouquet-card:hover .image-wrapper img {
+  transform: scale(1.1) rotate(1deg);
+}
+
+.quick-view {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 2;
+}
+
+.povod-bouquet-card:hover .quick-view {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.povod-bouquet-card h3 {
+  padding: 1rem 1rem 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.povod-bouquet-card:hover h3 {
+  color: #4CAF50;
+}
+
+.price {
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4CAF50;
+  transition: transform 0.3s ease;
+}
+
+.povod-bouquet-card:hover .price {
+  transform: scale(1.05);
+}
+
+.add-to-cart-povod {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  padding: 0.7rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-to-cart-povod::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.add-to-cart-povod:hover {
+  background: #3d8b40;
+  transform: translateY(-2px);
+}
+
+.add-to-cart-povod:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Price Categories with Gradient Backgrounds */
+.price-categories {
+  padding: 5rem 0;
+  background: #f9f9f9;
+}
+
+.price-categories h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  position: relative;
+}
+
+.price-categories h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #4CAF50;
+}
+
+.price-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.price-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+
+.price-card:hover::before {
+  height: 100%;
+}
+
+.price-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.price-card:hover h3,
+.price-card:hover p {
+  color: white;
+}
+
+.price-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  transition: color 0.3s ease;
+}
+
+.price-card p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.price-card a {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.price-card:hover a {
+  background: white;
+  color: #4CAF50;
+}
+
+.price-card a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.price-card a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Gift Add-ons with 3D Flip Effect */
+.gift-addons {
+  padding: 5rem 0;
+  background: white;
+}
+
+.gift-addons h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.addon-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.addon-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.addon-card:hover .addon-card-inner {
+  transform: rotateY(180deg);
+}
+
+.addon-card-front, .addon-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.addon-card-front {
+  display: flex;
+  flex-direction: column;
+}
+
+.addon-card-back {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.addon-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.addon-card:hover img {
+  transform: scale(1.05);
+}
+
+.addon-card h3 {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.addon-card-back h3 {
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.addon-card-back p {
+  margin-bottom: 1.5rem;
+}
+
+.add-to-cart.addon {
+  background: white;
+  color: #4CAF50;
+}
+
+.add-to-cart.addon:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+  
+  .price-cards, .addons-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+  
+  .price-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .addon-card-inner {
+    transform: none !important;
+  }
+  
+  .addon-card-front, .addon-card-back {
+    position: relative;
+    backface-visibility: visible;
+  }
+  
+  .addon-card-back {
+    transform: rotateY(0);
+    background: #f9f9f9;
+    color: #333;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+  
+  .occasions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .povod-bouquets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .povod-hero {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .occasions-grid, .povod-bouquets-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .view-all {
+    margin-top: 1rem;
+  }
+}
+
+/* Floating Animation for All Cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Pulse Animation for Special Items */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.special-item {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+  position: relative;
+  opacity: 0;
+  transition: all 1.5s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+}
+
+.active.fade-bottom {
+  animation: fade-bottom 1s ease-in;
+}
+
+@keyframes fade-bottom {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

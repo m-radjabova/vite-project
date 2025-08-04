@@ -76,3 +76,85 @@
     letter-spacing: 0%;
     color: #FFFFFF;
 }
+
+@media (max-width: 1200px) {
+    .follow .container .follow-items {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 0;
+    }
+    
+    .follow-input {
+        width: 80%;
+        max-width: 500px;
+    }
+    
+    .follow-text {
+        position: static;
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .follow-title {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .follow-input {
+        width: 90%;
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .follow-btn {
+        padding: 8px 25px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .follow {
+        min-height: 150px;
+        background-position: center;
+    }
+    
+    .follow .container .follow-items {
+        gap: 15px;
+        padding: 25px 15px;
+    }
+    
+    .follow-title {
+        font-size: 18px;
+    }
+    
+    .follow-input {
+        width: 100%;
+        font-size: 13px;
+    }
+    
+    .follow-btn {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+    
+    .follow-text {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 400px) {
+    .follow-title {
+        font-size: 16px;
+    }
+    
+    .follow-input {
+        padding: 6px;
+    }
+    
+    .follow-btn {
+        padding: 7px 18px;
+        letter-spacing: 5%;
+    }
+}

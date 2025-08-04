@@ -176,36 +176,31 @@
     gap: 0.3125rem;
 }
 
-@media (max-width: 992px) {
-    .fm-testimonials-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 1200px) {
+    .floramarket-testimonials {
+        padding: 4rem 3rem;
+    }
+    
+    .fm-section-title {
+        font-size: 2.25rem;
+    }
+    
+    .fm-testimonial-card {
+        padding: 1.5rem;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .floramarket-testimonials {
-        padding: 3.75rem 0;
-    }
-    
-    .fm-testimonials-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.25rem;
+        padding: 3.5rem 1.5rem;
     }
     
     .fm-section-title {
         font-size: 2rem;
     }
     
-    .fm-testimonial-card {
-        padding: 1.5625rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .fm-testimonials-grid {
-        grid-template-columns: 1fr;
-        padding: 0 0.9375rem;
+    .fm-testimonials-header {
+        margin-bottom: 2.5rem;
     }
     
     .fm-testimonial-card {
@@ -213,12 +208,143 @@
     }
     
     .fm-quote-icon {
-        font-size: 3.125rem;
-        top: 0.9375rem;
-        right: 1.25rem;
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .floramarket-testimonials {
+        padding: 3rem 1.25rem;
+    }
+    
+    .fm-testimonials-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
     }
     
     .fm-section-title {
         font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fm-title-underline {
+        width: 4rem;
+    }
+    
+    .fm-view-all-link {
+        margin-top: 0.5rem;
+    }
+    
+    .fm-testimonial-card {
+        padding: 1.25rem;
+    }
+    
+    .fm-reviewer-name {
+        font-size: 1rem;
+    }
+    
+    .fm-review-details {
+        font-size: 0.8125rem;
+    }
+    
+    .fm-review-text p {
+        font-size: 0.9375rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .floramarket-testimonials {
+        padding: 2.5rem 1rem;
+    }
+    
+    .fm-section-title {
+        font-size: 1.5rem;
+        letter-spacing: 0.03em;
+    }
+    
+    .fm-title-underline {
+        width: 3rem;
+        height: 0.125rem;
+    }
+    
+    .fm-testimonial-card {
+        padding: 1rem;
+    }
+    
+    .fm-quote-icon {
+        font-size: 2.5rem;
+        top: 0.75rem;
+        right: 1rem;
+    }
+    
+    .fm-review-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .fm-rating {
+        align-self: flex-start;
+    }
+    
+    .fm-review-text p {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    
+    .fm-verified-badge {
+        font-size: 0.6875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .floramarket-testimonials {
+        padding: 2rem 0.75rem;
+    }
+    
+    .fm-section-title {
+        font-size: 1.375rem;
+    }
+    
+    .fm-testimonial-card {
+        padding: 0.875rem;
+    }
+    
+    .fm-quote-icon {
+        font-size: 2rem;
+    }
+    
+    .fm-reviewer-name {
+        font-size: 0.9375rem;
+    }
+    
+    .fm-review-details {
+        font-size: 0.75rem;
+    }
+    
+    .fm-star {
+        font-size: 0.9375rem;
+    }
+    
+    .fm-review-text p {
+        font-size: 0.8125rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .floramarket-testimonials::before {
+        width: 90%;
+    }
+    
+    .fm-testimonial-card {
+        padding: 0.75rem;
+    }
+    
+    .fm-quote-icon {
+        font-size: 1.75rem;
+        top: 0.5rem;
+        right: 0.75rem;
     }
 }

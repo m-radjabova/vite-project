@@ -11,16 +11,11 @@ import Roses from "../../components/HomePage/Roses"
 import SeasonFlower from "../../components/HomePage/SeasonFlower"
 import Follow from "../../components/HomePage/Follow"
 import FloraMarkBase from "../../components/HomePage/FloraMarkBase"
-import IsLoading from "../../components/IsLoading"
-import useLoading from "../../hooks/useLoading"
+// import IsLoading from "../../components/IsLoading"
+// import useLoading from "../../hooks/useLoading"
 import CarouselImages from "../../components/CarouselImages"
 
 function Home() {
-  const { loading } = useLoading();
-  
-    if (loading) {
-        return <IsLoading />;
-    }
 
   return (
     <div>

@@ -84,5 +84,17 @@ p .about-bold{
 .about-link.active{
     background-color: #4BB45E1A;
     padding: 15px;
+}
 
+@media screen and (max-width: 1080px) {
+    .about-container{
+        flex-direction: column;
+    }
+    .about-left{
+        padding: 0 15px;
+        width: 100%;
+    }
+    .about-right{
+        width: 100%;
+    }
 }

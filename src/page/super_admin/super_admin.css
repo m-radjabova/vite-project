@@ -1,5 +1,4 @@
 
-/* Header Styles */
 .user-management__header {
   display: flex;
   align-items: center;
@@ -220,4 +219,8 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.bg-purple{
+    background-color: #a662c3 !important;
 }

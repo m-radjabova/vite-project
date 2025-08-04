@@ -16,6 +16,7 @@
 @import "./css/aboutCompanyGirls.css";
 @import "./css/reviewsPage.css";
 @import "./css//favoritesPage.css";
+@import "./css//povodPage.css";
 @import "./page/admin/Profile/Profile.css";
 @import "./page/admin/Admin.css";
 @import "./page/admin/Bouquets/AdminBouquets.css";
@@ -32,6 +33,7 @@
 @import "./page/admin/Orders/AdminOrders.css";
 @import "./css/carouselImage.css";
 @import "./page/admin/Carousel/AdminCarousel.css";
+@import "./components/MainHeaderPage/bouquetPage.css";
 
 @import "./page/super_admin/super_admin.css";
 

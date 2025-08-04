@@ -56,3 +56,135 @@
     font-size: 15px;
     color: #444444;
 }
+
+
+@media (max-width: 1200px) {
+    .flora-mark {
+        padding: 30px 30px 50px 30px;
+    }
+    
+    .flora-mark-title h1 {
+        font-size: 32px;
+    }
+    
+    .flora-mark-items .flora-mark-item {
+        gap: 25px;
+    }
+    
+    .flora-mark-item h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 992px) {
+    .flora-mark {
+        padding: 25px 25px 40px 25px;
+    }
+    
+    .flora-mark-title h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .flora-mark-title p {
+        font-size: 14px;
+    }
+    
+    .flora-mark-items {
+        margin-top: 30px;
+    }
+    
+    .flora-mark-items .flora-mark-item {
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .flora-mark-item img {
+        width: 80%;
+        max-width: 400px;
+    }
+    
+    .flora-mark-item h1 {
+        font-size: 26px;
+        text-align: center;
+    }
+    
+    .flora-mark-item p {
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .flora-mark {
+        padding: 20px 20px 35px 20px;
+        margin-top: 20px;
+    }
+    
+    .flora-mark-title h1 {
+        font-size: 24px;
+    }
+    
+    .flora-mark-item img {
+        width: 90%;
+    }
+    
+    .flora-mark-item h1 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+    .flora-mark {
+        padding: 15px 15px 30px 15px;
+    }
+    
+    .flora-mark-title h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .flora-mark-title p {
+        font-size: 13px;
+    }
+    
+    .flora-mark-items {
+        margin-top: 20px;
+    }
+    
+    .flora-mark-items .flora-mark-item {
+        margin-bottom: 25px;
+        gap: 15px;
+    }
+    
+    .flora-mark-item h1 {
+        font-size: 20px;
+    }
+    
+    .flora-mark-item p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .flora-mark {
+        padding: 10px 10px 25px 10px;
+    }
+    
+    .flora-mark-title h1 {
+        font-size: 18px;
+    }
+    
+    .flora-mark-item img {
+        width: 100%;
+    }
+    
+    .flora-mark-item h1 {
+        font-size: 18px;
+    }
+    
+    .flora-mark-item p {
+        font-size: 12px;
+    }
+}

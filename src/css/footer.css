@@ -69,3 +69,9 @@
 .footer .footer-nav .footer-link:hover{
     text-decoration: underline;
 }
+
+@media screen and (max-width: 480px) {
+    .footer{
+        padding: 10px 15px;
+    }
+}

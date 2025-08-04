@@ -37,3 +37,10 @@
     border-radius: 6px;
     padding: 8px 12px;
 }
+
+@media screen and (max-width: 800px) {
+    .flower-center-list{
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+}

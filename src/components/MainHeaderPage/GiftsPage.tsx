@@ -19,7 +19,6 @@ function GiftsPage() {
     item.category && item.category.includes("gifts")
   );
 
-  
   const getBadgeClass = (status: string) => {
     if (status === "Акция") return "badge-red";
     if (status === "Новинка") return "badge-green";

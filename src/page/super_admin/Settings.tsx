@@ -55,7 +55,7 @@ function Settings() {
                                     </td>
                                     <td className="user-management__roles-cell">
                                         <div className="user-management__roles">
-                                            {getRoleBadge(user.roles)}
+                                            {user.roles && getRoleBadge(user.roles)}
                                         </div>
                                     </td>
                                     <td className="user-management__edit-cell">

@@ -53,6 +53,8 @@ import { CartProvider } from "./context/CartContext";
 import CheckoutPage from "./components/ReviewPage/CheckoutPage";
 import AdminOrders from "./page/admin/Orders/AdminOrders";
 import AdminCarousel from "./page/admin/Carousel/AdminCarousel";
+import useLoading from "./hooks/useLoading";
+import PovodPage from "./components/MainHeaderPage/PovodPage";
 
 export interface User{
   id: number;
@@ -66,10 +68,15 @@ function App() {
   const {
     state: { user, isLoading },
   } = useContextPro();
-
+  const { loading } = useLoading();
+  
   if (isLoading) {
     return <IsLoading />;
   }
+
+    if (loading) {
+        return <IsLoading />;
+    }
 
   return (
     <CartProvider>
@@ -104,6 +111,7 @@ function App() {
             <Route path="/sales/:id" element={<BouquetDisplay />} />
             <Route path="/gifts" element={<GiftsPage />} />
             <Route path="/gifts/:id" element={<BouquetDisplay />} />
+            <Route path="/occasion" element={<PovodPage />} />
           </Route>
 
           <Route element={<AuthLayout />}>
