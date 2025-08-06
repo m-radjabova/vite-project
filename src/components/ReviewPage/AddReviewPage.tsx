@@ -93,35 +93,35 @@ function AddReviewPage() {
           
           {selectedBouquet && (
             <form onSubmit={handleSubmit(onSubmit)} className="review-form">
-              <div className="form-group">
-                <label htmlFor="author" className="form-label">
+              <div className="form-group-add">
+                <label htmlFor="author" className="form-label-add">
                   Автор
                 </label>
                 <input
                   type="text"
                   id="author"
-                  className={`form-input ${errors.author ? 'error' : ''}`}
+                  className={`form-input-add ${errors.author ? 'error' : ''}`}
                   defaultValue={user.username}
-                  {...register("author", { required: "Ism talab qilinadi" })}
+                  {...register("author", { required: "имя обязательное" })}
                 />
                 {errors.author && <span className="error-message">{errors.author.message as string}</span>}
               </div>
 
-              <div className="form-group">
-                <label htmlFor="location" className="form-label">
+              <div className="form-group-add">
+                <label htmlFor="location" className="form-label-add">
                   Местоположение
                 </label>
                 <input
                   type="text"
                   id="location"
-                  className={`form-input ${errors.location ? 'error' : ''}`}
-                  {...register("location", { required: "Manzil talab qilinadi" })}
+                  className={`form-input-add ${errors.location ? 'error' : ''}`}
+                  {...register("location", { required: "местоположение обязательное" })}
                 />
                 {errors.location && <span className="error-message">{errors.location.message as string}</span>}
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Рейтинг</label>
+              <div className="form-group-add">
+                <label className="form-label-add">Рейтинг</label>
                 <Controller
                   control={control}
                   name="rating"
@@ -142,20 +142,20 @@ function AddReviewPage() {
                 {errors.rating && <span className="error-message">{errors.rating.message as string}</span>}
               </div>
 
-              <div className="form-group">
-                <label htmlFor="text" className="form-label">
+              <div className="form-group--add">
+                <label htmlFor="text" className="form-label-add">
                   Отзыв
                 </label>
                 <textarea
                   id="text"
-                  className={`form-textarea ${errors.text ? 'error' : ''}`}
+                  className={`form-textarea-add ${errors.text ? 'error' : ''}`}
                   {...register("text", { required: "Отзыв обязательный" })}
                   rows={5}
                 ></textarea>
                 {errors.text && <span className="error-message">{errors.text.message as string}</span>}
               </div>
 
-              <button type="submit" className="submit-button">
+              <button type="submit" className="submit-button-add">
                 отправить отзыв
               </button>
             </form>

@@ -94,7 +94,7 @@
 }
 
 /* Details section */
-.flower-details {
+.flower-details-carousel {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -105,7 +105,7 @@
     z-index: 2;
 }
 
-.flower-card:hover .flower-details {
+.flower-card:hover .flower-details-carousel {
     transform: translateY(0);
 }
 
@@ -139,7 +139,7 @@
         height: 220px;
     }
     
-    .flower-details {
+    .flower-details--carousel {
         padding: 15px;
     }
     

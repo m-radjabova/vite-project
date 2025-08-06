@@ -159,12 +159,12 @@
   box-shadow: 0 16px 40px rgba(176, 39, 160, 0.15);
 }
 
-.form-group {
+.form-group-add {
   margin-bottom: 2rem;
   position: relative;
 }
 
-.form-label {
+.form-label-add {
   display: block;
   margin-bottom: 0.8rem;
   font-weight: 500;
@@ -174,8 +174,8 @@
   transition: all 0.3s ease;
 }
 
-.form-input,
-.form-textarea {
+.form-input-add,
+.form-textarea-add {
   width: 100%;
   padding: 1rem 1.2rem;
   border: 1px solid rgba(176, 39, 160, 0.3);
@@ -186,15 +186,15 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.form-input:focus,
-.form-textarea:focus {
+.form-input-add:focus,
+.form-textarea-add:focus {
   outline: none;
   border-color: #ff6d75;
   box-shadow: 0 0 0 3px rgba(255, 109, 117, 0.2);
   transform: translateY(-2px);
 }
 
-.form-textarea {
+.form-textarea-add {
   resize: vertical;
   min-height: 150px;
 }
@@ -212,7 +212,7 @@
   font-family: 'Rubik', sans-serif;
 }
 
-.submit-button {
+.submit-button-add {
   background: linear-gradient(135deg, #b027a0, #ff6d75);
   color: white;
   border: none;
@@ -232,17 +232,17 @@
   box-shadow: 0 4px 12px rgba(176, 39, 160, 0.3);
 }
 
-.submit-button:hover {
+.submit-button-add:hover {
   background: linear-gradient(135deg, #ff6d75, #b027a0);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(176, 39, 160, 0.4);
 }
 
-.submit-button:active {
+.submit-button-add:active {
   transform: translateY(1px);
 }
 
-.submit-button::after {
+.submit-button-add::after {
   content: '';
   position: absolute;
   top: 0;
@@ -254,7 +254,7 @@
   transition: opacity 0.3s ease;
 }
 
-.submit-button:hover::after {
+.submit-button-add:hover::after {
   opacity: 1;
 }
 

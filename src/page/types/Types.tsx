@@ -77,3 +77,10 @@ export interface ImageType{
     id: string;
     image: string
 }
+
+export interface FavoriteType {
+  id: string;
+  bouquetId: string;
+  userId: string;
+  userName: string;
+}

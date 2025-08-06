@@ -52,149 +52,149 @@ function AddNewBouquets() {
   };
 
   return (
-    <div className="add-new-bouquets-container">
-      <div className="admin-bouquets-hdr">
+    <div className="add-bouquet-page">
+      <div className="admin-bouquets-header">
         <div>
           <h1 className="admin-bouquets-title">
-            <GiFlowerPot className="icon-title" />
+            <GiFlowerPot className="title-icon" />
             Add New Bouquet
           </h1>
-          <p className="admin-bouquets-subtitle">Fill in the details to add a new bouquet to your store !!</p>
+          <p className="bouquet-subtitle">Fill in the details to add a new bouquet to your store !!</p>
         </div>
-        <button className="back-to-list-btn" onClick={() => navigate("/admin/flowers/all")}>
-          <ArrowLeft className="admin-btn-icon" />
+        <button className="bouquet-back-btn" onClick={() => navigate("/admin/flowers/all")}>
+          <ArrowLeft className="btn-icon" />
           Back to Bouquet List
         </button>
       </div>
       
       <div className="admin-divider"></div>
       
-      <div className="admin-bouquets-form-container">
+      <div className="bouquet-form-wrapper">
         <form onSubmit={handleSubmit(onSubmit)} className="bouquet-form">
-          <div className="form-grid">
+          <div className="form-layout">
             {/* Bouquet Name */}
-            <div className={`form-group ${errors.name ? 'error' : ''}`}>
-              <label htmlFor="name" className="form-label">
-                <FaPlus className="input-icon" />
+            <div className={`input-field ${errors.name ? 'has-error' : ''}`}>
+              <label htmlFor="name" className="field-label">
+                <FaPlus className="label-icon" />
                 Bouquet Name
               </label>
               <input 
                 type="text" 
                 id="name" 
-                className="form-input"
+                className="text-input"
                 placeholder="Romantic Roses"
                 {...register("name", { required: "Bouquet name is required" })} 
               />
-              {errors.name && <span className="error-message"><FaInfoCircle /> {errors.name.message as string}</span>}
+              {errors.name && <span className="error-text"><FaInfoCircle /> {errors.name.message as string}</span>}
             </div>
 
             {/* Price */}
-            <div className={`form-group ${errors.price ? 'error' : ''}`}>
-              <label htmlFor="price" className="form-label">
-                <MdAttachMoney className="input-icon" />
+            <div className={`input-field ${errors.price ? 'has-error' : ''}`}>
+              <label htmlFor="price" className="field-label">
+                <MdAttachMoney className="label-icon" />
                 Price
               </label>
               <input 
                 type="number" 
                 id="price" 
-                className="form-input"
+                className="text-input"
                 placeholder="49.99"
                 step="0.01"
                 {...register("price", { required: "Price is required" })} 
               />
-              {errors.price && <span className="error-message"><FaInfoCircle /> {errors.price.message as string}</span>}
+              {errors.price && <span className="error-text"><FaInfoCircle /> {errors.price.message as string}</span>}
             </div>
 
             {/* Old Price */}
-            <div className={`form-group ${errors.oldPrice ? 'error' : ''}`}>
-              <label htmlFor="oldPrice" className="form-label">
-                <MdOutlineDiscount className="input-icon" />
+            <div className={`input-field ${errors.oldPrice ? 'has-error' : ''}`}>
+              <label htmlFor="oldPrice" className="field-label">
+                <MdOutlineDiscount className="label-icon" />
                 Old Price
               </label>
               <input 
                 type="number" 
                 id="oldPrice" 
-                className="form-input"
+                className="text-input"
                 placeholder="59.99"
                 step="0.01"
                 {...register("oldPrice", { required: "Old Price is required" })} 
               />
-              {errors.oldPrice && <span className="error-message"><FaInfoCircle /> {errors.oldPrice.message as string}</span>}
+              {errors.oldPrice && <span className="error-text"><FaInfoCircle /> {errors.oldPrice.message as string}</span>}
             </div>
 
             {/* Status */}
-            <div className={`form-group ${errors.status ? 'error' : ''}`}>
-              <label htmlFor="status" className="form-label">
-                <FaTag className="input-icon" />
+            <div className={`input-field ${errors.status ? 'has-error' : ''}`}>
+              <label htmlFor="status" className="field-label">
+                <FaTag className="label-icon" />
                 Status
               </label>
               <input 
                 type="text" 
                 id="status" 
-                className="form-input"
+                className="text-input"
                 placeholder="Акция, Новинка, С водой можно"
                 {...register("status", { required: "Status is required" })} 
               />
-              {errors.status && <span className="error-message"><FaInfoCircle /> {errors.status.message as string}</span>}
+              {errors.status && <span className="error-text"><FaInfoCircle /> {errors.status.message as string}</span>}
             </div>
 
             {/* Compound */}
-            <div className={`form-group ${errors.compound ? 'error' : ''}`}>
-              <label htmlFor="compound" className="form-label">
-                <GiFlowerPot className="input-icon" />
+            <div className={`input-field ${errors.compound ? 'has-error' : ''}`}>
+              <label htmlFor="compound" className="field-label">
+                <GiFlowerPot className="label-icon" />
                 Compound
               </label>
               <textarea
                 id="compound" 
-                className="form-input"
+                className="text-area"
                 placeholder="5 red roses, 3 white lilies, greenery"
                 rows={3}
                 {...register("compound", { required: "Compound is required" })} 
               />
-              {errors.compound && <span className="error-message"><FaInfoCircle /> {errors.compound.message as string}</span>}
+              {errors.compound && <span className="error-text"><FaInfoCircle /> {errors.compound.message as string}</span>}
             </div>
 
             {/* Image */}
-            <div className={`form-group ${errors.image ? 'error' : ''}`}>
-              <label htmlFor="image" className="form-label">
-                <FaImage className="input-icon" />
+            <div className={`input-field ${errors.image ? 'has-error' : ''}`}>
+              <label htmlFor="image" className="field-label">
+                <FaImage className="label-icon" />
                 Image URL
               </label>
               <input 
                 type="text" 
                 id="image" 
-                className="form-input"
+                className="text-input"
                 placeholder="https://example.com/image.jpg"
                 {...register("image", { required: "Image is required" })} 
               />
-              {errors.image && <span className="error-message"><FaInfoCircle /> {errors.image.message as string}</span>}
+              {errors.image && <span className="error-text"><FaInfoCircle /> {errors.image.message as string}</span>}
             </div>
 
             {/* Size */}
-            <div className={`form-group ${errors.size ? 'error' : ''}`}>
-              <label htmlFor="size" className="form-label">
-                <IoMdResize className="input-icon" />
+            <div className={`input-field ${errors.size ? 'has-error' : ''}`}>
+              <label htmlFor="size" className="field-label">
+                <IoMdResize className="label-icon" />
                 Size
               </label>
               <input 
                 type="text" 
                 id="size" 
-                className="form-input"
+                className="text-input"
                 placeholder="30x40 cm"
                 {...register("size", { required: "Size is required" })} 
               />
-              {errors.size && <span className="error-message"><FaInfoCircle /> {errors.size.message as string}</span>}
+              {errors.size && <span className="error-text"><FaInfoCircle /> {errors.size.message as string}</span>}
             </div>
 
             {/* Category */}
-            <div className={`form-group ${errors.category ? 'error' : ''}`}>
-              <label htmlFor="category" className="form-label">
-                <MdCategory className="input-icon" />
+            <div className={`input-field ${errors.category ? 'has-error' : ''}`}>
+              <label htmlFor="category" className="field-label">
+                <MdCategory className="label-icon" />
                 Category
               </label>
               {isLoading ? (
-                <div className="loading-categories">
-                  <FaSpinner className="spinner" /> Loading categories...
+                <div className="loading-spinner">
+                  <FaSpinner className="spinning-icon" /> Loading categories...
                 </div>
               ) : (
                 <Controller
@@ -205,8 +205,8 @@ function AddNewBouquets() {
                     <Select
                       {...field}
                       inputId="category"
-                      className="react-select-container"
-                      classNamePrefix="react-select"
+                      className="custom-select"
+                      classNamePrefix="select"
                       options={category.map(cat => ({ value: cat.id, label: cat.title }))}
                       isMulti
                       placeholder="Select categories..."
@@ -216,18 +216,18 @@ function AddNewBouquets() {
                   )}
                 />
               )}
-              {errors.category && <span className="error-message"><FaInfoCircle /> {errors.category.message as string}</span>}
+              {errors.category && <span className="error-text"><FaInfoCircle /> {errors.category.message as string}</span>}
             </div>
           </div>
 
           <button
             type="submit"
-            className="submit-button"
+            className="form-submit-btn"
             disabled={isSubmitting}
           >
             {isSubmitting ? (
               <>
-                <FaSpinner className="spinner" /> Processing...
+                <FaSpinner className="spinning-icon" /> Processing...
               </>
             ) : (
               <>

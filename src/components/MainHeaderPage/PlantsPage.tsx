@@ -46,13 +46,15 @@ function PlantsPage() {
   }
 
   return (
-    <div className="season-section">
+    <div className="bouquet-section">
+      <section className="plants-hero">
+          <div className="hero-content">
+            <h1>Горшечные растения</h1>
+            <p>Все горшечные растения магазина</p>
+            <button onClick={() => navigate('/catalog')} className="cta-button">Выбрать букет</button>
+          </div>
+      </section>
       <div className="container">
-        <div className="section-header">
-          <h2>Горшечные растения</h2>
-          <p>Все горшечные растения магазина</p>
-        </div>
-        
         <div className="bouquet-grid">
           {seasonBouquets.map(item => (
             <div

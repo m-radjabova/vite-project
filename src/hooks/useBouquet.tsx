@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BouqetType, OrderType } from "../page/types/Types";
+import { BouqetType, FavoriteType, OrderType } from "../page/types/Types";
 import apiClient from "../apiClient/ApiClient";
 import useContextPro from "./useContextPro";
 import { FieldValues } from "react-hook-form";
@@ -30,9 +30,16 @@ function useBouquet() {
   };
 
   const getFavorites = async () => {
-    const res = await apiClient.get<{ id: string; bouquetId: string }[]>("/favorites");
-    setFavorites(res.data.map(fav => fav.bouquetId));
+    try {
+      const res = await apiClient.get<{ id: string; bouquetId: string, userId: string, userName: string }[]>("/favorites");
+      const userFavorites = res.data.filter(fav => user && fav.userId === user.id.toString());
+      setFavorites(userFavorites.map(fav => fav.bouquetId));
+    } catch (err) {
+      console.error("Error fetching favorites:", err);
+    }
   };
+
+
 
   const selectBouquet = (id: string) => {
     const found = bouquet.find(b => b.id === id) || null;
@@ -40,17 +47,32 @@ function useBouquet() {
   };
 
 
-  const toggleFavorite = async (id: string) => {
-    let updated;
-    if (favorites.includes(id)) {
-      await apiClient.delete(`/favorites/${id}`);
-      updated = favorites.filter(favId => favId !== id);
-    } else {
-      await apiClient.post(`/favorites`, { bouquetId: id, userId: user?.id, userName: user?.username });
-      updated = [...favorites, id];
+  const toggleFavorite = async (bouquetId: string) => {
+    try {
+      if (favorites.includes(bouquetId)) {
+        const res = await apiClient.get<FavoriteType[]>("/favorites");
+        const favoriteToDelete = res.data.find(f => f.bouquetId === bouquetId && f.userId === user?.id.toString());
+
+        if (!favoriteToDelete) throw new Error("Favorite not found for deletion");
+
+        await apiClient.delete(`/favorites/${favoriteToDelete.id}`);
+        setFavorites(prev => prev.filter(favId => favId !== bouquetId));
+      } else {
+        await apiClient.post("/favorites", {
+          bouquetId,
+          userId: user?.id,
+          userName: user?.username,
+        });
+        setFavorites(prev => [...prev, bouquetId]);
+      }
+    } catch (err) {
+      console.error("toggleFavorite error:", err);
+      toast.error("Favorite o‘zgartirishda xatolik");
     }
-    setFavorites(updated);
   };
+
+
+
 
   const addBouquet = async (data: FieldValues) => {
     try {

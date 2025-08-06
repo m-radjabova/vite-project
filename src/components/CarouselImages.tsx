@@ -135,7 +135,7 @@ function FlowerCarousel() {
                                     <FaHeart className="heart-icon" />
                                 </div>
                                 
-                                <div className="flower-details">
+                                <div className="flower-details-carousel">
                                     <h3 className="flower-title">Only for you <FaGift className="gift-icon" /></h3>
                                     <p className="flower-description">Beautiful flowers for your loved one <FaHeart className="inline-heart" /></p>
                                 </div>

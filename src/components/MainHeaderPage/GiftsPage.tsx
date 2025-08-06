@@ -45,13 +45,15 @@ function GiftsPage() {
   }
 
   return (
-    <div className="season-section">
+    <div className="bouquet-section">
+      <section className="gifts-hero">
+          <div className="hero-content">
+            <h1>Подарки</h1>
+            <p>Подарки для твоих любимых</p>
+            <button onClick={() => navigate('/catalog')} className="cta-button">Выбрать подарок</button>
+          </div>
+      </section>
       <div className="container">
-        <div className="section-header">
-          <h2>Подарки</h2>
-          <p>Подарки для твоих любимых</p>
-        </div>
-        
         <div className="bouquet-grid">
           {seasonBouquets.map(item => (
             <div

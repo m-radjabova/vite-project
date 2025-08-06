@@ -46,13 +46,15 @@ function SalesPage() {
   }
 
   return (
-    <div className="season-section">
+    <div className="bouquet-section">
+      <section className="sales-hero">
+          <div className="hero-content">
+            <h1>Со скидкой</h1>
+            <p>Все товары со скидкой</p>
+            <button onClick={() => navigate('/catalog')} className="cta-button">Выбрать букет</button>
+          </div>
+      </section>
       <div className="container">
-        <div className="section-header">
-          <h2>Со скидкой</h2>
-          <p>Все товары со скидкой</p>
-        </div>
-        
         <div className="bouquet-grid">
           {seasonBouquets.map(item => (
             <div
