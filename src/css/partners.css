@@ -53,12 +53,6 @@
     margin-top: 10px;
 }
 
-/* Slider Container */
-.partners-slider-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
 
 /* Partner Slide */
 .partner-slide {
@@ -89,7 +83,7 @@
 
 .partner-logo {
     max-width: 100%;
-    max-height: 60px;
+    max-height: 100px;
     object-fit: contain;
     transition: all 0.3s ease;
 }

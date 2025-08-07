@@ -1,43 +1,51 @@
 .season-section {
-  padding: 80px 0;
+  padding: 100px 0;
+  background: #fef7fa;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .section-header h2 {
-  font-family: "Cormorant Garamond";
+  font-family: "Cormorant Garamond", serif;
   font-weight: 700;
-  font-size: 36px;
-  color: #444444;
-  margin-bottom: 15px;
+  font-size: 42px;
+  color: #333;
+  margin-bottom: 20px;
   position: relative;
   display: inline-block;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .section-header h2::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
-  height: 3px;
+  height: 4px;
   background: #4BB45E;
+  border-radius: 2px;
 }
 
 .section-header p {
   font-size: 1.1rem;
-  color: #7f8c8d;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
+/* Modern Grid Layout */
 .bouquet-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
+  padding: 0 20px;
 }
 
 .bouquet-card-wrapper {
@@ -47,88 +55,109 @@
 
 .bouquet-card {
   background: white;
-  border-radius: 12px;
-  overflow: visible;
-  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); */
-  transition: all 0.3s ease;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
-  font-family: "Rubik";
+  font-family: "Inter", sans-serif;
   cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  overflow: visible;
+}
+
+.bouquet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  border-color: rgba(75, 180, 94, 0.2);
 }
 
 .bouquet-card.hovered {
   z-index: 10;
 }
 
-/* Card Media */
+/* Card Media - Modern Aspect Ratio */
 .card-media {
   position: relative;
-  height: 300px;
-  overflow: hidden;
+  height: 0;
+  padding-bottom: 100%; /* Square aspect ratio */
+  background: #f9f9f9;
 }
 
 .bouquet-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  transition: transform 0.5s ease;
-}
-
-.bouquet-card:hover .bouquet-image {
-  transform: scale(1.05);
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .favorite-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.8);
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
   border: none;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #d23c67;
-  font-size: 18px;
+  color: #333;
+  font-size: 20px;
   z-index: 2;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .favorite-btn:hover {
   background: white;
+  color: #d23c67;
   transform: scale(1.1);
 }
 
 .favorite-btn.favorited {
   color: #d23c67;
+  animation: heartBeat 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(0.9); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Modern Status Badge */
 .status-badge {
   position: absolute;
-  bottom: 15px;
-  left: 15px;
+  bottom: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
   background: #4BB45E;
-  border: 2px solid white;
+  border: none;
   z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .status-badge img {
   width: 16px;
   height: 16px;
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 .status-badge.badge-red {
@@ -143,18 +172,19 @@
   background: #3bb2f9;
 }
 
+/* Card Content - Modern Typography */
 .card-content {
-  padding: 20px;
+  padding: 24px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .bouquet-name {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-weight: 500;
+  font-size: 1.3rem;
+  color: #222;
+  margin-bottom: 12px;
+  font-weight: 600;
   transition: color 0.3s ease;
 }
 
@@ -165,176 +195,194 @@
 .price-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: auto;
 }
 
 .current-price {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: #4BB45E;
 }
 
 .old-price {
-  font-size: 1rem;
-  color: #bdc3c7;
+  font-size: 1.1rem;
+  color: #aaa;
   text-decoration: line-through;
 }
 
-/* Hover Content */
+/* Modern Hover Content */
 .hover-content {
   position: absolute;
-  top: calc(100% - 20px);
+  top: calc(100% - 10px);
   left: 0;
   width: 100%;
   background: white;
-  border-radius: 0 0 12px 12px;
-  padding: 25px 20px 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 16px 16px;
+  padding: 0 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   z-index: 5;
-  transform: translateY(-10px);
+  transform: translateY(10px);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bouquet-card.hovered .hover-content {
+.bouquet-card:hover .hover-content {
   transform: translateY(0);
   opacity: 1;
   visibility: visible;
+  padding: 24px;
+  max-height: 400px;
 }
 
 .composition h4 {
   font-size: 1rem;
   color: #4BB45E;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .composition ul {
   list-style-type: none;
   padding-left: 0;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .composition li {
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  margin-bottom: 5px;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 8px;
   position: relative;
-  padding-left: 15px;
+  padding-left: 20px;
+  line-height: 1.5;
 }
 
 .composition li::before {
-  content: '•';
+  content: '';
   position: absolute;
   left: 0;
-  color: #4BB45E;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: #4BB45E;
+  border-radius: 50%;
 }
 
+/* Modern Action Buttons */
 .action-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
+  gap: 12px;
 }
 
 .quantity-selector {
   display: flex;
   align-items: center;
-  border: 1px solid #c2c1c1;
-  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
   overflow: hidden;
+  flex: 1;
 }
 
 .qty-btn {
-  background: none;
+  background: #f5f5f5;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: #4BB45E;
   font-size: 1rem;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .qty-btn:hover {
-  background: #f1f8f1;
-}
-
-.qty-btn.minus {
-  border-right: 1px solid #c2c1c1;
-}
-
-.qty-btn.plus {
-  border-left: 1px solid #c2c1c1;
+  background: #e8f5e9;
 }
 
 .qty-value {
-  width: 30px;
+  width: 40px;
   text-align: center;
   font-weight: 500;
+  color: #333;
 }
 
 .add-to-cart {
   background: #4BB45E;
   color: white;
   border: none;
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .add-to-cart:hover {
   background: #3a8d49;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(75, 180, 94, 0.3);
 }
 
 .quick-buy {
   width: 100%;
-  background: none;
-  border: 1px solid #4BB45E;
+  background: transparent;
+  border: 2px solid #4BB45E;
   color: #4BB45E;
-  padding: 8px;
-  border-radius: 6px;
-  font-weight: 500;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .quick-buy:hover {
-  background: rgba(75, 180, 94, 0.1);
+  background: rgba(75, 180, 94, 0.08);
+  border-color: #3a8d49;
+  color: #3a8d49;
 }
 
-/* View All Button */
+/* View All Button - Modern Style */
 .view-all-container {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .view-all-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: #4BB45E;
   color: white;
   border: none;
-  padding: 12px 30px;
-  border-radius: 30px;
+  padding: 14px 36px;
+  border-radius: 50px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(75, 180, 94, 0.2);
 }
 
 .view-all-btn:hover {
   background: #3a8d49;
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(75, 180, 94, 0.3);
+  box-shadow: 0 8px 25px rgba(75, 180, 94, 0.3);
 }
 
 .view-all-btn svg {
@@ -345,11 +393,16 @@
   transform: translateX(5px);
 }
 
-/* Responsive */
+/* Modern Responsive Adjustments */
 @media (max-width: 768px) {
+  .season-section {
+    padding: 60px 0;
+  }
+  
   .bouquet-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 15px;
   }
   
   .section-header h2 {
@@ -357,19 +410,18 @@
   }
   
   .card-media {
-    height: 250px;
+    padding-bottom: 100%;
   }
-  
-  .hover-content {
-    position: relative;
-    top: auto;
-    left: auto;
-    box-shadow: none;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    padding: 15px;
-    margin-top: 10px;
-    border-top: 1px solid #ecf0f1;
-  }
+}
+
+/* Modern Loading Animation (Optional) */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.loading-card .card-media {
+  background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite linear;
 }

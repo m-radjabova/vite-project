@@ -72,8 +72,6 @@ function useBouquet() {
   };
 
 
-
-
   const addBouquet = async (data: FieldValues) => {
     try {
       const res = await apiClient.post("/bouquets", data);
