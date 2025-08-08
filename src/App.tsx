@@ -57,10 +57,11 @@ import useLoading from "./hooks/useLoading";
 import PovodPage from "./components/MainHeaderPage/PovodPage";
 
 export interface User{
-  id: number;
+  id: string;
   username: string;
   email: string;
   password: string;
+  phone: string;
   roles: ("ADMIN" | "USER" | "SUPER_ADMIN")[];
 }
 

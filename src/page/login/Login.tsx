@@ -19,10 +19,10 @@ const LoginForm = () => {
           localStorage.setItem("token", user.id);
           navigate("/admin");
         }else{
-          toast.error("Неверный пароль");
+          toast.error("упс, что-то пошло не так");
         }
       } else{
-        toast.error("Аккаунт не найден. Пожалуйста, зарегистрируйтесь!");
+        toast.error("Account not found. Please sign up!");
       }
     });
   };
