@@ -11,16 +11,17 @@ type CartContextType = {
   addOrder : (orderData: FieldValues) => Promise<void>;
   clearCart: () => void;
   orders: OrderType[];
+  updateOrderStatus: (orderId: string, newStatus: string) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const {addToCart, cart, deleteBouquetFromCart, updateItemCount, addOrder, clearCart, orders } = useBouquet()
+  const {addToCart, cart, deleteBouquetFromCart, updateItemCount, addOrder, clearCart, orders, updateOrderStatus } = useBouquet()
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, deleteBouquetFromCart, updateItemCount, addOrder, clearCart, orders }}>
+    <CartContext.Provider value={{ cart, addToCart, deleteBouquetFromCart, updateItemCount, addOrder, clearCart, orders, updateOrderStatus }}>
       {children}
     </CartContext.Provider>
   );

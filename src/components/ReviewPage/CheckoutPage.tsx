@@ -34,6 +34,7 @@ function CheckoutPage() {
       paymentMethod: data.payment,
       totalPrice: deliveryMethod === 'express' ? totalPrice + 15 : totalPrice,
       createdAt: formatDateTime(new Date()),
+      status: "pending",
     };
 
     setIsSubmitting(true);

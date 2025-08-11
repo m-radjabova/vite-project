@@ -38,7 +38,7 @@
     font-weight: 600;
     color: #333;
     margin: 0;
-    background: linear-gradient(to right, #9c27b0, #7b1fa2);
+    background-color: linear-gradient(to right, #9c27b0, #7b1fa2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 0.5px;

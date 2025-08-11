@@ -217,10 +217,20 @@ function useBouquet() {
   }
 
 
+  const updateOrderStatus = (orderId: string, newStatus: string) => {
+    setOrders(prevOrders => 
+      prevOrders.map(order => 
+        order.id === orderId ? { ...order, status: newStatus } : order
+      )
+    );
+  };
+
+
   return { bouquet, favorites, toggleFavorite, addBouquet, updateBouquet, deleteBouquet,  getBouquet,
     selectedBouquet,
     selectBouquet,
-    addReviews, addToCart, cart, deleteBouquetFromCart, updateItemCount, getCart, addOrder, orders, setOrders, clearCart
+    addReviews, addToCart, cart, deleteBouquetFromCart, updateItemCount, getCart, addOrder, orders, setOrders, clearCart,
+    updateOrderStatus
   };
 }
 

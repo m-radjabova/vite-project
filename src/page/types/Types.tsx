@@ -71,6 +71,7 @@ export interface OrderType {
     paymentMethod: string;
     totalPrice: number;
     createdAt: string;
+    status: string;
 }
 
 export interface ImageType{
