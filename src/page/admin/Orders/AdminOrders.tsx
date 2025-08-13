@@ -4,12 +4,15 @@ import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaBoxOpen,FaTruck,FaCalend
 } from "react-icons/fa";
 import { MdPayment} from "react-icons/md";
 import apiClient from "../../../apiClient/ApiClient";
+import DeleteOrderModal from "./DeleteOrderModal";
 
 
 function AdminOrders() {
     const { orders, updateOrderStatus } = useCartContext();
     const [filter, setFilter] = useState('all');
     const [isCompleting, setIsCompleting] = useState(false);
+   const [cancelOrderId, setCancelOrderId] = useState<string | null>(null);
+    const [cancelOpenModal, setCancelOpenModal] = useState(false);
 
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;
@@ -24,10 +27,9 @@ function AdminOrders() {
      }
 
     const handleCancel = (orderId: string) => {
-        if (window.confirm('Are you sure you want to cancel this order?')) {
-            updateOrderStatus(orderId, 'cancelled');
-            apiClient.patch(`/orders/${orderId}`, { status: 'cancelled' });
-        }
+        setIsCompleting(true);
+        updateOrderStatus(orderId, 'cancelled');
+        apiClient.patch(`/orders/${orderId}`, { status: 'cancelled' });
     };
 
     return (
@@ -175,7 +177,12 @@ function AdminOrders() {
                                     
                                     <button 
                                         className="order-action-btn cancel-action"
-                                        onClick={() => handleCancel(order.id)}
+                                        onClick={
+                                            () => {
+                                                setCancelOpenModal(true);
+                                                setCancelOrderId(order.id);
+                                            }
+                                        }
                                     >
                                         <span className="action-icon">
                                         <FaTimesCircle />
@@ -201,6 +208,13 @@ function AdminOrders() {
                     ))}
                 </div>
             )}
+            <DeleteOrderModal 
+                cancelOpenModal={cancelOpenModal}
+                setCancelOpenModal={setCancelOpenModal}
+                cancelOrderId={cancelOrderId}
+                setCancelOrderId={setCancelOrderId}
+                handleCancel={handleCancel}
+            />
         </div>
     )
 }
